@@ -1,0 +1,69 @@
+# Environment & Secrets (NEVER COMMIT)
+.env
+*.env
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Node & Next.js
+node_modules/
+frontend/node_modules/
+.next/
+frontend/.next/
+out/
+frontend/out/
+.npm/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+*.tsbuildinfo
+
+# Testing & Coverage
+.coverage
+.pytest_cache/
+htmlcov/
+coverage.xml
+*.cover
+
+# OS & IDE
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Docker volumes / scratch
+scratch/

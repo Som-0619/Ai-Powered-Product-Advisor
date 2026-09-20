@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #fafafa;
+    --foreground: #090d16;
+    --card: #ffffff;
+    --card-foreground: #090d16;
+    --border: #e2e8f0;
+    --muted: #f1f5f9;
+    --muted-foreground: #64748b;
+    --accent: #2563eb;
+    --accent-foreground: #ffffff;
+
+    /* Semantic surface mappings for existing component tokens */
+    --bg: #fafafa;
+    --surface-50: #ffffff;
+    --surface-100: #f8fafc;
+    --surface-200: #f1f5f9;
+    --surface-300: #e2e8f0;
+    --text-primary: #090d16;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --border-subtle: rgba(15, 23, 42, 0.08);
+    --glass-bg: rgba(255, 255, 255, 0.92);
+    --glass-border: rgba(15, 23, 42, 0.08);
+  }
+
+  .dark {
+    --background: #090a0f;
+    --foreground: #f8fafc;
+    --card: #12151e;
+    --card-foreground: #f8fafc;
+    --border: rgba(255, 255, 255, 0.08);
+    --muted: #181c27;
+    --muted-foreground: #94a3b8;
+    --accent: #3b82f6;
+    --accent-foreground: #ffffff;
+
+    /* Semantic surface mappings for existing component tokens */
+    --bg: #090a0f;
+    --surface-50: #12151e;
+    --surface-100: #181c27;
+    --surface-200: #202636;
+    --surface-300: #2a3245;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --glass-bg: rgba(18, 21, 30, 0.88);
+    --glass-border: rgba(255, 255, 255, 0.08);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+}
+
+/* Minimal, professional card styling */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+}
+
+.glass-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(59, 130, 246, 0.35);
+}
+
+/* Minimalist subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
