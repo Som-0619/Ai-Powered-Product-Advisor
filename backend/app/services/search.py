@@ -98,47 +98,50 @@ class SearchService(ABC):
         """Execute hybrid retrieval fusing BM25 keyword scores and vector similarity."""
         pass
 
-    # Domain-Specific Search Wrappers
+    # Stage 4 Canonical Product Search Methods
     @abstractmethod
-    async def search_products(
+    async def search_keyword(
         self,
-        query_text: str,
-        mode: str = "hybrid",
-        filters: Optional[ProductFilters] = None,
+        query: str,
+        filters: Optional[Dict[str, Any]] = None,
         limit: int = 10,
+        offset: int = 0,
     ) -> SearchResponse:
-        """Search products catalog with metadata filters."""
+        """Search products using BM25 keyword matching."""
         pass
 
     @abstractmethod
-    async def search_reviews(
+    async def search_vector(
         self,
-        query_text: str,
-        mode: str = "hybrid",
-        filters: Optional[ReviewFilters] = None,
+        query: str,
+        filters: Optional[Dict[str, Any]] = None,
         limit: int = 10,
+        offset: int = 0,
     ) -> SearchResponse:
-        """Search reviews with rating, sentiment, and fraud filtering."""
+        """Search products using dense vector k-NN semantic similarity."""
         pass
 
     @abstractmethod
-    async def search_components(
+    async def search_hybrid(
         self,
-        query_text: str,
-        mode: str = "hybrid",
-        filters: Optional[ComponentFilters] = None,
+        query: str,
+        filters: Optional[Dict[str, Any]] = None,
+        keyword_weight: Optional[float] = None,
+        vector_weight: Optional[float] = None,
         limit: int = 10,
+        offset: int = 0,
     ) -> SearchResponse:
-        """Search electronic components with electrical parameters (voltage, current, interface)."""
+        """Search products combining BM25 and vector scores via normalized fusion."""
         pass
 
     @abstractmethod
-    async def search_documents(
+    async def get_product_candidates(
         self,
-        query_text: str,
+        query: str,
+        filters: Optional[Dict[str, Any]] = None,
         mode: str = "hybrid",
-        filters: Optional[DocumentFilters] = None,
-        limit: int = 10,
-    ) -> SearchResponse:
-        """Search technical documents, datasheets, and user manuals."""
+        limit: int = 20,
+    ) -> List[Dict[str, Any]]:
+        """Retrieve candidate product IDs and search scores/metadata from OpenSearch."""
         pass
+

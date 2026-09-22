@@ -36,31 +36,63 @@ TECHNICAL_ANALYSIS_SETTINGS = {
 }
 
 
+DEFAULT_PRODUCT_INDEX = "products_v1"
+DEFAULT_PRODUCT_ALIAS = "products_current"
+
+
 def get_products_index_mapping(dim: int = DEFAULT_VECTOR_DIM) -> Dict[str, Any]:
     return {
         "settings": TECHNICAL_ANALYSIS_SETTINGS,
         "mappings": {
             "properties": {
+                "product_id": {"type": "keyword"},
                 "id": {"type": "keyword"},
+                "brand": {
+                    "type": "text",
+                    "analyzer": "technical_analyzer",
+                    "fields": {
+                        "keyword": {"type": "keyword"},
+                        "raw": {"type": "keyword"},
+                    },
+                },
+                "model": {
+                    "type": "text",
+                    "analyzer": "technical_analyzer",
+                    "fields": {
+                        "keyword": {"type": "keyword"},
+                        "raw": {"type": "keyword"},
+                    },
+                },
+                "variant": {
+                    "type": "text",
+                    "analyzer": "technical_analyzer",
+                    "fields": {
+                        "keyword": {"type": "keyword"},
+                        "raw": {"type": "keyword"},
+                    },
+                },
                 "title": {
                     "type": "text",
                     "analyzer": "technical_analyzer",
                     "fields": {"raw": {"type": "keyword"}},
                 },
                 "slug": {"type": "keyword"},
+                "category": {"type": "keyword"},
+                "subcategory": {"type": "keyword"},
                 "description": {"type": "text", "analyzer": "technical_analyzer"},
+                "search_text": {"type": "text", "analyzer": "technical_analyzer"},
+                "specifications": {"type": "object", "dynamic": True},
+                "specs": {"type": "object", "dynamic": True},
+                "image_reference": {"type": "object", "dynamic": True},
+                "source_metadata": {"type": "object", "dynamic": True},
                 "model_number": {
                     "type": "keyword",
                     "fields": {"text": {"type": "text", "analyzer": "technical_analyzer"}},
                 },
                 "sku": {"type": "keyword"},
-                "brand": {"type": "keyword"},
-                "category": {"type": "keyword"},
-                "subcategory": {"type": "keyword"},
                 "price": {"type": "float"},
                 "currency": {"type": "keyword"},
                 "is_component": {"type": "boolean"},
-                "specs": {"type": "object", "dynamic": True},
                 "embedding": {
                     "type": "knn_vector",
                     "dimension": dim,
@@ -73,6 +105,7 @@ def get_products_index_mapping(dim: int = DEFAULT_VECTOR_DIM) -> Dict[str, Any]:
             }
         },
     }
+
 
 
 def get_components_index_mapping(dim: int = DEFAULT_VECTOR_DIM) -> Dict[str, Any]:
@@ -196,7 +229,40 @@ def get_documents_index_mapping(dim: int = DEFAULT_VECTOR_DIM) -> Dict[str, Any]
 
 INDEX_MAPPINGS = {
     "products": get_products_index_mapping,
+    "products_v1": get_products_index_mapping,
     "components": get_components_index_mapping,
     "reviews": get_reviews_index_mapping,
     "documents": get_documents_index_mapping,
 }
+
+
+def create_versioned_product_index(
+    client: Any, index_name: str, dim: int = DEFAULT_VECTOR_DIM
+) -> bool:
+    """Create a versioned product index if it does not already exist."""
+    if client.indices.exists(index=index_name):
+        return False
+    body = get_products_index_mapping(dim=dim)
+    client.indices.create(index=index_name, body=body)
+    return True
+
+
+def switch_alias(client: Any, alias_name: str, target_index: str) -> None:
+    """Atomically switch alias_name to point to target_index, removing it from any prior indices."""
+    actions = []
+    # Find existing indices pointing to this alias
+    if client.indices.exists_alias(name=alias_name):
+        existing_indices = list(client.indices.get_alias(name=alias_name).keys())
+        for idx in existing_indices:
+            actions.append({"remove": {"index": idx, "alias": alias_name}})
+
+    actions.append({"add": {"index": target_index, "alias": alias_name}})
+    client.indices.update_aliases(body={"actions": actions})
+
+
+def get_alias_indices(client: Any, alias_name: str) -> list:
+    """Get list of concrete index names associated with alias."""
+    if not client.indices.exists_alias(name=alias_name):
+        return []
+    return list(client.indices.get_alias(name=alias_name).keys())
+

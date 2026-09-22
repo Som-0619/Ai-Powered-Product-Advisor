@@ -1,7 +1,7 @@
 """Configuration settings for Product Advisor."""
 
 from typing import List, Literal, Optional
-from pydantic import Field, field_validator
+from pydantic import Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -48,10 +48,13 @@ class Settings(BaseSettings):
     # OpenSearch
     OPENSEARCH_HOST: str = "localhost"
     OPENSEARCH_PORT: int = 9200
+    OPENSEARCH_URL: Optional[str] = None
     OPENSEARCH_USE_SSL: bool = False
     OPENSEARCH_VERIFY_CERTS: bool = False
     OPENSEARCH_USERNAME: str = "admin"
     OPENSEARCH_PASSWORD: str = "admin"
+    OPENSEARCH_INDEX: str = "products_v1"
+    OPENSEARCH_ALIAS: str = "products_current"
 
     # Redis Cache & Local Queue
     REDIS_HOST: str = "localhost"
@@ -85,11 +88,17 @@ class Settings(BaseSettings):
     REASONING_MODEL: str = "qwen2.5:7b"
     VISION_MODEL: str = "moondream:1.8b"
     EMBEDDING_MODEL: str = "nomic-embed-text"
+    EMBEDDING_DIMENSION: int = 384
     LLM_TIMEOUT_SECONDS: float = 60.0
     LLM_MAX_RETRIES: int = 3
 
+    # Search & Retrieval Configuration
+    KEYWORD_WEIGHT: float = 0.5
+    VECTOR_WEIGHT: float = 0.5
+    ENABLE_DB_SEARCH_FALLBACK: bool = False
+
     # Retailer Availability & Verification Configuration
-    RETAILER_VERIFICATION_MAX_AGE_HOURS: int = 72
+    RETAILER_VERIFICATION_MAX_AGE_HOURS: int = 720
 
     @field_validator("DEBUG", mode="before")
     @classmethod
@@ -103,5 +112,26 @@ class Settings(BaseSettings):
                 return True
         return value
 
+    @model_validator(mode="after")
+    def resolve_localhost_when_outside_docker(self) -> "Settings":
+        """If running locally outside Docker container, resolve internal Docker hostnames to localhost."""
+        import os
+        is_in_docker = os.path.exists("/.dockerenv") or os.environ.get("RUNNING_IN_DOCKER") == "true"
+        if not is_in_docker and self.ENVIRONMENT == "local":
+            if self.POSTGRES_HOST == "postgres":
+                self.POSTGRES_HOST = "localhost"
+            if self.DATABASE_URL and "@postgres:" in self.DATABASE_URL:
+                self.DATABASE_URL = self.DATABASE_URL.replace("@postgres:", "@localhost:")
+            if self.OPENSEARCH_HOST == "opensearch":
+                self.OPENSEARCH_HOST = "localhost"
+            if self.REDIS_HOST == "redis":
+                self.REDIS_HOST = "localhost"
+            if "minio:9000" in self.STORAGE_ENDPOINT:
+                self.STORAGE_ENDPOINT = self.STORAGE_ENDPOINT.replace("minio:9000", "localhost:9000")
+            if "ollama:11434" in self.OLLAMA_BASE_URL:
+                self.OLLAMA_BASE_URL = self.OLLAMA_BASE_URL.replace("ollama:11434", "localhost:11434")
+        return self
+
 
 settings = Settings()
+

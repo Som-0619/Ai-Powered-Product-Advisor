@@ -109,7 +109,7 @@ async def test_product_repository_queries(db_session: AsyncSession):
     assert detailed.brand.name == "Lenovo"
     assert detailed.category is not None
     assert len(detailed.variants) >= 2
-    assert len(detailed.specifications) >= 5
+    assert len(detailed.specification_items or detailed.specifications) >= 5
     assert len(detailed.prices) >= 2
     assert len(detailed.availabilities) >= 2
 

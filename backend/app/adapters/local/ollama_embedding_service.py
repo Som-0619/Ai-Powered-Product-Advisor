@@ -21,25 +21,33 @@ class LocalOllamaEmbeddingService(EmbeddingService):
         self._dimension = dimension
         self._client = httpx.AsyncClient(base_url=self._base_url, timeout=30.0)
 
-    async def embed_query(self, text: str) -> List[float]:
+    async def embed_text(self, text: str) -> List[float]:
         try:
             payload = {"model": self._model, "prompt": text}
             res = await self._client.post("/api/embeddings", json=payload)
             res.raise_for_status()
-            return res.json().get("embedding", [])
+            vec = res.json().get("embedding", [])
+            self.validate_vector(vec)
+            return vec
         except Exception as exc:
             logger.warning(
                 f"Ollama embedding query failed for model '{self._model}': {exc}"
             )
             # Return empty or fallback vector if Ollama is unreachable/model not pulled
-            return [0.0] * self._dimension
+            fallback = [0.0] * self._dimension
+            self.validate_vector(fallback)
+            return fallback
+
+    async def embed_query(self, text: str) -> List[float]:
+        return await self.embed_text(text)
 
     async def embed_documents(self, texts: List[str]) -> List[List[float]]:
         embeddings = []
         for text in texts:
-            emb = await self.embed_query(text)
+            emb = await self.embed_text(text)
             embeddings.append(emb)
         return embeddings
+
 
     def dimension(self) -> int:
         return self._dimension

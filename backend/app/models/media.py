@@ -2,7 +2,7 @@
 
 import uuid
 from typing import Optional, Dict, Any, TYPE_CHECKING
-from sqlalchemy import String, Text, Boolean, ForeignKey, Index
+from sqlalchemy import String, Text, Boolean, ForeignKey, Index, text
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship, synonym
 from app.models.base import Base, UUIDMixin, TimestampMixin
@@ -60,11 +60,11 @@ class ProductImage(Base, UUIDMixin, TimestampMixin):
     variant_id: Mapped[Optional[uuid.UUID]] = mapped_column(
         UUID(as_uuid=True), ForeignKey("product_variants.id", ondelete="SET NULL"), nullable=True, index=True
     )
-    image_url: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
-    storage_key: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
-    storage_path: Mapped[Optional[str]] = mapped_column(String(500), nullable=True) # MinIO/S3 object path
+    image_url: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    storage_key: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    storage_path: Mapped[Optional[str]] = mapped_column(Text, nullable=True) # MinIO/S3 object path
     source: Mapped[Optional[str]] = mapped_column(String(100), nullable=True) # e.g. "Amazon", "Flipkart", "Manufacturer"
-    source_url: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
+    source_url: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     image_type: Mapped[str] = mapped_column(
         String(50), default="primary", nullable=False, index=True
     )
@@ -85,6 +85,12 @@ class ProductImage(Base, UUIDMixin, TimestampMixin):
         Index("ix_product_images_product_id", "product_id"),
         Index("ix_product_images_variant_id", "variant_id"),
         Index("ix_product_images_image_type", "image_type"),
+        Index(
+            "ix_product_images_unique_primary",
+            "product_id",
+            unique=True,
+            postgresql_where=text("is_primary = true"),
+        ),
     )
 
 

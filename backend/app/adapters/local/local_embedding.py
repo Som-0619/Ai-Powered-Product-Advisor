@@ -22,12 +22,17 @@ class DeterministicLocalEmbeddingService(EmbeddingService):
     def __init__(self, dimension: int = 384, model_name: str = "local-deterministic-v1"):
         self._dim = dimension
         self._model = model_name
+        self._cache: dict = {}
 
     def _embed_text(self, text: str) -> List[float]:
         """Convert text into an L2-normalized vector."""
+        if text in self._cache:
+            return self._cache[text]
+
         vec = [0.0] * self._dim
         clean_text = text.lower().strip()
         if not clean_text:
+            self._cache[text] = vec
             return vec
 
         # Whole words get higher weight (4.0), subword 3-grams get lower weight (1.0)
@@ -52,16 +57,26 @@ class DeterministicLocalEmbeddingService(EmbeddingService):
         if norm > 0.0:
             vec = [round(v / norm, 6) for v in vec]
 
+        self._cache[text] = vec
+        return vec
+
+    async def embed_text(self, text: str) -> List[float]:
+        vec = self._embed_text(text)
+        self.validate_vector(vec)
         return vec
 
     async def embed_query(self, text: str) -> List[float]:
-        return self._embed_text(text)
+        return await self.embed_text(text)
 
     async def embed_documents(self, texts: List[str]) -> List[List[float]]:
-        return [self._embed_text(t) for t in texts]
+        results = []
+        for t in texts:
+            results.append(await self.embed_text(t))
+        return results
 
     def dimension(self) -> int:
         return self._dim
 
     def model_name(self) -> str:
         return self._model
+

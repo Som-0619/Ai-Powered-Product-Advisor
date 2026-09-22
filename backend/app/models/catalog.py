@@ -9,7 +9,7 @@ from app.models.base import Base, UUIDMixin, TimestampMixin
 
 if TYPE_CHECKING:
     from app.models.components import Component
-    from app.models.reviews import Review
+    from app.models.reviews import ProductReview
     from app.models.pricing import Price, Availability
     from app.models.sources import ProductSource
     from app.models.media import Document, ProductImage
@@ -89,6 +89,37 @@ class Brand(Base, UUIDMixin, TimestampMixin):
     products: Mapped[List["Product"]] = relationship("Product", back_populates="brand_rel")
 
 
+CANONICAL_ELECTRONICS_CATEGORIES = (
+    "Laptops",
+    "Smartphones",
+    "Tablets",
+    "Headphones",
+    "Earbuds",
+    "Smartwatches",
+    "Monitors",
+    "Keyboards",
+    "Mice",
+    "Webcams",
+    "Cameras",
+    "Routers",
+    "WiFi devices",
+    "Smart home devices",
+    "IoT devices",
+    "Development boards",
+    "Microcontrollers",
+    "Sensors",
+    "Displays",
+    "Power supplies",
+    "Batteries",
+    "Storage devices",
+    "USB devices",
+    "Chargers",
+    "Adapters",
+    "Cables",
+    "Electronic components",
+)
+
+
 class Product(Base, UUIDMixin, TimestampMixin):
     """Canonical product entity representing the single source of truth for product identity."""
     __tablename__ = "products"
@@ -96,16 +127,18 @@ class Product(Base, UUIDMixin, TimestampMixin):
     title: Mapped[str] = mapped_column(String(255), nullable=False, index=True)
     slug: Mapped[str] = mapped_column(String(280), nullable=False, unique=True, index=True)
     description: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
-    brand: Mapped[Optional[str]] = mapped_column(BrandType(), nullable=True, index=True)
-    model: Mapped[Optional[str]] = mapped_column(String(150), nullable=True, index=True)
+    brand: Mapped[Optional[str]] = mapped_column(BrandType(), nullable=True)
+    model: Mapped[Optional[str]] = mapped_column(String(150), nullable=True)
     variant: Mapped[Optional[str]] = mapped_column(String(150), nullable=True)
-    category: Mapped[Optional[str]] = mapped_column(CategoryType(), nullable=True, index=True)
+    category: Mapped[Optional[str]] = mapped_column(CategoryType(), nullable=True)
     subcategory: Mapped[Optional[str]] = mapped_column(String(100), nullable=True, index=True)
-    external_product_id: Mapped[Optional[str]] = mapped_column(String(100), nullable=True, index=True)
+    external_product_id: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     model_number: Mapped[Optional[str]] = mapped_column(String(100), nullable=True, index=True)
     sku: Mapped[Optional[str]] = mapped_column(String(100), nullable=True, index=True)
     status: Mapped[str] = mapped_column(String(30), nullable=False, default="active", index=True)
     is_component: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False, index=True)
+    release_year: Mapped[Optional[int]] = mapped_column(nullable=True, index=True)
+    specifications: Mapped[Dict[str, Any]] = mapped_column(JSONB, nullable=False, default=dict)
 
     category_id: Mapped[Optional[uuid.UUID]] = mapped_column(
         UUID(as_uuid=True), ForeignKey("categories.id", ondelete="RESTRICT"), nullable=True, index=True
@@ -121,9 +154,9 @@ class Product(Base, UUIDMixin, TimestampMixin):
     category_rel: Mapped[Optional["Category"]] = relationship("Category", back_populates="products")
     brand_rel: Mapped[Optional["Brand"]] = relationship("Brand", back_populates="products")
     variants: Mapped[List["ProductVariant"]] = relationship("ProductVariant", back_populates="product", cascade="all, delete-orphan")
-    specifications: Mapped[List["Specification"]] = relationship("Specification", back_populates="product", cascade="all, delete-orphan")
+    specification_items: Mapped[List["Specification"]] = relationship("Specification", back_populates="product", cascade="all, delete-orphan")
     component_profile: Mapped[Optional["Component"]] = relationship("Component", back_populates="product", uselist=False, cascade="all, delete-orphan")
-    reviews: Mapped[List["Review"]] = relationship("Review", back_populates="product", cascade="all, delete-orphan")
+    reviews: Mapped[List["ProductReview"]] = relationship("ProductReview", back_populates="product", cascade="all, delete-orphan")
     prices: Mapped[List["Price"]] = relationship("Price", back_populates="product", cascade="all, delete-orphan")
     availabilities: Mapped[List["Availability"]] = relationship("Availability", back_populates="product", cascade="all, delete-orphan")
     sources: Mapped[List["ProductSource"]] = relationship("ProductSource", back_populates="product", cascade="all, delete-orphan")
@@ -137,6 +170,7 @@ class Product(Base, UUIDMixin, TimestampMixin):
         Index("ix_products_category", "category"),
         Index("ix_products_external_product_id", "external_product_id"),
         Index("ix_products_model", "model"),
+        Index("ix_products_brand_model_variant", "brand", "model", "variant"),
     )
 
 
@@ -151,6 +185,7 @@ class ProductVariant(Base, UUIDMixin, TimestampMixin):
     title: Mapped[str] = mapped_column(String(200), nullable=False)
     variant_name: Mapped[str] = mapped_column(String(200), nullable=False, default="")
     external_variant_id: Mapped[Optional[str]] = mapped_column(String(120), nullable=True, index=True)
+    external_product_id: Mapped[Optional[str]] = mapped_column(String(120), nullable=True, index=True)
     attributes: Mapped[Dict[str, Any]] = mapped_column(JSONB, nullable=False, default=dict)
     specifications: Mapped[Dict[str, Any]] = mapped_column(JSONB, nullable=False, default=dict)
 
@@ -165,6 +200,7 @@ class ProductVariant(Base, UUIDMixin, TimestampMixin):
 
     __table_args__ = (
         Index("ix_product_variants_external_variant_id", "external_variant_id"),
+        Index("ix_product_variants_external_product_id", "external_product_id"),
     )
 
 
@@ -184,7 +220,7 @@ class Specification(Base, UUIDMixin, TimestampMixin):
     raw_value: Mapped[Optional[Dict[str, Any]]] = mapped_column(JSONB, nullable=True) # Normalized numeric e.g. {"val": 16, "unit": "GB"}
 
     # Relationships
-    product: Mapped["Product"] = relationship("Product", back_populates="specifications")
+    product: Mapped["Product"] = relationship("Product", back_populates="specification_items")
 
     __table_args__ = (
         Index("ix_specifications_product_group_key", "product_id", "spec_group", "key"),

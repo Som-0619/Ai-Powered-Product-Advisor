@@ -1,11 +1,12 @@
-"""Recommendation endpoint router connecting real multi-agent supervisor execution."""
-
 import json
+import time
+from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 from fastapi import APIRouter, Query, Request
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
+from app.core.logging import logger
 from app.services.orchestrator import orchestrator
 
 router = APIRouter(tags=["recommend"])
@@ -20,9 +21,24 @@ class RecommendRequest(BaseModel):
 @router.post("/recommend")
 async def recommend_endpoint(request: RecommendRequest):
     """Deterministic recommendation & verification endpoint executing the full multi-agent pipeline."""
+    req_start_ts = datetime.now(timezone.utc).isoformat()
+    t_api_start = time.perf_counter()
+    logger.info(f"[DEV_TRACE] request_start: {req_start_ts}", extra={"request_start": req_start_ts})
+
     result = await orchestrator.run(
         user_query=request.query,
         request_id=request.request_id,
+    )
+    api_latency_ms = round((time.perf_counter() - t_api_start) * 1000, 2)
+    final_count = len(result.get("recommendations", [])) if isinstance(result, dict) else 0
+    logger.info(
+        f"[DEV_TRACE] FastAPI latency: {api_latency_ms}ms, total request latency: {api_latency_ms}ms, final product count: {final_count}",
+        extra={
+            "fastapi_latency_ms": api_latency_ms,
+            "total_request_latency_ms": api_latency_ms,
+            "final_product_count": final_count,
+            "request_id": request.request_id,
+        },
     )
     return result
 

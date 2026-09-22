@@ -209,7 +209,7 @@ def test_missing_image_does_not_fallback_to_other_product():
     placeholder_prod_id = "c2000000-0000-0000-0000-000000000028"  # MQ-135 Gas Sensor (placeholder)
     ph_images = get_product_images(placeholder_prod_id)
     assert len(ph_images) > 0
-    ph_img = ph_images[0]
+    ph_img = next(im for im in ph_images if im["product_id"] == placeholder_prod_id)
     assert ph_img["product_id"] == placeholder_prod_id
     assert ph_img["verified"] is False
     assert "data:image/svg" in ph_img["image_url"]

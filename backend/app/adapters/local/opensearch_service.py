@@ -213,11 +213,10 @@ class LocalOpenSearchService(SearchService):
 
         clauses = []
         for key, val in filters.items():
-            if val is None:
+            if val is None or val == "":
                 continue
 
             if key in ("min_price", "max_price"):
-                # Handle price range
                 price_range = {}
                 if "min_price" in filters and filters["min_price"] is not None:
                     price_range["gte"] = float(filters["min_price"])
@@ -226,9 +225,19 @@ class LocalOpenSearchService(SearchService):
                 if price_range and {"range": {"price": price_range}} not in clauses:
                     clauses.append({"range": {"price": price_range}})
 
+            elif key == "brand":
+                clauses.append({"term": {"brand.keyword": str(val)}})
+
+            elif key == "category":
+                clauses.append({"term": {"category": str(val)}})
+
+            elif key == "subcategory":
+                clauses.append({"term": {"subcategory": str(val)}})
+
+            elif key in ("ram", "storage", "gpu", "cpu"):
+                clauses.append({"match": {f"specifications.{key}": str(val)}})
+
             elif key in ("min_voltage", "max_voltage"):
-                # Operating voltage range overlap:
-                # component.voltage_min <= query.max_voltage AND component.voltage_max >= query.min_voltage
                 min_v = filters.get("min_voltage")
                 max_v = filters.get("max_voltage")
                 if min_v is not None and {"range": {"voltage_max": {"gte": float(min_v)}}} not in clauses:
@@ -249,21 +258,40 @@ class LocalOpenSearchService(SearchService):
                 clauses.append({"term": {"is_verified_purchase": True}})
 
             elif key == "interface":
-                # Matches technical interface terms (e.g. I2C, SPI)
                 clauses.append({"match": {"interface": str(val)}})
 
             elif isinstance(val, bool):
                 clauses.append({"term": {key: val}})
 
-            elif isinstance(val, (int, float, str)):
+            elif isinstance(val, (int, float)):
                 clauses.append({"term": {key: val}})
+
+            elif isinstance(val, str):
+                clauses.append({"term": {f"{key}.keyword" if key in ("brand", "model", "variant") else key: val}})
 
         return clauses
 
     def _get_search_fields(self, index_name: str) -> List[str]:
-        """Field boost weights for BM25 keyword searches."""
-        if index_name == "products":
-            return ["title^3", "model_number^4", "model_number.text^3", "sku^3", "brand^2", "description^1", "category^1"]
+        """Field boost weights for BM25 keyword searches.
+
+        Conceptual priority: model > brand > category > specifications > description
+        """
+        if index_name in ("products", "products_current", "products_v1", "products_v2") or index_name.startswith("products"):
+            return [
+                "model^4",
+                "model.keyword^4",
+                "model_number^4",
+                "model_number.text^3",
+                "search_text^3",
+                "brand^3",
+                "brand.keyword^3",
+                "title^3",
+                "category^2",
+                "subcategory^2",
+                "sku^3",
+                "description^1",
+            ]
+
         elif index_name == "components":
             return ["part_number^5", "part_number.text^4", "title^4", "description^2", "voltage_display^3", "interface^3", "component_type^2", "package_type^2"]
         elif index_name == "reviews":
@@ -271,6 +299,40 @@ class LocalOpenSearchService(SearchService):
         elif index_name == "documents":
             return ["title^3", "extracted_text^1", "doc_type^2"]
         return ["*"]
+
+    async def _db_fallback_search(
+        self,
+        query: str,
+        filters: Optional[Dict[str, Any]] = None,
+        limit: int = 10,
+    ) -> SearchResponse:
+        """Controlled fallback using PostgreSQL basic search when OpenSearch is unavailable."""
+        from app.services.product_catalog_service import ProductCatalogService
+        cat_service = ProductCatalogService()
+        category = filters.get("category") if filters else None
+        brand = filters.get("brand") if filters else None
+        products = await cat_service.search_products(query, category=category, brand=brand, limit=limit)
+        hits = [
+            SearchHit(
+                id=str(p.id),
+                score=1.0,
+                index="postgresql_fallback",
+                source={
+                    "product_id": str(p.id),
+                    "brand": p.brand,
+                    "model": p.model,
+                    "category": p.category,
+                    "price": None,
+                },
+            )
+            for p in products
+        ]
+        return SearchResponse(
+            total=len(hits),
+            hits=hits,
+            search_mode="db_fallback",
+            latency_ms=0.0,
+        )
 
     async def keyword_search(
         self,
@@ -313,7 +375,10 @@ class LocalOpenSearchService(SearchService):
             "highlight": {
                 "fields": {
                     "title": {},
+                    "model": {},
+                    "brand": {},
                     "description": {},
+                    "search_text": {},
                     "part_number": {},
                     "body": {},
                     "extracted_text": {},
@@ -324,11 +389,18 @@ class LocalOpenSearchService(SearchService):
         if filter_clauses:
             query_body["query"]["bool"]["filter"] = filter_clauses
 
-        raw_res = await asyncio.to_thread(
-            self._client.search,
-            index=index_name,
-            body=query_body,
-        )
+        try:
+            raw_res = await asyncio.to_thread(
+                self._client.search,
+                index=index_name,
+                body=query_body,
+            )
+        except Exception as exc:
+            logger.error(f"OpenSearch keyword search error on '{index_name}': {exc}")
+            if settings.ENABLE_DB_SEARCH_FALLBACK:
+                logger.warning("Falling back to PostgreSQL database search")
+                return await self._db_fallback_search(query_text, filters=filters, limit=limit)
+            raise RuntimeError(f"OpenSearch keyword search failed: {exc}") from exc
 
         latency = round((time.perf_counter() - start) * 1000, 2)
         total_hits = raw_res["hits"]["total"]["value"]
@@ -365,48 +437,56 @@ class LocalOpenSearchService(SearchService):
         start = time.perf_counter()
         filter_clauses = self._build_filter_clauses(filters)
 
-        if query_text and query_text.strip():
-            query_vector = await self._embedding.embed_query(query_text)
-            knn_clause: Dict[str, Any] = {
-                "embedding": {
-                    "vector": query_vector,
-                    "k": limit + offset,
+        try:
+            if query_text and query_text.strip():
+                query_vector = await self._embedding.embed_text(query_text)
+                self._embedding.validate_vector(query_vector)
+                knn_clause: Dict[str, Any] = {
+                    "embedding": {
+                        "vector": query_vector,
+                        "k": limit + offset,
+                    }
                 }
-            }
-            if filter_clauses:
+                if filter_clauses:
+                    query_body = {
+                        "from": offset,
+                        "size": limit,
+                        "query": {
+                            "bool": {
+                                "must": [{"knn": knn_clause}],
+                                "filter": filter_clauses,
+                            }
+                        },
+                    }
+                else:
+                    query_body = {
+                        "from": offset,
+                        "size": limit,
+                        "query": {"knn": knn_clause},
+                    }
+            else:
                 query_body = {
                     "from": offset,
                     "size": limit,
                     "query": {
                         "bool": {
-                            "must": [{"knn": knn_clause}],
+                            "must": [{"match_all": {}}],
                             "filter": filter_clauses,
                         }
                     },
                 }
-            else:
-                query_body = {
-                    "from": offset,
-                    "size": limit,
-                    "query": {"knn": knn_clause},
-                }
-        else:
-            query_body = {
-                "from": offset,
-                "size": limit,
-                "query": {
-                    "bool": {
-                        "must": [{"match_all": {}}],
-                        "filter": filter_clauses,
-                    }
-                },
-            }
 
-        raw_res = await asyncio.to_thread(
-            self._client.search,
-            index=index_name,
-            body=query_body,
-        )
+            raw_res = await asyncio.to_thread(
+                self._client.search,
+                index=index_name,
+                body=query_body,
+            )
+        except Exception as exc:
+            logger.error(f"OpenSearch vector search error on '{index_name}': {exc}")
+            if settings.ENABLE_DB_SEARCH_FALLBACK:
+                logger.warning("Falling back to PostgreSQL database search")
+                return await self._db_fallback_search(query_text, filters=filters, limit=limit)
+            raise RuntimeError(f"OpenSearch vector search failed: {exc}") from exc
 
         latency = round((time.perf_counter() - start) * 1000, 2)
         total_hits = raw_res["hits"]["total"]["value"]
@@ -432,16 +512,34 @@ class LocalOpenSearchService(SearchService):
         index_name: str,
         query_text: str,
         filters: Optional[Dict[str, Any]] = None,
-        alpha: float = 0.5,
+        alpha: Optional[float] = None,
+        keyword_weight: Optional[float] = None,
+        vector_weight: Optional[float] = None,
         limit: int = 10,
         offset: int = 0,
     ) -> SearchResponse:
         """Hybrid search combining BM25 keyword and dense vector similarity.
 
-        Uses Reciprocal Rank Fusion (RRF) with alpha weight:
-        final_score = alpha * (1 / (60 + bm25_rank)) + (1 - alpha) * (1 / (60 + vector_rank))
+        Uses normalized linear score combination and rank blending:
+        fused_score = (norm_keyword * kw_weight) + (norm_vector * vec_weight)
         """
         start = time.perf_counter()
+
+        # Resolve weights
+        if keyword_weight is not None and vector_weight is not None:
+            kw_w = float(keyword_weight)
+            vec_w = float(vector_weight)
+        elif alpha is not None:
+            kw_w = float(alpha)
+            vec_w = 1.0 - kw_w
+        else:
+            kw_w = float(settings.KEYWORD_WEIGHT)
+            vec_w = float(settings.VECTOR_WEIGHT)
+
+        total_w = kw_w + vec_w
+        if total_w > 0:
+            kw_w = kw_w / total_w
+            vec_w = vec_w / total_w
 
         # Execute BM25 and vector queries concurrently
         bm25_res, vector_res = await asyncio.gather(
@@ -449,24 +547,54 @@ class LocalOpenSearchService(SearchService):
             self.semantic_search(index_name, query_text, filters=filters, limit=limit * 2),
         )
 
+        # Normalize BM25 scores to [0.0, 1.0]
+        bm25_scores = [h.score for h in bm25_res.hits]
+        max_bm25 = max(bm25_scores) if bm25_scores else 1.0
+        min_bm25 = min(bm25_scores) if bm25_scores else 0.0
+        range_bm25 = max_bm25 - min_bm25
+
+        bm25_norm: Dict[str, float] = {}
+        for h in bm25_res.hits:
+            bm25_norm[h.id] = 1.0 if range_bm25 <= 0 else (h.score - min_bm25) / range_bm25
+
+        # Normalize Vector scores to [0.0, 1.0]
+        vec_scores = [h.score for h in vector_res.hits]
+        max_vec = max(vec_scores) if vec_scores else 1.0
+        min_vec = min(vec_scores) if vec_scores else 0.0
+        range_vec = max_vec - min_vec
+
+        vec_norm: Dict[str, float] = {}
+        for h in vector_res.hits:
+            vec_norm[h.id] = 1.0 if range_vec <= 0 else (h.score - min_vec) / range_vec
+
+        # Reciprocal Rank Fusion (RRF) components
         rrf_constant = 60.0
-        doc_scores: Dict[str, float] = {}
         doc_data: Dict[str, SearchHit] = {}
+        all_ids = set(bm25_norm.keys()).union(vec_norm.keys())
 
-        # 1. Process BM25 ranks
-        for rank, hit in enumerate(bm25_res.hits):
-            score = alpha * (1.0 / (rrf_constant + rank + 1))
-            doc_scores[hit.id] = doc_scores.get(hit.id, 0.0) + score
-            doc_data[hit.id] = hit
+        # Collect hit metadata
+        for h in bm25_res.hits:
+            doc_data[h.id] = h
+        for h in vector_res.hits:
+            if h.id not in doc_data:
+                doc_data[h.id] = h
 
-        # 2. Process Vector ranks
-        for rank, hit in enumerate(vector_res.hits):
-            score = (1.0 - alpha) * (1.0 / (rrf_constant + rank + 1))
-            doc_scores[hit.id] = doc_scores.get(hit.id, 0.0) + score
-            if hit.id not in doc_data:
-                doc_data[hit.id] = hit
+        # Calculate normalized fused score for each candidate
+        doc_scores: Dict[str, float] = {}
+        for doc_id in all_ids:
+            score_k = bm25_norm.get(doc_id, 0.0)
+            score_v = vec_norm.get(doc_id, 0.0)
 
-        # 3. Sort by combined fused score
+            # Find ranks
+            k_rank = next((r for r, h in enumerate(bm25_res.hits) if h.id == doc_id), 999)
+            v_rank = next((r for r, h in enumerate(vector_res.hits) if h.id == doc_id), 999)
+
+            rrf = kw_w * (1.0 / (rrf_constant + k_rank + 1)) + vec_w * (1.0 / (rrf_constant + v_rank + 1))
+            linear_fused = kw_w * score_k + vec_w * score_v
+
+            # Weighted combination of normalized linear score and RRF rank stability
+            doc_scores[doc_id] = round(linear_fused * 0.8 + (rrf * 60.0) * 0.2, 4)
+
         sorted_doc_ids = sorted(doc_scores.keys(), key=lambda x: doc_scores[x], reverse=True)
         paginated_ids = sorted_doc_ids[offset : offset + limit]
 
@@ -476,7 +604,7 @@ class LocalOpenSearchService(SearchService):
             fused_hits.append(
                 SearchHit(
                     id=hit.id,
-                    score=round(doc_scores[doc_id] * 100.0, 4),  # Scale for readability
+                    score=doc_scores[doc_id],
                     index=hit.index,
                     source=hit.source,
                     highlights=hit.highlights,
@@ -491,6 +619,89 @@ class LocalOpenSearchService(SearchService):
             latency_ms=latency,
         )
 
+    # Stage 4 Canonical Product Search Methods
+    @property
+    def product_index(self) -> str:
+        return settings.OPENSEARCH_ALIAS
+
+    async def search_keyword(
+        self,
+        query: str,
+        filters: Optional[Dict[str, Any]] = None,
+        limit: int = 10,
+        offset: int = 0,
+    ) -> SearchResponse:
+        """Search products using BM25 keyword matching."""
+        return await self.keyword_search(
+            self.product_index,
+            query_text=query,
+            filters=filters,
+            limit=limit,
+            offset=offset,
+        )
+
+    async def search_vector(
+        self,
+        query: str,
+        filters: Optional[Dict[str, Any]] = None,
+        limit: int = 10,
+        offset: int = 0,
+    ) -> SearchResponse:
+        """Search products using dense vector k-NN semantic similarity."""
+        return await self.semantic_search(
+            self.product_index,
+            query_text=query,
+            filters=filters,
+            limit=limit,
+            offset=offset,
+        )
+
+    async def search_hybrid(
+        self,
+        query: str,
+        filters: Optional[Dict[str, Any]] = None,
+        keyword_weight: Optional[float] = None,
+        vector_weight: Optional[float] = None,
+        limit: int = 10,
+        offset: int = 0,
+    ) -> SearchResponse:
+        """Search products combining BM25 and vector scores via normalized fusion."""
+        return await self.hybrid_search(
+            self.product_index,
+            query_text=query,
+            filters=filters,
+            keyword_weight=keyword_weight,
+            vector_weight=vector_weight,
+            limit=limit,
+            offset=offset,
+        )
+
+    async def get_product_candidates(
+        self,
+        query: str,
+        filters: Optional[Dict[str, Any]] = None,
+        mode: str = "hybrid",
+        limit: int = 20,
+    ) -> List[Dict[str, Any]]:
+        """Retrieve candidate product IDs and search scores/metadata from OpenSearch."""
+        if mode == "keyword":
+            resp = await self.search_keyword(query, filters=filters, limit=limit)
+        elif mode == "vector":
+            resp = await self.search_vector(query, filters=filters, limit=limit)
+        else:
+            resp = await self.search_hybrid(query, filters=filters, limit=limit)
+
+        candidates = []
+        for hit in resp.hits:
+            candidates.append({
+                "product_id": hit.id,
+                "score": hit.score,
+                "source": hit.source,
+                "matched_fields": hit.highlights or {},
+                "search_mode": resp.search_mode,
+            })
+        return candidates
+
     # Domain-specific search methods
     async def search_products(
         self,
@@ -500,11 +711,12 @@ class LocalOpenSearchService(SearchService):
         limit: int = 10,
     ) -> SearchResponse:
         f_dict = filters.model_dump(exclude_none=True) if filters else {}
+        idx = self.product_index
         if mode == "keyword":
-            return await self.keyword_search("products", query_text, filters=f_dict, limit=limit)
+            return await self.keyword_search(idx, query_text, filters=f_dict, limit=limit)
         elif mode == "vector":
-            return await self.semantic_search("products", query_text, filters=f_dict, limit=limit)
-        return await self.hybrid_search("products", query_text, filters=f_dict, limit=limit)
+            return await self.semantic_search(idx, query_text, filters=f_dict, limit=limit)
+        return await self.hybrid_search(idx, query_text, filters=f_dict, limit=limit)
 
     async def search_components(
         self,
@@ -547,3 +759,4 @@ class LocalOpenSearchService(SearchService):
         elif mode == "vector":
             return await self.semantic_search("documents", query_text, filters=f_dict, limit=limit)
         return await self.hybrid_search("documents", query_text, filters=f_dict, limit=limit)
+

@@ -125,6 +125,15 @@ async def request_tracing_middleware(request: Request, call_next) -> Response:
 # Mount API v1
 app.include_router(api_v1_router)
 
+# Also mount search routes at root (/search, /search/semantic, /search/hybrid)
+from app.api.v1.search import router as search_router
+app.include_router(search_router)
+
+# Mount /api/chat for Stage 5 Section 32 endpoint compliance
+from app.api.v1.chat import router as chat_router
+app.include_router(chat_router, prefix="/api")
+
+
 
 @app.get("/", tags=["root"])
 async def root():

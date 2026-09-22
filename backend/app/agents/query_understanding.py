@@ -176,20 +176,18 @@ class QueryUnderstandingAgent:
                 self._append_constraint(analysis, platform)
 
     def _is_obviously_vague(self, text: str) -> bool:
-        """Detect obvious single-word or generic queries requiring clarification."""
+        """Detect obvious generic queries requiring clarification."""
         clean = text.strip().lower()
         clean = re.sub(r"[^\w\s]", "", clean)
         words = clean.split()
         if not words:
             return True
-        if len(words) <= 1 and words[0] in ("laptop", "phone", "sensor", "component", "parts", "chahiye"):
+        if len(words) <= 1 and words[0] in ("chahiye",):
             return True
         if clean in (
             "kuch accha dikhao",
             "show me something good",
             "best products",
-            "best laptop",
-            "best sensor",
             "which component is compatible with this board",
             "which component is compatible with this board?",
             "is this compatible",
@@ -197,6 +195,69 @@ class QueryUnderstandingAgent:
         ):
             return True
         return False
+
+    def _heuristic_analyze(self, raw_query: str) -> Optional[QueryAnalysis]:
+        """Fast-path deterministic intent extraction avoiding Qwen LLM latency before retrieval."""
+        q_lower = raw_query.lower().strip()
+        detected_lang = self._detect_language(raw_query)
+
+        category = None
+        subcategory = None
+        if any(k in q_lower for k in ["laptop", "laptops", "notebook", "notebooks", "macbook", "ultrabook", "vivobook", "thinkpad"]):
+            category = "Laptop"
+            if "gaming" in q_lower:
+                subcategory = "Gaming Laptop"
+        elif any(k in q_lower for k in ["phone", "phones", "smartphone", "smartphones", "mobile", "iphone", "galaxy", "pixel", "oneplus"]):
+            category = "Smartphones"
+        elif any(k in q_lower for k in ["headphone", "headphones", "earphone", "earphones", "earbud", "earbuds", "audio", "sound", "headset"]):
+            category = "Headphones"
+        elif any(k in q_lower for k in ["esp32", "arduino", "raspberry", "sensor", "relay", "microcontroller", "mcu", "transducer", "bme280", "circuit", "breadboard", "electronics", "electronic", "component", "ic", "module"]):
+            category = "Electronics"
+            if "sensor" in q_lower:
+                subcategory = "Sensor"
+            elif "microcontroller" in q_lower or "esp32" in q_lower or "mcu" in q_lower:
+                subcategory = "Microcontroller"
+
+        if not category:
+            return None
+
+        # Extract budget
+        budget_max = self._extract_heuristic_budget(raw_query)
+        currency = "INR" if self._contains_currency_hint(raw_query) else ("USD" if any(w in q_lower for w in ["dollar", "usd", "$"]) else None)
+        if budget_max and not currency:
+            currency = "INR" if self._contains_currency_hint(raw_query) else "USD"
+
+        # Hard constraints
+        hard_constraints: List[str] = []
+        if budget_max:
+            hard_constraints.append(f"budget_max: {budget_max}")
+        for voltage in re.findall(r"\b\d+(?:\.\d+)?\s*[vV]\b", raw_query):
+            hard_constraints.append(voltage.replace(" ", ""))
+        for platform in ("ESP32", "Arduino", "Raspberry Pi", "I2C", "SPI", "UART", "RTX 4060", "RTX 3060", "RTX 4050"):
+            if re.search(rf"\b{re.escape(platform)}\b", raw_query, re.IGNORECASE):
+                hard_constraints.append(platform)
+
+        use_case = None
+        if any(k in q_lower for k in ["gaming", "game"]):
+            use_case = "Gaming"
+        elif any(k in q_lower for k in ["coding", "programming", "developer"]):
+            use_case = "Coding"
+        elif any(k in q_lower for k in ["ml", "machine learning", "ai"]):
+            use_case = "Machine Learning / ML"
+        elif any(k in q_lower for k in ["iot", "automation"]):
+            use_case = "IoT / Automation"
+
+        return QueryAnalysis(
+            category=category,
+            subcategory=subcategory,
+            budget_max=budget_max,
+            currency=currency,
+            hard_constraints=hard_constraints,
+            use_case=use_case,
+            language=detected_lang,
+            ambiguity=False,
+            clarification_question=None,
+        )
 
     async def analyze_query(
         self,
@@ -223,6 +284,21 @@ class QueryUnderstandingAgent:
                 ambiguity=True,
                 clarification_question=clarification,
             )
+
+        # Fast-path deterministic intent extraction without calling Qwen LLM before retrieval
+        heuristic_res = self._heuristic_analyze(raw_query)
+        if heuristic_res is not None:
+            logger.info(
+                "[DEV_TRACE] Fast-path intent extraction completed (bypassed Qwen before retrieval)",
+                extra={
+                    "request_id": req_id,
+                    "category": heuristic_res.category,
+                    "budget_max": heuristic_res.budget_max,
+                    "ambiguity": heuristic_res.ambiguity,
+                    "language": heuristic_res.language,
+                },
+            )
+            return heuristic_res
 
         prompt = (
             f"Analyze this user query:\n"

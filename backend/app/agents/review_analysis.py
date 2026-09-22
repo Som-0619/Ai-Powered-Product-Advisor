@@ -171,10 +171,124 @@ class ReviewAnalysisAgent:
         return DeepReviewReasoning(review_ids=[review.review_id for review in reviews], summary=response.content)
 
 
+ReviewAgent = ReviewAnalysisAgent
+
+
 async def review_analysis_node(state: Dict[str, Any], model_gateway: Optional[ModelGateway] = None) -> Dict[str, Any]:
-    """Supervisor-compatible review node; state must contain trusted ``reviews`` data."""
-    reviews = [ReviewInput.model_validate(review) for review in state.get("reviews", [])]
-    result = await ReviewAnalysisAgent(model_gateway).analyze_reviews(
-        reviews, state.get("product_id"), state.get("request_id"), bool(state.get("use_deep_review_reasoning", False))
-    )
-    return {"review_results": [result.model_dump()]}
+    """Supervisor-compatible review node; fetches canonical reviews by product_id via tool layer."""
+    from app.agents import tools
+
+    agent = ReviewAnalysisAgent(model_gateway)
+    request_id = state.get("request_id") or str(uuid.uuid4())
+    deep_reasoning = bool(state.get("use_deep_review_reasoning", False))
+
+    # Determine products to review
+    explicit_reviews = state.get("reviews", [])
+    if explicit_reviews:
+        reviews = [ReviewInput.model_validate(r) for r in explicit_reviews]
+        product_id = state.get("product_id")
+        result = await agent.analyze_reviews(reviews, product_id, request_id, deep_reasoning)
+        return {"review_results": [result.model_dump()]}
+
+    # Otherwise discover product_ids from state
+    product_ids: List[str] = []
+    if state.get("product_id"):
+        product_ids.append(str(state["product_id"]))
+    elif state.get("selected_products"):
+        product_ids = [str(pid) for pid in state["selected_products"][:2]]
+    elif state.get("search_results"):
+        product_ids = [str(r["product_id"]) for r in state["search_results"][:2]]
+    elif state.get("candidates"):
+        product_ids = [str(r.get("product_id") or r.get("id")) for r in state["candidates"][:2]]
+
+    from app.services.factory import get_cache_service
+    import json
+    cache_service = get_cache_service()
+
+    review_results: List[Dict[str, Any]] = []
+    review_context: Dict[str, Any] = {}
+
+    for pid in product_ids:
+        # Check Section 27 Redis cache for review summaries
+        cache_key = f"review_summary:{pid}"
+        try:
+            cached_entry = await cache_service.get(cache_key)
+            if cached_entry:
+                cached_data = json.loads(cached_entry)
+                review_results.append(cached_data.get("result", {}))
+                review_context[pid] = cached_data.get("context", {})
+                continue
+        except Exception:
+            pass
+
+        raw_reviews = await tools.get_product_reviews(pid)
+        if not raw_reviews:
+            empty_res = ReviewAnalysisResult(
+                product_id=pid,
+                review_ids=[],
+                sentiment="unknown",
+            )
+            review_results.append(empty_res.model_dump())
+            ctx_entry = {
+                "product_id": pid,
+                "summary": "No verified review data available.",
+                "sentiment": "unknown",
+                "reviews_count": 0,
+                "positive_themes": [],
+                "negative_themes": [],
+                "rating_distribution": {},
+            }
+            review_context[pid] = ctx_entry
+            try:
+                await cache_service.set(cache_key, json.dumps({"result": empty_res.model_dump(), "context": ctx_entry}), expire_seconds=600)
+            except Exception:
+                pass
+            continue
+
+        reviews = [
+            ReviewInput(
+                review_id=r["review_id"],
+                body=r["body"],
+                rating=r.get("rating"),
+                title=r.get("title"),
+            )
+            for r in raw_reviews
+        ]
+        res = await agent.analyze_reviews(reviews, product_id=pid, request_id=request_id, use_deep_reasoning=deep_reasoning)
+        review_results.append(res.model_dump())
+
+        # Build compact structured review summary
+        pos_themes = [f.finding for f in res.pros] or [f.finding for f in res.recurring_praise]
+        neg_themes = [f.finding for f in res.cons] or [f.finding for f in res.recurring_complaints]
+        
+        # Calculate rating distribution
+        ratings = [r.rating for r in reviews if r.rating is not None]
+        rating_dist: Dict[str, int] = {}
+        for rtg in ratings:
+            key = f"{int(rtg)} star"
+            rating_dist[key] = rating_dist.get(key, 0) + 1
+        avg_rating = round(sum(ratings) / len(ratings), 2) if ratings else None
+
+        ctx_entry = {
+            "product_id": pid,
+            "summary": res.deep_reasoning.summary if res.deep_reasoning else f"Sentiment: {res.sentiment}. Reviews analyzed: {len(reviews)}.",
+            "sentiment": res.sentiment,
+            "reviews_count": len(reviews),
+            "average_rating": avg_rating,
+            "positive_themes": pos_themes,
+            "negative_themes": neg_themes,
+            "rating_distribution": rating_dist,
+        }
+        review_context[pid] = ctx_entry
+
+        try:
+            await cache_service.set(cache_key, json.dumps({"result": res.model_dump(), "context": ctx_entry}), expire_seconds=600)
+        except Exception:
+            pass
+
+
+    return {
+        "review_results": review_results,
+        "review_context": review_context,
+    }
+

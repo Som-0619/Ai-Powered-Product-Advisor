@@ -10,15 +10,17 @@ PostgreSQL canonical source of truth service for:
 
 import uuid
 from typing import Optional, List, Sequence, Dict, Any, Union
-from sqlalchemy import select
+from sqlalchemy import select, or_, update
 from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.catalog import Product, ProductVariant, Specification
-from app.models.media import ProductImage
+from app.models.media import ProductImage, CANONICAL_IMAGE_TYPES
 from app.models.retailer_offers import RetailerOffer
 from app.models.sources import ProductSource
+from app.models.reviews import ProductReview
 from app.services.factory import get_db_service
+from sqlalchemy import or_
 
 
 def _coerce_uuid(val: Union[uuid.UUID, str]) -> uuid.UUID:
@@ -52,12 +54,79 @@ class ProductCatalogService:
                 selectinload(Product.images),
                 selectinload(Product.retailer_offers),
                 selectinload(Product.sources),
-                selectinload(Product.specifications),
+                selectinload(Product.reviews),
             )
         )
         async for session in self._get_session():
             result = await session.execute(stmt)
             return result.scalar_one_or_none()
+
+    async def get_products_by_ids(
+        self, product_ids: Sequence[Union[uuid.UUID, str]]
+    ) -> List[Product]:
+        """Fetch canonical products for given IDs, preserving input order with full graph preloaded."""
+        if not product_ids:
+            return []
+        pids = [_coerce_uuid(pid) for pid in product_ids]
+        stmt = (
+            select(Product)
+            .where(Product.id.in_(pids))
+            .options(
+                selectinload(Product.variants),
+                selectinload(Product.images),
+                selectinload(Product.retailer_offers),
+                selectinload(Product.sources),
+                selectinload(Product.reviews),
+            )
+        )
+        async for session in self._get_session():
+            result = await session.execute(stmt)
+            prods = list(result.scalars().all())
+            prod_map = {p.id: p for p in prods}
+            return [prod_map[pid] for pid in pids if pid in prod_map]
+
+    async def get_all_products(self) -> List[Product]:
+        """Fetch all canonical products with variants and images for indexing."""
+        stmt = select(Product).options(
+            selectinload(Product.variants),
+            selectinload(Product.images),
+            selectinload(Product.retailer_offers),
+            selectinload(Product.sources),
+        )
+        async for session in self._get_session():
+            result = await session.execute(stmt)
+            return list(result.scalars().all())
+
+
+    async def get_products(
+        self,
+        category: Optional[str] = None,
+        skip: int = 0,
+        limit: int = 50,
+    ) -> List[Product]:
+        """Fetch canonical products, optionally filtered by category name or slug."""
+        stmt = select(Product)
+        if category:
+            clean_cat = category.strip().lower()
+            stmt = stmt.where(
+                or_(
+                    Product.category.ilike(clean_cat),
+                    Product.subcategory.ilike(clean_cat),
+                    Product.slug.ilike(f"%{clean_cat}%"),
+                )
+            )
+        stmt = (
+            stmt.offset(skip)
+            .limit(limit)
+            .options(
+                selectinload(Product.variants),
+                selectinload(Product.images),
+                selectinload(Product.retailer_offers),
+            )
+        )
+        async for session in self._get_session():
+            result = await session.execute(stmt)
+            return list(result.scalars().all())
 
     async def get_variant(self, variant_id: Union[uuid.UUID, str]) -> Optional[ProductVariant]:
         """Fetch product variant by variant_id."""
@@ -74,6 +143,21 @@ class ProductCatalogService:
             result = await session.execute(stmt)
             return result.scalar_one_or_none()
 
+    async def get_product_variants(self, product_id: Union[uuid.UUID, str]) -> List[ProductVariant]:
+        """Fetch all variants strictly belonging to canonical product_id."""
+        pid = _coerce_uuid(product_id)
+        stmt = (
+            select(ProductVariant)
+            .where(ProductVariant.product_id == pid)
+            .order_by(ProductVariant.created_at.asc())
+        )
+        async for session in self._get_session():
+            result = await session.execute(stmt)
+            variants = list(result.scalars().all())
+            for v in variants:
+                assert v.product_id == pid, f"Variant {v.id} product_id mismatch: expected {pid}, got {v.product_id}"
+            return variants
+
     async def get_product_images(self, product_id: Union[uuid.UUID, str]) -> List[ProductImage]:
         """Fetch all images strictly belonging to canonical product_id."""
         pid = _coerce_uuid(product_id)
@@ -89,6 +173,21 @@ class ProductCatalogService:
             for img in images:
                 assert img.product_id == pid, f"Image {img.id} product_id mismatch: expected {pid}, got {img.product_id}"
             return images
+
+    async def get_product_reviews(self, product_id: Union[uuid.UUID, str]) -> List[ProductReview]:
+        """Fetch all reviews strictly belonging to canonical product_id."""
+        pid = _coerce_uuid(product_id)
+        stmt = (
+            select(ProductReview)
+            .where(ProductReview.product_id == pid)
+            .order_by(ProductReview.created_at.desc())
+        )
+        async for session in self._get_session():
+            result = await session.execute(stmt)
+            reviews = list(result.scalars().all())
+            for r in reviews:
+                assert r.product_id == pid, f"Review {r.id} product_id mismatch: expected {pid}, got {r.product_id}"
+            return reviews
 
     async def get_retailer_offers(self, product_id: Union[uuid.UUID, str]) -> List[RetailerOffer]:
         """Fetch all external retailer offers strictly belonging to canonical product_id."""
@@ -122,6 +221,36 @@ class ProductCatalogService:
                 assert src.product_id == pid, f"Source {src.id} product_id mismatch: expected {pid}, got {src.product_id}"
             return sources
 
+    async def search_products(
+        self,
+        query: str,
+        category: Optional[str] = None,
+        brand: Optional[str] = None,
+        limit: int = 50,
+    ) -> List[Product]:
+        """Perform search across title, brand, model, description with filters."""
+        stmt = select(Product)
+        q = query.strip()
+        if q:
+            pattern = f"%{q}%"
+            stmt = stmt.where(
+                or_(
+                    Product.title.ilike(pattern),
+                    Product.brand.ilike(pattern),
+                    Product.model.ilike(pattern),
+                    Product.description.ilike(pattern),
+                    Product.sku.ilike(pattern),
+                )
+            )
+        if category:
+            stmt = stmt.where(Product.category.ilike(category.strip()))
+        if brand:
+            stmt = stmt.where(Product.brand.ilike(brand.strip()))
+        stmt = stmt.limit(limit)
+        async for session in self._get_session():
+            result = await session.execute(stmt)
+            return list(result.scalars().all())
+
     async def create_product(
         self,
         title: str,
@@ -139,6 +268,8 @@ class ProductCatalogService:
         category_id: Optional[uuid.UUID] = None,
         brand_id: Optional[uuid.UUID] = None,
         is_component: bool = False,
+        specifications: Optional[Dict[str, Any]] = None,
+        release_year: Optional[int] = None,
     ) -> Product:
         """Create a new canonical product entity."""
         prod = Product(
@@ -157,6 +288,8 @@ class ProductCatalogService:
             category_id=category_id,
             brand_id=brand_id,
             is_component=is_component,
+            specifications=specifications or {},
+            release_year=release_year,
         )
         async for session in self._get_session():
             session.add(prod)
@@ -206,20 +339,43 @@ class ProductCatalogService:
         """Add a canonical product image strictly attached to product_id."""
         pid = _coerce_uuid(product_id)
         vid = _coerce_uuid(variant_id) if variant_id else None
-        img = ProductImage(
-            id=image_id or uuid.uuid4(),
-            product_id=pid,
-            variant_id=vid,
-            image_url=image_url,
-            storage_key=storage_key or image_url,
-            storage_path=storage_key or image_url,
-            source=source,
-            source_url=source_url or image_url,
-            image_type=image_type.lower(),
-            is_primary=is_primary,
-            verified=verified,
-        )
+        clean_type = image_type.lower().strip()
+        if clean_type not in CANONICAL_IMAGE_TYPES:
+            raise ValueError(
+                f"Invalid image_type '{image_type}'. Allowed types: {sorted(CANONICAL_IMAGE_TYPES)}"
+            )
+
         async for session in self._get_session():
+            if vid:
+                v_res = await session.execute(
+                    select(ProductVariant).where(ProductVariant.id == vid)
+                )
+                variant_obj = v_res.scalar_one_or_none()
+                if variant_obj and variant_obj.product_id != pid:
+                    raise ValueError(
+                        f"Variant ownership mismatch: variant {vid} belongs to {variant_obj.product_id}, not {pid}"
+                    )
+
+            if is_primary:
+                await session.execute(
+                    update(ProductImage)
+                    .where(ProductImage.product_id == pid)
+                    .values(is_primary=False)
+                )
+
+            img = ProductImage(
+                id=image_id or uuid.uuid4(),
+                product_id=pid,
+                variant_id=vid,
+                image_url=image_url,
+                storage_key=storage_key or image_url,
+                storage_path=storage_key or image_url,
+                source=source,
+                source_url=source_url or image_url,
+                image_type=clean_type,
+                is_primary=is_primary,
+                verified=verified,
+            )
             session.add(img)
             await session.flush()
             return img
@@ -284,3 +440,34 @@ class ProductCatalogService:
             session.add(ps)
             await session.flush()
             return ps
+
+    async def add_review(
+        self,
+        product_id: Union[uuid.UUID, str],
+        body: str,
+        rating: Optional[float] = None,
+        title: Optional[str] = None,
+        source: Optional[str] = None,
+        verified_purchase: bool = False,
+        reviewer_id: Optional[Union[uuid.UUID, str]] = None,
+        review_id: Optional[uuid.UUID] = None,
+    ) -> ProductReview:
+        """Add a canonical review strictly attached to product_id."""
+        pid = _coerce_uuid(product_id)
+        rid = _coerce_uuid(reviewer_id) if reviewer_id else None
+        rev = ProductReview(
+            id=review_id or uuid.uuid4(),
+            product_id=pid,
+            reviewer_id=rid,
+            rating=rating,
+            title=title,
+            body=body,
+            source=source,
+            is_verified_purchase=verified_purchase,
+            attributes_analyzed={},
+        )
+        async for session in self._get_session():
+            session.add(rev)
+            await session.flush()
+            return rev
+

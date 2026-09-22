@@ -8,6 +8,7 @@ from sqlalchemy.orm import selectinload
 
 from app.services.factory import get_db_service
 from app.services.catalog_service import CatalogService
+from app.services.product_image_service import ProductImageService
 from app.services.catalog_fallback import get_fallback_product, get_product_images
 from app.services.retailer_offers import (
     get_canonical_product_offers,
@@ -51,6 +52,27 @@ async def get_product(id: str):
                         "is_current": getattr(p, "is_current", True),
                     })
                 offers = get_canonical_product_offers(str(product.id))
+
+                img_service = ProductImageService(session)
+                primary_img = await img_service.get_primary_image(product.id)
+                product_images = await img_service.get_images(product.id)
+                main_img_url = None
+                if primary_img:
+                    main_img_url = await img_service.get_image_url(product.id, primary_img.id)
+
+                serialized_images = []
+                for im in product_images:
+                    resolved = await img_service.get_image_url(product.id, im.id)
+                    serialized_images.append({
+                        "image_id": str(im.id),
+                        "product_id": str(im.product_id),
+                        "variant_id": str(im.variant_id) if im.variant_id else None,
+                        "image_url": resolved,
+                        "image_type": im.image_type,
+                        "is_primary": im.is_primary,
+                        "verified": im.verified,
+                    })
+
                 return {
                     "status": "success",
                     "id": str(product.id),
@@ -67,6 +89,9 @@ async def get_product(id: str):
                     "specifications": specs_dict,
                     "component_profile": component_data,
                     "prices": prices_list,
+                    "product_image": main_img_url,
+                    "image_url": main_img_url,
+                    "images": serialized_images,
                     "retailer_offers": offers,
                     "buy_links": offers,
                 }
@@ -132,6 +157,38 @@ async def get_product(id: str):
 @router.get("/{id}/images")
 async def get_product_images_endpoint(id: str):
     """Retrieve verified product images for canonical product_id."""
+    # 1. Try DB first via ProductImageService
+    try:
+        product_uuid = uuid.UUID(id)
+        db = get_db_service()
+        async with db.session() as session:
+            img_service = ProductImageService(session)
+            db_images = await img_service.get_images(product_uuid)
+            if db_images:
+                result_images = []
+                for img in db_images:
+                    resolved_url = await img_service.get_image_url(product_uuid, img.id)
+                    result_images.append({
+                        "image_id": str(img.id),
+                        "product_id": str(img.product_id),
+                        "variant_id": str(img.variant_id) if img.variant_id else None,
+                        "image_url": resolved_url,
+                        "image_type": img.image_type,
+                        "is_primary": img.is_primary,
+                        "verified": img.verified,
+                        "source": img.source,
+                        "storage_key": img.storage_key,
+                    })
+                return {
+                    "status": "success",
+                    "product_id": id,
+                    "count": len(result_images),
+                    "images": result_images,
+                }
+    except Exception:
+        pass
+
+    # 2. Fallback in-memory images
     images = get_product_images(id)
     if not images:
         fallback = get_fallback_product(id)

@@ -21,9 +21,10 @@ class SearchResponse(BaseModel):
 
     total: int = Field(..., description="Total matching documents count")
     hits: List[SearchHit] = Field(default_factory=list, description="Ranked list of hits")
-    search_mode: Literal["keyword", "vector", "hybrid"] = Field(
+    search_mode: Literal["keyword", "vector", "hybrid", "db_fallback"] = Field(
         ..., description="Search mode executed"
     )
+
     latency_ms: float = Field(..., description="Query execution latency in milliseconds")
 
 

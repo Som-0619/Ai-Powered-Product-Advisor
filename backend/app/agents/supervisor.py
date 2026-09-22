@@ -1,12 +1,19 @@
-"""Conditional LangGraph supervisor for Product Advisor specialist agents."""
+"""Conditional LangGraph supervisor for Product Advisor specialist agents.
+
+Coordinates SearchAgent, ReviewAgent, CompatibilityAgent, VisionAgent,
+and RecommendationAgent via typed LangGraph AgentState.
+"""
 
 import inspect
+import time
+import uuid
 from datetime import datetime, timezone
 from typing import Any, Awaitable, Callable, Dict, List, Mapping, Optional, Union
 
 from langgraph.graph import END, START, StateGraph
 from langgraph.graph.state import CompiledStateGraph
 
+from app.core.logging import logger
 from app.agents.query_understanding import query_understanding_node
 from app.schemas.agent_state import AgentState
 from app.schemas.query_analysis import QueryAnalysis
@@ -25,7 +32,18 @@ _COMPONENT_CATEGORIES = {
     "electronic component",
 }
 _LAPTOP_CATEGORIES = {"laptop", "notebook", "gaming laptop"}
-_WORKER_STEPS = ("retrieval", "review", "parts", "compatibility", "vision", "ranking", "evidence", "verification")
+_WORKER_STEPS = (
+    "retrieval",
+    "search",
+    "review",
+    "parts",
+    "compatibility",
+    "vision",
+    "ranking",
+    "recommendation",
+    "evidence",
+    "verification",
+)
 _STATE_FIELDS = set(AgentState.model_fields)
 
 
@@ -46,6 +64,30 @@ def _trace(state: Mapping[str, Any], node: str, status: str, **details: Any) -> 
     return entries
 
 
+def _get_default_worker_nodes() -> Dict[str, NodeHandler]:
+    from app.agents.compatibility import compatibility_node
+    from app.agents.critic import critic_node
+    from app.agents.evidence import evidence_node
+    from app.agents.parts import parts_node
+    from app.agents.recommendation_agent import recommendation_node
+    from app.agents.review_analysis import review_analysis_node
+    from app.agents.search_agent import search_node
+    from app.agents.vision import vision_node
+
+    return {
+        "retrieval": search_node,
+        "search": search_node,
+        "review": review_analysis_node,
+        "parts": parts_node,
+        "compatibility": compatibility_node,
+        "vision": vision_node,
+        "ranking": recommendation_node,
+        "recommendation": recommendation_node,
+        "evidence": evidence_node,
+        "verification": critic_node,
+    }
+
+
 class SupervisorAgent:
     """Plans and conditionally routes query work without invoking unrelated agents."""
 
@@ -60,28 +102,47 @@ class SupervisorAgent:
         unknown = set((worker_nodes or {})) - set(_WORKER_STEPS)
         if unknown:
             raise ValueError(f"Unsupported supervisor worker nodes: {sorted(unknown)}")
-        self._worker_nodes = dict(worker_nodes or {})
+        self._worker_nodes = dict(_get_default_worker_nodes() if worker_nodes is None else worker_nodes)
         self._query_node = query_node or query_understanding_node
         self.max_retries = max_retries
 
     @staticmethod
-    def create_plan(intent: Mapping[str, Any]) -> List[str]:
+    def create_plan(intent: Mapping[str, Any], query: str = "") -> List[str]:
         """Select only the stages necessary for the understood request."""
         if intent.get("ambiguity"):
             return ["clarify"]
 
+        q_lower = query.lower().strip()
         category = str(intent.get("category") or "").strip().lower()
+
+        # Visual question specifically targeting product appearance/ports
+        if ("image" in q_lower or "photo" in q_lower or "picture" in q_lower) and any(
+            w in q_lower for w in ("show", "port", "usb", "look", "connector", "front", "back", "color")
+        ) and "compare" not in q_lower:
+            return ["vision"]
+
+        # Component compatibility
+        if any(w in q_lower for w in ("compatible", "compatibility", "pinout", "voltage match")) or (
+            "esp32" in q_lower and "sensor" in q_lower
+        ):
+            return ["retrieval", "parts", "compatibility", "ranking", "evidence", "verification"]
+
+        # Review sentiment or review comparison
+        if "review" in q_lower or "rating" in q_lower or "feedback" in q_lower:
+            return ["retrieval", "review", "ranking", "evidence"]
+
         if category in _LAPTOP_CATEGORIES:
             return ["retrieval", "review", "vision", "ranking", "evidence", "verification"]
         if category in _COMPONENT_CATEGORIES:
             return ["retrieval", "parts", "compatibility", "ranking", "evidence", "verification"]
+
         return ["retrieval", "ranking", "evidence"]
 
     async def _query(self, state: StateValue) -> Dict[str, Any]:
         current = _as_dict(state)
         try:
             result = self._query_node(
-                {"raw_query": current["user_query"], "request_id": current["request_id"]}
+                {"raw_query": current.get("user_query") or current.get("query") or "", "request_id": current["request_id"]}
             )
             if inspect.isawaitable(result):
                 result = await result
@@ -111,7 +172,8 @@ class SupervisorAgent:
 
     async def _plan(self, state: StateValue) -> Dict[str, Any]:
         current = _as_dict(state)
-        plan = self.create_plan(current.get("intent", {}))
+        query = current.get("user_query") or current.get("query") or ""
+        plan = self.create_plan(current.get("intent", {}), query=query)
         return {"plan": plan, "trace": _trace(current, "plan", "completed", plan=plan)}
 
     async def _clarify(self, state: StateValue) -> Dict[str, Any]:
@@ -120,6 +182,7 @@ class SupervisorAgent:
         return {
             "plan": [],
             "final_response": question,
+            "final_answer": question,
             "trace": _trace(current, "clarify", "completed"),
         }
 
@@ -208,7 +271,32 @@ class SupervisorAgent:
 
     async def _stop(self, state: StateValue) -> Dict[str, Any]:
         current = _as_dict(state)
-        return {"trace": _trace(current, "stop", "completed")}
+        answer = current.get("final_answer") or current.get("final_response")
+
+        if not answer:
+            # Generate grounded final summary from state if available
+            recs = current.get("recommendation_context", [])
+            compat = current.get("compatibility_context", {})
+            vision = current.get("vision_context", {})
+
+            if recs:
+                top = recs[0]
+                answer = f"Recommended: {top.get('title')} (Score: {top.get('final_score', 0):.2f}). Reasons: {'; '.join(top.get('ranking_reasons', [])[:2])}."
+            elif compat and compat.get("reasoning"):
+                answer = f"Compatibility status: {compat.get('status')}. Reasoning: {compat.get('reasoning')}."
+            elif vision and vision.get("observations"):
+                obs_text = "; ".join(o.get("observation", "") for o in vision["observations"])
+                answer = f"Visual observations: {obs_text}"
+            elif current.get("intent", {}).get("ambiguity"):
+                answer = current.get("intent", {}).get("clarification_question") or "Could you clarify your request?"
+            else:
+                answer = "Evaluation completed based on verified product catalog evidence."
+
+        return {
+            "final_answer": answer,
+            "final_response": answer,
+            "trace": _trace(current, "stop", "completed"),
+        }
 
     def _route_next(self, state: StateValue) -> str:
         plan = _as_dict(state).get("plan", [])
@@ -262,6 +350,117 @@ class SupervisorAgent:
         workflow.add_edge("replan", "route")
         workflow.add_edge("stop", END)
         return workflow.compile()
+
+    async def run(
+        self,
+        user_query: str,
+        request_id: Optional[str] = None,
+        initial_state: Optional[Dict[str, Any]] = None,
+    ) -> Dict[str, Any]:
+        """Execute the LangGraph workflow and return structured Section 32 response.
+
+        Isolated state guarantees multi-user concurrency safety.
+        """
+        from app.agents import tools
+
+        req_id = request_id or str(uuid.uuid4())
+        t_sup = time.perf_counter()
+        state = {
+            "request_id": req_id,
+            "user_query": user_query,
+            "query": user_query,
+            **(initial_state or {}),
+        }
+        graph = self.build_graph()
+        output = await graph.ainvoke(state)
+        final_dict = _as_dict(output)
+
+        # 1. products
+        products = []
+        cands = final_dict.get("recommendation_context") or final_dict.get("search_results") or final_dict.get("candidates") or []
+        for c in cands:
+            products.append({
+                "product_id": c.get("product_id") or c.get("id"),
+                "title": c.get("title") or f"{c.get('brand', '')} {c.get('model', '')}".strip(),
+                "brand": c.get("brand", ""),
+                "model": c.get("model", ""),
+                "category": c.get("category", ""),
+                "price": c.get("price"),
+                "specifications": c.get("specifications", {}),
+                "primary_image_url": c.get("primary_image_url"),
+                "final_score": c.get("final_score"),
+                "eligible": c.get("eligible", True),
+            })
+
+        # 2. evidence
+        evidence = final_dict.get("evidence", [])
+        if isinstance(evidence, dict):
+            evidence = evidence.get("evidence", [])
+
+        # 3. reviews
+        reviews = []
+        rev_ctx = final_dict.get("review_context", {})
+        if rev_ctx:
+            reviews = list(rev_ctx.values())
+        elif final_dict.get("review_results"):
+            reviews = final_dict["review_results"]
+
+        # 4. compatibility
+        compatibility = final_dict.get("compatibility_results", [])
+        if not compatibility and final_dict.get("compatibility_context"):
+            compatibility = [final_dict["compatibility_context"]]
+
+        # 5. visual_findings
+        visual_findings = final_dict.get("visual_findings") or final_dict.get("vision_results") or []
+
+        # 6. retailer_offers
+        offers = final_dict.get("retailer_offers", [])
+        if not offers and products:
+            for p in products[:3]:
+                pid = p.get("product_id")
+                if pid:
+                    p_offers = await tools.get_retailer_offers(pid)
+                    offers.extend(p_offers)
+
+        # 7. answer
+        answer = final_dict.get("final_answer") or final_dict.get("final_response") or ""
+        if not answer:
+            if final_dict.get("intent", {}).get("ambiguity"):
+                answer = final_dict.get("intent", {}).get("clarification_question") or "Could you clarify your request?"
+            elif products:
+                top_p = products[0]
+                answer = f"Found {len(products)} matching option(s). Top match: {top_p['title']}."
+            else:
+                answer = "No products found matching the given query."
+
+        sup_latency_ms = round((time.perf_counter() - t_sup) * 1000, 2)
+        logger.info(
+            f"[DEV_TRACE] Supervisor latency: {sup_latency_ms}ms, final product count: {len(products)}",
+            extra={
+                "supervisor_latency_ms": sup_latency_ms,
+                "final_product_count": len(products),
+                "request_id": req_id,
+            },
+        )
+
+        return {
+            "answer": answer,
+            "products": products,
+            "evidence": evidence,
+            "reviews": reviews,
+            "compatibility": compatibility,
+            "visual_findings": visual_findings,
+            "retailer_offers": offers,
+            "confidence": final_dict.get("confidence", 1.0),
+            "warnings": final_dict.get("warnings", []),
+            "request_id": req_id,
+            # Backward compatibility fields for frontend/orchestrator
+            "reply": answer,
+            "recommendations": products,
+            "trace": final_dict.get("trace", []),
+            "verification": final_dict.get("verification", {}),
+            "status": "clarification" if final_dict.get("intent", {}).get("ambiguity") else ("no_results" if not products else "success"),
+        }
 
 
 def build_supervisor_graph(

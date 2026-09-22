@@ -187,7 +187,7 @@ class WorkflowOrchestrator:
                     candidates_raw.append(src)
 
                 # Also search products index for component items only
-                prod_res = await self.search.hybrid_search("products", user_query, filters={"is_component": True}, limit=8)
+                prod_res = await self.search.hybrid_search(settings.OPENSEARCH_ALIAS, user_query, filters={"is_component": True}, limit=8)
                 for hit in prod_res.hits:
                     src = dict(hit.source)
                     src["id"] = hit.id
@@ -196,7 +196,7 @@ class WorkflowOrchestrator:
                     candidates_raw.append(src)
             else:
                 # Consumer query (Smartphones, Laptops, Audio): strictly search products with is_component=False
-                prod_res = await self.search.hybrid_search("products", user_query, filters={"is_component": False}, limit=8)
+                prod_res = await self.search.hybrid_search(settings.OPENSEARCH_ALIAS, user_query, filters={"is_component": False}, limit=8)
                 for hit in prod_res.hits:
                     src = dict(hit.source)
                     src["id"] = hit.id
@@ -224,25 +224,12 @@ class WorkflowOrchestrator:
             else:
                 candidates_raw = [c for c in unique_candidates if not c.get("is_component")]
 
+            # If filtered candidates are empty, use unique candidates directly from OpenSearch
+            if not candidates_raw and unique_candidates:
+                candidates_raw = unique_candidates
+
         except Exception as exc:
             logger.error("Retrieval failed", extra={"error": str(exc)})
-
-        if not candidates_raw:
-            logger.info("Using catalog fallback for candidate retrieval", extra={"query": user_query})
-            fallback_category = (
-                "Audio & Headphones" if is_audio_query
-                else ("Smartphones" if is_phone_query
-                else ("Laptops & Ultrabooks" if is_laptop_query
-                else ("Electronics & Components" if is_comp_query else analysis.category)))
-            )
-            candidates_raw = search_fallback_catalog(
-                query=user_query,
-                category=fallback_category,
-                budget_max=analysis.budget_max,
-                is_component=True if is_comp_query else (False if (is_phone_query or is_laptop_query or is_audio_query) else None),
-                limit=8,
-                sort_expensive_first=sort_expensive_first,
-            )
 
         retrieval_latency = (time.perf_counter() - t0) * 1000
         _record_trace(
@@ -286,13 +273,17 @@ class WorkflowOrchestrator:
         is_component = is_comp_query or any(k in category_lower for k in ["mcu", "esp32", "arduino", "sensor", "relay", "component", "microcontroller", "ic", "module", "passives"])
         is_laptop = is_laptop_query or (not is_component and any(k in category_lower for k in ["laptop", "notebook", "gaming", "electronics", "gpu", "audio", "computer"]))
 
+        is_review_query = any(k in user_query_lower for k in ["review", "rating", "feedback", "sentiment", "thermals", "build quality", "pros", "cons"])
+        is_compat_query = any(k in user_query_lower for k in ["compatible", "compatibility", "connect", "pinout", "voltage match", "relay module to", "sensor for esp32", "relay to esp32"]) or (is_comp_query and any(k in user_query_lower for k in ["for esp32", "with esp32", "to esp32", "for arduino", "with arduino"]))
+        is_vision_query = any(k in user_query_lower for k in ["image", "photo", "picture", "show", "port", "connector", "front", "back", "color", "usb"]) and "compare" not in user_query_lower
+
         review_results: List[Dict[str, Any]] = []
         parts_results: List[Dict[str, Any]] = []
         compatibility_results: List[Dict[str, Any]] = []
         vision_results: List[Dict[str, Any]] = []
 
         # --- 3a. Review Analysis Agent ---
-        if is_laptop and candidates_raw:
+        if is_review_query and is_laptop and candidates_raw:
             yield {
                 "type": "step",
                 "step": "Review",
@@ -344,7 +335,7 @@ class WorkflowOrchestrator:
                 "request_id": req_id,
             }
         else:
-            _record_trace(trace, "Review", "skipped", 0.0, "Not applicable for component query")
+            _record_trace(trace, "Review", "skipped", 0.0, "Not requested or not applicable")
             yield {
                 "type": "step",
                 "step": "Review",
@@ -354,7 +345,7 @@ class WorkflowOrchestrator:
             }
 
         # --- 3b. Parts & Compatibility Specialist ---
-        if is_component:
+        if is_compat_query and is_component:
             # Parts
             yield {
                 "type": "step",
@@ -427,7 +418,7 @@ class WorkflowOrchestrator:
             yield {"type": "step", "step": "Compatibility", "status": "skipped", "latency_ms": 0.0}
 
         # --- 3c. Vision Specialist ---
-        if is_laptop or not is_component:
+        if is_vision_query:
             yield {
                 "type": "step",
                 "step": "Vision",

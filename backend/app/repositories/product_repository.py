@@ -27,7 +27,7 @@ class ProductRepository(BaseRepository[Product]):
                 selectinload(Product.category_rel),
                 selectinload(Product.brand_rel),
                 selectinload(Product.variants),
-                selectinload(Product.specifications),
+                selectinload(Product.specification_items),
                 selectinload(Product.component_profile),
                 selectinload(Product.prices),
                 selectinload(Product.availabilities),

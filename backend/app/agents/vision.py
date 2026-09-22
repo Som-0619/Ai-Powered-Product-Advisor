@@ -114,14 +114,14 @@ class VisionAgent:
 
 
 async def vision_node(state: Dict[str, Any], model_gateway: Optional[ModelGateway] = None) -> Dict[str, Any]:
-    """Supervisor-compatible node for a preselected image; no retrieval occurs here."""
+    """Supervisor-compatible node for a preselected image; enforces Image Safety Rule via tool layer."""
+    from app.agents import tools
+
     image_bytes = state.get("image_bytes")
     image_source = state.get("image_source", "")
-    if not image_bytes:
-        result = VisualVerificationResult(
-            visual_verification_status="unavailable", image_source=image_source, error="No shortlisted image supplied."
-        )
-    else:
+
+    # If raw image bytes are directly supplied in state, use agent directly
+    if image_bytes:
         result = await VisionAgent(model_gateway).analyze_image(
             image_bytes=image_bytes,
             image_source=image_source,
@@ -129,4 +129,72 @@ async def vision_node(state: Dict[str, Any], model_gateway: Optional[ModelGatewa
             shortlisted=bool(state.get("shortlisted", False)),
             request_id=state.get("request_id"),
         )
-    return {"vision_results": [result.model_dump()]}
+        return {
+            "vision_results": [result.model_dump()],
+            "visual_findings": [result.model_dump()],
+            "vision_context": {"status": result.visual_verification_status, "observations": [o.model_dump() for o in result.observations]},
+        }
+
+    # Otherwise, resolve candidate product from state
+    product_id = state.get("product_id")
+    if not product_id and state.get("selected_products"):
+        product_id = state["selected_products"][0]
+    elif not product_id and state.get("search_results"):
+        product_id = state["search_results"][0].get("product_id")
+    elif not product_id and state.get("candidates"):
+        product_id = state["candidates"][0].get("product_id") or state["candidates"][0].get("id")
+
+    if not product_id:
+        result = VisualVerificationResult(
+            visual_verification_status="unavailable",
+            image_source=image_source,
+            error="No shortlisted image supplied.",
+        )
+        return {
+            "vision_results": [result.model_dump()],
+            "visual_findings": [],
+            "vision_context": {"status": "unavailable", "observations": []},
+        }
+
+    # Enforce Image Safety Rule via tools.analyze_product_image
+    image_id = state.get("image_id")
+    claims = state.get("related_claims") or state.get("claims") or []
+    if isinstance(claims, list) and claims and isinstance(claims[0], dict):
+        claims = [c.get("claim") for c in claims if c.get("claim")]
+
+    tool_res = await tools.analyze_product_image(
+        product_id=product_id,
+        image_id=image_id,
+        claims=claims,
+    )
+
+    if tool_res.get("status") == "error":
+        result = VisualVerificationResult(
+            visual_verification_status="unavailable",
+            image_source=tool_res.get("image_url", ""),
+            error=tool_res.get("message", "Image analysis failed"),
+        )
+        return {
+            "vision_results": [result.model_dump()],
+            "visual_findings": [tool_res],
+            "vision_context": {"status": "unavailable", "error": tool_res.get("message")},
+            "warnings": [f"Vision warning for product {product_id}: {tool_res.get('message')}"],
+        }
+
+    obs_list = tool_res.get("observations", [])
+    result = VisualVerificationResult(
+        visual_verification_status="available",
+        image_source=tool_res.get("image_url", ""),
+    )
+    return {
+        "vision_results": [result.model_dump()],
+        "visual_findings": [tool_res],
+        "vision_context": {
+            "status": "available",
+            "product_id": str(product_id),
+            "image_id": tool_res.get("image_id"),
+            "image_url": tool_res.get("image_url"),
+            "observations": obs_list,
+        },
+    }
+

@@ -89,6 +89,26 @@ class AwsS3StorageService(StorageService):
                 "error": str(exc),
             }
 
+    async def list_objects(self, prefix: str = "", recursive: bool = True) -> list[str]:
+        """List object keys under the specified prefix from S3."""
+        self._ensure_boto3()
+        if not self._client:
+            await self.connect()
+
+        clean_prefix = prefix.lstrip("/")
+        loop = asyncio.get_running_loop()
+
+        def _list() -> list[str]:
+            paginator = self._client.get_paginator("list_objects_v2")
+            keys = []
+            delimit = "" if recursive else "/"
+            for page in paginator.paginate(Bucket=self._bucket, Prefix=clean_prefix, Delimiter=delimit):
+                for obj in page.get("Contents", []):
+                    keys.append(obj["Key"])
+            return keys
+
+        return await loop.run_in_executor(None, _list)
+
     async def put_object(
         self,
         object_name: str,
@@ -194,3 +214,7 @@ class AwsS3StorageService(StorageService):
             )
 
         return await loop.run_in_executor(None, _presign)
+
+
+# Canonical and backward-compatible alias
+S3Storage = AwsS3StorageService

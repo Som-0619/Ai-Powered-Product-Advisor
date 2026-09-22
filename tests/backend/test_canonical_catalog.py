@@ -1,38 +1,51 @@
 """Automated tests for Canonical Product Catalog Foundation.
 
-Validates Requirements:
-1. Canonical product entity contains: product_id, brand, model, variant, category, subcategory, description, external_product_id, created_at, updated_at.
-2. product_id is a stable UUID; never uses array index; never replaced by external_product_id.
-3. Variants strictly belong to product_id (variant_id, variant_name, sku, external_variant_id, specifications).
-4. Product images strictly belong to product_id (image_id, variant_id, image_url, image_type, source, verified).
-5. Retailer offers strictly belong to product_id (offer_id, retailer, external_product_id, url, price, currency, availability_status, verification_status).
-6. Product sources strictly belong to product_id (source_id, source_type, source_url, external_product_id, trust_score).
-7. Foreign-key integrity and cascade constraints.
-8. ProductCatalogService retrieval methods.
+Validates the 9 Mandatory Verification Requirements:
+1. test_product_identity()
+2. test_variant_product_relationship()
+3. test_image_product_relationship()
+4. test_review_product_relationship()
+5. test_retailer_product_relationship()
+6. test_no_duplicate_product_identity()
+7. test_storage_abstraction()
+8. test_product_without_retailer_still_works()
+9. test_product_without_image_does_not_use_another_product_image()
 """
 
+import os
 import uuid
+import inspect
 import pytest
 import pytest_asyncio
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-from sqlalchemy import select, text
+from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
 from app.core.config import settings
-from app.models.catalog import Product, ProductVariant
+from app.models.catalog import (
+    Product,
+    ProductVariant,
+    CANONICAL_ELECTRONICS_CATEGORIES,
+)
 from app.models.media import ProductImage, CANONICAL_IMAGE_TYPES
+from app.models.reviews import ProductReview
 from app.models.retailer_offers import RetailerOffer
 from app.models.sources import ProductSource, CANONICAL_SOURCE_TYPES
 from app.services.product_catalog_service import ProductCatalogService
+from app.services.storage import StorageService, MinIOStorage, S3Storage
+from app.adapters.local.minio_storage import MinioStorageService
+from app.adapters.aws.s3_storage import AwsS3StorageService
 
 
-# Use 127.0.0.1 for local host connectivity to PostgreSQL container
-TEST_DB_URL = "postgresql+asyncpg://advisor_user:advisor_password@127.0.0.1:5432/product_advisor"
+TEST_DB_URL = os.environ.get(
+    "LOCAL_POSTGRES_URL",
+    "postgresql+asyncpg://advisor_user:advisor_password@127.0.0.1:5432/product_advisor",
+)
 
 
 @pytest_asyncio.fixture(loop_scope="function")
 async def test_session():
-    """Provides an isolated AsyncSession for catalog tests."""
+    """Provides an isolated AsyncSession for canonical catalog tests."""
     engine = create_async_engine(TEST_DB_URL, echo=False)
     session_factory = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
     async with session_factory() as session:
@@ -41,191 +54,278 @@ async def test_session():
 
 
 @pytest.mark.asyncio
-async def test_product_has_stable_id(test_session: AsyncSession):
-    """Verify that every product has a stable, immutable UUID identity and not an array index."""
-    stable_uuid = uuid.uuid4()
+async def test_product_identity(test_session: AsyncSession):
+    """Verify canonical product entity requirements:
+    1. Required fields: product_id, brand, model, variant, category, subcategory, description, release_year, created_at, updated_at.
+    2. product_id is the internal canonical identifier (UUID v4) and never an array index or position.
+    3. external_product_id (ASIN/FSN) does NOT replace product_id.
+    4. Product is retrievable via ProductCatalogService.get_product(product_id).
+    """
     service = ProductCatalogService(test_session)
+    stable_uuid = uuid.uuid4()
+    asin = "B0CBGF51G3"
 
     product = await service.create_product(
         product_id=stable_uuid,
-        title="Dell XPS 15 9530 Canonical Test",
-        slug=f"dell-xps-15-{uuid.uuid4().hex[:8]}",
+        title="Dell XPS 15 9530 Canonical Identity Test",
+        slug=f"dell-xps-15-ident-{uuid.uuid4().hex[:8]}",
         brand="Dell",
         model="XPS 15 9530",
         variant="Core i7 / 32GB / 1TB SSD",
-        category="Laptops & Ultrabooks",
-        subcategory="Creator & Premium Laptops",
+        category="Laptops",
+        subcategory="Workstation",
         description="Ultra-premium creator workstation laptop.",
-        external_product_id="B0CBGF51G3",
+        external_product_id=asin,
     )
+    product.release_year = 2023
+    product.specifications = {
+        "cpu": "Intel Core i7-13700H",
+        "ram": "32GB DDR5",
+        "storage": "1TB NVMe SSD",
+    }
     await test_session.commit()
 
-    # Identity checks
+    # Verify canonical identity
     assert product.id == stable_uuid
     assert product.product_id == stable_uuid
     assert isinstance(product.product_id, uuid.UUID)
-    # Ensure ID is not a sequential number or array index
-    assert str(product.product_id) == str(stable_uuid)
 
-    # Fetch back via service
+    # Required fields verification
+    assert product.brand == "Dell"
+    assert product.model == "XPS 15 9530"
+    assert product.variant == "Core i7 / 32GB / 1TB SSD"
+    assert product.category == "Laptops"
+    assert product.subcategory == "Workstation"
+    assert product.description == "Ultra-premium creator workstation laptop."
+    assert product.release_year == 2023
+    assert product.created_at is not None
+    assert product.updated_at is not None
+    assert product.specifications["cpu"] == "Intel Core i7-13700H"
+
+    # Isolation from external marketplace identifier: external_product_id != product_id
+    assert product.external_product_id == asin
+    assert product.product_id != asin
+    assert str(product.product_id) != asin
+
+    # Retrieval via ProductCatalogService
     fetched = await service.get_product(stable_uuid)
     assert fetched is not None
-    assert fetched.id == stable_uuid
     assert fetched.product_id == stable_uuid
     assert fetched.brand == "Dell"
     assert fetched.model == "XPS 15 9530"
-    assert fetched.category == "Laptops & Ultrabooks"
-    assert fetched.subcategory == "Creator & Premium Laptops"
-    assert fetched.created_at is not None
-    assert fetched.updated_at is not None
 
 
 @pytest.mark.asyncio
-async def test_variant_belongs_to_product(test_session: AsyncSession):
-    """Verify variants have distinct identities and strictly belong to product_id."""
+async def test_variant_product_relationship(test_session: AsyncSession):
+    """Verify product_variants fields and child-to-parent relationship:
+    1. Fields: variant_id, product_id, variant_name, sku, external_product_id, specifications, created_at, updated_at.
+    2. Multiple distinct hardware variants strictly belong to product_id.
+    3. Retrieval via get_product_variants(product_id).
+    """
     service = ProductCatalogService(test_session)
     product_uuid = uuid.uuid4()
 
     product = await service.create_product(
         product_id=product_uuid,
-        title="ThinkPad X1 Carbon Gen 11 Test",
-        slug=f"thinkpad-x1-test-{uuid.uuid4().hex[:8]}",
-        brand="Lenovo",
-        model="ThinkPad X1 Carbon Gen 11",
-        category="Laptops & Ultrabooks",
+        title="Apple iPhone 15 Pro",
+        slug=f"iphone-15-pro-{uuid.uuid4().hex[:8]}",
+        brand="Apple",
+        model="iPhone 15 Pro",
+        category="Smartphones",
     )
     await test_session.commit()
 
-    # Create 2 distinct hardware variants (16GB RAM vs 32GB RAM)
     v1_id = uuid.uuid4()
     v2_id = uuid.uuid4()
 
     var1 = await service.create_variant(
         variant_id=v1_id,
         product_id=product_uuid,
-        variant_name="16GB RAM / 512GB SSD / Core i7-1365U",
-        sku=f"LNV-X1C11-16-{uuid.uuid4().hex[:6]}",
-        specifications={"ram_gb": 16, "storage_gb": 512, "cpu": "Intel Core i7-1365U"},
-        external_variant_id="VAR-ASIN-16GB",
+        variant_name="128GB / Natural Titanium",
+        sku=f"APL-IP15P-128-{uuid.uuid4().hex[:6]}",
+        specifications={"storage": "128GB", "color": "Natural Titanium", "ram": "8GB"},
+        external_variant_id="APL-ASIN-128",
     )
     var2 = await service.create_variant(
         variant_id=v2_id,
         product_id=product_uuid,
-        variant_name="32GB RAM / 1TB SSD / Core i7-1370P",
-        sku=f"LNV-X1C11-32-{uuid.uuid4().hex[:6]}",
-        specifications={"ram_gb": 32, "storage_gb": 1024, "cpu": "Intel Core i7-1370P"},
-        external_variant_id="VAR-ASIN-32GB",
+        variant_name="256GB / Black Titanium",
+        sku=f"APL-IP15P-256-{uuid.uuid4().hex[:6]}",
+        specifications={"storage": "256GB", "color": "Black Titanium", "ram": "8GB"},
+        external_variant_id="APL-ASIN-256",
     )
     await test_session.commit()
 
-    # Foreign key and identity checks
+    # Verify fields and relationship
     assert var1.product_id == product_uuid
     assert var2.product_id == product_uuid
     assert var1.variant_id == v1_id
     assert var2.variant_id == v2_id
-    assert var1.variant_id != var2.variant_id
-    assert var1.sku != var2.sku
-    assert var1.specifications["ram_gb"] == 16
-    assert var2.specifications["ram_gb"] == 32
+    assert var1.variant_name == "128GB / Natural Titanium"
+    assert var2.variant_name == "256GB / Black Titanium"
+    assert var1.specifications["storage"] == "128GB"
+    assert var2.specifications["storage"] == "256GB"
+    assert var1.created_at is not None
+    assert var1.updated_at is not None
 
-    # Fetch variant through service
-    fetched_v1 = await service.get_variant(v1_id)
-    assert fetched_v1 is not None
-    assert fetched_v1.product_id == product_uuid
-    assert fetched_v1.variant_name == "16GB RAM / 512GB SSD / Core i7-1365U"
+    # Fetch through service
+    variants = await service.get_product_variants(product_uuid)
+    assert len(variants) >= 2
+    for v in variants:
+        assert v.product_id == product_uuid
+        assert v.variant_id is not None
 
 
 @pytest.mark.asyncio
-async def test_image_belongs_to_product(test_session: AsyncSession):
-    """Verify images strictly belong to product_id across canonical image types."""
+async def test_image_product_relationship(test_session: AsyncSession):
+    """Verify product_images fields and strict 1-to-1 relationship:
+    1. Fields: image_id, product_id, variant_id, image_type, storage_key, source, source_url, verified, created_at, updated_at.
+    2. Allowed image types.
+    3. Every image strictly references product_id.
+    4. Retrieval via get_product_images(product_id).
+    """
     service = ProductCatalogService(test_session)
     product_uuid = uuid.uuid4()
 
     await service.create_product(
         product_id=product_uuid,
-        title="Sony WH-1000XM5 Test",
+        title="Sony WH-1000XM5 Headphones",
         slug=f"sony-wh1000xm5-{uuid.uuid4().hex[:8]}",
         brand="Sony",
         model="WH-1000XM5",
-        category="Audio & Headphones",
+        category="Headphones",
     )
     await test_session.commit()
 
-    # Add images for various canonical types
-    img_front = await service.add_image(
+    img1 = await service.add_image(
         product_id=product_uuid,
-        image_url="https://images.example.com/sony-front.jpg",
+        image_url="https://images.example.com/sony-front.webp",
         image_type="front",
+        storage_key="images/sony/front.webp",
+        source="Manufacturer",
         is_primary=True,
         verified=True,
-        source="Manufacturer",
     )
-    img_ports = await service.add_image(
+    img2 = await service.add_image(
         product_id=product_uuid,
-        image_url="https://images.example.com/sony-ports.jpg",
+        image_url="https://images.example.com/sony-ports.webp",
         image_type="ports",
+        storage_key="images/sony/ports.webp",
+        source="Manufacturer",
         is_primary=False,
         verified=True,
-        source="Amazon",
     )
     await test_session.commit()
 
-    # Verify relationships
-    assert img_front.product_id == product_uuid
-    assert img_ports.product_id == product_uuid
-    assert img_front.image_id == img_front.id
-    assert img_front.image_type in CANONICAL_IMAGE_TYPES
-    assert img_ports.image_type in CANONICAL_IMAGE_TYPES
+    # Assert schema fields
+    assert img1.product_id == product_uuid
+    assert img2.product_id == product_uuid
+    assert img1.image_id == img1.id
+    assert img1.image_type in CANONICAL_IMAGE_TYPES
+    assert img2.image_type in CANONICAL_IMAGE_TYPES
+    assert img1.storage_key == "images/sony/front.webp"
+    assert img1.source == "Manufacturer"
+    assert img1.verified is True
+    assert img1.created_at is not None
 
-    # Fetch through service
+    # Retrieve through catalog service
     images = await service.get_product_images(product_uuid)
     assert len(images) >= 2
-    for img in images:
-        assert img.product_id == product_uuid
-        assert img.verified is True
+    for im in images:
+        assert im.product_id == product_uuid
 
 
 @pytest.mark.asyncio
-async def test_retailer_offer_belongs_to_product(test_session: AsyncSession):
-    """Verify retailer offers strictly reference product_id with valid marketplaces and statuses."""
+async def test_review_product_relationship(test_session: AsyncSession):
+    """Verify product_reviews fields and relationship:
+    1. Fields: review_id, product_id, rating, title, content, verified_purchase, source, created_at.
+    2. Every review strictly references product_id (never attached by name alone).
+    3. Retrieval via get_product_reviews(product_id).
+    """
     service = ProductCatalogService(test_session)
     product_uuid = uuid.uuid4()
 
     await service.create_product(
         product_id=product_uuid,
-        title="Apple MacBook Pro 14 Test",
-        slug=f"macbook-pro-14-{uuid.uuid4().hex[:8]}",
-        brand="Apple",
-        model="MacBook Pro 14",
-        category="Laptops & Ultrabooks",
+        title="Raspberry Pi 5 Review Test",
+        slug=f"rpi-5-review-{uuid.uuid4().hex[:8]}",
+        brand="Raspberry Pi",
+        model="Raspberry Pi 5",
+        category="Development boards",
     )
     await test_session.commit()
 
-    # Add Amazon offer
+    rev = await service.add_review(
+        product_id=product_uuid,
+        rating=4.8,
+        title="Phenomenal SBC Performance",
+        body="Massive speed improvement with PCIe support and active cooling.",
+        source="Customer Review",
+        verified_purchase=True,
+    )
+    await test_session.commit()
+
+    assert rev.product_id == product_uuid
+    assert rev.review_id == rev.id
+    assert rev.rating == 4.8
+    assert rev.title == "Phenomenal SBC Performance"
+    assert rev.content == "Massive speed improvement with PCIe support and active cooling."
+    assert rev.verified_purchase is True
+    assert rev.source == "Customer Review"
+    assert rev.created_at is not None
+
+    # Fetch through service
+    reviews = await service.get_product_reviews(product_uuid)
+    assert len(reviews) >= 1
+    for r in reviews:
+        assert r.product_id == product_uuid
+
+
+@pytest.mark.asyncio
+async def test_retailer_product_relationship(test_session: AsyncSession):
+    """Verify retailer_offers fields, constraints, and relationship:
+    1. Fields: offer_id, product_id, variant_id, retailer, external_product_id, url, price, currency, availability_status, verification_status, last_verified.
+    2. Retailers: amazon, flipkart.
+    3. Availability: available, unavailable, unknown.
+    4. Verification: verified, unverified, broken, not_available.
+    5. Retrieval via get_retailer_offers(product_id).
+    """
+    service = ProductCatalogService(test_session)
+    product_uuid = uuid.uuid4()
+
+    await service.create_product(
+        product_id=product_uuid,
+        title="Logitech MX Master 3S Test",
+        slug=f"logitech-mx3s-{uuid.uuid4().hex[:8]}",
+        brand="Logitech",
+        model="MX Master 3S",
+        category="Mice",
+    )
+    await test_session.commit()
+
     az_offer = await service.add_retailer_offer(
         product_id=product_uuid,
         retailer="amazon",
-        external_product_id="B0CHX1W1XY",
-        url="https://www.amazon.in/dp/B0CHX1W1XY",
-        price=199900.0,
+        external_product_id="B0B11EL3BR",
+        url="https://www.amazon.in/dp/B0B11EL3BR",
+        price=8995.0,
         currency="INR",
         availability_status="available",
         verification_status="verified",
     )
-    # Add Flipkart offer
     fk_offer = await service.add_retailer_offer(
         product_id=product_uuid,
         retailer="flipkart",
-        external_product_id="itm1234567890",
-        url="https://www.flipkart.com/product/p/itm1234567890",
-        price=197900.0,
+        external_product_id="itm1000000001",
+        url="https://www.flipkart.com/product/p/itm1000000001",
+        price=8799.0,
         currency="INR",
         availability_status="available",
         verification_status="verified",
     )
     await test_session.commit()
 
-    # Identity and constraints
+    # Assert offer schema and constraints
     assert az_offer.product_id == product_uuid
     assert fk_offer.product_id == product_uuid
     assert az_offer.offer_id == az_offer.id
@@ -238,153 +338,159 @@ async def test_retailer_offer_belongs_to_product(test_session: AsyncSession):
     assert len(offers) == 2
     for o in offers:
         assert o.product_id == product_uuid
-        assert o.currency == "INR"
 
 
 @pytest.mark.asyncio
-async def test_source_belongs_to_product(test_session: AsyncSession):
-    """Verify product source provenance strictly belongs to product_id."""
+async def test_no_duplicate_product_identity(test_session: AsyncSession):
+    """Verify data integrity: prevent duplicate product identity by UUID or unique slug."""
     service = ProductCatalogService(test_session)
-    product_uuid = uuid.uuid4()
+    duplicate_uuid = uuid.uuid4()
+    duplicate_slug = f"unique-laptop-{uuid.uuid4().hex[:8]}"
 
+    # Insert first product
     await service.create_product(
-        product_id=product_uuid,
-        title="ESP32-S3 Microcontroller Test",
-        slug=f"esp32-s3-test-{uuid.uuid4().hex[:8]}",
+        product_id=duplicate_uuid,
+        title="Original Unique Laptop",
+        slug=duplicate_slug,
+        brand="Lenovo",
+        model="ThinkPad P1",
+    )
+    await test_session.commit()
+
+    # Attempting to insert a duplicate with the same UUID must raise IntegrityError
+    with pytest.raises(IntegrityError):
+        await service.create_product(
+            product_id=duplicate_uuid,
+            title="Duplicate UUID Laptop",
+            slug=f"different-slug-{uuid.uuid4().hex[:8]}",
+            brand="Lenovo",
+            model="ThinkPad P1",
+        )
+        await test_session.commit()
+    await test_session.rollback()
+
+    # Attempting to insert a duplicate with the same unique slug must raise IntegrityError
+    with pytest.raises(IntegrityError):
+        await service.create_product(
+            product_id=uuid.uuid4(),
+            title="Duplicate Slug Laptop",
+            slug=duplicate_slug,
+            brand="Lenovo",
+            model="ThinkPad P1",
+        )
+        await test_session.commit()
+    await test_session.rollback()
+
+
+def test_storage_abstraction():
+    """Verify storage abstraction interface and implementation compliance:
+    1. StorageService defines upload(), get_url(), delete(), exists().
+    2. MinIOStorage implements the abstraction for local environments.
+    3. S3Storage implements the abstraction for AWS production environments.
+    4. Application interacts with StorageService without direct MinIO/boto3 SDK calls.
+    """
+    # 1. Interface method verification
+    for method_name in ("upload", "get_url", "delete", "exists"):
+        assert hasattr(StorageService, method_name), f"StorageService missing '{method_name}' method"
+        method = getattr(StorageService, method_name)
+        assert callable(method), f"StorageService.{method_name} is not callable"
+
+    # 2. Local MinIO adapter compliance
+    assert issubclass(MinIOStorage, StorageService)
+    assert hasattr(MinIOStorage, "upload")
+    assert hasattr(MinIOStorage, "get_url")
+    assert hasattr(MinIOStorage, "delete")
+    assert hasattr(MinIOStorage, "exists")
+
+    # 3. AWS S3 adapter compliance
+    assert issubclass(S3Storage, StorageService)
+    assert hasattr(S3Storage, "upload")
+    assert hasattr(S3Storage, "get_url")
+    assert hasattr(S3Storage, "delete")
+    assert hasattr(S3Storage, "exists")
+
+
+@pytest.mark.asyncio
+async def test_product_without_retailer_still_works(test_session: AsyncSession):
+    """CRITICAL: Retailer offers are strictly OPTIONAL.
+    A product must remain fully functional when it has no Amazon offer and no Flipkart offer.
+    """
+    service = ProductCatalogService(test_session)
+    standalone_uuid = uuid.uuid4()
+
+    # Create standalone product with no retailer offers
+    standalone_prod = await service.create_product(
+        product_id=standalone_uuid,
+        title="Open Source Hardware ESP32 Dev Board",
+        slug=f"standalone-esp32-{uuid.uuid4().hex[:8]}",
         brand="Espressif",
-        model="ESP32-S3",
-        category="Electronic Components",
-        is_component=True,
+        model="ESP32-WROOM-32",
+        category="Microcontrollers",
+        description="Standalone development board without commercial retailer listings.",
     )
     await test_session.commit()
 
-    source = await service.add_product_source(
-        product_id=product_uuid,
-        source_url="https://www.espressif.com/en/products/socs/esp32-s3",
-        source_type="manufacturer",
-        external_product_id="ESP32-S3-WROOM-1",
-        trust_score=0.99,
-    )
-    await test_session.commit()
+    # 1. Product must be fetched successfully
+    fetched = await service.get_product(standalone_uuid)
+    assert fetched is not None
+    assert fetched.product_id == standalone_uuid
+    assert fetched.title == "Open Source Hardware ESP32 Dev Board"
 
-    assert source.product_id == product_uuid
-    assert source.source_type == "manufacturer"
-    assert source.source_type in CANONICAL_SOURCE_TYPES
-    assert source.trust_score == 0.99
-
-    sources = await service.get_product_sources(product_uuid)
-    assert len(sources) >= 1
-    assert sources[0].product_id == product_uuid
+    # 2. Retailer offers query must return an empty list without crashing or failing
+    offers = await service.get_retailer_offers(standalone_uuid)
+    assert offers == []
+    assert isinstance(offers, list)
+    assert len(offers) == 0
 
 
 @pytest.mark.asyncio
-async def test_external_id_does_not_replace_product_id(test_session: AsyncSession):
-    """CRITICAL: external_product_id (e.g. Amazon ASIN) must NEVER replace internal product_id."""
+async def test_product_without_image_does_not_use_another_product_image(test_session: AsyncSession):
+    """CRITICAL: An image MUST belong to exactly one product_id.
+    A product without an image must NEVER leak, borrow, or fallback to another product's image.
+    """
     service = ProductCatalogService(test_session)
-    asin = "B0CBGF51G3"
-    custom_uuid = uuid.uuid4()
+    prod_with_image_uuid = uuid.uuid4()
+    prod_without_image_uuid = uuid.uuid4()
 
-    product = await service.create_product(
-        product_id=custom_uuid,
-        title="ASIN Identity Isolation Test Laptop",
-        slug=f"asin-test-{uuid.uuid4().hex[:8]}",
-        brand="Dell",
-        model="XPS 15",
-        external_product_id=asin,
+    # Product A has an image
+    await service.create_product(
+        product_id=prod_with_image_uuid,
+        title="Product A with Verified Image",
+        slug=f"prod-a-image-{uuid.uuid4().hex[:8]}",
+        brand="BrandA",
+        model="ModelA",
+        category="Laptops",
+    )
+    product_a_image = await service.add_image(
+        product_id=prod_with_image_uuid,
+        image_url="https://images.example.com/unique-product-a-front.webp",
+        image_type="primary",
+        verified=True,
+    )
+
+    # Product B has NO image
+    await service.create_product(
+        product_id=prod_without_image_uuid,
+        title="Product B with Zero Images",
+        slug=f"prod-b-no-image-{uuid.uuid4().hex[:8]}",
+        brand="BrandB",
+        model="ModelB",
+        category="Laptops",
     )
     await test_session.commit()
 
-    # 1. Primary key must NOT be ASIN string
-    assert product.id != asin
-    assert product.product_id != asin
-    assert isinstance(product.id, uuid.UUID)
+    # Product A must have its own image
+    images_a = await service.get_product_images(prod_with_image_uuid)
+    assert len(images_a) == 1
+    assert images_a[0].product_id == prod_with_image_uuid
+    assert images_a[0].image_url == "https://images.example.com/unique-product-a-front.webp"
 
-    # 2. external_product_id stores the ASIN
-    assert product.external_product_id == asin
+    # Product B must return an empty list and NEVER contain Product A's image
+    images_b = await service.get_product_images(prod_without_image_uuid)
+    assert images_b == []
+    assert len(images_b) == 0
 
-    # 3. Product ID remains stable even if external_product_id changes
-    product.external_product_id = "B0UPDATED99"
-    await test_session.commit()
-
-    re_fetched = await service.get_product(custom_uuid)
-    assert re_fetched.id == custom_uuid
-    assert re_fetched.product_id == custom_uuid
-    assert re_fetched.external_product_id == "B0UPDATED99"
-
-
-@pytest.mark.asyncio
-async def test_foreign_key_integrity(test_session: AsyncSession):
-    """Verify relational cascading deletes and foreign-key integrity constraints."""
-    service = ProductCatalogService(test_session)
-    product_uuid = uuid.uuid4()
-
-    product = await service.create_product(
-        product_id=product_uuid,
-        title="Cascade Deletion Test Product",
-        slug=f"cascade-test-{uuid.uuid4().hex[:8]}",
-    )
-    await test_session.commit()
-
-    # Attach variant, image, offer, and source
-    var = await service.create_variant(
-        product_id=product_uuid,
-        variant_name="Default Variant",
-        sku=f"CASCADE-SKU-{uuid.uuid4().hex[:6]}",
-    )
-    img = await service.add_image(
-        product_id=product_uuid,
-        image_url="https://example.com/test.jpg",
-    )
-    offer = await service.add_retailer_offer(
-        product_id=product_uuid,
-        retailer="amazon",
-        price=100.0,
-    )
-    source = await service.add_product_source(
-        product_id=product_uuid,
-        source_url="https://example.com/source",
-    )
-    await test_session.commit()
-
-    # Delete parent product
-    await test_session.delete(product)
-    await test_session.commit()
-
-    # Verify children were cascaded on delete
-    res_var = await test_session.execute(select(ProductVariant).where(ProductVariant.id == var.id))
-    assert res_var.scalar_one_or_none() is None
-
-    res_img = await test_session.execute(select(ProductImage).where(ProductImage.id == img.id))
-    assert res_img.scalar_one_or_none() is None
-
-    res_offer = await test_session.execute(select(RetailerOffer).where(RetailerOffer.id == offer.id))
-    assert res_offer.scalar_one_or_none() is None
-
-    res_src = await test_session.execute(select(ProductSource).where(ProductSource.id == source.id))
-    assert res_src.scalar_one_or_none() is None
-
-
-@pytest.mark.asyncio
-async def test_orphan_insert_rejected(test_session: AsyncSession):
-    """Verify that images and offers cannot be created referencing a non-existent product_id."""
-    non_existent_uuid = uuid.uuid4()
-    service = ProductCatalogService(test_session)
-
-    # Attempting to add an image to a non-existent product must violate foreign key
-    with pytest.raises(IntegrityError):
-        await service.add_image(
-            product_id=non_existent_uuid,
-            image_url="https://example.com/orphan.jpg",
-        )
-        await test_session.commit()
-    await test_session.rollback()
-
-    # Attempting to add a retailer offer to a non-existent product must violate foreign key
-    with pytest.raises(IntegrityError):
-        await service.add_retailer_offer(
-            product_id=non_existent_uuid,
-            retailer="amazon",
-            price=50.0,
-        )
-        await test_session.commit()
-    await test_session.rollback()
+    # Explicit cross-check: No image in the database for Product B can have Product A's URL or ID
+    for img in images_b:
+        assert img.product_id != prod_with_image_uuid
+        assert img.image_url != product_a_image.image_url

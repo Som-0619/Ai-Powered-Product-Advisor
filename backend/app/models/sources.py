@@ -10,7 +10,7 @@ from app.models.base import Base, UUIDMixin, TimestampMixin
 
 if TYPE_CHECKING:
     from app.models.catalog import Product
-    from app.models.reviews import Review
+    from app.models.reviews import ProductReview
 
 
 CANONICAL_SOURCE_TYPES = (
@@ -35,7 +35,7 @@ class Source(Base, UUIDMixin, TimestampMixin):
 
     # Relationships
     product_sources: Mapped[List["ProductSource"]] = relationship("ProductSource", back_populates="source", cascade="all, delete-orphan")
-    reviews: Mapped[List["Review"]] = relationship("Review", back_populates="source")
+    reviews: Mapped[List["ProductReview"]] = relationship("ProductReview", back_populates="source_rel")
     crawl_jobs: Mapped[List["CrawlJob"]] = relationship("CrawlJob", back_populates="source")
 
 
@@ -58,6 +58,9 @@ class ProductSource(Base, UUIDMixin, TimestampMixin):
     trust_score: Mapped[float] = mapped_column(Float, default=1.0, nullable=False)
     last_checked: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
     crawl_metadata: Mapped[Dict[str, Any]] = mapped_column(JSONB, default=dict, nullable=False)
+
+    # Canonical synonym
+    last_verified = synonym("last_checked")
 
     # Relationships
     product: Mapped["Product"] = relationship("Product", back_populates="sources")

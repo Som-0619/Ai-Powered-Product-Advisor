@@ -320,8 +320,9 @@ class LocalOllamaModelGateway(ModelGateway):
         content = raw_res.content if isinstance(raw_res.content, str) else str(raw_res.content)
 
         logger.info(
-            "Fast generation completed",
+            f"[DEV_TRACE] LLM latency: {latency_ms}ms (model: {model_name})",
             extra={
+                "llm_latency_ms": latency_ms,
                 "request_id": req_id,
                 "model": model_name,
                 "role": role,
@@ -400,8 +401,9 @@ class LocalOllamaModelGateway(ModelGateway):
         parsed_result = res_dict["parsed"]
 
         logger.info(
-            "Structured generation completed",
+            f"[DEV_TRACE] LLM latency: {latency_ms}ms (model: {model_name}, schema: {schema.__name__})",
             extra={
+                "llm_latency_ms": latency_ms,
                 "request_id": req_id,
                 "model": model_name,
                 "role": role,

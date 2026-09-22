@@ -80,6 +80,20 @@ class MinioStorageService(StorageService):
                 "error": str(exc),
             }
 
+    async def list_objects(self, prefix: str = "", recursive: bool = True) -> list[str]:
+        """List object keys under the specified prefix."""
+        if not self._client:
+            await self.connect()
+
+        clean_prefix = prefix.lstrip("/")
+        loop = asyncio.get_running_loop()
+
+        def _list():
+            objs = self._client.list_objects(self._bucket, prefix=clean_prefix, recursive=recursive)
+            return [o.object_name for o in objs]
+
+        return await loop.run_in_executor(None, _list)
+
     async def put_object(
         self,
         object_name: str,
@@ -185,5 +199,6 @@ class MinioStorageService(StorageService):
         return await loop.run_in_executor(None, _presign)
 
 
-# Backwards compatibility alias
+# Backwards compatibility and canonical aliases
 LocalMinioStorageService = MinioStorageService
+MinIOStorage = MinioStorageService

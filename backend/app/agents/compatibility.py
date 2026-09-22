@@ -141,8 +141,85 @@ class CompatibilityAgent:
 
 
 async def compatibility_node(state: Dict[str, Any], model_gateway: Optional[ModelGateway] = None) -> Dict[str, Any]:
+    from app.agents import tools
+    from app.agents.parts import PartsAgent
+
     parts = [PartSpecification.model_validate(item) for item in state.get("parts_results", [])]
-    if len(parts) < 2:
-        return {"compatibility_results": []}
-    result = await CompatibilityAgent(model_gateway).check_compatibility(parts[0], parts[1], state.get("request_id"), bool(state.get("use_deep_compatibility_reasoning", True)))
-    return {"compatibility_results": [result.model_dump()]}
+    agent = CompatibilityAgent(model_gateway)
+    request_id = state.get("request_id") or str(uuid.uuid4())
+    use_deep = bool(state.get("use_deep_compatibility_reasoning", True))
+
+    if len(parts) >= 2:
+        result = await agent.check_compatibility(parts[0], parts[1], request_id, use_deep)
+        return {
+            "compatibility_results": [result.model_dump()],
+            "compatibility_context": {
+                "status": result.status,
+                "reasoning": result.reasoning,
+                "evidence": [e.model_dump() for e in result.evidence],
+            },
+        }
+
+    # Hydrate from search_results / candidates / selected_products if parts_results < 2
+    candidates = state.get("search_results") or state.get("candidates") or []
+    if len(candidates) < 2 and state.get("selected_products") and len(state["selected_products"]) >= 2:
+        candidates = [{"product_id": pid} for pid in state["selected_products"][:2]]
+
+    if len(candidates) >= 2:
+        p1 = candidates[0]
+        p2 = candidates[1]
+        pid1 = str(p1.get("product_id") or p1.get("id"))
+        pid2 = str(p2.get("product_id") or p2.get("id"))
+
+        ctx = await tools.check_compatibility_context(pid1, pid2)
+        if ctx.get("status") == "insufficient_information":
+            return {
+                "compatibility_results": [],
+                "compatibility_context": {
+                    "status": "insufficient_information",
+                    "reasoning": ctx.get("reason", "Insufficient specification data found for compatibility assessment."),
+                    "evidence": [],
+                },
+            }
+
+        s1_text = f"Part: {ctx.get('p1_name', '')}. Category: {ctx.get('p1_category', '')}. Specs: {ctx.get('p1_specs', {})}"
+        s2_text = f"Part: {ctx.get('p2_name', '')}. Category: {ctx.get('p2_category', '')}. Specs: {ctx.get('p2_specs', {})}"
+
+        part1 = PartsAgent.extract_deterministic(PartInput(part_id=pid1, source_text=s1_text))
+        part2 = PartsAgent.extract_deterministic(PartInput(part_id=pid2, source_text=s2_text))
+
+        # Check voltage / interface / protocols directly from spec dict if regex didn't catch
+        specs1 = ctx.get("p1_specs") or {}
+        specs2 = ctx.get("p2_specs") or {}
+
+        for k, v in specs1.items():
+            k_lower = str(k).lower()
+            if "interface" in k_lower or "protocol" in k_lower:
+                val_str = str(v)
+                for proto in ("I2C", "SPI", "UART", "USB", "GPIO", "CAN", "PWM"):
+                    if proto.lower() in val_str.lower() and proto not in part1.interfaces:
+                        part1.interfaces.append(proto)
+                        part1.protocols.append(proto)
+
+        for k, v in specs2.items():
+            k_lower = str(k).lower()
+            if "interface" in k_lower or "protocol" in k_lower:
+                val_str = str(v)
+                for proto in ("I2C", "SPI", "UART", "USB", "GPIO", "CAN", "PWM"):
+                    if proto.lower() in val_str.lower() and proto not in part2.interfaces:
+                        part2.interfaces.append(proto)
+                        part2.protocols.append(proto)
+
+        result = await agent.check_compatibility(part1, part2, request_id, use_deep)
+        return {
+            "parts_results": [part1.model_dump(), part2.model_dump()],
+            "compatibility_results": [result.model_dump()],
+            "compatibility_context": {
+                "status": result.status,
+                "reasoning": result.reasoning,
+                "evidence": [e.model_dump() for e in result.evidence],
+            },
+        }
+
+    return {"compatibility_results": [], "compatibility_context": {}}
+

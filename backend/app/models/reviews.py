@@ -5,7 +5,7 @@ from datetime import datetime
 from typing import Optional, List, Dict, Any
 from sqlalchemy import String, Text, Float, Boolean, DateTime, ForeignKey, Index
 from sqlalchemy.dialects.postgresql import UUID, JSONB
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column, relationship, synonym
 from app.models.base import Base, UUIDMixin, TimestampMixin
 
 
@@ -20,12 +20,12 @@ class Reviewer(Base, UUIDMixin, TimestampMixin):
     metadata_json: Mapped[Dict[str, Any]] = mapped_column(JSONB, default=dict, nullable=False)
 
     # Relationships
-    reviews: Mapped[List["Review"]] = relationship("Review", back_populates="reviewer")
+    reviews: Mapped[List["ProductReview"]] = relationship("ProductReview", back_populates="reviewer")
 
 
-class Review(Base, UUIDMixin, TimestampMixin):
-    """Customer or expert review record with fraud and sentiment telemetry."""
-    __tablename__ = "reviews"
+class ProductReview(Base, UUIDMixin, TimestampMixin):
+    """Canonical customer or expert review record with trust and provenance metrics."""
+    __tablename__ = "product_reviews"
 
     product_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), ForeignKey("products.id", ondelete="CASCADE"), nullable=False, index=True
@@ -40,6 +40,7 @@ class Review(Base, UUIDMixin, TimestampMixin):
     rating: Mapped[Optional[float]] = mapped_column(Float, nullable=True, index=True)
     title: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
     body: Mapped[str] = mapped_column(Text, nullable=False)
+    source: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     sentiment: Mapped[Optional[str]] = mapped_column(String(30), nullable=True, index=True) # "positive", "neutral", "negative"
     use_case: Mapped[Optional[str]] = mapped_column(String(100), nullable=True, index=True) # e.g. "Gaming", "Coding", "Robotics"
     is_verified_purchase: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
@@ -47,12 +48,21 @@ class Review(Base, UUIDMixin, TimestampMixin):
     attributes_analyzed: Mapped[Dict[str, Any]] = mapped_column(JSONB, default=dict, nullable=False)
     reviewed_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True, index=True)
 
+    # Canonical synonyms matching Section 8 requirements
+    review_id = synonym("id")
+    content = synonym("body")
+    verified_purchase = synonym("is_verified_purchase")
+
     # Relationships
     product: Mapped["Product"] = relationship("Product", back_populates="reviews")
     reviewer: Mapped[Optional["Reviewer"]] = relationship("Reviewer", back_populates="reviews")
-    source: Mapped[Optional["Source"]] = relationship("Source", back_populates="reviews")
+    source_rel: Mapped[Optional["Source"]] = relationship("Source", back_populates="reviews")
 
     __table_args__ = (
-        Index("ix_reviews_product_rating", "product_id", "rating"),
-        Index("ix_reviews_fraud_score", "fraud_score"),
+        Index("ix_product_reviews_product_rating", "product_id", "rating"),
+        Index("ix_product_reviews_fraud_score", "fraud_score"),
     )
+
+
+# Backward-compatible alias
+Review = ProductReview
