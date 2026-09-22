@@ -357,8 +357,21 @@ export async function streamRecommendation(
     onStep?: (stepEvent: { step: string; status: string; message?: string; latency_ms?: number; intent?: any; count?: number }) => void;
     onComplete?: (result: RecommendationResponse) => void;
     onError?: (error: Error) => void;
-  }
+  },
+  timeoutMs: number = 120000
 ): Promise<void> {
+  const controller = new AbortController();
+  // Local LLM inference can be slow (cold model load, CPU-only queries), but a request
+  // must never hang the UI forever — abort and surface an error if no data arrives
+  // (or no further data arrives) within timeoutMs.
+  let sawActivity = false;
+  let idleTimer: ReturnType<typeof setTimeout> | null = null;
+  const resetIdleTimer = () => {
+    if (idleTimer) clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => controller.abort(), timeoutMs);
+  };
+  resetIdleTimer();
+
   try {
     const response = await fetch(`${API_BASE}/api/v1/recommend/stream`, {
       method: "POST",
@@ -366,6 +379,7 @@ export async function streamRecommendation(
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ query }),
+      signal: controller.signal,
     });
 
     if (!response.ok) {
@@ -379,10 +393,14 @@ export async function streamRecommendation(
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
     let buffer = "";
+    let gotComplete = false;
 
     while (true) {
       const { value, done } = await reader.read();
       if (done) break;
+
+      sawActivity = true;
+      resetIdleTimer();
 
       buffer += decoder.decode(value, { stream: true });
       const lines = buffer.split("\n\n");
@@ -397,6 +415,7 @@ export async function streamRecommendation(
           if (payload.type === "step" && callbacks.onStep) {
             callbacks.onStep(payload);
           } else if (payload.type === "complete" && callbacks.onComplete) {
+            gotComplete = true;
             callbacks.onComplete(payload.data);
           }
         } catch (parseErr) {
@@ -404,12 +423,31 @@ export async function streamRecommendation(
         }
       }
     }
-  } catch (err: any) {
-    if (callbacks.onError) {
-      callbacks.onError(err instanceof Error ? err : new Error(String(err)));
-    } else {
-      console.error("Stream recommendation error:", err);
+
+    if (!gotComplete) {
+      throw new Error(
+        sawActivity
+          ? "The recommendation stream ended without a result. Please try again."
+          : "No response was received from the backend. Please try again."
+      );
     }
+  } catch (err: any) {
+    const isAbort = err?.name === "AbortError";
+    const finalErr = isAbort
+      ? new Error(
+          "The request took too long to respond (local model may still be warming up). Please try again."
+        )
+      : err instanceof Error
+      ? err
+      : new Error(String(err));
+
+    if (callbacks.onError) {
+      callbacks.onError(finalErr);
+    } else {
+      console.error("Stream recommendation error:", finalErr);
+    }
+  } finally {
+    if (idleTimer) clearTimeout(idleTimer);
   }
 }
 

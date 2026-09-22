@@ -58,13 +58,25 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
       id: "initial-welcome",
       sender: "assistant",
       text: "Hello! I am your AI Product Advisor. I provide grounded recommendations for consumer electronics and electronic components with real-time verification and live price comparison across Amazon and Flipkart. What can I help you find?",
-      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      // Left blank on initial render (server and client can disagree on locale/24h
+      // formatting) and filled in on mount below, to avoid a hydration mismatch.
+      timestamp: "",
     },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [liveStepMessage, setLiveStepMessage] = useState<string>("");
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    setMessages((prev) =>
+      prev.map((msg) =>
+        msg.id === "initial-welcome" && !msg.timestamp
+          ? { ...msg, timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) }
+          : msg
+      )
+    );
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
