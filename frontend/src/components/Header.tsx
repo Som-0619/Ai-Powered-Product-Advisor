@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { Cpu, Sun, Moon } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
@@ -11,7 +12,7 @@ export const Header: React.FC = () => {
     <header className="border-b border-border bg-card/80 backdrop-blur-md sticky top-0 z-50 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand identity */}
-        <div className="flex items-center space-x-3">
+        <Link href="/" className="flex items-center space-x-3 cursor-pointer">
           <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center shadow-sm">
             <Cpu className="w-5 h-5 text-white" />
           </div>
@@ -25,7 +26,15 @@ export const Header: React.FC = () => {
               Multimodal Product Intelligence & Verification
             </p>
           </div>
-        </div>
+        </Link>
+
+        <div className="flex items-center gap-4">
+          <Link
+            href="/advisor?mode=chat"
+            className="hidden sm:inline-flex items-center px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold transition-all cursor-pointer"
+          >
+            Try now
+          </Link>
 
         {/* Minimal Theme Switch */}
         <div className="flex items-center">
@@ -42,6 +51,7 @@ export const Header: React.FC = () => {
               <Moon className="w-4 h-4 text-slate-700" aria-hidden="true" />
             )}
           </button>
+        </div>
         </div>
       </div>
     </header>

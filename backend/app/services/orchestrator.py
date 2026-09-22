@@ -228,6 +228,43 @@ class WorkflowOrchestrator:
             if not candidates_raw and unique_candidates:
                 candidates_raw = unique_candidates
 
+            # Hydrate candidate details (retailer offers, verified prices, specs) from PostgreSQL canonical source
+            try:
+                cand_pids = [c.get("id") for c in candidates_raw if c.get("id")]
+                if cand_pids:
+                    from app.services.product_catalog_service import ProductCatalogService
+                    cat_service = ProductCatalogService()
+                    db_prods = await cat_service.get_products_by_ids(cand_pids)
+                    db_prod_map = {str(p.id): p for p in db_prods}
+                    for cand in candidates_raw:
+                        cid = str(cand.get("id"))
+                        db_p = db_prod_map.get(cid)
+                        if db_p:
+                            if db_p.retailer_offers:
+                                cand["retailer_offers"] = [
+                                    {
+                                        "retailer": o.retailer,
+                                        "price": float(o.price) if o.price is not None else None,
+                                        "url": o.url,
+                                        "currency": o.currency or "INR",
+                                        "availability_status": o.availability_status,
+                                        "verification_status": o.verification_status,
+                                        "external_product_id": getattr(o, "external_product_id", None),
+                                        "last_verified": o.last_verified.isoformat() if getattr(o, "last_verified", None) else None,
+                                    }
+                                    for o in db_p.retailer_offers
+                                ]
+                            if not cand.get("brand") and db_p.brand:
+                                cand["brand"] = db_p.brand
+                            if not cand.get("model") and db_p.model:
+                                cand["model"] = db_p.model
+                            if not cand.get("variant") and db_p.variant:
+                                cand["variant"] = db_p.variant
+                            if not cand.get("external_product_id") and db_p.external_product_id:
+                                cand["external_product_id"] = db_p.external_product_id
+            except Exception as exc:
+                logger.warning(f"Failed hydrating candidates from PostgreSQL: {exc}")
+
         except Exception as exc:
             logger.error("Retrieval failed", extra={"error": str(exc)})
 
@@ -481,9 +518,17 @@ class WorkflowOrchestrator:
 
         ranking_candidates: List[RankingCandidate] = []
         for idx, cand in enumerate(candidates_raw):
-            # Parse price
-            raw_p = cand.get("price")
-            price_f = float(raw_p) if raw_p is not None else None
+            # Parse price strictly from verified retailer offers or positive catalog price
+            cand_offers = cand.get("retailer_offers") or cand.get("buy_links") or []
+            valid_prices = [
+                float(o["price"]) for o in cand_offers
+                if o.get("price") is not None and float(o["price"]) > 0 and (o.get("verification_status") or "").lower() == "verified"
+            ]
+            if valid_prices:
+                price_f = min(valid_prices)
+            else:
+                raw_p = cand.get("price")
+                price_f = float(raw_p) if (raw_p is not None and float(raw_p) > 0) else None
             # Currency conversion approximation
             if price_f is not None and analysis.currency == "INR" and cand.get("currency") == "USD":
                 price_f = price_f * 83.0
@@ -604,10 +649,30 @@ class WorkflowOrchestrator:
         for idx, res in enumerate(ranked_results):
             cand = cand_map.get(res.product_id, {})
             title = cand.get("title", f"Product {res.product_id}")
-            raw_p = cand.get("price")
-            price = float(raw_p) if raw_p is not None else 0.0
-            currency = cand.get("currency") or analysis.currency or "USD"
+            cand_offers = cand.get("retailer_offers") or cand.get("buy_links") or []
+
+            from app.services.retailer_offers import resolve_product_retailer_offers
+            resolved_offers, az_url, fk_url, lowest_verified_price = resolve_product_retailer_offers(
+                product_id=str(res.product_id),
+                title=title,
+                brand=cand.get("brand", ""),
+                model=cand.get("model", ""),
+                variant=cand.get("variant", ""),
+                external_product_id=cand.get("external_product_id") or cand.get("asin"),
+                stored_offers=cand_offers,
+            )
+
+            # Rule 1, 6, 7: Never fabricate price
+            price = lowest_verified_price
+            currency = cand.get("currency") or analysis.currency or "INR"
             currency_symbol = "₹" if currency == "INR" else "$"
+            if price is not None and price > 0:
+                formatted_price = f"₹{int(price):,}" if price.is_integer() else f"₹{price:,.2f}"
+                formatted_price_str = formatted_price
+            else:
+                price = None
+                formatted_price = "Price unavailable"
+                formatted_price_str = "Price unavailable"
 
             # Construct grounded pros/cons
             pros = ["Strict constraint match", "High retrieval relevance"]
@@ -625,15 +690,20 @@ class WorkflowOrchestrator:
                 why += " " + " ".join(res.ranking_reasons)
 
             # Grounded per-product specification lines & constraint satisfaction evidence
-            formatted_price_str = f"{currency_symbol}{price:,.0f}"
             specs_dict = cand.get("specs", {})
             spec_highlights = "; ".join(f"{k.replace('_', ' ').title()}: {v}" for k, v in list(specs_dict.items())[:3])
             review_item = cand.get("reviews", [{}])[0] if cand.get("reviews") else {}
 
+            pricing_evidence_text = (
+                f"Grounded in verified catalog pricing: Listed at {formatted_price_str}. Meets all mandatory constraints for '{user_query}'."
+                if price is not None
+                else f"Meets all mandatory constraints for '{user_query}'."
+            )
+
             card_evidence = [
                 {
                     "claim": f"Mandatory Constraint Fit: Gated within budget & category ({cand.get('category', 'Electronics')}).",
-                    "evidence_text": f"Grounded in verified catalog pricing: Listed at {formatted_price_str}. Meets all mandatory constraints for '{user_query}'.",
+                    "evidence_text": pricing_evidence_text,
                     "confidence": 0.95,
                 },
                 {
@@ -670,7 +740,6 @@ class WorkflowOrchestrator:
                 clean_title = urllib.parse.quote(title[:30])
                 img_url = f"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%2318181b'/><text x='50%25' y='45%25' dominant-baseline='middle' text-anchor='middle' fill='%2371717a' font-family='sans-serif' font-size='14'>{clean_title}</text><text x='50%25' y='58%25' dominant-baseline='middle' text-anchor='middle' fill='%23a1a1aa' font-family='sans-serif' font-weight='bold' font-size='15'>Image unavailable</text></svg>"
 
-
             card_confidence = res.final_score
             if card_confidence <= 0.0 and res.score_breakdown:
                 vals = res.score_breakdown.model_dump()
@@ -678,10 +747,6 @@ class WorkflowOrchestrator:
                 card_confidence = sum(vals.get(k, 0.6) * weights.get(k, 1.0) for k in weights) / sum(weights.values())
             if card_confidence <= 0.0:
                 card_confidence = 0.75
-
-            currency = "INR"
-            currency_symbol = "₹"
-            formatted_price = f"₹{int(price):,}" if price.is_integer() else f"₹{price:,.2f}"
 
             # Strict multi-view visual verification gallery
             # Requirement 3 & 4: Only display a view if verified image exists. NEVER create a fake view.
@@ -828,31 +893,6 @@ class WorkflowOrchestrator:
                     "agreement": False,
                 })
 
-            # Resolve verified retailer offers strictly
-            cand_offers = cand.get("retailer_offers") or cand.get("buy_links") or []
-            az_offer = next((o for o in cand_offers if o.get("retailer") == "Amazon"), None)
-            fk_offer = next((o for o in cand_offers if o.get("retailer") == "Flipkart"), None)
-
-            from app.services.retailer_offers import is_verification_stale
-
-            is_az_active = (
-                az_offer is not None
-                and az_offer.get("availability_status") == "available"
-                and az_offer.get("verification_status") == "verified"
-                and bool(az_offer.get("url"))
-                and not is_verification_stale(az_offer.get("last_verified"))
-            )
-            verified_az_url = az_offer.get("url") if is_az_active else None
-
-            is_fk_active = (
-                fk_offer is not None
-                and fk_offer.get("availability_status") == "available"
-                and fk_offer.get("verification_status") == "verified"
-                and bool(fk_offer.get("url"))
-                and not is_verification_stale(fk_offer.get("last_verified"))
-            )
-            verified_fk_url = fk_offer.get("url") if is_fk_active else None
-
             card = {
                 "product_id": res.product_id,
                 "product_name": title,
@@ -860,13 +900,13 @@ class WorkflowOrchestrator:
                 "product_image": img_url,
                 "image_url": img_url,
                 "images": verified_imgs if verified_imgs else cand.get("images", []),
-                "retailer_offers": cand_offers,
-                "buy_links": cand_offers,
+                "retailer_offers": resolved_offers,
+                "buy_links": resolved_offers,
                 "specs": cand.get("specs", {}),
                 "model_number": cand.get("model_number") or cand.get("sku", ""),
                 "sku": cand.get("sku") or cand.get("model_number", ""),
-                "amazon_url": verified_az_url,
-                "flipkart_url": verified_fk_url,
+                "amazon_url": az_url,
+                "flipkart_url": fk_url,
                 "brand": cand.get("brand", ""),
                 "category": cand.get("category", analysis.category or "Electronics"),
                 "price": price,
@@ -899,10 +939,16 @@ class WorkflowOrchestrator:
             cards.append(card)
 
         # Rank products according to pricing (expensive item on top and vice versa)
+        def _get_sort_price(c):
+            p = c.get("price")
+            if p is not None:
+                return float(p)
+            return float("-inf") if sort_expensive_first else float("inf")
+
         if sort_expensive_first:
-            cards.sort(key=lambda c: (not c["eligible"], -c["price"], -c["confidence"]))
+            cards.sort(key=lambda c: (not c["eligible"], -_get_sort_price(c), -c["confidence"]))
         else:
-            cards.sort(key=lambda c: (not c["eligible"], c["price"], -c["confidence"]))
+            cards.sort(key=lambda c: (not c["eligible"], _get_sort_price(c), -c["confidence"]))
 
         for idx, c in enumerate(cards):
             c["rank"] = idx + 1

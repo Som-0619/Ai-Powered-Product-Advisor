@@ -112,11 +112,32 @@ async def search_products(
                 primary_img = next((img for img in p.images if img.is_primary), p.images[0])
                 primary_image_url = primary_img.image_url
 
-            price = None
-            if p.retailer_offers:
-                valid_prices = [o.price for o in p.retailer_offers if o.price is not None and o.price > 0]
-                if valid_prices:
-                    price = float(min(valid_prices))
+            from app.services.retailer_offers import resolve_product_retailer_offers
+            stored_offers = [
+                {
+                    "retailer": o.retailer,
+                    "price": float(o.price) if o.price is not None else None,
+                    "url": o.url,
+                    "currency": o.currency or "INR",
+                    "availability_status": o.availability_status,
+                    "verification_status": o.verification_status,
+                    "external_product_id": getattr(o, "external_product_id", None),
+                    "last_verified": o.last_verified.isoformat() if getattr(o, "last_verified", None) else None,
+                }
+                for o in (p.retailer_offers or [])
+            ]
+            resolved_offers, az_url, fk_url, lowest_verified_price = resolve_product_retailer_offers(
+                product_id=str(p.id),
+                title=p.title or "",
+                brand=p.brand or "",
+                model=p.model or "",
+                variant=p.variant or "",
+                external_product_id=p.external_product_id,
+                stored_offers=stored_offers,
+            )
+
+            price = lowest_verified_price
+            formatted_price = f"₹{int(price):,}" if price is not None and price.is_integer() else (f"₹{price:,.2f}" if price is not None else "Price unavailable")
 
             results.append({
                 "product_id": str(p.id),
@@ -130,6 +151,11 @@ async def search_products(
                 "relevance_score": h.score,
                 "matched_fields": h.highlights or {},
                 "price": price,
+                "formatted_price": formatted_price,
+                "amazon_url": az_url,
+                "flipkart_url": fk_url,
+                "retailer_offers": resolved_offers,
+                "buy_links": resolved_offers,
                 "specifications": p.specifications or {},
                 "primary_image_url": primary_image_url,
                 "basic_product_context": (
@@ -166,11 +192,31 @@ async def get_product(
             primary_img = next((img for img in p.images if img.is_primary), p.images[0])
             primary_image_url = primary_img.image_url
 
-        price = None
-        if p.retailer_offers:
-            valid_prices = [o.price for o in p.retailer_offers if o.price is not None and o.price > 0]
-            if valid_prices:
-                price = float(min(valid_prices))
+        from app.services.retailer_offers import resolve_product_retailer_offers
+        stored_offers = [
+            {
+                "retailer": o.retailer,
+                "price": float(o.price) if o.price is not None else None,
+                "url": o.url,
+                "currency": o.currency or "INR",
+                "availability_status": o.availability_status,
+                "verification_status": o.verification_status,
+                "external_product_id": getattr(o, "external_product_id", None),
+                "last_verified": o.last_verified.isoformat() if getattr(o, "last_verified", None) else None,
+            }
+            for o in (p.retailer_offers or [])
+        ]
+        resolved_offers, az_url, fk_url, lowest_verified_price = resolve_product_retailer_offers(
+            product_id=str(p.id),
+            title=p.title or "",
+            brand=p.brand or "",
+            model=p.model or "",
+            variant=p.variant or "",
+            external_product_id=p.external_product_id,
+            stored_offers=stored_offers,
+        )
+        price = lowest_verified_price
+        formatted_price = f"₹{int(price):,}" if price is not None and price.is_integer() else (f"₹{price:,.2f}" if price is not None else "Price unavailable")
 
         return {
             "product_id": str(p.id),
@@ -186,6 +232,11 @@ async def get_product(
             "model_number": p.model_number or "",
             "sku": p.sku or "",
             "price": price,
+            "formatted_price": formatted_price,
+            "amazon_url": az_url,
+            "flipkart_url": fk_url,
+            "retailer_offers": resolved_offers,
+            "buy_links": resolved_offers,
             "primary_image_url": primary_image_url,
             "is_component": bool(p.is_component),
         }
@@ -294,20 +345,48 @@ async def get_retailer_offers(
     catalog_service = ProductCatalogService()
 
     async def _execute():
-        offers = await catalog_service.get_retailer_offers(product_id)
-        return [
+        p = await catalog_service.get_product(product_id)
+        if not p:
+            from app.services.catalog_fallback import get_fallback_product
+            fb = get_fallback_product(str(product_id))
+            if fb:
+                from app.services.retailer_offers import resolve_product_retailer_offers
+                resolved, _, _, _ = resolve_product_retailer_offers(
+                    product_id=str(product_id),
+                    title=fb.get("title", ""),
+                    brand=fb.get("brand"),
+                    model=fb.get("model"),
+                    variant=fb.get("variant"),
+                    external_product_id=fb.get("external_product_id") or fb.get("asin"),
+                    stored_offers=fb.get("retailer_offers") or fb.get("buy_links") or [],
+                )
+                return resolved
+            return []
+
+        from app.services.retailer_offers import resolve_product_retailer_offers
+        stored = [
             {
-                "offer_id": str(o.id),
-                "product_id": str(o.product_id),
-                "retailer": o.retailer or "",
+                "retailer": o.retailer,
                 "price": float(o.price) if o.price is not None else None,
-                "currency": o.currency or "INR",
-                "availability_status": (o.availability_status or "unknown").lower(),
-                "verification_status": (o.verification_status or "unverified").lower(),
                 "url": o.url,
+                "currency": o.currency or "INR",
+                "availability_status": o.availability_status,
+                "verification_status": o.verification_status,
+                "external_product_id": getattr(o, "external_product_id", None),
+                "last_verified": o.last_verified.isoformat() if getattr(o, "last_verified", None) else None,
             }
-            for o in offers
+            for o in (p.retailer_offers or [])
         ]
+        resolved, _, _, _ = resolve_product_retailer_offers(
+            product_id=str(p.id),
+            title=p.title or "",
+            brand=p.brand or "",
+            model=p.model or "",
+            variant=p.variant or "",
+            external_product_id=p.external_product_id,
+            stored_offers=stored,
+        )
+        return resolved
 
     try:
         return await asyncio.wait_for(_execute(), timeout=timeout)

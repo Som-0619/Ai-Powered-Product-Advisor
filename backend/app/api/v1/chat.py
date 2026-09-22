@@ -43,9 +43,15 @@ async def chat_endpoint(request: ChatRequest) -> Dict[str, Any]:
     if not user_query:
         raise HTTPException(status_code=400, detail="A query or message must be provided.")
 
-    req_id = request.conversation_id or request.session_id
+    session_id = request.session_id or request.conversation_id
+    req_id = session_id
     supervisor = SupervisorAgent()
-    result = await supervisor.run(user_query=user_query, request_id=req_id)
+    result = await supervisor.run(
+        user_query=user_query,
+        request_id=req_id,
+        session_id=session_id,
+        history=request.history,
+    )
 
     api_latency_ms = round((time.perf_counter() - t_api_start) * 1000, 2)
     logger.info(
@@ -84,6 +90,7 @@ async def chat_endpoint(request: ChatRequest) -> Dict[str, Any]:
         "compatibility": result.get("compatibility", []),
         "visual_findings": result.get("visual_findings", []),
         "retailer_offers": result.get("retailer_offers", []),
+        "limitations": result.get("limitations"),
         "warnings": result.get("warnings", []),
         "confidence": result.get("confidence", 1.0),
         # Backward compatibility for existing UI

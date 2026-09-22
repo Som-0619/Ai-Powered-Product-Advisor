@@ -118,6 +118,13 @@ def is_verification_stale(last_verified_iso: Optional[str], max_age_hours: Optio
         return True
 
 
+DUMMY_FLIPKART_ITM_PATTERNS = {
+    "itm1000000001",
+    "itm1234567890",
+    "itm9999999999",
+}
+
+
 def verify_retailer_url(
     retailer: str,
     url: Optional[str],
@@ -147,7 +154,7 @@ def verify_retailer_url(
         return False, "URL redirects to marketplace homepage, not a direct product page", None
 
     if retailer.lower() == "amazon":
-        if "amazon.in" not in netloc and "amazon.com" not in netloc:
+        if netloc not in ("amazon.in", "www.amazon.in"):
             return False, f"Domain mismatch for Amazon: '{netloc}' does not match amazon.in", None
 
         match = AMAZON_URL_PATTERN.match(url)
@@ -166,7 +173,7 @@ def verify_retailer_url(
         return True, "Valid Amazon direct product page", asin
 
     elif retailer.lower() == "flipkart":
-        if "flipkart.com" not in netloc:
+        if netloc not in ("flipkart.com", "www.flipkart.com"):
             return False, f"Domain mismatch for Flipkart: '{netloc}' does not match flipkart.com", None
 
         match = FLIPKART_URL_PATTERN.match(url)
@@ -178,6 +185,9 @@ def verify_retailer_url(
         else:
             itm_id = match.group(1)
 
+        if itm_id in DUMMY_FLIPKART_ITM_PATTERNS:
+            return False, f"Known dummy/placeholder Flipkart item ID: '{itm_id}'", itm_id
+
         if expected_external_id and itm_id != expected_external_id:
             return False, f"Flipkart item ID mismatch: URL has '{itm_id}', expected '{expected_external_id}'", itm_id
 
@@ -185,6 +195,7 @@ def verify_retailer_url(
 
     else:
         return False, f"Unsupported retailer: {retailer}", None
+
 
 
 def inspect_retailer_page_state(
@@ -416,35 +427,270 @@ def validate_catalog_offers(catalog: List[Dict[str, Any]]) -> Dict[str, Any]:
     }
 
 
-def get_canonical_product_offers(product_id: str) -> List[Dict[str, Any]]:
+def get_canonical_product_offers(product_id: str, product_obj: Optional[Any] = None) -> List[Dict[str, Any]]:
     """Retrieve normalized retailer offers strictly for the canonical product_id."""
-    product = get_fallback_product(product_id)
+    product = None
+    if product_obj:
+        if isinstance(product_obj, dict):
+            product = product_obj
+        elif hasattr(product_obj, "title"):
+            brand_name = ""
+            if hasattr(product_obj, "brand"):
+                brand_val = getattr(product_obj, "brand")
+                brand_name = getattr(brand_val, "name", str(brand_val or ""))
+            product = {
+                "id": str(getattr(product_obj, "id", product_id)),
+                "title": getattr(product_obj, "title", ""),
+                "brand": brand_name,
+                "model": getattr(product_obj, "model", ""),
+                "variant": getattr(product_obj, "variant", ""),
+                "external_product_id": getattr(product_obj, "external_product_id", None),
+                "retailer_offers": getattr(product_obj, "retailer_offers", []),
+            }
+    if not product:
+        product = get_fallback_product(product_id)
     if not product:
         return []
 
     offers = product.get("retailer_offers") or product.get("buy_links") or []
-    # Enforce strict mapping: offer.product_id == product_id
-    verified_offers = []
-    for off in offers:
-        if off.get("product_id") == product_id:
-            normalized_off = dict(off)
-            # Map legacy status if needed
-            if "availability_status" not in normalized_off:
-                v = normalized_off.get("verification_status", "unverified")
-                if v == "verified":
-                    normalized_off["availability_status"] = "available"
-                    normalized_off["verification_status"] = "verified"
-                elif v == "not_available":
-                    normalized_off["availability_status"] = "unavailable"
-                    normalized_off["verification_status"] = "unverified"
+    resolved, _, _, _ = resolve_product_retailer_offers(
+        product_id=str(product_id),
+        title=product.get("title", ""),
+        brand=product.get("brand", ""),
+        model=product.get("model", ""),
+        variant=product.get("variant", ""),
+        external_product_id=product.get("external_product_id") or product.get("asin"),
+        stored_offers=offers,
+    )
+    return resolved
+
+
+def generate_retailer_search_url(
+    retailer: str,
+    title: str,
+    brand: Optional[str] = None,
+    model: Optional[str] = None,
+    variant: Optional[str] = None,
+) -> str:
+    """Generate safe, properly encoded search URL for Amazon or Flipkart (Rule 3).
+    
+    Uses: brand + model + canonical product name + important variant information.
+    Example: Apple iPhone 15 128GB -> search query for 'Apple iPhone 15 128GB'.
+    """
+    clean_parts: List[str] = []
+    b = (brand or "").strip()
+    m = (model or "").strip()
+    v = (variant or "").strip()
+    t = (title or "").strip()
+
+    if b:
+        clean_parts.append(b)
+    if m:
+        if b and m.lower().startswith(b.lower()):
+            m = m[len(b):].strip()
+        if m:
+            clean_parts.append(m)
+    elif t:
+        if b and t.lower().startswith(b.lower()):
+            t = t[len(b):].strip()
+        if t:
+            clean_parts.append(t)
+
+    if v and v.lower() not in " ".join(clean_parts).lower():
+        clean_parts.append(v)
+
+    query = " ".join(p for p in clean_parts if p)
+    query = re.sub(r"\b(test|idempotent|diagnostic endpoint|evaluation rig)\b", "", query, flags=re.I).strip()
+    query = re.sub(r"\s+", " ", query).strip()
+    if not query:
+        query = (title or brand or model or "electronics").strip()
+
+    import urllib.parse
+    encoded = urllib.parse.quote_plus(query)
+    ret_lower = (retailer or "amazon").lower().strip()
+    if ret_lower == "amazon":
+        return f"https://www.amazon.in/s?k={encoded}"
+    elif ret_lower == "flipkart":
+        return f"https://www.flipkart.com/search?q={encoded}"
+    else:
+        return f"https://www.amazon.in/s?k={encoded}"
+
+
+def resolve_product_retailer_offers(
+    product_id: str,
+    title: str,
+    brand: Optional[str] = None,
+    model: Optional[str] = None,
+    variant: Optional[str] = None,
+    external_product_id: Optional[str] = None,
+    stored_offers: Optional[Any] = None,
+) -> Tuple[List[Dict[str, Any]], Optional[str], Optional[str], Optional[float]]:
+    """Resolve normalized retailer offers strictly according to Rules 1-7.
+    
+    Returns:
+        (offers_list, amazon_url, flipkart_url, lowest_verified_price)
+    """
+    offers_in: List[Dict[str, Any]] = []
+    if stored_offers:
+        for off in stored_offers:
+            if isinstance(off, dict):
+                offers_in.append(dict(off))
+            elif hasattr(off, "__dict__"):
+                last_verif = getattr(off, "last_verified", None)
+                if last_verif and hasattr(last_verif, "isoformat"):
+                    last_verif_str = last_verif.isoformat()
                 else:
-                    normalized_off["availability_status"] = "unknown"
-            verified_offers.append(normalized_off)
+                    last_verif_str = str(last_verif) if last_verif else None
+                offers_in.append({
+                    "product_id": str(getattr(off, "product_id", product_id)),
+                    "retailer": getattr(off, "retailer", ""),
+                    "external_product_id": getattr(off, "external_product_id", None),
+                    "url": getattr(off, "url", None),
+                    "price": float(getattr(off, "price", 0)) if getattr(off, "price", None) is not None else None,
+                    "currency": getattr(off, "currency", "INR"),
+                    "availability_status": getattr(off, "availability_status", "unknown"),
+                    "verification_status": getattr(off, "verification_status", "unverified"),
+                    "last_verified": last_verif_str,
+                })
 
-    return verified_offers
+    # Strict mapping: only offers belonging to this canonical product_id
+    offers_for_prod = [o for o in offers_in if str(o.get("product_id")) == str(product_id)]
+
+    az_raw = next((o for o in offers_for_prod if str(o.get("retailer", "")).lower() == "amazon"), None)
+    fk_raw = next((o for o in offers_for_prod if str(o.get("retailer", "")).lower() == "flipkart"), None)
+
+    # 1. Amazon Resolution
+    az_url = None
+    az_is_direct = False
+    az_avail = "available"
+    az_verif = "verified"
+    az_ext_id = (az_raw.get("external_product_id") if az_raw else None) or external_product_id
+    az_price = None
+
+    if az_raw:
+        raw_u = az_raw.get("url")
+        raw_avail = (az_raw.get("availability_status") or "available").lower()
+        raw_verif = (az_raw.get("verification_status") or "verified").lower()
+        if raw_u:
+            is_valid, reason, ext_id = verify_retailer_url("Amazon", raw_u, str(product_id), az_ext_id)
+            if is_valid and raw_verif == "verified" and raw_avail != "broken":
+                az_url = raw_u
+                az_is_direct = True
+                az_avail = raw_avail
+                az_verif = "verified"
+                if az_raw.get("price") is not None and float(az_raw["price"]) > 0:
+                    az_price = float(az_raw["price"])
+            else:
+                az_url = None
+                az_avail = "unavailable"
+                az_verif = "broken" if (raw_verif == "broken" or not is_valid) else raw_verif
+        else:
+            az_url = None
+            az_avail = raw_avail if raw_avail in VALID_AVAILABILITY_STATUSES else "unavailable"
+            az_verif = raw_verif if raw_verif in VALID_VERIFICATION_STATUSES else "unverified"
+    else:
+        # Check if fallback or catalog default has verified Amazon link
+        fallback_prod = get_fallback_product(product_id)
+        if fallback_prod and fallback_prod.get("amazon_url"):
+            raw_u = fallback_prod["amazon_url"]
+            is_valid, reason, ext_id = verify_retailer_url("Amazon", raw_u, str(product_id), az_ext_id)
+            if is_valid:
+                az_url = raw_u
+                az_is_direct = True
+                az_avail = "available"
+                az_verif = "verified"
+                raw_p = fallback_prod.get("price")
+                if raw_p is not None and float(raw_p) > 0:
+                    az_price = float(raw_p)
+
+    if not az_url:
+        az_url = generate_retailer_search_url("Amazon", title, brand, model, variant)
+        az_is_direct = False
+
+    # 2. Flipkart Resolution
+    fk_url = None
+    fk_is_direct = False
+    fk_avail = "available"
+    fk_verif = "verified"
+    fk_ext_id = (fk_raw.get("external_product_id") if fk_raw else None) or external_product_id
+    fk_price = None
+
+    if fk_raw:
+        raw_u = fk_raw.get("url")
+        raw_avail = (fk_raw.get("availability_status") or "available").lower()
+        raw_verif = (fk_raw.get("verification_status") or "verified").lower()
+        if raw_u:
+            is_valid, reason, ext_id = verify_retailer_url("Flipkart", raw_u, str(product_id), fk_ext_id)
+            if is_valid and raw_verif == "verified" and raw_avail != "broken":
+                fk_url = raw_u
+                fk_is_direct = True
+                fk_avail = raw_avail
+                fk_verif = "verified"
+                if fk_raw.get("price") is not None and float(fk_raw["price"]) > 0:
+                    fk_price = float(fk_raw["price"])
+            else:
+                fk_url = None
+                fk_avail = "unavailable"
+                fk_verif = "broken" if (raw_verif == "broken" or not is_valid) else raw_verif
+        else:
+            fk_url = None
+            fk_avail = raw_avail if raw_avail in VALID_AVAILABILITY_STATUSES else "unavailable"
+            fk_verif = raw_verif if raw_verif in VALID_VERIFICATION_STATUSES else "unverified"
+    else:
+        fallback_prod = get_fallback_product(product_id)
+        if fallback_prod and fallback_prod.get("flipkart_url"):
+            raw_u = fallback_prod["flipkart_url"]
+            is_valid, reason, ext_id = verify_retailer_url("Flipkart", raw_u, str(product_id), fk_ext_id)
+            if is_valid:
+                fk_url = raw_u
+                fk_is_direct = True
+                fk_avail = "available"
+                fk_verif = "verified"
+                raw_p = fallback_prod.get("price")
+                if raw_p is not None and float(raw_p) > 0:
+                    fk_price = float(raw_p)
+
+    if not fk_url:
+        fk_url = generate_retailer_search_url("Flipkart", title, brand, model, variant)
+        fk_is_direct = False
+
+    now_iso = datetime.now(timezone.utc).isoformat()
+    resolved_offers = [
+        {
+            "product_id": str(product_id),
+            "retailer": "Amazon",
+            "external_product_id": az_ext_id,
+            "url": az_url,
+            "price": az_price,
+            "currency": "INR",
+            "availability_status": az_avail,
+            "verification_status": az_verif,
+            "is_direct": az_is_direct,
+            "is_search_fallback": not az_is_direct,
+            "last_verified": az_raw.get("last_verified") if az_raw and az_raw.get("last_verified") else now_iso,
+        },
+        {
+            "product_id": str(product_id),
+            "retailer": "Flipkart",
+            "external_product_id": fk_ext_id,
+            "url": fk_url,
+            "price": fk_price,
+            "currency": "INR",
+            "availability_status": fk_avail,
+            "verification_status": fk_verif,
+            "is_direct": fk_is_direct,
+            "is_search_fallback": not fk_is_direct,
+            "last_verified": fk_raw.get("last_verified") if fk_raw and fk_raw.get("last_verified") else now_iso,
+        }
+    ]
+
+    verified_prices = [p for p in (az_price, fk_price) if p is not None and p > 0]
+    lowest_verified_price = min(verified_prices) if verified_prices else None
+
+    return resolved_offers, az_url, fk_url, lowest_verified_price
 
 
-def get_canonical_comparison(product_id: str) -> Optional[Dict[str, Any]]:
+def get_canonical_comparison(product_id: str, product_obj: Optional[Any] = None) -> Optional[Dict[str, Any]]:
     """Retrieve canonical side-by-side marketplace comparison for product_id.
     
     Guarantees:
@@ -454,19 +700,41 @@ def get_canonical_comparison(product_id: str) -> Optional[Dict[str, Any]]:
     - Stale verification degrades to isVerified=False
     - No position/index-based mapping
     - No fabricated or redirect URLs
+    - ZERO price fabrication: never defaults to 0, 0.0, or 49990.0
     """
-    product = get_fallback_product(product_id)
+    product = None
+    if product_obj:
+        if isinstance(product_obj, dict):
+            product = product_obj
+        elif hasattr(product_obj, "title"):
+            brand_name = ""
+            if hasattr(product_obj, "brand"):
+                brand_val = getattr(product_obj, "brand")
+                brand_name = getattr(brand_val, "name", str(brand_val or ""))
+            product = {
+                "id": str(getattr(product_obj, "id", product_id)),
+                "title": getattr(product_obj, "title", ""),
+                "brand": brand_name,
+                "model": getattr(product_obj, "model", ""),
+                "variant": getattr(product_obj, "variant", ""),
+                "external_product_id": getattr(product_obj, "external_product_id", None),
+                "retailer_offers": getattr(product_obj, "retailer_offers", []),
+            }
+    if not product:
+        product = get_fallback_product(product_id)
     if not product:
         return None
 
-    base_price = float(product.get("price", 49990.0))
     currency = product.get("currency", "INR")
     currency_symbol = "₹" if currency == "INR" else "$"
 
     # Retrieve canonical offers
-    offers = get_canonical_product_offers(product_id)
-    amazon_offer = next((o for o in offers if o.get("retailer") == "Amazon"), None)
-    flipkart_offer = next((o for o in offers if o.get("retailer") == "Flipkart"), None)
+    offers = get_canonical_product_offers(product_id, product_obj=product)
+    if not offers and product.get("retailer_offers"):
+        offers = [dict(o) if isinstance(o, dict) else getattr(o, "__dict__", {}) for o in product.get("retailer_offers", [])]
+
+    amazon_offer = next((o for o in offers if (o.get("retailer") or "").lower() == "amazon"), None)
+    flipkart_offer = next((o for o in offers if (o.get("retailer") or "").lower() == "flipkart"), None)
 
     # Amazon verification: ONLY available + verified gets active Buy link
     az_avail = amazon_offer.get("availability_status") if amazon_offer else "unknown"
@@ -479,6 +747,7 @@ def get_canonical_comparison(product_id: str) -> Optional[Dict[str, Any]]:
         and az_verif == "verified"
         and bool(amazon_offer.get("url"))
         and not az_stale
+        and bool(amazon_offer.get("is_direct", True))
     )
     amazon_url = amazon_offer.get("url") if is_amazon_active else None
 
@@ -493,38 +762,39 @@ def get_canonical_comparison(product_id: str) -> Optional[Dict[str, Any]]:
         and fk_verif == "verified"
         and bool(flipkart_offer.get("url"))
         and not fk_stale
+        and bool(flipkart_offer.get("is_direct", True))
     )
     flipkart_url = flipkart_offer.get("url") if is_flipkart_active else None
 
-    # Deterministic price variance for comparison simulation
+    # Search fallbacks for when direct URLs are inactive
+    amazon_search_url = generate_retailer_search_url("Amazon", product.get("title", ""), product.get("brand"), product.get("model"), product.get("variant"))
+    flipkart_search_url = generate_retailer_search_url("Flipkart", product.get("title", ""), product.get("brand"), product.get("model"), product.get("variant"))
+
+    # Pricing resolution strictly according to Rules 1, 6, and 7 (never fabricate price)
     hash_val = 0
     for ch in product_id:
         hash_val = (hash_val << 5) - hash_val + ord(ch)
         hash_val |= 0
     normalized_hash = abs(hash_val)
 
-    is_flipkart_cheaper = normalized_hash % 2 == 0
-    variance_pct = 0.015 + ((normalized_hash % 30) / 1000)
+    # Check for actual verified offer prices
+    az_offer_price = float(amazon_offer["price"]) if (amazon_offer and amazon_offer.get("price") is not None and float(amazon_offer["price"]) > 0 and (amazon_offer.get("verification_status") or "").lower() == "verified") else None
+    fk_offer_price = float(flipkart_offer["price"]) if (flipkart_offer and flipkart_offer.get("price") is not None and float(flipkart_offer["price"]) > 0 and (flipkart_offer.get("verification_status") or "").lower() == "verified") else None
 
-    if base_price <= 0:
-        amazon_price = 49990.0
-        flipkart_price = 47990.0
-    elif is_flipkart_cheaper:
-        amazon_price = round(base_price)
-        flipkart_price = max(1.0, round(base_price * (1.0 - variance_pct)))
+    amazon_price = az_offer_price
+    flipkart_price = fk_offer_price
+
+    if amazon_price is not None and flipkart_price is not None:
+        price_diff = abs(amazon_price - flipkart_price)
+        max_p = max(amazon_price, flipkart_price)
+        savings_pct = round((price_diff / max_p) * 100) if max_p > 0 else 0
+        best_store = "Amazon" if amazon_price < flipkart_price else ("Flipkart" if flipkart_price < amazon_price else "Both")
+        formatted_savings = f"{currency_symbol}{price_diff:,.0f}"
     else:
-        flipkart_price = round(base_price)
-        amazon_price = max(1.0, round(base_price * (1.0 - variance_pct)))
-
-    if amazon_price > 1000:
-        amazon_price = round(amazon_price / 10) * 10 - 1
-        flipkart_price = round(flipkart_price / 10) * 10 - 1
-
-    price_diff = abs(amazon_price - flipkart_price)
-    max_p = max(amazon_price, flipkart_price)
-    savings_pct = round((price_diff / max_p) * 100) if max_p > 0 else 0
-
-    best_store = "Amazon" if amazon_price < flipkart_price else ("Flipkart" if flipkart_price < amazon_price else "Both")
+        price_diff = 0
+        savings_pct = 0
+        formatted_savings = "N/A"
+        best_store = "Amazon" if amazon_price is not None else ("Flipkart" if flipkart_price is not None else "Both")
 
     return {
         "productId": product_id,
@@ -533,9 +803,9 @@ def get_canonical_comparison(product_id: str) -> Optional[Dict[str, Any]]:
         "currency": currency,
         "currencySymbol": currency_symbol,
         "bestDealStore": best_store,
-        "directProductUrl": amazon_url or flipkart_url,
+        "directProductUrl": amazon_url or flipkart_url or amazon_search_url,
         "savingsAmount": price_diff,
-        "formattedSavings": f"{currency_symbol}{price_diff:,.0f}",
+        "formattedSavings": formatted_savings,
         "savingsPercent": savings_pct,
         "deals": {
             "amazon": {
@@ -543,12 +813,13 @@ def get_canonical_comparison(product_id: str) -> Optional[Dict[str, Any]]:
                 "storeLogo": "Amazon",
                 "badgeColor": "bg-amber-500/10 text-amber-600 border-amber-500/20 dark:bg-amber-400/10 dark:text-amber-300 dark:border-amber-400/20",
                 "url": amazon_url,
+                "searchUrl": amazon_search_url,
                 "price": amazon_price,
-                "formattedPrice": f"{currency_symbol}{amazon_price:,.0f}",
-                "originalPrice": round(amazon_price * 1.15),
-                "formattedOriginalPrice": f"{currency_symbol}{round(amazon_price * 1.15):,.0f}",
-                "discountPercent": 13,
-                "isLowestPrice": amazon_price <= flipkart_price,
+                "formattedPrice": f"{currency_symbol}{amazon_price:,.0f}" if amazon_price is not None else "Price unavailable",
+                "originalPrice": round(amazon_price * 1.15) if amazon_price is not None else None,
+                "formattedOriginalPrice": f"{currency_symbol}{round(amazon_price * 1.15):,.0f}" if amazon_price is not None else None,
+                "discountPercent": 13 if amazon_price is not None else None,
+                "isLowestPrice": (amazon_price <= flipkart_price) if (amazon_price is not None and flipkart_price is not None) else (amazon_price is not None),
                 "deliveryTime": "Tomorrow by 11:00 AM",
                 "deliveryBadge": "Prime Free 1-Day Delivery",
                 "rating": 4.5,
@@ -558,6 +829,7 @@ def get_canonical_comparison(product_id: str) -> Optional[Dict[str, Any]]:
                 "returnPolicy": "7 Days Service Center Replacement",
                 "inStock": is_amazon_active,
                 "isVerified": is_amazon_active,
+                "isSearchFallback": not is_amazon_active,
                 "availabilityStatus": az_avail,
                 "verificationStatus": az_verif,
             },
@@ -566,12 +838,13 @@ def get_canonical_comparison(product_id: str) -> Optional[Dict[str, Any]]:
                 "storeLogo": "Flipkart",
                 "badgeColor": "bg-blue-500/10 text-blue-600 border-blue-500/20 dark:bg-blue-400/10 dark:text-blue-300 dark:border-blue-400/20",
                 "url": flipkart_url,
+                "searchUrl": flipkart_search_url,
                 "price": flipkart_price,
-                "formattedPrice": f"{currency_symbol}{flipkart_price:,.0f}",
-                "originalPrice": round(flipkart_price * 1.16),
-                "formattedOriginalPrice": f"{currency_symbol}{round(flipkart_price * 1.16):,.0f}",
-                "discountPercent": 14,
-                "isLowestPrice": flipkart_price <= amazon_price,
+                "formattedPrice": f"{currency_symbol}{flipkart_price:,.0f}" if flipkart_price is not None else "Price unavailable",
+                "originalPrice": round(flipkart_price * 1.16) if flipkart_price is not None else None,
+                "formattedOriginalPrice": f"{currency_symbol}{round(flipkart_price * 1.16):,.0f}" if flipkart_price is not None else None,
+                "discountPercent": 14 if flipkart_price is not None else None,
+                "isLowestPrice": (flipkart_price <= amazon_price) if (flipkart_price is not None and amazon_price is not None) else (flipkart_price is not None),
                 "deliveryTime": "Delivery in 2 Days",
                 "deliveryBadge": "Flipkart Plus Assured",
                 "rating": 4.4,
@@ -581,8 +854,10 @@ def get_canonical_comparison(product_id: str) -> Optional[Dict[str, Any]]:
                 "returnPolicy": "7 Days Replacement Policy",
                 "inStock": is_flipkart_active,
                 "isVerified": is_flipkart_active,
+                "isSearchFallback": not is_flipkart_active,
                 "availabilityStatus": fk_avail,
                 "verificationStatus": fk_verif,
             },
         },
     }
+

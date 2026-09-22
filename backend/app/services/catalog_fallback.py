@@ -49,7 +49,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CBGF51G3",
         "amazon_url": "https://www.amazon.in/dp/B0CBGF51G3",
-        "flipkart_url": "https://www.flipkart.com/dell-xps-15-intel-core-i7-13th-gen-13700h-32-gb-1-tb-ssd-windows-11-home-6-graphics-nvidia-geforce-rtx-4050-9530-laptop/p/itm289fe81ad080a",
+        "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000001",
@@ -63,86 +63,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000001",
                 "retailer": "Flipkart",
-                "external_product_id": "itm289fe81ad080a",
-                "url": "https://www.flipkart.com/dell-xps-15-intel-core-i7-13th-gen-13700h-32-gb-1-tb-ssd-windows-11-home-6-graphics-nvidia-geforce-rtx-4050-9530-laptop/p/itm289fe81ad080a",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71qK8XjH61L._SL1500_.jpg",
+        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000001-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000001",
                 "external_product_id": "B0CBGF51G3",
-                "image_url": "https://m.media-amazon.com/images/I/71qK8XjH61L._SL1500_.jpg",
+                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000001-BACK",
-                "product_id": "c1000000-0000-0000-0000-000000000001",
-                "external_product_id": "B0CBGF51G3",
-                "image_url": "https://m.media-amazon.com/images/I/71oD4HkI+QL._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000001-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000001",
-                "external_product_id": "B0CBGF51G3",
-                "image_url": "https://m.media-amazon.com/images/I/71oX3L-9uFL._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000001-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000001",
-                "external_product_id": "B0CBGF51G3",
-                "image_url": "https://m.media-amazon.com/images/I/81kKkO2lZKL._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000001-GALLERY",
-                "product_id": "c1000000-0000-0000-0000-000000000001",
-                "external_product_id": "B0CBGF51G3",
-                "image_url": "https://m.media-amazon.com/images/I/71wL1xYfKRL._SL1500_.jpg",
-                "image_type": "gallery",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000001-RIGHT",
-                "product_id": "c1000000-0000-0000-0000-000000000001",
-                "external_product_id": "B0CBGF51G3",
-                "image_url": "https://m.media-amazon.com/images/I/71QhH4vWvYL._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000001-LEFT",
-                "product_id": "c1000000-0000-0000-0000-000000000001",
-                "external_product_id": "B0CBGF51G3",
-                "image_url": "https://m.media-amazon.com/images/I/61m1Jq3t8CL._SL1500_.jpg",
-                "image_type": "left",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000001-BOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000001",
-                "external_product_id": "B0CBGF51G3",
-                "image_url": "https://m.media-amazon.com/images/I/71p0v7w6VnL._SL1500_.jpg",
-                "image_type": "board",
-                "source": "Amazon",
-                "verified": true
+                "source": "Placeholder",
+                "verified": false
             }
         ],
         "media_gallery": {
@@ -217,7 +154,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CM5JV232",
         "amazon_url": "https://www.amazon.in/dp/B0CM5JV232",
-        "flipkart_url": null,
+        "flipkart_url": "https://www.flipkart.com/apple-macbook-pro-m3-18-gb-512-gb-ssd-macos-sonoma-mrx33hn-a/p/itmc6c3726cfd382",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000002",
@@ -231,11 +168,11 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000002",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmc6c3726cfd382",
+                "url": "https://www.flipkart.com/apple-macbook-pro-m3-18-gb-512-gb-ssd-macos-sonoma-mrx33hn-a/p/itmc6c3726cfd382",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
         "image_url": "https://m.media-amazon.com/images/I/618d5bS2lUL._SL1500_.jpg",
@@ -255,60 +192,6 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "external_product_id": "B0CM5JV232",
                 "image_url": "https://m.media-amazon.com/images/I/61Ch8vjN+mL._SL1500_.jpg",
                 "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000002-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000002",
-                "external_product_id": "B0CM5JV232",
-                "image_url": "https://m.media-amazon.com/images/I/61x0UoB1dKL._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000002-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000002",
-                "external_product_id": "B0CM5JV232",
-                "image_url": "https://m.media-amazon.com/images/I/71gD8Wzp0ML._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000002-GALLERY",
-                "product_id": "c1000000-0000-0000-0000-000000000002",
-                "external_product_id": "B0CM5JV232",
-                "image_url": "https://m.media-amazon.com/images/I/618d5bSHS-L._SL1500_.jpg",
-                "image_type": "gallery",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000002-RIGHT",
-                "product_id": "c1000000-0000-0000-0000-000000000002",
-                "external_product_id": "B0CM5JV232",
-                "image_url": "https://m.media-amazon.com/images/I/61b7oVw7O-L._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000002-LEFT",
-                "product_id": "c1000000-0000-0000-0000-000000000002",
-                "external_product_id": "B0CM5JV232",
-                "image_url": "https://m.media-amazon.com/images/I/61BqW1z1YcL._SL1500_.jpg",
-                "image_type": "left",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000002-BOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000002",
-                "external_product_id": "B0CM5JV232",
-                "image_url": "https://m.media-amazon.com/images/I/71iW3oF9xEL._SL1500_.jpg",
-                "image_type": "board",
                 "source": "Amazon",
                 "verified": true
             }
@@ -385,7 +268,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CX21C8T8",
         "amazon_url": "https://www.amazon.in/dp/B0CX21C8T8",
-        "flipkart_url": null,
+        "flipkart_url": "https://www.flipkart.com/apple-macbook-air-m3-16-gb-512-gb-ssd-macos-sonoma-mxd43hn-a/p/itm4da8daafa869b",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000003",
@@ -399,49 +282,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000003",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm4da8daafa869b",
+                "url": "https://www.flipkart.com/apple-macbook-air-m3-16-gb-512-gb-ssd-macos-sonoma-mxd43hn-a/p/itm4da8daafa869b",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71S34+N82UL._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/m/7/y/-original-imagypv6datec8tp.jpeg?q=90",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000003-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000003",
                 "external_product_id": "B0CX21C8T8",
-                "image_url": "https://m.media-amazon.com/images/I/71S34+N82UL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/m/7/y/-original-imagypv6datec8tp.jpeg?q=90",
                 "image_type": "front",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             },
             {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000003-BACK",
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000003-GALLERY",
                 "product_id": "c1000000-0000-0000-0000-000000000003",
                 "external_product_id": "B0CX21C8T8",
-                "image_url": "https://m.media-amazon.com/images/I/718yG0gN3cL._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000003-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000003",
-                "external_product_id": "B0CX21C8T8",
-                "image_url": "https://m.media-amazon.com/images/I/71R37xG-V+L._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000003-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000003",
-                "external_product_id": "B0CX21C8T8",
-                "image_url": "https://m.media-amazon.com/images/I/71T1X6l0oKL._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/0/j/k/-original-imagypv6zewrxyf9.jpeg?q=90",
+                "image_type": "gallery",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -553,51 +418,6 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "image_type": "back",
                 "source": "Amazon",
                 "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000004-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000004",
-                "external_product_id": "B0B3B7NWVG",
-                "image_url": "https://m.media-amazon.com/images/I/61bK0vN6EWL._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000004-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000004",
-                "external_product_id": "B0B3B7NWVG",
-                "image_url": "https://m.media-amazon.com/images/I/71rJkQ-XUBL._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000004-RIGHT",
-                "product_id": "c1000000-0000-0000-0000-000000000004",
-                "external_product_id": "B0B3B7NWVG",
-                "image_url": "https://m.media-amazon.com/images/I/71vFKBpKakL._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000004-GALLERY",
-                "product_id": "c1000000-0000-0000-0000-000000000004",
-                "external_product_id": "B0B3B7NWVG",
-                "image_url": "https://m.media-amazon.com/images/I/61e8Xv7XfPL._SL1500_.jpg",
-                "image_type": "gallery",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000004-LEFT",
-                "product_id": "c1000000-0000-0000-0000-000000000004",
-                "external_product_id": "B0B3B7NWVG",
-                "image_url": "https://m.media-amazon.com/images/I/71q5nQ6tH+L._SL1500_.jpg",
-                "image_type": "left",
-                "source": "Amazon",
-                "verified": true
             }
         ],
         "media_gallery": {
@@ -671,7 +491,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CJ2B8K6V",
         "amazon_url": "https://www.amazon.in/dp/B0CJ2B8K6V",
-        "flipkart_url": "https://www.flipkart.com/lenovo-thinkpad-x1-carbon-gen-11-intel-core-i7-13th-gen-1365u-16-gb-512-gb-ssd-windows-11-pro-21hms00d00-thin-light-laptop/p/itmd45a981a8c91a",
+        "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000005",
@@ -685,86 +505,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000005",
                 "retailer": "Flipkart",
-                "external_product_id": "itmd45a981a8c91a",
-                "url": "https://www.flipkart.com/lenovo-thinkpad-x1-carbon-gen-11-intel-core-i7-13th-gen-1365u-16-gb-512-gb-ssd-windows-11-pro-21hms00d00-thin-light-laptop/p/itmd45a981a8c91a",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/61gVdKx2u3L._SL1500_.jpg",
+        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000005-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000005",
                 "external_product_id": "B0CJ2B8K6V",
-                "image_url": "https://m.media-amazon.com/images/I/61gVdKx2u3L._SL1500_.jpg",
+                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000005-BACK",
-                "product_id": "c1000000-0000-0000-0000-000000000005",
-                "external_product_id": "B0CJ2B8K6V",
-                "image_url": "https://m.media-amazon.com/images/I/61yD-PqQ9qL._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000005-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000005",
-                "external_product_id": "B0CJ2B8K6V",
-                "image_url": "https://m.media-amazon.com/images/I/71R2W7k9-WL._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000005-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000005",
-                "external_product_id": "B0CJ2B8K6V",
-                "image_url": "https://m.media-amazon.com/images/I/61k1q0fN5mL._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000005-GALLERY",
-                "product_id": "c1000000-0000-0000-0000-000000000005",
-                "external_product_id": "B0CJ2B8K6V",
-                "image_url": "https://m.media-amazon.com/images/I/61k-8yN6RPL._SL1500_.jpg",
-                "image_type": "gallery",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000005-RIGHT",
-                "product_id": "c1000000-0000-0000-0000-000000000005",
-                "external_product_id": "B0CJ2B8K6V",
-                "image_url": "https://m.media-amazon.com/images/I/61n9r8B7R2L._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000005-LEFT",
-                "product_id": "c1000000-0000-0000-0000-000000000005",
-                "external_product_id": "B0CJ2B8K6V",
-                "image_url": "https://m.media-amazon.com/images/I/51w+z-8wz1L._SL1500_.jpg",
-                "image_type": "left",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000005-BOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000005",
-                "external_product_id": "B0CJ2B8K6V",
-                "image_url": "https://m.media-amazon.com/images/I/71V0L8s8fIL._SL1500_.jpg",
-                "image_type": "board",
-                "source": "Amazon",
-                "verified": true
+                "source": "Placeholder",
+                "verified": false
             }
         ],
         "media_gallery": {
@@ -839,7 +596,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CFF7NL2L",
         "amazon_url": "https://www.amazon.in/dp/B0CFF7NL2L",
-        "flipkart_url": "https://www.flipkart.com/lenovo-legion-pro-5-intel-core-i7-14th-gen-14700hx-32-gb-1-tb-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-4070-16irx9-gaming-laptop/p/itm5fe1a82fcae91",
+        "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000006",
@@ -853,86 +610,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000006",
                 "retailer": "Flipkart",
-                "external_product_id": "itm5fe1a82fcae91",
-                "url": "https://www.flipkart.com/lenovo-legion-pro-5-intel-core-i7-14th-gen-14700hx-32-gb-1-tb-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-4070-16irx9-gaming-laptop/p/itm5fe1a82fcae91",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71qJebg7KML._SL1500_.jpg",
+        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000006-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000006",
                 "external_product_id": "B0CFF7NL2L",
-                "image_url": "https://m.media-amazon.com/images/I/71qJebg7KML._SL1500_.jpg",
+                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000006-BACK",
-                "product_id": "c1000000-0000-0000-0000-000000000006",
-                "external_product_id": "B0CFF7NL2L",
-                "image_url": "https://m.media-amazon.com/images/I/71rV2N8H9JL._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000006-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000006",
-                "external_product_id": "B0CFF7NL2L",
-                "image_url": "https://m.media-amazon.com/images/I/71s8L5qK3mL._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000006-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000006",
-                "external_product_id": "B0CFF7NL2L",
-                "image_url": "https://m.media-amazon.com/images/I/71dK4V5L7mL._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000006-GALLERY",
-                "product_id": "c1000000-0000-0000-0000-000000000006",
-                "external_product_id": "B0CFF7NL2L",
-                "image_url": "https://m.media-amazon.com/images/I/71Zp32Qy7WL._SL1500_.jpg",
-                "image_type": "gallery",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000006-RIGHT",
-                "product_id": "c1000000-0000-0000-0000-000000000006",
-                "external_product_id": "B0CFF7NL2L",
-                "image_url": "https://m.media-amazon.com/images/I/71+M8h3bKLL._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000006-LEFT",
-                "product_id": "c1000000-0000-0000-0000-000000000006",
-                "external_product_id": "B0CFF7NL2L",
-                "image_url": "https://m.media-amazon.com/images/I/61K1z2x6ZqL._SL1500_.jpg",
-                "image_type": "left",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000006-BOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000006",
-                "external_product_id": "B0CFF7NL2L",
-                "image_url": "https://m.media-amazon.com/images/I/71bZ4E8tYUL._SL1500_.jpg",
-                "image_type": "board",
-                "source": "Amazon",
-                "verified": true
+                "source": "Placeholder",
+                "verified": false
             }
         ],
         "media_gallery": {
@@ -1007,7 +701,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CX8R22R7",
         "amazon_url": "https://www.amazon.in/dp/B0CX8R22R7",
-        "flipkart_url": "https://www.flipkart.com/lenovo-loq-intel-core-i5-12th-gen-12450hx-16-gb-512-gb-ssd-windows-11-home-6-gb-graphics-nvidia-geforce-rtx-3050-15iax9-gaming-laptop/p/itme358a9e4b6d4b",
+        "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000007",
@@ -1021,50 +715,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000007",
                 "retailer": "Flipkart",
-                "external_product_id": "itme358a9e4b6d4b",
-                "url": "https://www.flipkart.com/lenovo-loq-intel-core-i5-12th-gen-12450hx-16-gb-512-gb-ssd-windows-11-home-6-gb-graphics-nvidia-geforce-rtx-3050-15iax9-gaming-laptop/p/itme358a9e4b6d4b",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71fR4o5U-mL._SL1500_.jpg",
+        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000007-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000007",
                 "external_product_id": "B0CX8R22R7",
-                "image_url": "https://m.media-amazon.com/images/I/71fR4o5U-mL._SL1500_.jpg",
+                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000007-BACK",
-                "product_id": "c1000000-0000-0000-0000-000000000007",
-                "external_product_id": "B0CX8R22R7",
-                "image_url": "https://m.media-amazon.com/images/I/71u9sW4jQxL._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000007-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000007",
-                "external_product_id": "B0CX8R22R7",
-                "image_url": "https://m.media-amazon.com/images/I/71wF4W5vKnL._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000007-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000007",
-                "external_product_id": "B0CX8R22R7",
-                "image_url": "https://m.media-amazon.com/images/I/71h6lH-v-hL._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
-                "verified": true
+                "source": "Placeholder",
+                "verified": false
             }
         ],
         "media_gallery": {
@@ -1135,7 +802,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0B8K37937",
         "amazon_url": "https://www.amazon.in/dp/B0B8K37937",
-        "flipkart_url": "https://www.flipkart.com/lenovo-ideapad-slim-3-intel-core-i3-12th-gen-1215u-8-gb-512-gb-ssd-windows-11-home-15iau7-thin-light-laptop/p/itm5cbde6ff4fbdb",
+        "flipkart_url": "https://www.flipkart.com/lenovo-ideapad-slim-3-intel-core-i3-12th-gen-1215u-8-gb-512-gb-ssd-windows-11-home-15iau7-thin-light-laptop/p/itm58722d471ef90?pid=COMGP26H8PHCAMZE",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000008",
@@ -1149,85 +816,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000008",
                 "retailer": "Flipkart",
-                "external_product_id": "itm5cbde6ff4fbdb",
-                "url": "https://www.flipkart.com/lenovo-ideapad-slim-3-intel-core-i3-12th-gen-1215u-8-gb-512-gb-ssd-windows-11-home-15iau7-thin-light-laptop/p/itm5cbde6ff4fbdb",
+                "external_product_id": "itm58722d471ef90",
+                "url": "https://www.flipkart.com/lenovo-ideapad-slim-3-intel-core-i3-12th-gen-1215u-8-gb-512-gb-ssd-windows-11-home-15iau7-thin-light-laptop/p/itm58722d471ef90?pid=COMGP26H8PHCAMZE",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/61kM5vP4rQL._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/1/z/w/-enriched-transparent-original-imahg5fx53zsqcs4.png?q=90",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000008-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000008",
                 "external_product_id": "B0B8K37937",
-                "image_url": "https://m.media-amazon.com/images/I/61kM5vP4rQL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/1/z/w/-enriched-transparent-original-imahg5fx53zsqcs4.png?q=90",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000008-BACK",
-                "product_id": "c1000000-0000-0000-0000-000000000008",
-                "external_product_id": "B0B8K37937",
-                "image_url": "https://m.media-amazon.com/images/I/61r5h4K6wML._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000008-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000008",
-                "external_product_id": "B0B8K37937",
-                "image_url": "https://m.media-amazon.com/images/I/61qJ8+qZ9kL._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000008-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000008",
-                "external_product_id": "B0B8K37937",
-                "image_url": "https://m.media-amazon.com/images/I/61kL7Q4JkHL._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             },
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000008-GALLERY",
                 "product_id": "c1000000-0000-0000-0000-000000000008",
                 "external_product_id": "B0B8K37937",
-                "image_url": "https://m.media-amazon.com/images/I/71-Ox71W7LL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/w/x/b/-original-imahg5fxjscwryjr.jpeg?q=90",
                 "image_type": "gallery",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000008-RIGHT",
-                "product_id": "c1000000-0000-0000-0000-000000000008",
-                "external_product_id": "B0B8K37937",
-                "image_url": "https://m.media-amazon.com/images/I/71-2w0PqHqL._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000008-LEFT",
-                "product_id": "c1000000-0000-0000-0000-000000000008",
-                "external_product_id": "B0B8K37937",
-                "image_url": "https://m.media-amazon.com/images/I/71zF7Q7eYVL._SL1500_.jpg",
-                "image_type": "left",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000008-BOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000008",
-                "external_product_id": "B0B8K37937",
-                "image_url": "https://m.media-amazon.com/images/I/71g2y6UqYLL._SL1500_.jpg",
-                "image_type": "board",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -1303,7 +916,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0BT9SJG58",
         "amazon_url": "https://www.amazon.in/dp/B0BT9SJG58",
-        "flipkart_url": "https://www.flipkart.com/asus-rog-strix-g16-intel-core-i7-13th-gen-13650hx-16-gb-1-tb-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-4060-165-hz-g614jv-n3474w-gaming-laptop/p/itmdb2e867373f1d",
+        "flipkart_url": "https://www.flipkart.com/asus-intel-core-i7-13th-gen-16-gb-1-tb-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-4060-g614jv-n3474ws-gaming-laptop/p/itm02b25080a5259?pid=COMH2FK8CM49KYYV",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000009",
@@ -1317,40 +930,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000009",
                 "retailer": "Flipkart",
-                "external_product_id": "itmdb2e867373f1d",
-                "url": "https://www.flipkart.com/asus-rog-strix-g16-intel-core-i7-13th-gen-13650hx-16-gb-1-tb-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-4060-165-hz-g614jv-n3474w-gaming-laptop/p/itmdb2e867373f1d",
+                "external_product_id": "itm02b25080a5259",
+                "url": "https://www.flipkart.com/asus-intel-core-i7-13th-gen-16-gb-1-tb-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-4060-g614jv-n3474ws-gaming-laptop/p/itm02b25080a5259?pid=COMH2FK8CM49KYYV",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/7183e8n2aRL._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/a/z/m/g614jv-n3474ws-gaming-laptop-asus-original-imah2fk856vncuqu.jpeg?q=90",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000009-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000009",
                 "external_product_id": "B0BT9SJG58",
-                "image_url": "https://m.media-amazon.com/images/I/7183e8n2aRL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/a/z/m/g614jv-n3474ws-gaming-laptop-asus-original-imah2fk856vncuqu.jpeg?q=90",
                 "image_type": "front",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             },
             {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000009-BACK",
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000009-GALLERY",
                 "product_id": "c1000000-0000-0000-0000-000000000009",
                 "external_product_id": "B0BT9SJG58",
-                "image_url": "https://m.media-amazon.com/images/I/71fB3bY-WQL._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000009-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000009",
-                "external_product_id": "B0BT9SJG58",
-                "image_url": "https://m.media-amazon.com/images/I/71j2-uV9-NL._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/d/a/x/g614jv-n3474ws-gaming-laptop-asus-original-imah2fk82jx2gscg.jpeg?q=90",
+                "image_type": "gallery",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -1421,7 +1025,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0C4TW7328",
         "amazon_url": "https://www.amazon.in/dp/B0C4TW7328",
-        "flipkart_url": "https://www.flipkart.com/asus-tuf-gaming-a15-amd-ryzen-7-octa-core-7735hs-16-gb-512-gb-ssd-windows-11-home-6-graphics-nvidia-geforce-rtx-4050-140-w-fa507nu-lp067w-laptop/p/itmfe15e47858c06",
+        "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000010",
@@ -1435,50 +1039,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000010",
                 "retailer": "Flipkart",
-                "external_product_id": "itmfe15e47858c06",
-                "url": "https://www.flipkart.com/asus-tuf-gaming-a15-amd-ryzen-7-octa-core-7735hs-16-gb-512-gb-ssd-windows-11-home-6-graphics-nvidia-geforce-rtx-4050-140-w-fa507nu-lp067w-laptop/p/itmfe15e47858c06",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/81x0gKq+qZL._SL1500_.jpg",
+        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000010-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000010",
                 "external_product_id": "B0C4TW7328",
-                "image_url": "https://m.media-amazon.com/images/I/81x0gKq+qZL._SL1500_.jpg",
+                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000010-BACK",
-                "product_id": "c1000000-0000-0000-0000-000000000010",
-                "external_product_id": "B0C4TW7328",
-                "image_url": "https://m.media-amazon.com/images/I/81N0c6b9QLL._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000010-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000010",
-                "external_product_id": "B0C4TW7328",
-                "image_url": "https://m.media-amazon.com/images/I/81t6z5mXgTL._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000010-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000010",
-                "external_product_id": "B0C4TW7328",
-                "image_url": "https://m.media-amazon.com/images/I/81p5d6rTjPL._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
-                "verified": true
+                "source": "Placeholder",
+                "verified": false
             }
         ],
         "media_gallery": {
@@ -1549,7 +1126,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0C27V76F7",
         "amazon_url": "https://www.amazon.in/dp/B0C27V76F7",
-        "flipkart_url": "https://www.flipkart.com/asus-tuf-gaming-f15-intel-core-i5-11th-gen-11400h-8-gb-512-gb-ssd-windows-11-home-4-graphics-nvidia-geforce-rtx-2050-144-hz-fx506hf-hn024w-laptop/p/itm507dd129486c8",
+        "flipkart_url": "https://www.flipkart.com/asus-tuf-gaming-f15-ai-powered-intel-core-i5-11th-gen-11400h-16-gb-512-gb-ssd-windows-11-home-4-graphics-nvidia-geforce-rtx-2050-144-hz-70-tgp-fx506hf-hn025w-laptop/p/itma4f834884f6b1?pid=COMGZKHQFQENGQSG",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000011",
@@ -1563,85 +1140,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000011",
                 "retailer": "Flipkart",
-                "external_product_id": "itm507dd129486c8",
-                "url": "https://www.flipkart.com/asus-tuf-gaming-f15-intel-core-i5-11th-gen-11400h-8-gb-512-gb-ssd-windows-11-home-4-graphics-nvidia-geforce-rtx-2050-144-hz-fx506hf-hn024w-laptop/p/itm507dd129486c8",
+                "external_product_id": "itma4f834884f6b1",
+                "url": "https://www.flipkart.com/asus-tuf-gaming-f15-ai-powered-intel-core-i5-11th-gen-11400h-16-gb-512-gb-ssd-windows-11-home-4-graphics-nvidia-geforce-rtx-2050-144-hz-70-tgp-fx506hf-hn025w-laptop/p/itma4f834884f6b1?pid=COMGZKHQFQENGQSG",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71-Dx764V0L._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/h/w/b/-original-imagtzvhxxuhzr4g.jpeg?q=90",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000011-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000011",
                 "external_product_id": "B0C27V76F7",
-                "image_url": "https://m.media-amazon.com/images/I/71-Dx764V0L._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/h/w/b/-original-imagtzvhxxuhzr4g.jpeg?q=90",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000011-BACK",
-                "product_id": "c1000000-0000-0000-0000-000000000011",
-                "external_product_id": "B0C27V76F7",
-                "image_url": "https://m.media-amazon.com/images/I/81x1n3J8nAL._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000011-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000011",
-                "external_product_id": "B0C27V76F7",
-                "image_url": "https://m.media-amazon.com/images/I/71r2P5sH9xL._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000011-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000011",
-                "external_product_id": "B0C27V76F7",
-                "image_url": "https://m.media-amazon.com/images/I/81bN8WzN1oL._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             },
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000011-GALLERY",
                 "product_id": "c1000000-0000-0000-0000-000000000011",
                 "external_product_id": "B0C27V76F7",
-                "image_url": "https://m.media-amazon.com/images/I/81xH00-J+AL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/x/v/q/-original-imagpbychf3qzkyu.jpeg?q=90",
                 "image_type": "gallery",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000011-RIGHT",
-                "product_id": "c1000000-0000-0000-0000-000000000011",
-                "external_product_id": "B0C27V76F7",
-                "image_url": "https://m.media-amazon.com/images/I/71Y88f0P8AL._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000011-LEFT",
-                "product_id": "c1000000-0000-0000-0000-000000000011",
-                "external_product_id": "B0C27V76F7",
-                "image_url": "https://m.media-amazon.com/images/I/71k-vQd-xML._SL1500_.jpg",
-                "image_type": "left",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000011-BOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000011",
-                "external_product_id": "B0C27V76F7",
-                "image_url": "https://m.media-amazon.com/images/I/81x6h3N9N9L._SL1500_.jpg",
-                "image_type": "board",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -1717,7 +1240,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CR1DP82M",
         "amazon_url": "https://www.amazon.in/dp/B0CR1DP82M",
-        "flipkart_url": null,
+        "flipkart_url": "https://www.flipkart.com/asus-zenbook-14-oled-intel-core-ultra-7-155h-16-gb-1-tb-ssd-windows-11-home-ux3405ma-pz752ws-thin-light-laptop/p/itm36bde93628279",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000012",
@@ -1731,40 +1254,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000012",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm36bde93628279",
+                "url": "https://www.flipkart.com/asus-zenbook-14-oled-intel-core-ultra-7-155h-16-gb-1-tb-ssd-windows-11-home-ux3405ma-pz752ws-thin-light-laptop/p/itm36bde93628279",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71Yf1E0qGCL._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/z/o/8/-original-imahg4pa9rdaem5n.jpeg?q=90",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000012-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000012",
                 "external_product_id": "B0CR1DP82M",
-                "image_url": "https://m.media-amazon.com/images/I/71Yf1E0qGCL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/z/o/8/-original-imahg4pa9rdaem5n.jpeg?q=90",
                 "image_type": "front",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             },
             {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000012-BACK",
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000012-GALLERY",
                 "product_id": "c1000000-0000-0000-0000-000000000012",
                 "external_product_id": "B0CR1DP82M",
-                "image_url": "https://m.media-amazon.com/images/I/71s6V1wP3bL._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000012-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000012",
-                "external_product_id": "B0CR1DP82M",
-                "image_url": "https://m.media-amazon.com/images/I/71k1q0fN5mL._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/l/z/v/-original-imahfyyszfghbygy.jpeg?q=90",
+                "image_type": "gallery",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -1875,33 +1389,6 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "image_type": "gallery",
                 "source": "Amazon",
                 "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000013-RIGHT",
-                "product_id": "c1000000-0000-0000-0000-000000000013",
-                "external_product_id": "B0C9YQG56Z",
-                "image_url": "https://m.media-amazon.com/images/I/71R12Wk2vCL._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000013-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000013",
-                "external_product_id": "B0C9YQG56Z",
-                "image_url": "https://m.media-amazon.com/images/I/61OaUvQ0s8L._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000013-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000013",
-                "external_product_id": "B0C9YQG56Z",
-                "image_url": "https://m.media-amazon.com/images/I/71s+qjT17-L._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
-                "verified": true
             }
         ],
         "media_gallery": {
@@ -1994,61 +1481,16 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "availability_status": "unavailable"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71fB7o9sEQL._SL1500_.jpg",
+        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000014-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000014",
                 "external_product_id": "B0CDG7LMS2",
-                "image_url": "https://m.media-amazon.com/images/I/71fB7o9sEQL._SL1500_.jpg",
+                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000014-BACK",
-                "product_id": "c1000000-0000-0000-0000-000000000014",
-                "external_product_id": "B0CDG7LMS2",
-                "image_url": "https://m.media-amazon.com/images/I/71b2W1k3mTL._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000014-GALLERY",
-                "product_id": "c1000000-0000-0000-0000-000000000014",
-                "external_product_id": "B0CDG7LMS2",
-                "image_url": "https://m.media-amazon.com/images/I/71U1j7pL9TL._SL1500_.jpg",
-                "image_type": "gallery",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000014-RIGHT",
-                "product_id": "c1000000-0000-0000-0000-000000000014",
-                "external_product_id": "B0CDG7LMS2",
-                "image_url": "https://m.media-amazon.com/images/I/71N7eW6tHLL._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000014-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000014",
-                "external_product_id": "B0CDG7LMS2",
-                "image_url": "https://m.media-amazon.com/images/I/61K8P1w7fCL._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000014-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000014",
-                "external_product_id": "B0CDG7LMS2",
-                "image_url": "https://m.media-amazon.com/images/I/71u9S2a8YcL._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
-                "verified": true
+                "source": "Placeholder",
+                "verified": false
             }
         ],
         "media_gallery": {
@@ -2121,7 +1563,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0B5HCBG18",
         "amazon_url": "https://www.amazon.in/dp/B0B5HCBG18",
-        "flipkart_url": "https://www.flipkart.com/hp-victus-amd-ryzen-5-hexa-core-5600h-16-gb-512-gb-ssd-windows-11-home-4-gb-graphics-nvidia-geforce-rtx-3050-144-hz-15-fb0157ax-gaming-laptop/p/itm289fe81ad080b",
+        "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000015",
@@ -2135,68 +1577,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000015",
                 "retailer": "Flipkart",
-                "external_product_id": "itm289fe81ad080b",
-                "url": "https://www.flipkart.com/hp-victus-amd-ryzen-5-hexa-core-5600h-16-gb-512-gb-ssd-windows-11-home-4-gb-graphics-nvidia-geforce-rtx-3050-144-hz-15-fb0157ax-gaming-laptop/p/itm289fe81ad080b",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/7104aD0B4sL._SL1500_.jpg",
+        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000015-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000015",
                 "external_product_id": "B0B5HCBG18",
-                "image_url": "https://m.media-amazon.com/images/I/7104aD0B4sL._SL1500_.jpg",
+                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000015-BACK",
-                "product_id": "c1000000-0000-0000-0000-000000000015",
-                "external_product_id": "B0B5HCBG18",
-                "image_url": "https://m.media-amazon.com/images/I/71nF5V-hGmL._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000015-GALLERY",
-                "product_id": "c1000000-0000-0000-0000-000000000015",
-                "external_product_id": "B0B5HCBG18",
-                "image_url": "https://m.media-amazon.com/images/I/71F2bX0sFJL._SL1500_.jpg",
-                "image_type": "gallery",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000015-RIGHT",
-                "product_id": "c1000000-0000-0000-0000-000000000015",
-                "external_product_id": "B0B5HCBG18",
-                "image_url": "https://m.media-amazon.com/images/I/71Q3hW2Y7VL._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000015-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000015",
-                "external_product_id": "B0B5HCBG18",
-                "image_url": "https://m.media-amazon.com/images/I/61lX7E6P5lL._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000015-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000015",
-                "external_product_id": "B0B5HCBG18",
-                "image_url": "https://m.media-amazon.com/images/I/71b2V5G5xWL._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
-                "verified": true
+                "source": "Placeholder",
+                "verified": false
             }
         ],
         "media_gallery": {
@@ -2268,38 +1665,38 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CC32D3S5",
-        "amazon_url": "https://www.amazon.in/dp/B0CC32D3S5",
-        "flipkart_url": "https://www.flipkart.com/hp-omen-amd-ryzen-7-octa-core-7840hs-16-gb-1-tb-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-4060-165-hz-16-xf0060ax-gaming-laptop/p/itmd5543c749eb36",
+        "amazon_url": null,
+        "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000016",
                 "retailer": "Amazon",
-                "external_product_id": "B0CC32D3S5",
-                "url": "https://www.amazon.in/dp/B0CC32D3S5",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             },
             {
                 "product_id": "c1000000-0000-0000-0000-000000000016",
                 "retailer": "Flipkart",
-                "external_product_id": "itmd5543c749eb36",
-                "url": "https://www.flipkart.com/hp-omen-amd-ryzen-7-octa-core-7840hs-16-gb-1-tb-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-4060-165-hz-16-xf0060ax-gaming-laptop/p/itmd5543c749eb36",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71YdF2K6uVL._SL1500_.jpg",
+        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000016-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000016",
                 "external_product_id": "B0CC32D3S5",
-                "image_url": "https://m.media-amazon.com/images/I/71YdF2K6uVL._SL1500_.jpg",
+                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
+                "source": "Placeholder",
+                "verified": false
             }
         ],
         "media_gallery": {
@@ -2367,7 +1764,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CHJJZ9G8",
         "amazon_url": "https://www.amazon.in/dp/B0CHJJZ9G8",
-        "flipkart_url": "https://www.flipkart.com/acer-nitro-v-intel-core-i5-13th-gen-13420h-16-gb-512-gb-ssd-windows-11-home-6-gb-graphics-nvidia-geforce-rtx-4050-144-hz-anv15-51-gaming-laptop/p/itm3d7c490a1b2d1",
+        "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000017",
@@ -2381,23 +1778,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000017",
                 "retailer": "Flipkart",
-                "external_product_id": "itm3d7c490a1b2d1",
-                "url": "https://www.flipkart.com/acer-nitro-v-intel-core-i5-13th-gen-13420h-16-gb-512-gb-ssd-windows-11-home-6-gb-graphics-nvidia-geforce-rtx-4050-144-hz-anv15-51-gaming-laptop/p/itm3d7c490a1b2d1",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71fM4bY-QpL._SL1500_.jpg",
+        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
         "images": [
             {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000017-BACK",
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000017-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000017",
                 "external_product_id": "B0CHJJZ9G8",
-                "image_url": "https://m.media-amazon.com/images/I/71fM4bY-QpL._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
-                "verified": true
+                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
+                "image_type": "front",
+                "source": "Placeholder",
+                "verified": false
             }
         ],
         "media_gallery": {
@@ -2465,7 +1862,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0C3HTXB58",
         "amazon_url": "https://www.amazon.in/dp/B0C3HTXB58",
-        "flipkart_url": "https://www.flipkart.com/acer-predator-helios-neo-16-intel-core-i7-13th-gen-13700hx-16-gb-1-tb-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-4060-165-hz-phn16-71-gaming-laptop/p/itmd45a981a8c91b",
+        "flipkart_url": "https://www.flipkart.com/acer-predator-neo-intel-core-i7-13th-gen-13700hx-16-gb-1-tb-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-4060-165-hz-140-w-phn16-71-78r1-gaming-laptop/p/itm4295aa0d4297e?pid=COMGZS9GHNQCJC26",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000018",
@@ -2479,31 +1876,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000018",
                 "retailer": "Flipkart",
-                "external_product_id": "itmd45a981a8c91b",
-                "url": "https://www.flipkart.com/acer-predator-helios-neo-16-intel-core-i7-13th-gen-13700hx-16-gb-1-tb-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-4060-165-hz-phn16-71-gaming-laptop/p/itmd45a981a8c91b",
+                "external_product_id": "itm4295aa0d4297e",
+                "url": "https://www.flipkart.com/acer-predator-neo-intel-core-i7-13th-gen-13700hx-16-gb-1-tb-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-4060-165-hz-140-w-phn16-71-78r1-gaming-laptop/p/itm4295aa0d4297e?pid=COMGZS9GHNQCJC26",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71N-zJb+FRL._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/t/y/4/-enriched-transparent-original-imahg5fxfzumjkgw.png?q=90",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000018-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000018",
                 "external_product_id": "B0C3HTXB58",
-                "image_url": "https://m.media-amazon.com/images/I/71N-zJb+FRL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/t/y/4/-enriched-transparent-original-imahg5fxfzumjkgw.png?q=90",
                 "image_type": "front",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             },
             {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000018-BACK",
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000018-GALLERY",
                 "product_id": "c1000000-0000-0000-0000-000000000018",
                 "external_product_id": "B0C3HTXB58",
-                "image_url": "https://m.media-amazon.com/images/I/71wK8X-Q9aL._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/4/n/1/-original-imahg5fxtbhrmhzf.jpeg?q=90",
+                "image_type": "gallery",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -2573,7 +1970,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CDLR4P9C",
         "amazon_url": "https://www.amazon.in/dp/B0CDLR4P9C",
-        "flipkart_url": "https://www.flipkart.com/acer-aspire-lite-intel-core-i3-12th-gen-1215u-8-gb-512-gb-ssd-windows-11-home-al15-51-thin-light-laptop/p/itmd5543c749eb37",
+        "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000019",
@@ -2587,23 +1984,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000019",
                 "retailer": "Flipkart",
-                "external_product_id": "itmd5543c749eb37",
-                "url": "https://www.flipkart.com/acer-aspire-lite-intel-core-i3-12th-gen-1215u-8-gb-512-gb-ssd-windows-11-home-al15-51-thin-light-laptop/p/itmd5543c749eb37",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71r5h4K6wML._SL1500_.jpg",
+        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
         "images": [
             {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000019-BACK",
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000019-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000019",
                 "external_product_id": "B0CDLR4P9C",
-                "image_url": "https://m.media-amazon.com/images/I/71r5h4K6wML._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
-                "verified": true
+                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
+                "image_type": "front",
+                "source": "Placeholder",
+                "verified": false
             }
         ],
         "media_gallery": {
@@ -2671,7 +2068,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0C5MC4Y4G",
         "amazon_url": "https://www.amazon.in/dp/B0C5MC4Y4G",
-        "flipkart_url": "https://www.flipkart.com/acer-aspire-7-intel-core-i5-12th-gen-12450h-16-gb-512-gb-ssd-windows-11-home-4-graphics-nvidia-geforce-rtx-2050-144-hz-a715-76g-gaming-laptop/p/itm0fe84838bca8f",
+        "flipkart_url": "https://www.flipkart.com/acer-aspire-7-intel-core-i5-12th-gen-12450h-8-gb-512-gb-ssd-windows-11-home-4-graphics-nvidia-geforce-rtx-nvidia-2050-144-hz-a715-76g-59wg-gaming-laptop/p/itm45fad0c290245?pid=COMGRHJUAHMRWTHH",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000020",
@@ -2685,49 +2082,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000020",
                 "retailer": "Flipkart",
-                "external_product_id": "itm0fe84838bca8f",
-                "url": "https://www.flipkart.com/acer-aspire-7-intel-core-i5-12th-gen-12450h-16-gb-512-gb-ssd-windows-11-home-4-graphics-nvidia-geforce-rtx-2050-144-hz-a715-76g-gaming-laptop/p/itm0fe84838bca8f",
+                "external_product_id": "itm45fad0c290245",
+                "url": "https://www.flipkart.com/acer-aspire-7-intel-core-i5-12th-gen-12450h-8-gb-512-gb-ssd-windows-11-home-4-graphics-nvidia-geforce-rtx-nvidia-2050-144-hz-a715-76g-59wg-gaming-laptop/p/itm45fad0c290245?pid=COMGRHJUAHMRWTHH",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/7123jqlq9KL._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/c/i/q/-enriched-transparent-original-imahg5fxrxmyynwg.png?q=90",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000020-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000020",
                 "external_product_id": "B0C5MC4Y4G",
-                "image_url": "https://m.media-amazon.com/images/I/7123jqlq9KL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/c/i/q/-enriched-transparent-original-imahg5fxrxmyynwg.png?q=90",
                 "image_type": "front",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             },
             {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000020-RIGHT",
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000020-GALLERY",
                 "product_id": "c1000000-0000-0000-0000-000000000020",
                 "external_product_id": "B0C5MC4Y4G",
-                "image_url": "https://m.media-amazon.com/images/I/71WkK5mKTTL._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000020-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000020",
-                "external_product_id": "B0C5MC4Y4G",
-                "image_url": "https://m.media-amazon.com/images/I/61y8B3tE7bL._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000020-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000020",
-                "external_product_id": "B0C5MC4Y4G",
-                "image_url": "https://m.media-amazon.com/images/I/71g4W1Zf7fL._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/y/t/d/-original-imahg5fxctg4fkhh.jpeg?q=90",
+                "image_type": "gallery",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -2799,7 +2178,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0BVT87383",
         "amazon_url": "https://www.amazon.in/dp/B0BVT87383",
-        "flipkart_url": null,
+        "flipkart_url": "https://www.flipkart.com/msi-katana-15-intel-core-i7-13th-gen-13620h-16-gb-1-tb-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-4060-144-hz-b13vfk-296in-gaming-laptop/p/itm575c0dfc9902c",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000021",
@@ -2813,22 +2192,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000021",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm575c0dfc9902c",
+                "url": "https://www.flipkart.com/msi-katana-15-intel-core-i7-13th-gen-13620h-16-gb-1-tb-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-4060-144-hz-b13vfk-296in-gaming-laptop/p/itm575c0dfc9902c",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71Y8K9uV0dL._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/i/t/w/-original-imah3cxkepkwh9f4.jpeg?q=90",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000021-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000021",
                 "external_product_id": "B0BVT87383",
-                "image_url": "https://m.media-amazon.com/images/I/71Y8K9uV0dL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/i/t/w/-original-imah3cxkepkwh9f4.jpeg?q=90",
                 "image_type": "front",
-                "source": "Amazon",
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000021-GALLERY",
+                "product_id": "c1000000-0000-0000-0000-000000000021",
+                "external_product_id": "B0BVT87383",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/c/l/h/-original-imags9wcty7xc7sg.jpeg?q=90",
+                "image_type": "gallery",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -2897,7 +2285,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CSYWW88J",
         "amazon_url": "https://www.amazon.in/dp/B0CSYWW88J",
-        "flipkart_url": null,
+        "flipkart_url": "https://www.flipkart.com/samsung-galaxy-book4-pro-360-evo-intel-core-ultra-7-155h-16-gb-1-tb-ssd-windows-11-home-np960qgk-kg2-2-1-laptop/p/itmd96213edabd07",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000022",
@@ -2911,22 +2299,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000022",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmd96213edabd07",
+                "url": "https://www.flipkart.com/samsung-galaxy-book4-pro-360-evo-intel-core-ultra-7-155h-16-gb-1-tb-ssd-windows-11-home-np960qgk-kg2-2-1-laptop/p/itmd96213edabd07",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71H5r7P0sYL._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/d/f/t/-original-imahg5fx8fw9svze.jpeg?q=90",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000022-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000022",
                 "external_product_id": "B0CSYWW88J",
-                "image_url": "https://m.media-amazon.com/images/I/71H5r7P0sYL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/d/f/t/-original-imahg5fx8fw9svze.jpeg?q=90",
                 "image_type": "front",
-                "source": "Amazon",
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000022-GALLERY",
+                "product_id": "c1000000-0000-0000-0000-000000000022",
+                "external_product_id": "B0CSYWW88J",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/f/b/n/-original-imahg5fw4qapvu5y.jpeg?q=90",
+                "image_type": "gallery",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -2995,7 +2392,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0B8KBD399",
         "amazon_url": "https://www.amazon.in/dp/B0B8KBD399",
-        "flipkart_url": null,
+        "flipkart_url": "https://www.flipkart.com/microsoft-surface-laptop-5-intel-core-i7-12th-gen-1255u-16-gb-512-gb-ssd-windows-11-home-rbg-00048-thin-light/p/itmad4ecb41f26bf",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000023",
@@ -3009,22 +2406,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000023",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmad4ecb41f26bf",
+                "url": "https://www.flipkart.com/microsoft-surface-laptop-5-intel-core-i7-12th-gen-1255u-16-gb-512-gb-ssd-windows-11-home-rbg-00048-thin-light/p/itmad4ecb41f26bf",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/61aW2-S9g1L._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/v/b/p/-original-imahg5fxtdu3hsuc.jpeg?q=90",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000023-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000023",
                 "external_product_id": "B0B8KBD399",
-                "image_url": "https://m.media-amazon.com/images/I/61aW2-S9g1L._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/v/b/p/-original-imahg5fxtdu3hsuc.jpeg?q=90",
                 "image_type": "front",
-                "source": "Amazon",
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000023-GALLERY",
+                "product_id": "c1000000-0000-0000-0000-000000000023",
+                "external_product_id": "B0B8KBD399",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/p/f/z/-original-imahg5fxxtsfqdme.jpeg?q=90",
+                "image_type": "gallery",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -3091,15 +2497,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "resolution": "1920x1080"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0C9QG56ZR",
-        "amazon_url": "https://www.amazon.in/dp/B0C9QG56ZR",
+        "source_url": "https://www.amazon.in/dp/B0CRKXDX83",
+        "amazon_url": "https://www.amazon.in/dp/B0CRKXDX83",
         "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000024",
                 "retailer": "Amazon",
-                "external_product_id": "B0C9QG56ZR",
-                "url": "https://www.amazon.in/dp/B0C9QG56ZR",
+                "external_product_id": "B0CRKXDX83",
+                "url": "https://www.amazon.in/dp/B0CRKXDX83",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -3114,16 +2520,16 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "availability_status": "unavailable"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Dell%20G15%205530%20%28Intel%20Core%20i5-13450H</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/71XZ6r9igGL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000024-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000024",
                 "external_product_id": "B0C9QG56ZR",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Dell%20G15%205530%20%28Intel%20Core%20i5-13450H</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/71XZ6r9igGL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -3189,15 +2595,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "resolution": "1920x1080"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CG21F8V8",
-        "amazon_url": "https://www.amazon.in/dp/B0CG21F8V8",
+        "source_url": "https://www.amazon.in/dp/B0BYD6VQ7K",
+        "amazon_url": "https://www.amazon.in/dp/B0BYD6VQ7K",
         "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000025",
                 "retailer": "Amazon",
-                "external_product_id": "B0CG21F8V8",
-                "url": "https://www.amazon.in/dp/B0CG21F8V8",
+                "external_product_id": "B0BYD6VQ7K",
+                "url": "https://www.amazon.in/dp/B0BYD6VQ7K",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -3212,16 +2618,16 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "availability_status": "unavailable"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Dell%20Inspiron%2015%203520%20%28Intel%20Core%20i</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/71nmVtNbN4L._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000025-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000025",
                 "external_product_id": "B0CG21F8V8",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Dell%20Inspiron%2015%203520%20%28Intel%20Core%20i</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/71nmVtNbN4L._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -3287,18 +2693,18 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "resolution": "1920x1200"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0C9YQ88Z7",
-        "amazon_url": "https://www.amazon.in/dp/B0C9YQ88Z7",
+        "source_url": null,
+        "amazon_url": null,
         "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000026",
                 "retailer": "Amazon",
-                "external_product_id": "B0C9YQ88Z7",
-                "url": "https://www.amazon.in/dp/B0C9YQ88Z7",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             },
             {
                 "product_id": "c1000000-0000-0000-0000-000000000026",
@@ -3310,16 +2716,16 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "availability_status": "unavailable"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71yD-PqQ9qL._SL1500_.jpg",
+        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
         "images": [
             {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000026-BACK",
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000026-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000026",
                 "external_product_id": "B0C9YQ88Z7",
-                "image_url": "https://m.media-amazon.com/images/I/71yD-PqQ9qL._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
-                "verified": true
+                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
+                "image_type": "front",
+                "source": "Placeholder",
+                "verified": false
             }
         ],
         "media_gallery": {
@@ -3385,15 +2791,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "resolution": "1920x1200"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CDLX8P2M",
-        "amazon_url": "https://www.amazon.in/dp/B0CDLX8P2M",
+        "source_url": "https://www.amazon.in/dp/B0F6WZ26MX",
+        "amazon_url": "https://www.amazon.in/dp/B0F6WZ26MX",
         "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000027",
                 "retailer": "Amazon",
-                "external_product_id": "B0CDLX8P2M",
-                "url": "https://www.amazon.in/dp/B0CDLX8P2M",
+                "external_product_id": "B0F6WZ26MX",
+                "url": "https://www.amazon.in/dp/B0F6WZ26MX",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -3408,16 +2814,16 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "availability_status": "unavailable"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Lenovo%20ThinkPad%20E14%20Gen%205%20%28Intel%20Co</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/51z9ezfuiBL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000027-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000027",
                 "external_product_id": "B0CDLX8P2M",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Lenovo%20ThinkPad%20E14%20Gen%205%20%28Intel%20Co</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/51z9ezfuiBL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -3483,15 +2889,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "resolution": "1920x1080"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CDLR4P9D",
-        "amazon_url": "https://www.amazon.in/dp/B0CDLR4P9D",
+        "source_url": "https://www.amazon.in/dp/B0BP2M7CCS",
+        "amazon_url": "https://www.amazon.in/dp/B0BP2M7CCS",
         "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000028",
                 "retailer": "Amazon",
-                "external_product_id": "B0CDLR4P9D",
-                "url": "https://www.amazon.in/dp/B0CDLR4P9D",
+                "external_product_id": "B0BP2M7CCS",
+                "url": "https://www.amazon.in/dp/B0BP2M7CCS",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -3506,16 +2912,16 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "availability_status": "unavailable"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>HP%2015s%20%28Intel%20Core%20i3-1215U%20/%208GB%20/</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/71bRz-UEILL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000028-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000028",
                 "external_product_id": "B0CDLR4P9D",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>HP%2015s%20%28Intel%20Core%20i3-1215U%20/%208GB%20/</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/71bRz-UEILL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -3581,15 +2987,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "resolution": "1920x1080"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0C9YQ88Z8",
-        "amazon_url": "https://www.amazon.in/dp/B0C9YQ88Z8",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0BTWG1BHC",
+        "amazon_url": "https://www.amazon.in/dp/B0BTWG1BHC",
+        "flipkart_url": "https://www.flipkart.com/asus-vivobook-go-15-oled-amd-ryzen-5-quad-core-7520u-16-gb-512-gb-ssd-windows-11-home-e1504fa-lk541ws-thin-light-laptop/p/itm4297a9be166be",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000029",
                 "retailer": "Amazon",
-                "external_product_id": "B0C9YQ88Z8",
-                "url": "https://www.amazon.in/dp/B0C9YQ88Z8",
+                "external_product_id": "B0BTWG1BHC",
+                "url": "https://www.amazon.in/dp/B0BTWG1BHC",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -3597,23 +3003,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000029",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm4297a9be166be",
+                "url": "https://www.flipkart.com/asus-vivobook-go-15-oled-amd-ryzen-5-quad-core-7520u-16-gb-512-gb-ssd-windows-11-home-e1504fa-lk541ws-thin-light-laptop/p/itm4297a9be166be",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>ASUS%20Vivobook%20Go%2015%20OLED%20%28AMD%20Ryzen</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/71MFoXmeDtL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000029-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000029",
                 "external_product_id": "B0C9YQ88Z8",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>ASUS%20Vivobook%20Go%2015%20OLED%20%28AMD%20Ryzen</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/71MFoXmeDtL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -3679,15 +3085,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "resolution": "3456x2234"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CM5L15NW",
-        "amazon_url": "https://www.amazon.in/dp/B0CM5L15NW",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0CM5S7HF6",
+        "amazon_url": "https://www.amazon.in/dp/B0CM5S7HF6",
+        "flipkart_url": "https://www.flipkart.com/apple-macbook-pro-m3-max-36-gb-1-tb-ssd-macos-sonoma-mrw33hn-a/p/itme3c9736ce5e76",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000030",
                 "retailer": "Amazon",
-                "external_product_id": "B0CM5L15NW",
-                "url": "https://www.amazon.in/dp/B0CM5L15NW",
+                "external_product_id": "B0CM5S7HF6",
+                "url": "https://www.amazon.in/dp/B0CM5S7HF6",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -3695,23 +3101,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000030",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itme3c9736ce5e76",
+                "url": "https://www.flipkart.com/apple-macbook-pro-m3-max-36-gb-1-tb-ssd-macos-sonoma-mrw33hn-a/p/itme3c9736ce5e76",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Apple%20MacBook%20Pro%2016%20%28M3%20Max%20chip%20/</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/612QNnTYz0L._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000030-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000030",
                 "external_product_id": "B0CM5L15NW",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Apple%20MacBook%20Pro%2016%20%28M3%20Max%20chip%20/</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/612QNnTYz0L._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -3777,15 +3183,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "resolution": "2880x1800"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CWL432P8",
-        "amazon_url": "https://www.amazon.in/dp/B0CWL432P8",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0D59PYPFX",
+        "amazon_url": "https://www.amazon.in/dp/B0D59PYPFX",
+        "flipkart_url": "https://www.flipkart.com/asus-rog-zephyrus-g14-oled-amd-ryzen-9-octa-core-8945hs-16-gb-1-tb-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-4060-90-w-ga403uv-qs085ws-gaming-laptop/p/itm912063a6c366f",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000031",
                 "retailer": "Amazon",
-                "external_product_id": "B0CWL432P8",
-                "url": "https://www.amazon.in/dp/B0CWL432P8",
+                "external_product_id": "B0D59PYPFX",
+                "url": "https://www.amazon.in/dp/B0D59PYPFX",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -3793,23 +3199,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000031",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm912063a6c366f",
+                "url": "https://www.flipkart.com/asus-rog-zephyrus-g14-oled-amd-ryzen-9-octa-core-8945hs-16-gb-1-tb-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-4060-90-w-ga403uv-qs085ws-gaming-laptop/p/itm912063a6c366f",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>ASUS%20ROG%20Zephyrus%20G14%20%28AMD%20Ryzen%209%20</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/81x+1vl1kCL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000031-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000031",
                 "external_product_id": "B0CWL432P8",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>ASUS%20ROG%20Zephyrus%20G14%20%28AMD%20Ryzen%209%20</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/81x+1vl1kCL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -3875,15 +3281,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "resolution": "3200x2000"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CDLX8P2N",
-        "amazon_url": "https://www.amazon.in/dp/B0CDLX8P2N",
+        "source_url": "https://www.amazon.in/dp/B0C42VNZZS",
+        "amazon_url": "https://www.amazon.in/dp/B0C42VNZZS",
         "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000032",
                 "retailer": "Amazon",
-                "external_product_id": "B0CDLX8P2N",
-                "url": "https://www.amazon.in/dp/B0CDLX8P2N",
+                "external_product_id": "B0C42VNZZS",
+                "url": "https://www.amazon.in/dp/B0C42VNZZS",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -3898,16 +3304,16 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "availability_status": "unavailable"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>ASUS%20ProArt%20Studiobook%2016%20OLED%20%28Int</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/61I4-3x8rtL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000032-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000032",
                 "external_product_id": "B0CDLX8P2N",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>ASUS%20ProArt%20Studiobook%2016%20OLED%20%28Int</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/61I4-3x8rtL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -3977,7 +3383,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CHWV2WYK",
         "amazon_url": "https://www.amazon.in/dp/B0CHWV2WYK",
-        "flipkart_url": "https://www.flipkart.com/apple-iphone-15-pro-natural-titanium-128-gb/p/itm6ac6485515ae4",
+        "flipkart_url": "https://www.flipkart.com/apple-iphone-15-pro-natural-titanium-128-gb/p/itm7ffb1e9990edd",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000101",
@@ -3991,67 +3397,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000101",
                 "retailer": "Flipkart",
-                "external_product_id": "itm6ac6485515ae4",
-                "url": "https://www.flipkart.com/apple-iphone-15-pro-natural-titanium-128-gb/p/itm6ac6485515ae4",
+                "external_product_id": "itm7ffb1e9990edd",
+                "url": "https://www.flipkart.com/apple-iphone-15-pro-natural-titanium-128-gb/p/itm7ffb1e9990edd",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/81+GIkwqdcL._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/mobile/p/b/q/-original-imahggex2ye98xfn.jpeg?q=90",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000101-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000101",
                 "external_product_id": "B0CHWV2WYK",
-                "image_url": "https://m.media-amazon.com/images/I/81+GIkwqdcL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/mobile/p/b/q/-original-imahggex2ye98xfn.jpeg?q=90",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000101-BACK",
-                "product_id": "c1000000-0000-0000-0000-000000000101",
-                "external_product_id": "B0CHWV2WYK",
-                "image_url": "https://m.media-amazon.com/images/I/71657TiFeHL._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000101-CAMERA",
-                "product_id": "c1000000-0000-0000-0000-000000000101",
-                "external_product_id": "B0CHWV2WYK",
-                "image_url": "https://m.media-amazon.com/images/I/712CBkmhLhL._SL1500_.jpg",
-                "image_type": "camera",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             },
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000101-GALLERY",
                 "product_id": "c1000000-0000-0000-0000-000000000101",
                 "external_product_id": "B0CHWV2WYK",
-                "image_url": "https://m.media-amazon.com/images/I/71d74dQuzAL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/mobile/6/j/1/-original-imahggexhnfhg2zs.jpeg?q=90",
                 "image_type": "gallery",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000101-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000101",
-                "external_product_id": "B0CHWV2WYK",
-                "image_url": "https://m.media-amazon.com/images/I/61bK6PMOC3L._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000101-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000101",
-                "external_product_id": "B0CHWV2WYK",
-                "image_url": "https://m.media-amazon.com/images/I/81CgtwSII3L._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -4167,15 +3537,6 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "image_type": "front",
                 "source": "Amazon",
                 "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000102-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000102",
-                "external_product_id": "B0CHX1W1XY",
-                "image_url": "https://m.media-amazon.com/images/I/81Os1eA5DxL._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
-                "verified": true
             }
         ],
         "media_gallery": {
@@ -4285,15 +3646,6 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "external_product_id": "B0BDK62PDX",
                 "image_url": "https://m.media-amazon.com/images/I/611mAjCc9TL._SL1500_.jpg",
                 "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000103-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000103",
-                "external_product_id": "B0BDK62PDX",
-                "image_url": "https://m.media-amazon.com/images/I/71s2X8p1bCL._SL1500_.jpg",
-                "image_type": "keyboard",
                 "source": "Amazon",
                 "verified": true
             }
@@ -4477,7 +3829,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CS5X81L4",
         "amazon_url": "https://www.amazon.in/dp/B0CS5X81L4",
-        "flipkart_url": null,
+        "flipkart_url": "https://www.flipkart.com/samsung-galaxy-s24-ultra-5g-titanium-black-256-gb/p/itm60d6a4ba69e8c",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000105",
@@ -4491,76 +3843,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000105",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm60d6a4ba69e8c",
+                "url": "https://www.flipkart.com/samsung-galaxy-s24-ultra-5g-titanium-black-256-gb/p/itm60d6a4ba69e8c",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71RVu88m78L._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/mobile/y/s/g/-original-imahgfmy2zgqvjmy.jpeg?q=90",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000105-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000105",
                 "external_product_id": "B0CS5X81L4",
-                "image_url": "https://m.media-amazon.com/images/I/71RVu88m78L._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/mobile/y/s/g/-original-imahgfmy2zgqvjmy.jpeg?q=90",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000105-BACK",
-                "product_id": "c1000000-0000-0000-0000-000000000105",
-                "external_product_id": "B0CS5X81L4",
-                "image_url": "https://m.media-amazon.com/images/I/71CXhVHPm0L._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000105-CAMERA",
-                "product_id": "c1000000-0000-0000-0000-000000000105",
-                "external_product_id": "B0CS5X81L4",
-                "image_url": "https://m.media-amazon.com/images/I/717vT6nN+KL._SL1500_.jpg",
-                "image_type": "camera",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             },
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000105-GALLERY",
                 "product_id": "c1000000-0000-0000-0000-000000000105",
                 "external_product_id": "B0CS5X81L4",
-                "image_url": "https://m.media-amazon.com/images/I/71CXhVwPx0L._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/mobile/5/c/x/-original-imahggevnsn9ubah.jpeg?q=90",
                 "image_type": "gallery",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000105-RIGHT",
-                "product_id": "c1000000-0000-0000-0000-000000000105",
-                "external_product_id": "B0CS5X81L4",
-                "image_url": "https://m.media-amazon.com/images/I/71S8L4XQO2L._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000105-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000105",
-                "external_product_id": "B0CS5X81L4",
-                "image_url": "https://m.media-amazon.com/images/I/61r5K8s8VBL._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000105-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000105",
-                "external_product_id": "B0CS5X81L4",
-                "image_url": "https://m.media-amazon.com/images/I/71q7X9s7O3L._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -4635,15 +3942,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "weight": "209 g"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CJ2B8K6R",
-        "amazon_url": "https://www.amazon.in/dp/B0CJ2B8K6R",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0CJ4S724M",
+        "amazon_url": "https://www.amazon.in/dp/B0CJ4S724M",
+        "flipkart_url": "https://www.flipkart.com/samsung-galaxy-s23-fe-mint-128-gb/p/itmfde87b854d383",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000106",
                 "retailer": "Amazon",
-                "external_product_id": "B0CJ2B8K6R",
-                "url": "https://www.amazon.in/dp/B0CJ2B8K6R",
+                "external_product_id": "B0CJ4S724M",
+                "url": "https://www.amazon.in/dp/B0CJ4S724M",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -4651,23 +3958,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000106",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmfde87b854d383",
+                "url": "https://www.flipkart.com/samsung-galaxy-s23-fe-mint-128-gb/p/itmfde87b854d383",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Samsung%20Galaxy%20S23%20FE%205G%20%28Mint%2C%208GB</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/w/z/n/-original-imah5ywfurj7gtqn.jpeg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000106-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000106",
                 "external_product_id": "B0CJ2B8K6R",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Samsung%20Galaxy%20S23%20FE%205G%20%28Mint%2C%208GB</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/w/z/n/-original-imah5ywfurj7gtqn.jpeg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000106-GALLERY",
+                "product_id": "c1000000-0000-0000-0000-000000000106",
+                "external_product_id": "B0CJ2B8K6R",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/8/v/0/-original-imah5ywfebrs9bfg.jpeg",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -4735,15 +4051,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "weight": "213 g"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CX8R22R8",
-        "amazon_url": "https://www.amazon.in/dp/B0CX8R22R8",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0CWPCFSM3",
+        "amazon_url": "https://www.amazon.in/dp/B0CWPCFSM3",
+        "flipkart_url": "https://www.flipkart.com/samsung-galaxy-a55-5g-awesome-iceblue-128-gb/p/itm0bb662185bcc4",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000107",
                 "retailer": "Amazon",
-                "external_product_id": "B0CX8R22R8",
-                "url": "https://www.amazon.in/dp/B0CX8R22R8",
+                "external_product_id": "B0CWPCFSM3",
+                "url": "https://www.amazon.in/dp/B0CWPCFSM3",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -4751,23 +4067,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000107",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm0bb662185bcc4",
+                "url": "https://www.flipkart.com/samsung-galaxy-a55-5g-awesome-iceblue-128-gb/p/itm0bb662185bcc4",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Samsung%20Galaxy%20A55%205G%20%28Awesome%20Iceb</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/t/g/r/-original-imahbhwhttnggfmc.jpeg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000107-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000107",
                 "external_product_id": "B0CX8R22R8",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Samsung%20Galaxy%20A55%205G%20%28Awesome%20Iceb</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/t/g/r/-original-imahbhwhttnggfmc.jpeg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000107-GALLERY",
+                "product_id": "c1000000-0000-0000-0000-000000000107",
+                "external_product_id": "B0CX8R22R8",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/8/c/j/-original-imahbzpyfv8gpku7.jpeg",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -4837,7 +4162,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0C7BGD91G",
         "amazon_url": "https://www.amazon.in/dp/B0C7BGD91G",
-        "flipkart_url": "https://www.flipkart.com/samsung-galaxy-m34-5g-prism-silver-128-gb/p/itma69b61fbbf27d",
+        "flipkart_url": "https://www.flipkart.com/samsung-galaxy-m34-5g-without-charger-prism-silver-128-gb/p/itm055143784ac74",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000108",
@@ -4851,67 +4176,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000108",
                 "retailer": "Flipkart",
-                "external_product_id": "itma69b61fbbf27d",
-                "url": "https://www.flipkart.com/samsung-galaxy-m34-5g-prism-silver-128-gb/p/itma69b61fbbf27d",
+                "external_product_id": "itm055143784ac74",
+                "url": "https://www.flipkart.com/samsung-galaxy-m34-5g-without-charger-prism-silver-128-gb/p/itm055143784ac74",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/817WWpa+-vL._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/mobile/p/i/g/galaxy-m34-5g-without-charger-sm-m346b-samsung-original-imagrhrhbuja8grh.jpeg?q=90",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000108-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000108",
                 "external_product_id": "B0C7BGD91G",
-                "image_url": "https://m.media-amazon.com/images/I/817WWpa+-vL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/mobile/p/i/g/galaxy-m34-5g-without-charger-sm-m346b-samsung-original-imagrhrhbuja8grh.jpeg?q=90",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000108-BACK",
-                "product_id": "c1000000-0000-0000-0000-000000000108",
-                "external_product_id": "B0C7BGD91G",
-                "image_url": "https://m.media-amazon.com/images/I/71k+VvO1xQL._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             },
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000108-GALLERY",
                 "product_id": "c1000000-0000-0000-0000-000000000108",
                 "external_product_id": "B0C7BGD91G",
-                "image_url": "https://m.media-amazon.com/images/I/91ItZhehcrL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/mobile/0/v/b/galaxy-m34-5g-without-charger-sm-m346b-samsung-original-imagrhrhjhkgtqen.jpeg?q=90",
                 "image_type": "gallery",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000108-RIGHT",
-                "product_id": "c1000000-0000-0000-0000-000000000108",
-                "external_product_id": "B0C7BGD91G",
-                "image_url": "https://m.media-amazon.com/images/I/81xG9-X1vFL._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000108-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000108",
-                "external_product_id": "B0C7BGD91G",
-                "image_url": "https://m.media-amazon.com/images/I/71o0W1a2bTL._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000108-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000108",
-                "external_product_id": "B0C7BGD91G",
-                "image_url": "https://m.media-amazon.com/images/I/81k2m3-vXLL._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -4985,15 +4274,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "weight": "220 g"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CQPP9ZJ1",
-        "amazon_url": "https://www.amazon.in/dp/B0CQPP9ZJ1",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/OnePlus-Flowy-Emerald-512GB-Storage/dp/B0CQPP6JTH",
+        "amazon_url": "https://www.amazon.in/OnePlus-Flowy-Emerald-512GB-Storage/dp/B0CQPP6JTH",
+        "flipkart_url": "https://www.flipkart.com/oneplus-12-5g-silky-black-512-gb/p/itm0132acee4b607",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000109",
                 "retailer": "Amazon",
-                "external_product_id": "B0CQPP9ZJ1",
-                "url": "https://www.amazon.in/dp/B0CQPP9ZJ1",
+                "external_product_id": "B0CQPP6JTH",
+                "url": "https://www.amazon.in/OnePlus-Flowy-Emerald-512GB-Storage/dp/B0CQPP6JTH",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -5001,11 +4290,11 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000109",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm0132acee4b607",
+                "url": "https://www.flipkart.com/oneplus-12-5g-silky-black-512-gb/p/itm0132acee4b607",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
         "image_url": "https://m.media-amazon.com/images/I/717Qo4MH97L._SL1500_.jpg",
@@ -5095,15 +4384,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "weight": "207 g"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CQPR4H2G",
-        "amazon_url": "https://www.amazon.in/dp/B0CQPR4H2G",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0CQYN9QDQ",
+        "amazon_url": "https://www.amazon.in/dp/B0CQYN9QDQ",
+        "flipkart_url": "https://www.flipkart.com/oneplus-12r-cool-blue-256-gb/p/itmce6c3b73e4aa4",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000110",
                 "retailer": "Amazon",
-                "external_product_id": "B0CQPR4H2G",
-                "url": "https://www.amazon.in/dp/B0CQPR4H2G",
+                "external_product_id": "B0CQYN9QDQ",
+                "url": "https://www.amazon.in/dp/B0CQYN9QDQ",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -5111,40 +4400,22 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000110",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmce6c3b73e4aa4",
+                "url": "https://www.flipkart.com/oneplus-12r-cool-blue-256-gb/p/itmce6c3b73e4aa4",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/717V4zXbM6L._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/m/i/u/12r-cph2585-oneplus-original-imah9zk5nnfqyurm.jpeg?q=70",
         "images": [
             {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000110-RIGHT",
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000110-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000110",
                 "external_product_id": "B0CQPR4H2G",
-                "image_url": "https://m.media-amazon.com/images/I/717V4zXbM6L._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000110-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000110",
-                "external_product_id": "B0CQPR4H2G",
-                "image_url": "https://m.media-amazon.com/images/I/61t8X2z6MFL._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000110-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000110",
-                "external_product_id": "B0CQPR4H2G",
-                "image_url": "https://m.media-amazon.com/images/I/71n8P7m6T2L._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
+                "image_url": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/m/i/u/12r-cph2585-oneplus-original-imah9zk5nnfqyurm.jpeg?q=70",
+                "image_type": "front",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -5216,26 +4487,26 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CX8R22R9",
-        "amazon_url": "https://www.amazon.in/dp/B0CX8R22R9",
-        "flipkart_url": null,
+        "amazon_url": null,
+        "flipkart_url": "https://www.flipkart.com/oneplus-nord-ce4-dark-chrome-128-gb/p/itm5a09089114afb",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000111",
                 "retailer": "Amazon",
-                "external_product_id": "B0CX8R22R9",
-                "url": "https://www.amazon.in/dp/B0CX8R22R9",
-                "verification_status": "verified",
-                "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
-            },
-            {
-                "product_id": "c1000000-0000-0000-0000-000000000111",
-                "retailer": "Flipkart",
                 "external_product_id": null,
                 "url": null,
                 "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "unavailable"
+            },
+            {
+                "product_id": "c1000000-0000-0000-0000-000000000111",
+                "retailer": "Flipkart",
+                "external_product_id": "itm5a09089114afb",
+                "url": "https://www.flipkart.com/oneplus-nord-ce4-dark-chrome-128-gb/p/itm5a09089114afb",
+                "verification_status": "verified",
+                "last_verified": "2026-09-18T00:00:00Z",
+                "availability_status": "available"
             }
         ],
         "image_url": "https://m.media-amazon.com/images/I/6175SlKKECL._SL1500_.jpg",
@@ -5255,33 +4526,6 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "external_product_id": "B0CX8R22R9",
                 "image_url": "https://m.media-amazon.com/images/I/6175SlK8cgL._SL1500_.jpg",
                 "image_type": "gallery",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000111-RIGHT",
-                "product_id": "c1000000-0000-0000-0000-000000000111",
-                "external_product_id": "B0CX8R22R9",
-                "image_url": "https://m.media-amazon.com/images/I/61R8y1u2F4L._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000111-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000111",
-                "external_product_id": "B0CX8R22R9",
-                "image_url": "https://m.media-amazon.com/images/I/51w8N4r6C2L._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000111-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000111",
-                "external_product_id": "B0CX8R22R9",
-                "image_url": "https://m.media-amazon.com/images/I/71k4M2b6T8L._SL1500_.jpg",
-                "image_type": "keyboard",
                 "source": "Amazon",
                 "verified": true
             }
@@ -5355,15 +4599,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "weight": "213 g"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CGVLM5Q8",
-        "amazon_url": "https://www.amazon.in/dp/B0CGVLM5Q8",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/Google-Pixel-Pro-Obsidian-128/dp/B0DQVQQN8W",
+        "amazon_url": "https://www.amazon.in/Google-Pixel-Pro-Obsidian-128/dp/B0DQVQQN8W",
+        "flipkart_url": "https://www.flipkart.com/google-pixel-8-pro-obsidian-128-gb/p/itm51f9522df8e95",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000112",
                 "retailer": "Amazon",
-                "external_product_id": "B0CGVLM5Q8",
-                "url": "https://www.amazon.in/dp/B0CGVLM5Q8",
+                "external_product_id": "B0DQVQQN8W",
+                "url": "https://www.amazon.in/Google-Pixel-Pro-Obsidian-128/dp/B0DQVQQN8W",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -5371,11 +4615,11 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000112",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm51f9522df8e95",
+                "url": "https://www.flipkart.com/google-pixel-8-pro-obsidian-128-gb/p/itm51f9522df8e95",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
         "image_url": "https://m.media-amazon.com/images/I/71r69Y7BSeL._SL1500_.jpg",
@@ -5465,15 +4709,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "weight": "187 g"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CGVHQW6Y",
-        "amazon_url": "https://www.amazon.in/dp/B0CGVHQW6Y",
+        "source_url": "https://www.amazon.in/dp/B0CGVNVD8R",
+        "amazon_url": "https://www.amazon.in/dp/B0CGVNVD8R",
         "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000113",
                 "retailer": "Amazon",
-                "external_product_id": "B0CGVHQW6Y",
-                "url": "https://www.amazon.in/dp/B0CGVHQW6Y",
+                "external_product_id": "B0CGVNVD8R",
+                "url": "https://www.amazon.in/dp/B0CGVNVD8R",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -5488,16 +4732,16 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "availability_status": "unavailable"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Google%20Pixel%208%20%28Hazel%2C%208GB%20RAM%2C%20128</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/61iLQG-KbLL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000113-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000113",
                 "external_product_id": "B0CGVHQW6Y",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Google%20Pixel%208%20%28Hazel%2C%208GB%20RAM%2C%20128</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/61iLQG-KbLL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -5565,15 +4809,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "weight": "193.5 g"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0BZV3991S",
-        "amazon_url": "https://www.amazon.in/dp/B0BZV3991S",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/Google-Pixel-Sea-128-RAM/dp/B0DB7N5NK4",
+        "amazon_url": "https://www.amazon.in/Google-Pixel-Sea-128-RAM/dp/B0DB7N5NK4",
+        "flipkart_url": "https://www.flipkart.com/google-pixel-7a-sea-128-gb/p/itmb4d7b100b1a4d",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000114",
                 "retailer": "Amazon",
-                "external_product_id": "B0BZV3991S",
-                "url": "https://www.amazon.in/dp/B0BZV3991S",
+                "external_product_id": "B0DB7N5NK4",
+                "url": "https://www.amazon.in/Google-Pixel-Sea-128-RAM/dp/B0DB7N5NK4",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -5581,48 +4825,21 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000114",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmb4d7b100b1a4d",
+                "url": "https://www.flipkart.com/google-pixel-7a-sea-128-gb/p/itmb4d7b100b1a4d",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71u9sW4jQYL._SL1500_.jpg",
+        "image_url": "https://m.media-amazon.com/images/I/61pTBxDPd-L._SY879_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000114-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000114",
                 "external_product_id": "B0BZV3991S",
-                "image_url": "https://m.media-amazon.com/images/I/71u9sW4jQYL._SL1500_.jpg",
+                "image_url": "https://m.media-amazon.com/images/I/61pTBxDPd-L._SY879_.jpg",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000114-RIGHT",
-                "product_id": "c1000000-0000-0000-0000-000000000114",
-                "external_product_id": "B0BZV3991S",
-                "image_url": "https://m.media-amazon.com/images/I/71c6N7q3w8L._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000114-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000114",
-                "external_product_id": "B0BZV3991S",
-                "image_url": "https://m.media-amazon.com/images/I/61z4N7t8s4L._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000114-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000114",
-                "external_product_id": "B0BZV3991S",
-                "image_url": "https://m.media-amazon.com/images/I/71v4F5m3X9L._SL1500_.jpg",
-                "image_type": "keyboard",
                 "source": "Amazon",
                 "verified": true
             }
@@ -5696,26 +4913,26 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CWL432P9",
-        "amazon_url": "https://www.amazon.in/dp/B0CWL432P9",
-        "flipkart_url": null,
+        "amazon_url": null,
+        "flipkart_url": "https://www.flipkart.com/xiaomi-14-black-512-gb/p/itm9199c6406170d",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000115",
                 "retailer": "Amazon",
-                "external_product_id": "B0CWL432P9",
-                "url": "https://www.amazon.in/dp/B0CWL432P9",
-                "verification_status": "verified",
-                "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
-            },
-            {
-                "product_id": "c1000000-0000-0000-0000-000000000115",
-                "retailer": "Flipkart",
                 "external_product_id": null,
                 "url": null,
                 "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "unavailable"
+            },
+            {
+                "product_id": "c1000000-0000-0000-0000-000000000115",
+                "retailer": "Flipkart",
+                "external_product_id": "itm9199c6406170d",
+                "url": "https://www.flipkart.com/xiaomi-14-black-512-gb/p/itm9199c6406170d",
+                "verification_status": "verified",
+                "last_verified": "2026-09-18T00:00:00Z",
+                "availability_status": "available"
             }
         ],
         "image_url": "https://m.media-amazon.com/images/I/71d1ytcCntL._SL1500_.jpg",
@@ -5795,15 +5012,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "weight": "204.5 g"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CQPM9N8K",
-        "amazon_url": "https://www.amazon.in/dp/B0CQPM9N8K",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/Redmi-Fusion-Black-Storage-Without/dp/B0CXXR6FZB",
+        "amazon_url": "https://www.amazon.in/Redmi-Fusion-Black-Storage-Without/dp/B0CXXR6FZB",
+        "flipkart_url": "https://www.flipkart.com/redmi-note-13-pro-5g-fusion-black-256-gb/p/itm7434e29d57904",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000116",
                 "retailer": "Amazon",
-                "external_product_id": "B0CQPM9N8K",
-                "url": "https://www.amazon.in/dp/B0CQPM9N8K",
+                "external_product_id": "B0CXXR6FZB",
+                "url": "https://www.amazon.in/Redmi-Fusion-Black-Storage-Without/dp/B0CXXR6FZB",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -5811,58 +5028,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000116",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm7434e29d57904",
+                "url": "https://www.flipkart.com/redmi-note-13-pro-5g-fusion-black-256-gb/p/itm7434e29d57904",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71nI6tM2RCL._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/mobile/x/j/m/-original-imagwubk2ky9v2gz.jpeg?q=90",
         "images": [
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000116-BACK",
-                "product_id": "c1000000-0000-0000-0000-000000000116",
-                "external_product_id": "B0CQPM9N8K",
-                "image_url": "https://m.media-amazon.com/images/I/71nI6tM2RCL._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000116-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000116",
                 "external_product_id": "B0CQPM9N8K",
-                "image_url": "https://m.media-amazon.com/images/I/71XNeka-BRL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/mobile/x/j/m/-original-imagwubk2ky9v2gz.jpeg?q=90",
                 "image_type": "front",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             },
             {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000116-RIGHT",
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000116-GALLERY",
                 "product_id": "c1000000-0000-0000-0000-000000000116",
                 "external_product_id": "B0CQPM9N8K",
-                "image_url": "https://m.media-amazon.com/images/I/71e0nS2a34L._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000116-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000116",
-                "external_product_id": "B0CQPM9N8K",
-                "image_url": "https://m.media-amazon.com/images/I/61x0H8a4NBL._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000116-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000116",
-                "external_product_id": "B0CQPM9N8K",
-                "image_url": "https://m.media-amazon.com/images/I/71v1D6s8C9L._SL1500_.jpg",
-                "image_type": "keyboard",
-                "source": "Amazon",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/mobile/l/0/2/-original-imagwubkbwefqepe.jpeg?q=90",
+                "image_type": "gallery",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -5936,38 +5126,47 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CNX6W7N4",
-        "amazon_url": "https://www.amazon.in/dp/B0CNX6W7N4",
-        "flipkart_url": null,
+        "amazon_url": null,
+        "flipkart_url": "https://www.flipkart.com/redmi-13c-starshine-green-128-gb/p/itmc4f0763fb3a50",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000117",
                 "retailer": "Amazon",
-                "external_product_id": "B0CNX6W7N4",
-                "url": "https://www.amazon.in/dp/B0CNX6W7N4",
-                "verification_status": "verified",
-                "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
-            },
-            {
-                "product_id": "c1000000-0000-0000-0000-000000000117",
-                "retailer": "Flipkart",
                 "external_product_id": null,
                 "url": null,
                 "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "unavailable"
+            },
+            {
+                "product_id": "c1000000-0000-0000-0000-000000000117",
+                "retailer": "Flipkart",
+                "external_product_id": "itmc4f0763fb3a50",
+                "url": "https://www.flipkart.com/redmi-13c-starshine-green-128-gb/p/itmc4f0763fb3a50",
+                "verification_status": "verified",
+                "last_verified": "2026-09-18T00:00:00Z",
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Redmi%2013C%20%28Starshine%20Green%2C%204GB%20RAM</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/9/f/c/-original-imahfk4xxgusghq8.jpeg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000117-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000117",
                 "external_product_id": "B0CNX6W7N4",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Redmi%2013C%20%28Starshine%20Green%2C%204GB%20RAM</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/9/f/c/-original-imahfk4xxgusghq8.jpeg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000117-GALLERY",
+                "product_id": "c1000000-0000-0000-0000-000000000117",
+                "external_product_id": "B0CNX6W7N4",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/u/6/r/-original-imahfk4xenbzxwrh.jpeg",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -6035,15 +5234,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "weight": "196 g"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CSYWW88L",
-        "amazon_url": "https://www.amazon.in/dp/B0CSYWW88L",
+        "source_url": "https://www.amazon.in/realme-Submarine-Storage-Display-Periscope/dp/B0CSWMQV9Z",
+        "amazon_url": "https://www.amazon.in/realme-Submarine-Storage-Display-Periscope/dp/B0CSWMQV9Z",
         "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000118",
                 "retailer": "Amazon",
-                "external_product_id": "B0CSYWW88L",
-                "url": "https://www.amazon.in/dp/B0CSYWW88L",
+                "external_product_id": "B0CSWMQV9Z",
+                "url": "https://www.amazon.in/realme-Submarine-Storage-Display-Periscope/dp/B0CSWMQV9Z",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -6058,41 +5257,14 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "availability_status": "unavailable"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71v7jE1-o4L._SL1500_.jpg",
+        "image_url": "https://m.media-amazon.com/images/I/71JxLJvl5dL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000118-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000118",
                 "external_product_id": "B0CSYWW88L",
-                "image_url": "https://m.media-amazon.com/images/I/71v7jE1-o4L._SL1500_.jpg",
+                "image_url": "https://m.media-amazon.com/images/I/71JxLJvl5dL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000118-RIGHT",
-                "product_id": "c1000000-0000-0000-0000-000000000118",
-                "external_product_id": "B0CSYWW88L",
-                "image_url": "https://m.media-amazon.com/images/I/71c5M8y3x2L._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000118-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000118",
-                "external_product_id": "B0CSYWW88L",
-                "image_url": "https://m.media-amazon.com/images/I/61b1C8v5D0L._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000118-KEYBOARD",
-                "product_id": "c1000000-0000-0000-0000-000000000118",
-                "external_product_id": "B0CSYWW88L",
-                "image_url": "https://m.media-amazon.com/images/I/71y0X8k3P2L._SL1500_.jpg",
-                "image_type": "keyboard",
                 "source": "Amazon",
                 "verified": true
             }
@@ -6165,15 +5337,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "weight": "203.7 g"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B07WGPK24Z",
-        "amazon_url": "https://www.amazon.in/dp/B07WGPK24Z",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B07WGMXVFK",
+        "amazon_url": "https://www.amazon.in/dp/B07WGMXVFK",
+        "flipkart_url": "https://www.flipkart.com/iqoo-12-5g-legend-256-gb/p/itmd0679ee887cfc",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000119",
                 "retailer": "Amazon",
-                "external_product_id": "B07WGPK24Z",
-                "url": "https://www.amazon.in/dp/B07WGPK24Z",
+                "external_product_id": "B07WGMXVFK",
+                "url": "https://www.amazon.in/dp/B07WGMXVFK",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -6181,23 +5353,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000119",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmd0679ee887cfc",
+                "url": "https://www.flipkart.com/iqoo-12-5g-legend-256-gb/p/itmd0679ee887cfc",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>iQOO%2012%205G%20%28Legend%2C%2012GB%20RAM%2C%20256GB</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/q/r/y/12-5g-iqoo-12-5g-iqoo-original-imagwhuqe6gwht6c.jpeg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000119-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000119",
                 "external_product_id": "B07WGPK24Z",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>iQOO%2012%205G%20%28Legend%2C%2012GB%20RAM%2C%20256GB</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/q/r/y/12-5g-iqoo-12-5g-iqoo-original-imagwhuqe6gwht6c.jpeg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000119-GALLERY",
+                "product_id": "c1000000-0000-0000-0000-000000000119",
+                "external_product_id": "B07WGPK24Z",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/n/o/s/12-5g-12-5g-iqoo-original-imagwgzghftj8ddz.jpeg",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -6265,15 +5446,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "weight": "190 g"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CX8R22R0",
-        "amazon_url": "https://www.amazon.in/dp/B0CX8R22R0",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/Nothing-Mediatek-Dimensity-Processor-Charging/dp/B0CQ82M8CV",
+        "amazon_url": "https://www.amazon.in/Nothing-Mediatek-Dimensity-Processor-Charging/dp/B0CQ82M8CV",
+        "flipkart_url": "https://www.flipkart.com/nothing-phone-2a-5g-black-128-gb/p/itm85c6bca5edadc",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000120",
                 "retailer": "Amazon",
-                "external_product_id": "B0CX8R22R0",
-                "url": "https://www.amazon.in/dp/B0CX8R22R0",
+                "external_product_id": "B0CQ82M8CV",
+                "url": "https://www.amazon.in/Nothing-Mediatek-Dimensity-Processor-Charging/dp/B0CQ82M8CV",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -6281,23 +5462,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000120",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm85c6bca5edadc",
+                "url": "https://www.flipkart.com/nothing-phone-2a-5g-black-128-gb/p/itm85c6bca5edadc",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Nothing%20Phone%20%282a%29%205G%20%28Black%2C%208GB%20R</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/c/g/a/-original-imahfptqg23vghss.jpeg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000120-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000120",
                 "external_product_id": "B0CX8R22R0",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Nothing%20Phone%20%282a%29%205G%20%28Black%2C%208GB%20R</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/c/g/a/-original-imahfptqg23vghss.jpeg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000120-GALLERY",
+                "product_id": "c1000000-0000-0000-0000-000000000120",
+                "external_product_id": "B0CX8R22R0",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/z/g/z/-original-imahfptqbnyebxjg.jpeg",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -6365,15 +5555,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "weight": "174.9 g"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0D4N6X81Z",
-        "amazon_url": "https://www.amazon.in/dp/B0D4N6X81Z",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/Motorola-Edge-50-Fusion-Marshmallow/dp/B0D4JLR5ZN",
+        "amazon_url": "https://www.amazon.in/Motorola-Edge-50-Fusion-Marshmallow/dp/B0D4JLR5ZN",
+        "flipkart_url": "https://www.flipkart.com/motorola-edge-50-fusion-marshmallow-blue-128-gb/p/itmf88eea5799a27",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000121",
                 "retailer": "Amazon",
-                "external_product_id": "B0D4N6X81Z",
-                "url": "https://www.amazon.in/dp/B0D4N6X81Z",
+                "external_product_id": "B0D4JLR5ZN",
+                "url": "https://www.amazon.in/Motorola-Edge-50-Fusion-Marshmallow/dp/B0D4JLR5ZN",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -6381,23 +5571,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000121",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmf88eea5799a27",
+                "url": "https://www.flipkart.com/motorola-edge-50-fusion-marshmallow-blue-128-gb/p/itmf88eea5799a27",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Motorola%20Edge%2050%20Fusion%205G%20%28Marshma</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/5/t/j/edge-50-fusion-pb300002in-motorola-original-imahywzrfagkuyxx.jpeg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000121-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000121",
                 "external_product_id": "B0D4N6X81Z",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Motorola%20Edge%2050%20Fusion%205G%20%28Marshma</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/5/t/j/edge-50-fusion-pb300002in-motorola-original-imahywzrfagkuyxx.jpeg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -6465,15 +5655,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "weight": "192 g"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CGB2P92Z",
-        "amazon_url": "https://www.amazon.in/dp/B0CGB2P92Z",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/Motorola-Mint-Green-128GB-Storage/dp/B0CKLRV6X9",
+        "amazon_url": "https://www.amazon.in/Motorola-Mint-Green-128GB-Storage/dp/B0CKLRV6X9",
+        "flipkart_url": "https://www.flipkart.com/motorola-g54-5g-mint-green-128-gb/p/itmfc12683043bbc",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000122",
                 "retailer": "Amazon",
-                "external_product_id": "B0CGB2P92Z",
-                "url": "https://www.amazon.in/dp/B0CGB2P92Z",
+                "external_product_id": "B0CKLRV6X9",
+                "url": "https://www.amazon.in/Motorola-Mint-Green-128GB-Storage/dp/B0CKLRV6X9",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -6481,23 +5671,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000122",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmfc12683043bbc",
+                "url": "https://www.flipkart.com/motorola-g54-5g-mint-green-128-gb/p/itmfc12683043bbc",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Moto%20G54%205G%20%28Mint%20Green%2C%208GB%20RAM%2C%201</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/k/w/a/-original-imagt5ugmkks2ep7.jpeg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000122-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000122",
                 "external_product_id": "B0CGB2P92Z",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Moto%20G54%205G%20%28Mint%20Green%2C%208GB%20RAM%2C%201</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/k/w/a/-original-imagt5ugmkks2ep7.jpeg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000122-GALLERY",
+                "product_id": "c1000000-0000-0000-0000-000000000122",
+                "external_product_id": "B0CGB2P92Z",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/c/n/j/-original-imagt5ugyaxgqugq.jpeg",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -6566,38 +5765,38 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0D4N7X92A",
-        "amazon_url": "https://www.amazon.in/dp/B0D4N7X92A",
-        "flipkart_url": null,
+        "amazon_url": null,
+        "flipkart_url": "https://www.flipkart.com/realme-gt-6t-5g-fluid-silver-128-gb/p/itmfeb5a69f5f153",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000123",
                 "retailer": "Amazon",
-                "external_product_id": "B0D4N7X92A",
-                "url": "https://www.amazon.in/dp/B0D4N7X92A",
-                "verification_status": "verified",
-                "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
-            },
-            {
-                "product_id": "c1000000-0000-0000-0000-000000000123",
-                "retailer": "Flipkart",
                 "external_product_id": null,
                 "url": null,
                 "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "unavailable"
+            },
+            {
+                "product_id": "c1000000-0000-0000-0000-000000000123",
+                "retailer": "Flipkart",
+                "external_product_id": "itmfeb5a69f5f153",
+                "url": "https://www.flipkart.com/realme-gt-6t-5g-fluid-silver-128-gb/p/itmfeb5a69f5f153",
+                "verification_status": "verified",
+                "last_verified": "2026-09-18T00:00:00Z",
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Realme%20GT%206T%20%28Razor%20Green%2C%208GB%20RAM%2C</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/d/q/y/gt-6t-5g-rmx3853-realme-original-imahfddqupz7zzmh.jpeg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000123-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000123",
                 "external_product_id": "B0D4N7X92A",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Realme%20GT%206T%20%28Razor%20Green%2C%208GB%20RAM%2C</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/d/q/y/gt-6t-5g-rmx3853-realme-original-imahfddqupz7zzmh.jpeg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -6666,38 +5865,47 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CX8R22R1",
-        "amazon_url": "https://www.amazon.in/dp/B0CX8R22R1",
-        "flipkart_url": null,
+        "amazon_url": null,
+        "flipkart_url": "https://www.flipkart.com/iqoo-neo9-pro-fiery-red-128-gb/p/itmbadc894a42a39",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000124",
                 "retailer": "Amazon",
-                "external_product_id": "B0CX8R22R1",
-                "url": "https://www.amazon.in/dp/B0CX8R22R1",
-                "verification_status": "verified",
-                "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
-            },
-            {
-                "product_id": "c1000000-0000-0000-0000-000000000124",
-                "retailer": "Flipkart",
                 "external_product_id": null,
                 "url": null,
                 "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "unavailable"
+            },
+            {
+                "product_id": "c1000000-0000-0000-0000-000000000124",
+                "retailer": "Flipkart",
+                "external_product_id": "itmbadc894a42a39",
+                "url": "https://www.flipkart.com/iqoo-neo9-pro-fiery-red-128-gb/p/itmbadc894a42a39",
+                "verification_status": "verified",
+                "last_verified": "2026-09-18T00:00:00Z",
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>iQOO%20Neo%209%20Pro%205G%20%28Fiery%20Red%2C%208GB%20R</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/0/i/o/neo9-pro-i2304-iqoo-original-imagyg968j7pafeg.jpeg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000124-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000124",
                 "external_product_id": "B0CX8R22R1",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>iQOO%20Neo%209%20Pro%205G%20%28Fiery%20Red%2C%208GB%20R</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/0/i/o/neo9-pro-i2304-iqoo-original-imagyg968j7pafeg.jpeg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000124-GALLERY",
+                "product_id": "c1000000-0000-0000-0000-000000000124",
+                "external_product_id": "B0CX8R22R1",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/l/4/g/neo9-pro-i2304-iqoo-original-imagyg96uw4vhkzb.jpeg",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -6765,15 +5973,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "weight": "190 g"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0D4N8Y13B",
-        "amazon_url": "https://www.amazon.in/dp/B0D4N8Y13B",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/iQOO-Luxe-Marble-128GB-Storage/dp/B07WHR9ZJ9",
+        "amazon_url": "https://www.amazon.in/iQOO-Luxe-Marble-128GB-Storage/dp/B07WHR9ZJ9",
+        "flipkart_url": "https://www.flipkart.com/iqoo-z9s-pro-5g-luxe-marble-128-gb/p/itm2f76190f198f6",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000125",
                 "retailer": "Amazon",
-                "external_product_id": "B0D4N8Y13B",
-                "url": "https://www.amazon.in/dp/B0D4N8Y13B",
+                "external_product_id": "B07WHR9ZJ9",
+                "url": "https://www.amazon.in/iQOO-Luxe-Marble-128GB-Storage/dp/B07WHR9ZJ9",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -6781,23 +5989,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000125",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm2f76190f198f6",
+                "url": "https://www.flipkart.com/iqoo-z9s-pro-5g-luxe-marble-128-gb/p/itm2f76190f198f6",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>iQOO%20Z9s%20Pro%205G%20%28Luxe%20Marble%2C%208GB%20R</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/o/k/x/z9s-pro-5g-z9s-pro-5g-iqoo-original-imah46j7jzhchck7.jpeg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000125-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000125",
                 "external_product_id": "B0D4N8Y13B",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>iQOO%20Z9s%20Pro%205G%20%28Luxe%20Marble%2C%208GB%20R</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/o/k/x/z9s-pro-5g-z9s-pro-5g-iqoo-original-imah46j7jzhchck7.jpeg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000125-GALLERY",
+                "product_id": "c1000000-0000-0000-0000-000000000125",
+                "external_product_id": "B0D4N8Y13B",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/4/f/6/z9s-pro-5g-z9s-pro-5g-iqoo-original-imah46j7dtykmzcd.jpeg",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -6865,15 +6082,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "weight": "190 g"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CX8R22R2",
-        "amazon_url": "https://www.amazon.in/dp/B0CX8R22R2",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/realme-narzo-Pro-128-Green/dp/B0CHQKRVMQ",
+        "amazon_url": "https://www.amazon.in/realme-narzo-Pro-128-Green/dp/B0CHQKRVMQ",
+        "flipkart_url": "https://www.flipkart.com/realme-rmx3868-glass-green-128-gb/p/itm328369c2978ad",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000126",
                 "retailer": "Amazon",
-                "external_product_id": "B0CX8R22R2",
-                "url": "https://www.amazon.in/dp/B0CX8R22R2",
+                "external_product_id": "B0CHQKRVMQ",
+                "url": "https://www.amazon.in/realme-narzo-Pro-128-Green/dp/B0CHQKRVMQ",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -6881,23 +6098,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000126",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm328369c2978ad",
+                "url": "https://www.flipkart.com/realme-rmx3868-glass-green-128-gb/p/itm328369c2978ad",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Realme%20Narzo%2070%20Pro%205G%20%28Glass%20Green</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/s/l/6/narzo-70-pro-5g-narzo-70-pro-5g-realme-original-imahf4hhqzfnjmkd.jpeg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000126-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000126",
                 "external_product_id": "B0CX8R22R2",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Realme%20Narzo%2070%20Pro%205G%20%28Glass%20Green</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/s/l/6/narzo-70-pro-5g-narzo-70-pro-5g-realme-original-imahf4hhqzfnjmkd.jpeg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000126-GALLERY",
+                "product_id": "c1000000-0000-0000-0000-000000000126",
+                "external_product_id": "B0CX8R22R2",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/b/s/q/narzo-70-pro-5g-narzo-70-pro-5g-realme-original-imahf4hhjvzzuqkf.jpeg",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -6965,15 +6191,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "weight": "190 g"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CGVLM5Q9",
-        "amazon_url": "https://www.amazon.in/dp/B0CGVLM5Q9",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0CDS9PTRQ",
+        "amazon_url": "https://www.amazon.in/dp/B0CDS9PTRQ",
+        "flipkart_url": "https://www.flipkart.com/poco-m6-pro-5g-forest-green-128-gb/p/itm151f47ed48eee",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000127",
                 "retailer": "Amazon",
-                "external_product_id": "B0CGVLM5Q9",
-                "url": "https://www.amazon.in/dp/B0CGVLM5Q9",
+                "external_product_id": "B0CDS9PTRQ",
+                "url": "https://www.amazon.in/dp/B0CDS9PTRQ",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -6981,23 +6207,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000127",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm151f47ed48eee",
+                "url": "https://www.flipkart.com/poco-m6-pro-5g-forest-green-128-gb/p/itm151f47ed48eee",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>POCO%20M6%20Pro%205G%20%28Forest%20Green%2C%206GB%20R</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/x/0/r/m6-pro-5g-mzb0eqjin-poco-original-imags3e7beqmyfje.jpeg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000127-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000127",
                 "external_product_id": "B0CGVLM5Q9",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>POCO%20M6%20Pro%205G%20%28Forest%20Green%2C%206GB%20R</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/x/0/r/m6-pro-5g-mzb0eqjin-poco-original-imags3e7beqmyfje.jpeg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000127-GALLERY",
+                "product_id": "c1000000-0000-0000-0000-000000000127",
+                "external_product_id": "B0CGVLM5Q9",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/s/9/i/m6-pro-5g-mzb0eqjin-poco-original-imags3e7dazavyje.jpeg",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -7065,15 +6300,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "weight": "190 g"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CX8R22R3",
-        "amazon_url": "https://www.amazon.in/dp/B0CX8R22R3",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/Samsung-Celestial-Storage-MediaTek-Dimensity/dp/B0CYQ2N8JR",
+        "amazon_url": "https://www.amazon.in/Samsung-Celestial-Storage-MediaTek-Dimensity/dp/B0CYQ2N8JR",
+        "flipkart_url": "https://www.flipkart.com/samsung-m15-celestial-blue-128-gb/p/itm924abf886fce2",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000128",
                 "retailer": "Amazon",
-                "external_product_id": "B0CX8R22R3",
-                "url": "https://www.amazon.in/dp/B0CX8R22R3",
+                "external_product_id": "B0CYQ2N8JR",
+                "url": "https://www.amazon.in/Samsung-Celestial-Storage-MediaTek-Dimensity/dp/B0CYQ2N8JR",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -7081,23 +6316,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000128",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm924abf886fce2",
+                "url": "https://www.flipkart.com/samsung-m15-celestial-blue-128-gb/p/itm924abf886fce2",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Samsung%20Galaxy%20M15%205G%20%28Celestial%20Bl</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/c/w/b/m15-sm-m156b-samsung-original-imahedag4bsyqjsz.jpeg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000128-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000128",
                 "external_product_id": "B0CX8R22R3",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Samsung%20Galaxy%20M15%205G%20%28Celestial%20Bl</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/c/w/b/m15-sm-m156b-samsung-original-imahedag4bsyqjsz.jpeg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000128-GALLERY",
+                "product_id": "c1000000-0000-0000-0000-000000000128",
+                "external_product_id": "B0CX8R22R3",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/n/n/w/m15-sm-m156b-samsung-original-imahedagwu48shzd.jpeg",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -7165,15 +6409,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "weight": "190 g"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0D4N9Z24C",
-        "amazon_url": "https://www.amazon.in/dp/B0D4N9Z24C",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/OnePlus-Mercurial-Silver-256GB-Storage/dp/B0D7VKSZGW",
+        "amazon_url": "https://www.amazon.in/OnePlus-Mercurial-Silver-256GB-Storage/dp/B0D7VKSZGW",
+        "flipkart_url": "https://www.flipkart.com/oneplus-nord-4-5g-mercurial-silver-256-gb/p/itmed83e7926e3e5",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000129",
                 "retailer": "Amazon",
-                "external_product_id": "B0D4N9Z24C",
-                "url": "https://www.amazon.in/dp/B0D4N9Z24C",
+                "external_product_id": "B0D7VKSZGW",
+                "url": "https://www.amazon.in/OnePlus-Mercurial-Silver-256GB-Storage/dp/B0D7VKSZGW",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -7181,11 +6425,11 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000129",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmed83e7926e3e5",
+                "url": "https://www.flipkart.com/oneplus-nord-4-5g-mercurial-silver-256-gb/p/itmed83e7926e3e5",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
         "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>OnePlus%20Nord%204%205G%20%28Mercurial%20Silver</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
@@ -7266,38 +6510,47 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CHWV2WYL",
-        "amazon_url": "https://www.amazon.in/dp/B0CHWV2WYL",
-        "flipkart_url": null,
+        "amazon_url": null,
+        "flipkart_url": "https://www.flipkart.com/oneplus-open-emerald-dusk-512-gb/p/itm8d91ded712561",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000130",
                 "retailer": "Amazon",
-                "external_product_id": "B0CHWV2WYL",
-                "url": "https://www.amazon.in/dp/B0CHWV2WYL",
-                "verification_status": "verified",
-                "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
-            },
-            {
-                "product_id": "c1000000-0000-0000-0000-000000000130",
-                "retailer": "Flipkart",
                 "external_product_id": null,
                 "url": null,
                 "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "unavailable"
+            },
+            {
+                "product_id": "c1000000-0000-0000-0000-000000000130",
+                "retailer": "Flipkart",
+                "external_product_id": "itm8d91ded712561",
+                "url": "https://www.flipkart.com/oneplus-open-emerald-dusk-512-gb/p/itm8d91ded712561",
+                "verification_status": "verified",
+                "last_verified": "2026-09-18T00:00:00Z",
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>OnePlus%20Open%20%28Voyager%20Black%2C%2016GB%20R</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/g/a/e/open-cph2551-oneplus-original-imagv2r4xvkjqcrj.jpeg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000130-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000130",
                 "external_product_id": "B0CHWV2WYL",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>OnePlus%20Open%20%28Voyager%20Black%2C%2016GB%20R</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/g/a/e/open-cph2551-oneplus-original-imagv2r4xvkjqcrj.jpeg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000130-GALLERY",
+                "product_id": "c1000000-0000-0000-0000-000000000130",
+                "external_product_id": "B0CHWV2WYL",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/e/u/b/open-cph2551-oneplus-original-imagv2r4ddtsyy8f.jpeg",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -7366,38 +6619,47 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CHX1W1XZ",
-        "amazon_url": "https://www.amazon.in/dp/B0CHX1W1XZ",
-        "flipkart_url": null,
+        "amazon_url": null,
+        "flipkart_url": "https://www.flipkart.com/apple-iphone-15-pro-max-blue-titanium-256-gb/p/itm4a0093df4a3d7",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000131",
                 "retailer": "Amazon",
-                "external_product_id": "B0CHX1W1XZ",
-                "url": "https://www.amazon.in/dp/B0CHX1W1XZ",
-                "verification_status": "verified",
-                "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
-            },
-            {
-                "product_id": "c1000000-0000-0000-0000-000000000131",
-                "retailer": "Flipkart",
                 "external_product_id": null,
                 "url": null,
                 "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "unavailable"
+            },
+            {
+                "product_id": "c1000000-0000-0000-0000-000000000131",
+                "retailer": "Flipkart",
+                "external_product_id": "itm4a0093df4a3d7",
+                "url": "https://www.flipkart.com/apple-iphone-15-pro-max-blue-titanium-256-gb/p/itm4a0093df4a3d7",
+                "verification_status": "verified",
+                "last_verified": "2026-09-18T00:00:00Z",
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Apple%20iPhone%2015%20Pro%20Max%20%28256%20GB%29%20-%20</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/p/b/7/-original-imahggetywqjzwg6.jpeg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000131-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000131",
                 "external_product_id": "B0CHX1W1XZ",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Apple%20iPhone%2015%20Pro%20Max%20%28256%20GB%29%20-%20</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/p/b/7/-original-imahggetywqjzwg6.jpeg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000131-GALLERY",
+                "product_id": "c1000000-0000-0000-0000-000000000131",
+                "external_product_id": "B0CHX1W1XZ",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/y/0/u/-original-imahggetzffhxaar.jpeg",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -7465,15 +6727,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "weight": "190 g"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CS5X81L5",
-        "amazon_url": "https://www.amazon.in/dp/B0CS5X81L5",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0FT8S9RB7",
+        "amazon_url": "https://www.amazon.in/dp/B0FT8S9RB7",
+        "flipkart_url": "https://www.flipkart.com/samsung-galaxy-s24-5g-cobalt-violet-128-gb/p/itma2ec54ed01030",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000132",
                 "retailer": "Amazon",
-                "external_product_id": "B0CS5X81L5",
-                "url": "https://www.amazon.in/dp/B0CS5X81L5",
+                "external_product_id": "B0FT8S9RB7",
+                "url": "https://www.amazon.in/dp/B0FT8S9RB7",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -7481,23 +6743,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000132",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itma2ec54ed01030",
+                "url": "https://www.flipkart.com/samsung-galaxy-s24-5g-cobalt-violet-128-gb/p/itma2ec54ed01030",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Samsung%20Galaxy%20S24%205G%20%28Cobalt%20Viole</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/t/f/q/-original-imahfvuahbmttxgu.jpeg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000132-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000132",
                 "external_product_id": "B0CS5X81L5",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Samsung%20Galaxy%20S24%205G%20%28Cobalt%20Viole</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/t/f/q/-original-imahfvuahbmttxgu.jpeg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c1000000-0000-0000-0000-000000000132-GALLERY",
+                "product_id": "c1000000-0000-0000-0000-000000000132",
+                "external_product_id": "B0CS5X81L5",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/mobile/0/a/j/-original-imahfvuadz9gaebf.jpeg",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -7604,42 +6875,6 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "image_type": "back",
                 "source": "Amazon",
                 "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000201-GALLERY",
-                "product_id": "c1000000-0000-0000-0000-000000000201",
-                "external_product_id": "B09XS7JWHH",
-                "image_url": "https://m.media-amazon.com/images/I/61vJtKbAssL._SL1500_.jpg",
-                "image_type": "gallery",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000201-ACCESSORIES",
-                "product_id": "c1000000-0000-0000-0000-000000000201",
-                "external_product_id": "B09XS7JWHH",
-                "image_url": "https://m.media-amazon.com/images/I/71p0W+3bL8L._SL1500_.jpg",
-                "image_type": "accessories",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000201-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000201",
-                "external_product_id": "B09XS7JWHH",
-                "image_url": "https://m.media-amazon.com/images/I/71k4s6m3VCL._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000201-RIGHT",
-                "product_id": "c1000000-0000-0000-0000-000000000201",
-                "external_product_id": "B09XS7JWHH",
-                "image_url": "https://m.media-amazon.com/images/I/81b6Y1v4O4L._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
-                "verified": true
             }
         ],
         "media_gallery": {
@@ -7709,15 +6944,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 22990.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0863TXGM3",
-        "amazon_url": "https://www.amazon.in/dp/B0863TXGM3",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B08LW4MT2Z",
+        "amazon_url": "https://www.amazon.in/dp/B08LW4MT2Z",
+        "flipkart_url": "https://www.flipkart.com/sony-wh-1000xm4-bluetooth-headset/p/itm2517d207c4dd5",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000202",
                 "retailer": "Amazon",
-                "external_product_id": "B0863TXGM3",
-                "url": "https://www.amazon.in/dp/B0863TXGM3",
+                "external_product_id": "B08LW4MT2Z",
+                "url": "https://www.amazon.in/dp/B08LW4MT2Z",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -7725,23 +6960,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000202",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm2517d207c4dd5",
+                "url": "https://www.flipkart.com/sony-wh-1000xm4-bluetooth-headset/p/itm2517d207c4dd5",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Sony%20WH-1000XM4%20Wireless%20Noise%20Canc</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/61wAWttbWrL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000202-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000202",
                 "external_product_id": "B0863TXGM3",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Sony%20WH-1000XM4%20Wireless%20Noise%20Canc</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/61wAWttbWrL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -7806,15 +7041,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 9990.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0BT41Z4PB",
-        "amazon_url": "https://www.amazon.in/dp/B0BT41Z4PB",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0CFSDYNGT",
+        "amazon_url": "https://www.amazon.in/dp/B0CFSDYNGT",
+        "flipkart_url": "https://www.flipkart.com/sony-wh-ch720n-active-noise-cancelling-50-hrs-battery-life-multipoint-connection-bluetooth/p/itm45d94d7470182",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000203",
                 "retailer": "Amazon",
-                "external_product_id": "B0BT41Z4PB",
-                "url": "https://www.amazon.in/dp/B0BT41Z4PB",
+                "external_product_id": "B0CFSDYNGT",
+                "url": "https://www.amazon.in/dp/B0CFSDYNGT",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -7822,23 +7057,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000203",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm45d94d7470182",
+                "url": "https://www.flipkart.com/sony-wh-ch720n-active-noise-cancelling-50-hrs-battery-life-multipoint-connection-bluetooth/p/itm45d94d7470182",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Sony%20WH-CH720N%20Noise%20Cancelling%20Wir</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/51--iaLfgWL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000203-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000203",
                 "external_product_id": "B0BT41Z4PB",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Sony%20WH-CH720N%20Noise%20Cancelling%20Wir</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/51--iaLfgWL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -7905,7 +7140,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0C33XXS56",
         "amazon_url": "https://www.amazon.in/dp/B0C33XXS56",
-        "flipkart_url": null,
+        "flipkart_url": "https://www.flipkart.com/sony-wf-1000xm5-best-noise-cancelling-tws-earbuds-multi-point-upto-36hrs-battery-bluetooth-headset/p/itm86886b74b3256",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000204",
@@ -7919,40 +7154,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000204",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm86886b74b3256",
+                "url": "https://www.flipkart.com/sony-wf-1000xm5-best-noise-cancelling-tws-earbuds-multi-point-upto-36hrs-battery-bluetooth-headset/p/itm86886b74b3256",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/61aB4Vwo8PL._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/headphone/p/2/v/wf-1000xm5-sony-enriched-transparent-original-imagtak4zdhzhffc.png?q=90",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000204-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000204",
                 "external_product_id": "B0C33XXS56",
-                "image_url": "https://m.media-amazon.com/images/I/61aB4Vwo8PL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/headphone/p/2/v/wf-1000xm5-sony-enriched-transparent-original-imagtak4zdhzhffc.png?q=90",
                 "image_type": "front",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             },
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000204-GALLERY",
                 "product_id": "c1000000-0000-0000-0000-000000000204",
                 "external_product_id": "B0C33XXS56",
-                "image_url": "https://m.media-amazon.com/images/I/61aB4Vwo8AL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/headphone/1/h/u/wf-1000xm5-sony-original-imagtak4fbg56fnt.jpeg?q=90",
                 "image_type": "gallery",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000204-RIGHT",
-                "product_id": "c1000000-0000-0000-0000-000000000204",
-                "external_product_id": "B0C33XXS56",
-                "image_url": "https://m.media-amazon.com/images/I/71w9T3m7L4L._SL1500_.jpg",
-                "image_type": "right",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -8022,7 +7248,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CCZ1L489",
         "amazon_url": "https://www.amazon.in/dp/B0CCZ1L489",
-        "flipkart_url": null,
+        "flipkart_url": "https://www.flipkart.com/bose-new-quietcomfort-ultra-wireless-noise-cancelling-headphones-spatial-audio-bluetooth-headset/p/itmaf5ffcc5144ba",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000205",
@@ -8036,23 +7262,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000205",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmaf5ffcc5144ba",
+                "url": "https://www.flipkart.com/bose-new-quietcomfort-ultra-wireless-noise-cancelling-headphones-spatial-audio-bluetooth-headset/p/itmaf5ffcc5144ba",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Bose%20QuietComfort%20Ultra%20Wireless%20No</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/51ZR4lyxBHL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000205-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000205",
                 "external_product_id": "B0CCZ1L489",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Bose%20QuietComfort%20Ultra%20Wireless%20No</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/51ZR4lyxBHL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -8119,7 +7345,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B098FKXT8L",
         "amazon_url": "https://www.amazon.in/dp/B098FKXT8L",
-        "flipkart_url": null,
+        "flipkart_url": "https://www.flipkart.com/bose-quietcomfort-45-24-hours-playback-noise-cancellation-bluetooth-headset/p/itma9e5d5efec36a",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000206",
@@ -8133,11 +7359,11 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000206",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itma9e5d5efec36a",
+                "url": "https://www.flipkart.com/bose-quietcomfort-45-24-hours-playback-noise-cancellation-bluetooth-headset/p/itma9e5d5efec36a",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
         "image_url": "https://m.media-amazon.com/images/I/51JbsHSktkL._SL1500_.jpg",
@@ -8224,15 +7450,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 24900.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CHWRXH8B",
-        "amazon_url": "https://www.amazon.in/dp/B0CHWRXH8B",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0CHX719JD",
+        "amazon_url": "https://www.amazon.in/dp/B0CHX719JD",
+        "flipkart_url": "https://www.flipkart.com/apple-airpods-pro-2nd-generation-magsafe-case-usb-c-bluetooth/p/itm60c8f5a308352",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000207",
                 "retailer": "Amazon",
-                "external_product_id": "B0CHWRXH8B",
-                "url": "https://www.amazon.in/dp/B0CHWRXH8B",
+                "external_product_id": "B0CHX719JD",
+                "url": "https://www.amazon.in/dp/B0CHX719JD",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -8240,11 +7466,11 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000207",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm60c8f5a308352",
+                "url": "https://www.flipkart.com/apple-airpods-pro-2nd-generation-magsafe-case-usb-c-bluetooth/p/itm60c8f5a308352",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
         "image_url": "https://m.media-amazon.com/images/I/61SUj2aKoEL._SL1500_.jpg",
@@ -8264,15 +7490,6 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "external_product_id": "B0CHWRXH8B",
                 "image_url": "https://m.media-amazon.com/images/I/71BHbg3LVAL._SL1500_.jpg",
                 "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000207-ACCESSORIES",
-                "product_id": "c1000000-0000-0000-0000-000000000207",
-                "external_product_id": "B0CHWRXH8B",
-                "image_url": "https://m.media-amazon.com/images/I/51n8P7m6T2L._SL1500_.jpg",
-                "image_type": "accessories",
                 "source": "Amazon",
                 "verified": true
             }
@@ -8341,15 +7558,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 59900.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B08PZHYWJS",
-        "amazon_url": "https://www.amazon.in/dp/B08PZHYWJS",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B08Q4S97M5",
+        "amazon_url": "https://www.amazon.in/dp/B08Q4S97M5",
+        "flipkart_url": "https://www.flipkart.com/apple-airpods-max-bluetooth/p/itm66a49e88f49e5",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000208",
                 "retailer": "Amazon",
-                "external_product_id": "B08PZHYWJS",
-                "url": "https://www.amazon.in/dp/B08PZHYWJS",
+                "external_product_id": "B08Q4S97M5",
+                "url": "https://www.amazon.in/dp/B08Q4S97M5",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -8357,48 +7574,21 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000208",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm66a49e88f49e5",
+                "url": "https://www.flipkart.com/apple-airpods-max-bluetooth/p/itm66a49e88f49e5",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/81Y7cW8+5uL._SL1500_.jpg",
+        "image_url": "https://m.media-amazon.com/images/I/81U3QW4lCcL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000208-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000208",
                 "external_product_id": "B08PZHYWJS",
-                "image_url": "https://m.media-amazon.com/images/I/81Y7cW8+5uL._SL1500_.jpg",
+                "image_url": "https://m.media-amazon.com/images/I/81U3QW4lCcL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000208-ACCESSORIES",
-                "product_id": "c1000000-0000-0000-0000-000000000208",
-                "external_product_id": "B08PZHYWJS",
-                "image_url": "https://m.media-amazon.com/images/I/81gC7frRJyL._SL1500_.jpg",
-                "image_type": "accessories",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000208-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000208",
-                "external_product_id": "B08PZHYWJS",
-                "image_url": "https://m.media-amazon.com/images/I/71n5fU3xLFL._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000208-GALLERY",
-                "product_id": "c1000000-0000-0000-0000-000000000208",
-                "external_product_id": "B08PZHYWJS",
-                "image_url": "https://m.media-amazon.com/images/I/81M6w2K9y3L._SL1500_.jpg",
-                "image_type": "gallery",
                 "source": "Amazon",
                 "verified": true
             }
@@ -8470,7 +7660,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0B6GHW1SX",
         "amazon_url": "https://www.amazon.in/dp/B0B6GHW1SX",
-        "flipkart_url": null,
+        "flipkart_url": "https://www.flipkart.com/sennheiser-momentum-4-wireless-over-ear-headphones-anc-60h-battery-multipoint-connectivity-bluetooth-wired/p/itm722356d6df76c",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000209",
@@ -8484,23 +7674,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000209",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm722356d6df76c",
+                "url": "https://www.flipkart.com/sennheiser-momentum-4-wireless-over-ear-headphones-anc-60h-battery-multipoint-connectivity-bluetooth-wired/p/itm722356d6df76c",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Sennheiser%20Momentum%204%20Wireless%20Head</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/716++4xC2wL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000209-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000209",
                 "external_product_id": "B0B6GHW1SX",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Sennheiser%20Momentum%204%20Wireless%20Head</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/716++4xC2wL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -8567,7 +7757,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B08HNFV61M",
         "amazon_url": "https://www.amazon.in/dp/B08HNFV61M",
-        "flipkart_url": null,
+        "flipkart_url": "https://www.flipkart.com/sennheiser-hd-560s-audiophile-over-ear-headphone-wired-without-mic-headset/p/itme71f567510ef2",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000210",
@@ -8581,23 +7771,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000210",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itme71f567510ef2",
+                "url": "https://www.flipkart.com/sennheiser-hd-560s-audiophile-over-ear-headphone-wired-without-mic-headset/p/itme71f567510ef2",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Sennheiser%20HD%20560S%20Audiophile%20Open-</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/71z2y-w+hmL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000210-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000210",
                 "external_product_id": "B08HNFV61M",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Sennheiser%20HD%20560S%20Audiophile%20Open-</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/71z2y-w+hmL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -8664,7 +7854,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B00HVLUR86",
         "amazon_url": "https://www.amazon.in/dp/B00HVLUR86",
-        "flipkart_url": null,
+        "flipkart_url": "https://www.flipkart.com/audio-technica-ath-m50x-professional-monitor-wired-without-mic/p/itm60d2ac1511889",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000211",
@@ -8678,23 +7868,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000211",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm60d2ac1511889",
+                "url": "https://www.flipkart.com/audio-technica-ath-m50x-professional-monitor-wired-without-mic/p/itm60d2ac1511889",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Audio-Technica%20ATH-M50x%20Professiona</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/71G5OkSr2zL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000211-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000211",
                 "external_product_id": "B00HVLUR86",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Audio-Technica%20ATH-M50x%20Professiona</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/71G5OkSr2zL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -8759,15 +7949,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 9999.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0BP28N2M5",
-        "amazon_url": "https://www.amazon.in/dp/B0BP28N2M5",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0BQN7Y8BB",
+        "amazon_url": "https://www.amazon.in/dp/B0BQN7Y8BB",
+        "flipkart_url": "https://www.flipkart.com/oneplus-buds-pro-2-bluetooth-headset/p/itm79f97165e1813",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000212",
                 "retailer": "Amazon",
-                "external_product_id": "B0BP28N2M5",
-                "url": "https://www.amazon.in/dp/B0BP28N2M5",
+                "external_product_id": "B0BQN7Y8BB",
+                "url": "https://www.amazon.in/dp/B0BQN7Y8BB",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -8775,23 +7965,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000212",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm79f97165e1813",
+                "url": "https://www.flipkart.com/oneplus-buds-pro-2-bluetooth-headset/p/itm79f97165e1813",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>OnePlus%20Buds%20Pro%202%20TWS%20Earbuds%20-%20Ob</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/511M6l6E5bL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000212-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000212",
                 "external_product_id": "B0BP28N2M5",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>OnePlus%20Buds%20Pro%202%20TWS%20Earbuds%20-%20Ob</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/511M6l6E5bL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -8858,7 +8048,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B09N3ZNHTY",
         "amazon_url": "https://www.amazon.in/dp/B09N3ZNHTY",
-        "flipkart_url": "https://www.flipkart.com/boat-airdopes-141-bluetooth-headset/p/itmd5543c749eb38",
+        "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000213",
@@ -8872,11 +8062,11 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000213",
                 "retailer": "Flipkart",
-                "external_product_id": "itmd5543c749eb38",
-                "url": "https://www.flipkart.com/boat-airdopes-141-bluetooth-headset/p/itmd5543c749eb38",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             }
         ],
         "image_url": "https://m.media-amazon.com/images/I/61u1VALn6JL._SL1500_.jpg",
@@ -8896,15 +8086,6 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "external_product_id": "B09N3ZNHTY",
                 "image_url": "https://m.media-amazon.com/images/I/61K5w4g-3nL._SL1500_.jpg",
                 "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000213-GALLERY",
-                "product_id": "c1000000-0000-0000-0000-000000000213",
-                "external_product_id": "B09N3ZNHTY",
-                "image_url": "https://m.media-amazon.com/images/I/71nvk5b5gLL._SL1500_.jpg",
-                "image_type": "gallery",
                 "source": "Amazon",
                 "verified": true
             }
@@ -8973,15 +8154,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 1799.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0856HNMR7",
-        "amazon_url": "https://www.amazon.in/dp/B0856HNMR7",
-        "flipkart_url": "https://www.flipkart.com/boat-rockerz-550-bluetooth-headset/p/itmd5543c749eb39",
+        "source_url": "https://www.amazon.in/dp/B08R7L77T7",
+        "amazon_url": "https://www.amazon.in/dp/B08R7L77T7",
+        "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000214",
                 "retailer": "Amazon",
-                "external_product_id": "B0856HNMR7",
-                "url": "https://www.amazon.in/dp/B0856HNMR7",
+                "external_product_id": "B08R7L77T7",
+                "url": "https://www.amazon.in/dp/B08R7L77T7",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -8989,30 +8170,21 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000214",
                 "retailer": "Flipkart",
-                "external_product_id": "itmd5543c749eb39",
-                "url": "https://www.flipkart.com/boat-rockerz-550-bluetooth-headset/p/itmd5543c749eb39",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/61gYLMssVvL._SL1500_.jpg",
+        "image_url": "https://m.media-amazon.com/images/I/61leGjTDm0L._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000214-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000214",
                 "external_product_id": "B0856HNMR7",
-                "image_url": "https://m.media-amazon.com/images/I/61gYLMssVvL._SL1500_.jpg",
+                "image_url": "https://m.media-amazon.com/images/I/61leGjTDm0L._SX679_.jpg",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000214-GALLERY",
-                "product_id": "c1000000-0000-0000-0000-000000000214",
-                "external_product_id": "B0856HNMR7",
-                "image_url": "https://m.media-amazon.com/images/I/61gYLMssVzL._SL1500_.jpg",
-                "image_type": "gallery",
                 "source": "Amazon",
                 "verified": true
             }
@@ -9080,15 +8252,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 5999.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0C9YQ88Z9",
-        "amazon_url": "https://www.amazon.in/dp/B0C9YQ88Z9",
+        "source_url": "https://www.amazon.in/dp/B0DVGHF7NK",
+        "amazon_url": "https://www.amazon.in/dp/B0DVGHF7NK",
         "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000215",
                 "retailer": "Amazon",
-                "external_product_id": "B0C9YQ88Z9",
-                "url": "https://www.amazon.in/dp/B0C9YQ88Z9",
+                "external_product_id": "B0DVGHF7NK",
+                "url": "https://www.amazon.in/dp/B0DVGHF7NK",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -9103,41 +8275,14 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "availability_status": "unavailable"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/51wB7-7Q7RL._SL1500_.jpg",
+        "image_url": "https://m.media-amazon.com/images/I/41ELxYw4xAL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000215-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000215",
                 "external_product_id": "B0C9YQ88Z9",
-                "image_url": "https://m.media-amazon.com/images/I/51wB7-7Q7RL._SL1500_.jpg",
+                "image_url": "https://m.media-amazon.com/images/I/41ELxYw4xAL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000215-ACCESSORIES",
-                "product_id": "c1000000-0000-0000-0000-000000000215",
-                "external_product_id": "B0C9YQ88Z9",
-                "image_url": "https://m.media-amazon.com/images/I/61o2K3x8bCL._SL1500_.jpg",
-                "image_type": "accessories",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000215-PORTS",
-                "product_id": "c1000000-0000-0000-0000-000000000215",
-                "external_product_id": "B0C9YQ88Z9",
-                "image_url": "https://m.media-amazon.com/images/I/51p6K8m1vTL._SL1500_.jpg",
-                "image_type": "ports",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c1000000-0000-0000-0000-000000000215-GALLERY",
-                "product_id": "c1000000-0000-0000-0000-000000000215",
-                "external_product_id": "B0C9YQ88Z9",
-                "image_url": "https://m.media-amazon.com/images/I/71q8P1v5L4L._SL1500_.jpg",
-                "image_type": "gallery",
                 "source": "Amazon",
                 "verified": true
             }
@@ -9230,16 +8375,16 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "availability_status": "unavailable"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>HyperX%20Cloud%20II%20Wireless%20Gaming%20Hea</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/61e0+8QzVBL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000216-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000216",
                 "external_product_id": "B08NTYB4M7",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>HyperX%20Cloud%20II%20Wireless%20Gaming%20Hea</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/61e0+8QzVBL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -9304,15 +8449,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 7990.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0C1L8Q88H",
-        "amazon_url": "https://www.amazon.in/dp/B0C1L8Q88H",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0BZQM5ZDL",
+        "amazon_url": "https://www.amazon.in/dp/B0BZQM5ZDL",
+        "flipkart_url": "https://www.flipkart.com/sony-wf-c700n-lightest-tws-anc-20hr-battery-in-ear-10-min-quick-charge-multi-point-bluetooth-headset/p/itmb0be8b51b21d7",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000217",
                 "retailer": "Amazon",
-                "external_product_id": "B0C1L8Q88H",
-                "url": "https://www.amazon.in/dp/B0C1L8Q88H",
+                "external_product_id": "B0BZQM5ZDL",
+                "url": "https://www.amazon.in/dp/B0BZQM5ZDL",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -9320,23 +8465,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000217",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmb0be8b51b21d7",
+                "url": "https://www.flipkart.com/sony-wf-c700n-lightest-tws-anc-20hr-battery-in-ear-10-min-quick-charge-multi-point-bluetooth-headset/p/itmb0be8b51b21d7",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Sony%20WF-C700N%20Truly%20Wireless%20Noise%20</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/51ni1o+keWL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000217-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000217",
                 "external_product_id": "B0C1L8Q88H",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Sony%20WF-C700N%20Truly%20Wireless%20Noise%20</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/51ni1o+keWL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -9424,16 +8569,16 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "availability_status": "unavailable"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Sony%20MDR-7506%20Professional%20Large%20Di</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/51F-Ok9xuzL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000218-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000218",
                 "external_product_id": "B000AJIF4E",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Sony%20MDR-7506%20Professional%20Large%20Di</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/51F-Ok9xuzL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -9498,15 +8643,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 11990.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CGVR15B8",
-        "amazon_url": "https://www.amazon.in/dp/B0CGVR15B8",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0CGR586KV",
+        "amazon_url": "https://www.amazon.in/dp/B0CGR586KV",
+        "flipkart_url": "https://www.flipkart.com/sennheiser-accentum-wireless-over-ear-headphones-designed-germany-50hr-battery-bluetooth/p/itm28e134ac6e335",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000219",
                 "retailer": "Amazon",
-                "external_product_id": "B0CGVR15B8",
-                "url": "https://www.amazon.in/dp/B0CGVR15B8",
+                "external_product_id": "B0CGR586KV",
+                "url": "https://www.amazon.in/dp/B0CGR586KV",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -9514,23 +8659,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000219",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm28e134ac6e335",
+                "url": "https://www.flipkart.com/sennheiser-accentum-wireless-over-ear-headphones-designed-germany-50hr-battery-bluetooth/p/itm28e134ac6e335",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Sennheiser%20Accentum%20Wireless%20Headph</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/71St1R5DFGL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000219-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000219",
                 "external_product_id": "B0CGVR15B8",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Sennheiser%20Accentum%20Wireless%20Headph</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/71St1R5DFGL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -9595,15 +8740,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 18990.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B09T8XQ97B",
-        "amazon_url": "https://www.amazon.in/dp/B09T8XQ97B",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B09T8YPFV2",
+        "amazon_url": "https://www.amazon.in/dp/B09T8YPFV2",
+        "flipkart_url": "https://www.flipkart.com/sennheiser-momentum-true-wireless-3-earbuds-adaptive-noise-cancellation-bluetooth-headset/p/itme99f87279e65d",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000220",
                 "retailer": "Amazon",
-                "external_product_id": "B09T8XQ97B",
-                "url": "https://www.amazon.in/dp/B09T8XQ97B",
+                "external_product_id": "B09T8YPFV2",
+                "url": "https://www.amazon.in/dp/B09T8YPFV2",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -9611,23 +8756,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000220",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itme99f87279e65d",
+                "url": "https://www.flipkart.com/sennheiser-momentum-true-wireless-3-earbuds-adaptive-noise-cancellation-bluetooth-headset/p/itme99f87279e65d",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Sennheiser%20Momentum%20True%20Wireless%203</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/617BfhOXfpL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000220-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000220",
                 "external_product_id": "B09T8XQ97B",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Sennheiser%20Momentum%20True%20Wireless%203</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/617BfhOXfpL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -9693,17 +8838,17 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B09BYR3ZLF",
-        "amazon_url": "https://www.amazon.in/dp/B09BYR3ZLF",
+        "amazon_url": null,
         "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000221",
                 "retailer": "Amazon",
-                "external_product_id": "B09BYR3ZLF",
-                "url": "https://www.amazon.in/dp/B09BYR3ZLF",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             },
             {
                 "product_id": "c1000000-0000-0000-0000-000000000221",
@@ -9789,15 +8934,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 4490.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B00HVLUR54",
-        "amazon_url": "https://www.amazon.in/dp/B00HVLUR54",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B00HVLUR18",
+        "amazon_url": "https://www.amazon.in/dp/B00HVLUR18",
+        "flipkart_url": "https://www.flipkart.com/audio-technica-ath-m20x-headphone-black-over-ear-wired-without-mic/p/itm3c99543d19bf3",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000222",
                 "retailer": "Amazon",
-                "external_product_id": "B00HVLUR54",
-                "url": "https://www.amazon.in/dp/B00HVLUR54",
+                "external_product_id": "B00HVLUR18",
+                "url": "https://www.amazon.in/dp/B00HVLUR18",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -9805,23 +8950,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000222",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm3c99543d19bf3",
+                "url": "https://www.flipkart.com/audio-technica-ath-m20x-headphone-black-over-ear-wired-without-mic/p/itm3c99543d19bf3",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Audio-Technica%20ATH-M20x%20Professiona</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/81zcnWFPwVS._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000222-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000222",
                 "external_product_id": "B00HVLUR54",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Audio-Technica%20ATH-M20x%20Professiona</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/81zcnWFPwVS._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -9886,15 +9031,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 4999.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CQPP9ZJ2",
-        "amazon_url": "https://www.amazon.in/dp/B0CQPP9ZJ2",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0CW6MXXGB",
+        "amazon_url": "https://www.amazon.in/dp/B0CW6MXXGB",
+        "flipkart_url": "https://www.flipkart.com/oneplus-buds-3-true-wireless-ear-earbuds-sliding-volume-control-49db-anc-bluetooth-headset/p/itm3f89e2c2d7b10",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000223",
                 "retailer": "Amazon",
-                "external_product_id": "B0CQPP9ZJ2",
-                "url": "https://www.amazon.in/dp/B0CQPP9ZJ2",
+                "external_product_id": "B0CW6MXXGB",
+                "url": "https://www.amazon.in/dp/B0CW6MXXGB",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -9902,23 +9047,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000223",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm3f89e2c2d7b10",
+                "url": "https://www.flipkart.com/oneplus-buds-3-true-wireless-ear-earbuds-sliding-volume-control-49db-anc-bluetooth-headset/p/itm3f89e2c2d7b10",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>OnePlus%20Buds%203%20TWS%20Earbuds%20-%20Metall</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/51fqxfdHIcL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000223-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000223",
                 "external_product_id": "B0CQPP9ZJ2",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>OnePlus%20Buds%203%20TWS%20Earbuds%20-%20Metall</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/51fqxfdHIcL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -9983,15 +9128,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 2499.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0BVRB2Z2N",
-        "amazon_url": "https://www.amazon.in/dp/B0BVRB2Z2N",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0C22KVGBR",
+        "amazon_url": "https://www.amazon.in/dp/B0C22KVGBR",
+        "flipkart_url": "https://www.flipkart.com/oneplus-nord-buds-2-true-wireless-earbuds-25db-active-noise-cancellation-bluetooth-headset/p/itm89489818bb3e2",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000224",
                 "retailer": "Amazon",
-                "external_product_id": "B0BVRB2Z2N",
-                "url": "https://www.amazon.in/dp/B0BVRB2Z2N",
+                "external_product_id": "B0C22KVGBR",
+                "url": "https://www.amazon.in/dp/B0C22KVGBR",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -9999,23 +9144,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000224",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm89489818bb3e2",
+                "url": "https://www.flipkart.com/oneplus-nord-buds-2-true-wireless-earbuds-25db-active-noise-cancellation-bluetooth-headset/p/itm89489818bb3e2",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>OnePlus%20Nord%20Buds%202%20TWS%20-%20Thunder%20G</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/516jDyX+YrL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000224-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000224",
                 "external_product_id": "B0BVRB2Z2N",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>OnePlus%20Nord%20Buds%202%20TWS%20-%20Thunder%20G</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/516jDyX+YrL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -10081,17 +9226,17 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0BVRB2Z2O",
-        "amazon_url": "https://www.amazon.in/dp/B0BVRB2Z2O",
+        "amazon_url": null,
         "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000225",
                 "retailer": "Amazon",
-                "external_product_id": "B0BVRB2Z2O",
-                "url": "https://www.amazon.in/dp/B0BVRB2Z2O",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             },
             {
                 "product_id": "c1000000-0000-0000-0000-000000000225",
@@ -10177,15 +9322,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 8999.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B08W5B4V91",
-        "amazon_url": "https://www.amazon.in/dp/B08W5B4V91",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B091FYLKNB",
+        "amazon_url": "https://www.amazon.in/dp/B091FYLKNB",
+        "flipkart_url": "https://www.flipkart.com/jbl-live-660nc-smart-adaptive-noise-cancellation-50-hr-playtime-speed-charge-bluetooth-headset/p/itm1b48abcd3dc59",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000226",
                 "retailer": "Amazon",
-                "external_product_id": "B08W5B4V91",
-                "url": "https://www.amazon.in/dp/B08W5B4V91",
+                "external_product_id": "B091FYLKNB",
+                "url": "https://www.amazon.in/dp/B091FYLKNB",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -10193,23 +9338,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000226",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm1b48abcd3dc59",
+                "url": "https://www.flipkart.com/jbl-live-660nc-smart-adaptive-noise-cancellation-50-hr-playtime-speed-charge-bluetooth-headset/p/itm1b48abcd3dc59",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>JBL%20Live%20660NC%20Wireless%20Over-Ear%20He</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/61APOA2BNFL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000226-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000226",
                 "external_product_id": "B08W5B4V91",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>JBL%20Live%20660NC%20Wireless%20Over-Ear%20He</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/61APOA2BNFL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -10274,15 +9419,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 14999.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B086PKMZ21",
-        "amazon_url": "https://www.amazon.in/dp/B086PKMZ21",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B08WBLM3HC",
+        "amazon_url": "https://www.amazon.in/dp/B08WBLM3HC",
+        "flipkart_url": "https://www.flipkart.com/razer-blackshark-v2-pro-wireless-rz04-03220100-r3m1-bluetooth-gaming-headset/p/itm8d8619097f66d",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000227",
                 "retailer": "Amazon",
-                "external_product_id": "B086PKMZ21",
-                "url": "https://www.amazon.in/dp/B086PKMZ21",
+                "external_product_id": "B08WBLM3HC",
+                "url": "https://www.amazon.in/dp/B08WBLM3HC",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -10290,23 +9435,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000227",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm8d8619097f66d",
+                "url": "https://www.flipkart.com/razer-blackshark-v2-pro-wireless-rz04-03220100-r3m1-bluetooth-gaming-headset/p/itm8d8619097f66d",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Razer%20BlackShark%20V2%20Pro%20Wireless%20Ga</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/71Z9KK9-zvL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000227-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000227",
                 "external_product_id": "B086PKMZ21",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Razer%20BlackShark%20V2%20Pro%20Wireless%20Ga</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/71Z9KK9-zvL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -10371,15 +9516,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 25900.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CCZ1L490",
-        "amazon_url": "https://www.amazon.in/dp/B0CCZ1L490",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0CD2F4B1G",
+        "amazon_url": "https://www.amazon.in/dp/B0CD2F4B1G",
+        "flipkart_url": "https://www.flipkart.com/bose-new-quietcomfort-ultra-wireless-noise-cancelling-earbuds-spatial-audio-bluetooth-headset/p/itmfd0f641f6cc64",
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000228",
                 "retailer": "Amazon",
-                "external_product_id": "B0CCZ1L490",
-                "url": "https://www.amazon.in/dp/B0CCZ1L490",
+                "external_product_id": "B0CD2F4B1G",
+                "url": "https://www.amazon.in/dp/B0CD2F4B1G",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -10387,23 +9532,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000228",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmfd0f641f6cc64",
+                "url": "https://www.flipkart.com/bose-new-quietcomfort-ultra-wireless-noise-cancelling-earbuds-spatial-audio-bluetooth-headset/p/itmfd0f641f6cc64",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Bose%20QuietComfort%20Ultra%20Earbuds%20-%20W</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/51qMK4q-NVL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000228-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000228",
                 "external_product_id": "B0CCZ1L490",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Bose%20QuietComfort%20Ultra%20Earbuds%20-%20W</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/51qMK4q-NVL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Amazon",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -10468,15 +9613,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 499.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B086MGV6F3",
-        "amazon_url": "https://www.amazon.in/dp/B086MGV6F3",
+        "source_url": "https://www.amazon.in/dp/B09KLQF4RR",
+        "amazon_url": "https://www.amazon.in/dp/B09KLQF4RR",
         "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000001",
                 "retailer": "Amazon",
-                "external_product_id": "B086MGV6F3",
-                "url": "https://www.amazon.in/dp/B086MGV6F3",
+                "external_product_id": "B09KLQF4RR",
+                "url": "https://www.amazon.in/dp/B09KLQF4RR",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -10491,41 +9636,14 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "availability_status": "unavailable"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/61jPZp1Zc2L._SL1200_.jpg",
+        "image_url": "https://m.media-amazon.com/images/I/61qtydPJLBL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000001-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000001",
                 "external_product_id": "B086MGV6F3",
-                "image_url": "https://m.media-amazon.com/images/I/61jPZp1Zc2L._SL1200_.jpg",
+                "image_url": "https://m.media-amazon.com/images/I/61qtydPJLBL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c2000000-0000-0000-0000-000000000001-BACK",
-                "product_id": "c2000000-0000-0000-0000-000000000001",
-                "external_product_id": "B086MGV6F3",
-                "image_url": "https://m.media-amazon.com/images/I/61u9f2GfHPL._SL1100_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c2000000-0000-0000-0000-000000000001-GALLERY",
-                "product_id": "c2000000-0000-0000-0000-000000000001",
-                "external_product_id": "B086MGV6F3",
-                "image_url": "https://m.media-amazon.com/images/I/71f8N7x6vPL._SL1500_.jpg",
-                "image_type": "gallery",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c2000000-0000-0000-0000-000000000001-BOARD",
-                "product_id": "c2000000-0000-0000-0000-000000000001",
-                "external_product_id": "B086MGV6F3",
-                "image_url": "https://m.media-amazon.com/images/I/61R12Wk2vCL._SL1500_.jpg",
-                "image_type": "board",
                 "source": "Amazon",
                 "verified": true
             }
@@ -10595,15 +9713,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 299.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B082F24NZL",
-        "amazon_url": "https://www.amazon.in/dp/B082F24NZL",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B01M98LHT4",
+        "amazon_url": "https://www.amazon.in/dp/B01M98LHT4",
+        "flipkart_url": "https://www.flipkart.com/ds-robotics-wireless-module-ch340-nodemcu-v3-lua-wifi-internet-things-development-board-based-esp8266-electronic-components-hobby-kit/p/itme30651435f8f1",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000002",
                 "retailer": "Amazon",
-                "external_product_id": "B082F24NZL",
-                "url": "https://www.amazon.in/dp/B082F24NZL",
+                "external_product_id": "B01M98LHT4",
+                "url": "https://www.amazon.in/dp/B01M98LHT4",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -10611,31 +9729,22 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000002",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itme30651435f8f1",
+                "url": "https://www.flipkart.com/ds-robotics-wireless-module-ch340-nodemcu-v3-lua-wifi-internet-things-development-board-based-esp8266-electronic-components-hobby-kit/p/itme30651435f8f1",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/61o4m8v7y8L._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1000/kerfl3k0/electronic-hobby-kit/x/s/z/wireless-module-ch340-nodemcu-v3-lua-wifi-internet-of-things-original-imafvdhadmhxzfz5.jpeg?q=90",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000002-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000002",
                 "external_product_id": "B082F24NZL",
-                "image_url": "https://m.media-amazon.com/images/I/61o4m8v7y8L._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1000/kerfl3k0/electronic-hobby-kit/x/s/z/wireless-module-ch340-nodemcu-v3-lua-wifi-internet-of-things-original-imafvdhadmhxzfz5.jpeg?q=90",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c2000000-0000-0000-0000-000000000002-GALLERY",
-                "product_id": "c2000000-0000-0000-0000-000000000002",
-                "external_product_id": "B082F24NZL",
-                "image_url": "https://m.media-amazon.com/images/I/61o4m8v7yIL._SL1500_.jpg",
-                "image_type": "gallery",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -10702,15 +9811,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 749.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B00844XE94",
-        "amazon_url": "https://www.amazon.in/dp/B00844XE94",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B008GRTSV6",
+        "amazon_url": "https://www.amazon.in/dp/B008GRTSV6",
+        "flipkart_url": "https://www.flipkart.com/arduino-uno-r3-board-atmega328p/p/itm6e7c5fc169122",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000003",
                 "retailer": "Amazon",
-                "external_product_id": "B00844XE94",
-                "url": "https://www.amazon.in/dp/B00844XE94",
+                "external_product_id": "B008GRTSV6",
+                "url": "https://www.amazon.in/dp/B008GRTSV6",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -10718,40 +9827,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000003",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm6e7c5fc169122",
+                "url": "https://www.flipkart.com/arduino-uno-r3-board-atmega328p/p/itm6e7c5fc169122",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/61k3A9gQO7L._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1000/kfeamq80/learning-toy/q/r/7/uno-r3-board-atmega328p-arduino-original-imafvuwgc236fhzx.jpeg?q=90",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000003-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000003",
                 "external_product_id": "B00844XE94",
-                "image_url": "https://m.media-amazon.com/images/I/61k3A9gQO7L._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1000/kfeamq80/learning-toy/q/r/7/uno-r3-board-atmega328p-arduino-original-imafvuwgc236fhzx.jpeg?q=90",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c2000000-0000-0000-0000-000000000003-BACK",
-                "product_id": "c2000000-0000-0000-0000-000000000003",
-                "external_product_id": "B00844XE94",
-                "image_url": "https://m.media-amazon.com/images/I/719F8aT8ZzL._SL1500_.jpg",
-                "image_type": "back",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             },
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000003-GALLERY",
                 "product_id": "c2000000-0000-0000-0000-000000000003",
                 "external_product_id": "B00844XE94",
-                "image_url": "https://m.media-amazon.com/images/I/61j3Xv7q8KL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1000/kf1fo280/learning-toy/r/q/r/uno-r3-board-compatible-usb-cable-arduino-uno-original-imafvhcnjmqznzsd.jpeg?q=90",
                 "image_type": "gallery",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -10821,7 +9921,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0046AMGW0",
         "amazon_url": "https://www.amazon.in/dp/B0046AMGW0",
-        "flipkart_url": null,
+        "flipkart_url": "https://www.flipkart.com/kartex-arduino-mega-2560-r3-compatible-board-atmega2560-ch340-usb-cable-electronic-components-hobby-kit/p/itm5b0af15bf1bc2",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000004",
@@ -10835,23 +9935,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000004",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm5b0af15bf1bc2",
+                "url": "https://www.flipkart.com/kartex-arduino-mega-2560-r3-compatible-board-atmega2560-ch340-usb-cable-electronic-components-hobby-kit/p/itm5b0af15bf1bc2",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Arduino%20Mega%202560%20R3%20Microcontrolle</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/480/kf4ajrk0/electronic-hobby-kit/c/z/c/arduino-mega-2560-r3-compatible-board-with-atmega2560-ch340-with-original-imafvnfb6zr3v7a6.jpeg?q=80",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000004-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000004",
                 "external_product_id": "B0046AMGW0",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Arduino%20Mega%202560%20R3%20Microcontrolle</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/kf4ajrk0/electronic-hobby-kit/c/z/c/arduino-mega-2560-r3-compatible-board-with-atmega2560-ch340-with-original-imafvnfb6zr3v7a6.jpeg?q=80",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c2000000-0000-0000-0000-000000000004-GALLERY",
+                "product_id": "c2000000-0000-0000-0000-000000000004",
+                "external_product_id": "B0046AMGW0",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/kf4ajrk0/electronic-hobby-kit/c/z/c/arduino-mega-2560-r3-compatible-board-with-atmega2560-ch340-with-original-imafvnfbeuzsknuz.jpeg?q=80",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -10916,15 +10025,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 7999.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0899VXM8F",
-        "amazon_url": "https://www.amazon.in/dp/B0899VXM8F",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B09TTKT94J",
+        "amazon_url": "https://www.amazon.in/dp/B09TTKT94J",
+        "flipkart_url": "https://www.flipkart.com/indian-hobby-center-raspberry-pi-4-model-b-8-gb-ram-electronic-components-kit/p/itmccac2ab7a8aa8",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000005",
                 "retailer": "Amazon",
-                "external_product_id": "B0899VXM8F",
-                "url": "https://www.amazon.in/dp/B0899VXM8F",
+                "external_product_id": "B09TTKT94J",
+                "url": "https://www.amazon.in/dp/B09TTKT94J",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -10932,11 +10041,11 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000005",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmccac2ab7a8aa8",
+                "url": "https://www.flipkart.com/indian-hobby-center-raspberry-pi-4-model-b-8-gb-ram-electronic-components-kit/p/itmccac2ab7a8aa8",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
         "image_url": "https://m.media-amazon.com/images/I/61mpMH5TzkL._SL1500_.jpg",
@@ -10956,15 +10065,6 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "external_product_id": "B0899VXM8F",
                 "image_url": "https://m.media-amazon.com/images/I/61Zf1fWf3lL._SL1500_.jpg",
                 "image_type": "back",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c2000000-0000-0000-0000-000000000005-GALLERY",
-                "product_id": "c2000000-0000-0000-0000-000000000005",
-                "external_product_id": "B0899VXM8F",
-                "image_url": "https://m.media-amazon.com/images/I/71s8L5q5L-L._SL1500_.jpg",
-                "image_type": "gallery",
                 "source": "Amazon",
                 "verified": true
             }
@@ -11033,15 +10133,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 9999.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CN586R2A",
-        "amazon_url": "https://www.amazon.in/dp/B0CN586R2A",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0CK2FCG1K",
+        "amazon_url": "https://www.amazon.in/dp/B0CK2FCG1K",
+        "flipkart_url": "https://www.flipkart.com/raspberry-pi-5-8gb-ram-64-bit-quad-core-arm-cortex-a76-single-board-computer-motherboard/p/itm9560c23bdb9b9",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000006",
                 "retailer": "Amazon",
-                "external_product_id": "B0CN586R2A",
-                "url": "https://www.amazon.in/dp/B0CN586R2A",
+                "external_product_id": "B0CK2FCG1K",
+                "url": "https://www.amazon.in/dp/B0CK2FCG1K",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -11049,23 +10149,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000006",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm9560c23bdb9b9",
+                "url": "https://www.flipkart.com/raspberry-pi-5-8gb-ram-64-bit-quad-core-arm-cortex-a76-single-board-computer-motherboard/p/itm9560c23bdb9b9",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Raspberry%20Pi%205%20%288GB%20RAM%2C%20Broadcom%20B</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/480/xif0q/motherboard/l/p/p/raspberry-pi-5-8gb-5-8gb-ram-64-bit-quad-core-arm-cortex-a76-original-imagudmuhqcjvtgd.jpeg?q=80",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000006-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000006",
                 "external_product_id": "B0CN586R2A",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Raspberry%20Pi%205%20%288GB%20RAM%2C%20Broadcom%20B</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/xif0q/motherboard/l/p/p/raspberry-pi-5-8gb-5-8gb-ram-64-bit-quad-core-arm-cortex-a76-original-imagudmuhqcjvtgd.jpeg?q=80",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c2000000-0000-0000-0000-000000000006-GALLERY",
+                "product_id": "c2000000-0000-0000-0000-000000000006",
+                "external_product_id": "B0CN586R2A",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/xif0q/motherboard/z/z/a/raspberry-pi-5-8gb-5-8gb-ram-64-bit-quad-core-arm-cortex-a76-original-imagudmuahxhz32f.jpeg?q=80",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -11130,15 +10239,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 649.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0B7CBM4KV",
-        "amazon_url": "https://www.amazon.in/dp/B0B7CBM4KV",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0BK9W4H2Q",
+        "amazon_url": "https://www.amazon.in/dp/B0BK9W4H2Q",
+        "flipkart_url": "https://www.flipkart.com/raspberry-pi-pico-w-wireless-am4socket-nano-itx-armv7-chipset-ddr4-motherboard-desktop-mobile-tablet-workstation/p/itm3588fb962986c",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000007",
                 "retailer": "Amazon",
-                "external_product_id": "B0B7CBM4KV",
-                "url": "https://www.amazon.in/dp/B0B7CBM4KV",
+                "external_product_id": "B0BK9W4H2Q",
+                "url": "https://www.amazon.in/dp/B0BK9W4H2Q",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -11146,31 +10255,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000007",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm3588fb962986c",
+                "url": "https://www.flipkart.com/raspberry-pi-pico-w-wireless-am4socket-nano-itx-armv7-chipset-ddr4-motherboard-desktop-mobile-tablet-workstation/p/itm3588fb962986c",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/61Y0G6v7f5L._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/l51d30w0/motherboard/s/c/n/pico-w-pico-w-wireless-raspberry-pi-original-imagfshhgdxpga6t.jpeg?q=90",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000007-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000007",
                 "external_product_id": "B0B7CBM4KV",
-                "image_url": "https://m.media-amazon.com/images/I/61Y0G6v7f5L._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/l51d30w0/motherboard/s/c/n/pico-w-pico-w-wireless-raspberry-pi-original-imagfshhgdxpga6t.jpeg?q=90",
                 "image_type": "front",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             },
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000007-GALLERY",
                 "product_id": "c2000000-0000-0000-0000-000000000007",
                 "external_product_id": "B0B7CBM4KV",
-                "image_url": "https://m.media-amazon.com/images/I/61Y0G6v7fIL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/l51d30w0/motherboard/f/y/c/pico-w-pico-w-wireless-raspberry-pi-original-imagfshhvgvzhehy.jpeg?q=90",
                 "image_type": "gallery",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -11237,15 +10346,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 119.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B01N9KS2XH",
-        "amazon_url": "https://www.amazon.in/dp/B01N9KS2XH",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B07FSPW4VK",
+        "amazon_url": "https://www.amazon.in/dp/B07FSPW4VK",
+        "flipkart_url": "https://www.flipkart.com/vgs-marketings-dht11-digital-temperature-humidity-dht-11-sensor-arduino-diy-module-raspberry-controller-electronic-hobby-kit/p/itmf963eeqrezg77",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000008",
                 "retailer": "Amazon",
-                "external_product_id": "B01N9KS2XH",
-                "url": "https://www.amazon.in/dp/B01N9KS2XH",
+                "external_product_id": "B07FSPW4VK",
+                "url": "https://www.amazon.in/dp/B07FSPW4VK",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -11253,23 +10362,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000008",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmf963eeqrezg77",
+                "url": "https://www.flipkart.com/vgs-marketings-dht11-digital-temperature-humidity-dht-11-sensor-arduino-diy-module-raspberry-controller-electronic-hobby-kit/p/itmf963eeqrezg77",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>DHT11%20Digital%20Temperature%20and%20Humid</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/480/jm81zm80/electronic-hobby-kit/p/4/r/dht11-digital-temperature-and-humidity-temperature-dht-11-sensor-original-imaf95njtbvbzmfe.jpeg?q=80",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000008-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000008",
                 "external_product_id": "B01N9KS2XH",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>DHT11%20Digital%20Temperature%20and%20Humid</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/jm81zm80/electronic-hobby-kit/p/4/r/dht11-digital-temperature-and-humidity-temperature-dht-11-sensor-original-imaf95njtbvbzmfe.jpeg?q=80",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c2000000-0000-0000-0000-000000000008-GALLERY",
+                "product_id": "c2000000-0000-0000-0000-000000000008",
+                "external_product_id": "B01N9KS2XH",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/jm81zm80/electronic-hobby-kit/p/4/r/dht11-digital-temperature-and-humidity-temperature-dht-11-sensor-original-imaf95nhxcbxam3y.jpeg?q=80",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -11334,15 +10452,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 329.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B01N6PB489",
-        "amazon_url": "https://www.amazon.in/dp/B01N6PB489",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B01DA3C452",
+        "amazon_url": "https://www.amazon.in/dp/B01DA3C452",
+        "flipkart_url": "https://www.flipkart.com/iduino-dht22-am2302-digital-temperature-humidity-sensor-controller-electronic-hobby-kit/p/itmd0498454f64b2",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000009",
                 "retailer": "Amazon",
-                "external_product_id": "B01N6PB489",
-                "url": "https://www.amazon.in/dp/B01N6PB489",
+                "external_product_id": "B01DA3C452",
+                "url": "https://www.amazon.in/dp/B01DA3C452",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -11350,22 +10468,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000009",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmd0498454f64b2",
+                "url": "https://www.flipkart.com/iduino-dht22-am2302-digital-temperature-humidity-sensor-controller-electronic-hobby-kit/p/itmd0498454f64b2",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/51w8N4r6CRL._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/l3os4280/electronic-hobby-kit/n/d/y/dht22-am2302-digital-temperature-and-humidity-sensor-iduino-original-imagerh2pfshgamf.jpeg?q=90",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000009-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000009",
                 "external_product_id": "B01N6PB489",
-                "image_url": "https://m.media-amazon.com/images/I/51w8N4r6CRL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/l3os4280/electronic-hobby-kit/n/d/y/dht22-am2302-digital-temperature-and-humidity-sensor-iduino-original-imagerh2pfshgamf.jpeg?q=90",
                 "image_type": "front",
-                "source": "Amazon",
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c2000000-0000-0000-0000-000000000009-GALLERY",
+                "product_id": "c2000000-0000-0000-0000-000000000009",
+                "external_product_id": "B01N6PB489",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/l3os4280/electronic-hobby-kit/z/j/i/dht22-am2302-digital-temperature-and-humidity-sensor-iduino-original-imagerh2ygg26pyf.jpeg?q=90",
+                "image_type": "gallery",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -11431,15 +10558,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 449.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B07PRVSL9J",
-        "amazon_url": "https://www.amazon.in/dp/B07PRVSL9J",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B07KKB7HR6",
+        "amazon_url": "https://www.amazon.in/dp/B07KKB7HR6",
+        "flipkart_url": "https://www.flipkart.com/kitsguru-breakout-temperature-humidity-barometric-pressure-bme280-digital-sensor-module-electronic-components-hobby-kit/p/itmf87xwwyjf2fua",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000010",
                 "retailer": "Amazon",
-                "external_product_id": "B07PRVSL9J",
-                "url": "https://www.amazon.in/dp/B07PRVSL9J",
+                "external_product_id": "B07KKB7HR6",
+                "url": "https://www.amazon.in/dp/B07KKB7HR6",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -11447,40 +10574,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000010",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmf87xwwyjf2fua",
+                "url": "https://www.flipkart.com/kitsguru-breakout-temperature-humidity-barometric-pressure-bme280-digital-sensor-module-electronic-components-hobby-kit/p/itmf87xwwyjf2fua",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71W89r9bHLL._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1000/jkzrc7k0/electronic-hobby-kit/g/p/n/breakout-temperature-humidity-barometric-pressure-bme280-digital-original-imaf87xw88vx2ng9.jpeg?q=90",
         "images": [
             {
-                "image_id": "IMG-c2000000-0000-0000-0000-000000000010-BOARD",
+                "image_id": "IMG-c2000000-0000-0000-0000-000000000010-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000010",
                 "external_product_id": "B07PRVSL9J",
-                "image_url": "https://m.media-amazon.com/images/I/71W89r9bHLL._SL1500_.jpg",
-                "image_type": "board",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c2000000-0000-0000-0000-000000000010-CONNECTOR",
-                "product_id": "c2000000-0000-0000-0000-000000000010",
-                "external_product_id": "B07PRVSL9J",
-                "image_url": "https://m.media-amazon.com/images/I/61k9H5W6TGL._SL1500_.jpg",
-                "image_type": "connector",
-                "source": "Amazon",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1000/jkzrc7k0/electronic-hobby-kit/g/p/n/breakout-temperature-humidity-barometric-pressure-bme280-digital-original-imaf87xw88vx2ng9.jpeg?q=90",
+                "image_type": "front",
+                "source": "Flipkart",
                 "verified": true
             },
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000010-GALLERY",
                 "product_id": "c2000000-0000-0000-0000-000000000010",
                 "external_product_id": "B07PRVSL9J",
-                "image_url": "https://m.media-amazon.com/images/I/71q7Q5V1WHL._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1000/jkzrc7k0/electronic-hobby-kit/g/p/n/breakout-temperature-humidity-barometric-pressure-bme280-digital-original-imaf87xwhugcxhrx.jpeg?q=90",
                 "image_type": "gallery",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -11548,15 +10666,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 149.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B07K67B42W",
-        "amazon_url": "https://www.amazon.in/dp/B07K67B42W",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B09HQ2QW6S",
+        "amazon_url": "https://www.amazon.in/dp/B09HQ2QW6S",
+        "flipkart_url": "https://www.flipkart.com/circuitcomponents-pir-motion-sensor-detector-module-hc-sr501-sensors/p/itm9eec38bb7387a",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000011",
                 "retailer": "Amazon",
-                "external_product_id": "B07K67B42W",
-                "url": "https://www.amazon.in/dp/B07K67B42W",
+                "external_product_id": "B09HQ2QW6S",
+                "url": "https://www.amazon.in/dp/B09HQ2QW6S",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -11564,23 +10682,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000011",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm9eec38bb7387a",
+                "url": "https://www.flipkart.com/circuitcomponents-pir-motion-sensor-detector-module-hc-sr501-sensors/p/itm9eec38bb7387a",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>HC-SR501%20Pyroelectric%20Infrared%20PIR%20</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/480/xif0q/sensor/l/u/e/pir-motion-sensor-detector-module-hc-sr501-circuitcomponents-resized-original-imag9hcfy9j2qmyj.jpeg",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000011-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000011",
                 "external_product_id": "B07K67B42W",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>HC-SR501%20Pyroelectric%20Infrared%20PIR%20</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/xif0q/sensor/l/u/e/pir-motion-sensor-detector-module-hc-sr501-circuitcomponents-resized-original-imag9hcfy9j2qmyj.jpeg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c2000000-0000-0000-0000-000000000011-GALLERY",
+                "product_id": "c2000000-0000-0000-0000-000000000011",
+                "external_product_id": "B07K67B42W",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/kwzap3k0/sensor/f/l/h/pir-motion-sensor-detector-module-hc-sr501-circuitcomponents-original-imag9jq6fgjbhg4j.jpeg",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -11645,15 +10772,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 129.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B07F89V4W7",
-        "amazon_url": "https://www.amazon.in/dp/B07F89V4W7",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B09H6NJYBK",
+        "amazon_url": "https://www.amazon.in/dp/B09H6NJYBK",
+        "flipkart_url": "https://www.flipkart.com/arduino-hc-sr04-ultrasonic-distance-measurement-transducer-module-sensor-educational-electronic-hobby-kit/p/itmf82b8wjbzhudw",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000012",
                 "retailer": "Amazon",
-                "external_product_id": "B07F89V4W7",
-                "url": "https://www.amazon.in/dp/B07F89V4W7",
+                "external_product_id": "B09H6NJYBK",
+                "url": "https://www.amazon.in/dp/B09H6NJYBK",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -11661,22 +10788,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000012",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmf82b8wjbzhudw",
+                "url": "https://www.flipkart.com/arduino-hc-sr04-ultrasonic-distance-measurement-transducer-module-sensor-educational-electronic-hobby-kit/p/itmf82b8wjbzhudw",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/61lX7E6P5-L._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/electronic-hobby-kit/b/k/c/hc-sr04-ultrasonic-distance-measurement-transducer-module-sensor-resized-original-imag3wfwzpsxffv7.jpeg?q=90",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000012-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000012",
                 "external_product_id": "B07F89V4W7",
-                "image_url": "https://m.media-amazon.com/images/I/61lX7E6P5-L._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/electronic-hobby-kit/b/k/c/hc-sr04-ultrasonic-distance-measurement-transducer-module-sensor-resized-original-imag3wfwzpsxffv7.jpeg?q=90",
                 "image_type": "front",
-                "source": "Amazon",
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c2000000-0000-0000-0000-000000000012-GALLERY",
+                "product_id": "c2000000-0000-0000-0000-000000000012",
+                "external_product_id": "B07F89V4W7",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/kqfj1jk0/electronic-hobby-kit/g/s/u/hc-sr04-ultrasonic-distance-measurement-transducer-module-sensor-original-imag4fwcgfh8fzqx.jpeg?q=90",
+                "image_type": "gallery",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -11742,15 +10878,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 179.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B07P8VNL4Q",
-        "amazon_url": "https://www.amazon.in/dp/B07P8VNL4Q",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B07FS3MBCG",
+        "amazon_url": "https://www.amazon.in/dp/B07FS3MBCG",
+        "flipkart_url": "https://www.flipkart.com/circuitcomponents-mq2-mq-2-gas-sensor-module-smoke-methane-butane-detection/p/itm94e60adea0443",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000013",
                 "retailer": "Amazon",
-                "external_product_id": "B07P8VNL4Q",
-                "url": "https://www.amazon.in/dp/B07P8VNL4Q",
+                "external_product_id": "B07FS3MBCG",
+                "url": "https://www.amazon.in/dp/B07FS3MBCG",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -11758,23 +10894,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000013",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm94e60adea0443",
+                "url": "https://www.flipkart.com/circuitcomponents-mq2-mq-2-gas-sensor-module-smoke-methane-butane-detection/p/itm94e60adea0443",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>MQ-2%20Flammable%20Gas%2C%20LPG%2C%20Methane%20%26%20</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/480/kws5hu80/sensor/c/3/m/mq2-mq-2-gas-sensor-module-smoke-methane-butane-detection-original-imag9dntwqwpjwvf.jpeg?q=80",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000013-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000013",
                 "external_product_id": "B07P8VNL4Q",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>MQ-2%20Flammable%20Gas%2C%20LPG%2C%20Methane%20%26%20</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/kws5hu80/sensor/c/3/m/mq2-mq-2-gas-sensor-module-smoke-methane-butane-detection-original-imag9dntwqwpjwvf.jpeg?q=80",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c2000000-0000-0000-0000-000000000013-GALLERY",
+                "product_id": "c2000000-0000-0000-0000-000000000013",
+                "external_product_id": "B07P8VNL4Q",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/kws5hu80/sensor/u/y/c/mq2-mq-2-gas-sensor-module-smoke-methane-butane-detection-original-imag9dntpq7svhpk.jpeg?q=80",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -11839,15 +10984,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 199.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B07B5N92M8",
-        "amazon_url": "https://www.amazon.in/dp/B07B5N92M8",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B08P5YFMCF",
+        "amazon_url": "https://www.amazon.in/dp/B08P5YFMCF",
+        "flipkart_url": "https://www.flipkart.com/sunrobotics-bh1750-digital-light-sensor-module-security-circuit-motion-detector-electronic-hobby-kit/p/itmekyhgrrnbtgcs",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000014",
                 "retailer": "Amazon",
-                "external_product_id": "B07B5N92M8",
-                "url": "https://www.amazon.in/dp/B07B5N92M8",
+                "external_product_id": "B08P5YFMCF",
+                "url": "https://www.amazon.in/dp/B08P5YFMCF",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -11855,23 +11000,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000014",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmekyhgrrnbtgcs",
+                "url": "https://www.flipkart.com/sunrobotics-bh1750-digital-light-sensor-module-security-circuit-motion-detector-electronic-hobby-kit/p/itmekyhgrrnbtgcs",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>BH1750FVI%2016-Bit%20Digital%20Ambient%20Li</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/480/electronic-hobby-kit/z/x/z/bh1750-digital-light-sensor-module-sunrobotics-original-imaekybddhfs8ruy.jpeg?q=80",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000014-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000014",
                 "external_product_id": "B07B5N92M8",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>BH1750FVI%2016-Bit%20Digital%20Ambient%20Li</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/electronic-hobby-kit/z/x/z/bh1750-digital-light-sensor-module-sunrobotics-original-imaekybddhfs8ruy.jpeg?q=80",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -11936,15 +11081,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 119.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B07V2P9M8W",
-        "amazon_url": "https://www.amazon.in/dp/B07V2P9M8W",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B00LW15A4W",
+        "amazon_url": "https://www.amazon.in/dp/B00LW15A4W",
+        "flipkart_url": "https://www.flipkart.com/dhruv-pro-1-channel-5v-10a-relay-module-optocoupler-ac-dc-appliance-control-micro-controller-board-electronic-hobby-kit/p/itm9ee3ac19fbb47",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000015",
                 "retailer": "Amazon",
-                "external_product_id": "B07V2P9M8W",
-                "url": "https://www.amazon.in/dp/B07V2P9M8W",
+                "external_product_id": "B00LW15A4W",
+                "url": "https://www.amazon.in/dp/B00LW15A4W",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -11952,22 +11097,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000015",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm9ee3ac19fbb47",
+                "url": "https://www.flipkart.com/dhruv-pro-1-channel-5v-10a-relay-module-optocoupler-ac-dc-appliance-control-micro-controller-board-electronic-hobby-kit/p/itm9ee3ac19fbb47",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/61Mtz1vWwEL._SL1100_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/kgzg8sw0/electronic-hobby-kit/4/w/c/1-channel-5v-10a-relay-module-with-optocoupler-ac-and-dc-original-imafx3m9zfmzwf7k.jpeg?q=90",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000015-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000015",
                 "external_product_id": "B07V2P9M8W",
-                "image_url": "https://m.media-amazon.com/images/I/61Mtz1vWwEL._SL1100_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/kgzg8sw0/electronic-hobby-kit/4/w/c/1-channel-5v-10a-relay-module-with-optocoupler-ac-and-dc-original-imafx3m9zfmzwf7k.jpeg?q=90",
                 "image_type": "front",
-                "source": "Amazon",
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c2000000-0000-0000-0000-000000000015-GALLERY",
+                "product_id": "c2000000-0000-0000-0000-000000000015",
+                "external_product_id": "B07V2P9M8W",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/kgzg8sw0/electronic-hobby-kit/4/w/c/1-channel-5v-10a-relay-module-with-optocoupler-ac-and-dc-original-imafx3m9zx95segr.jpeg?q=90",
+                "image_type": "gallery",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -12033,15 +11187,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 289.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B07V1M8V9Z",
-        "amazon_url": "https://www.amazon.in/dp/B07V1M8V9Z",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B07S29BN57",
+        "amazon_url": "https://www.amazon.in/dp/B07S29BN57",
+        "flipkart_url": "https://www.flipkart.com/rees52-optocoupler-4-channel-5v-relay-module-control-arduino-dsp-avr-pic-arm/p/itmez4fhdmtvwhme",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000016",
                 "retailer": "Amazon",
-                "external_product_id": "B07V1M8V9Z",
-                "url": "https://www.amazon.in/dp/B07V1M8V9Z",
+                "external_product_id": "B07S29BN57",
+                "url": "https://www.amazon.in/dp/B07S29BN57",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -12049,22 +11203,31 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000016",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmez4fhdmtvwhme",
+                "url": "https://www.flipkart.com/rees52-optocoupler-4-channel-5v-relay-module-control-arduino-dsp-avr-pic-arm/p/itmez4fhdmtvwhme",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/71a2B6v8v4L._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/j9a8fww0/learning-toy/g/3/d/optocoupler-4-channel-5v-relay-module-relay-control-for-arduino-original-imaez2fdw7wky2uz.jpeg?q=90",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000016-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000016",
                 "external_product_id": "B07V1M8V9Z",
-                "image_url": "https://m.media-amazon.com/images/I/71a2B6v8v4L._SL1500_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/j9a8fww0/learning-toy/g/3/d/optocoupler-4-channel-5v-relay-module-relay-control-for-arduino-original-imaez2fdw7wky2uz.jpeg?q=90",
                 "image_type": "front",
-                "source": "Amazon",
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c2000000-0000-0000-0000-000000000016-GALLERY",
+                "product_id": "c2000000-0000-0000-0000-000000000016",
+                "external_product_id": "B07V1M8V9Z",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/j9a8fww0/learning-toy/g/3/d/optocoupler-4-channel-5v-relay-module-relay-control-for-arduino-original-imaez2fendvzjs6y.jpeg?q=90",
+                "image_type": "gallery",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -12130,15 +11293,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 549.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B07P8VNL4R",
-        "amazon_url": "https://www.amazon.in/dp/B07P8VNL4R",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B01IDNCCFQ",
+        "amazon_url": "https://www.amazon.in/dp/B01IDNCCFQ",
+        "flipkart_url": "https://www.flipkart.com/sunrobotics-8-channel-5v-relay-board-module/p/itmf3pdt9pxhukzs",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000017",
                 "retailer": "Amazon",
-                "external_product_id": "B07P8VNL4R",
-                "url": "https://www.amazon.in/dp/B07P8VNL4R",
+                "external_product_id": "B01IDNCCFQ",
+                "url": "https://www.amazon.in/dp/B01IDNCCFQ",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -12146,23 +11309,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000017",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmf3pdt9pxhukzs",
+                "url": "https://www.flipkart.com/sunrobotics-8-channel-5v-relay-board-module/p/itmf3pdt9pxhukzs",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>5V%208-Channel%20Relay%20Module%20Board%20wit</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/480/kq9ta4w0/learning-toy/e/g/r/8-channel-5v-relay-board-module-sunrobotics-original-imag4bbgwgfzjuse.jpeg?q=80",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000017-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000017",
                 "external_product_id": "B07P8VNL4R",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>5V%208-Channel%20Relay%20Module%20Board%20wit</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/kq9ta4w0/learning-toy/e/g/r/8-channel-5v-relay-board-module-sunrobotics-original-imag4bbgwgfzjuse.jpeg?q=80",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -12227,15 +11390,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 229.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B07B5N92M9",
-        "amazon_url": "https://www.amazon.in/dp/B07B5N92M9",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0DYD468L5",
+        "amazon_url": "https://www.amazon.in/dp/B0DYD468L5",
+        "flipkart_url": "https://www.flipkart.com/tayal-l298n-motor-driver-module-dual-h-bridge-dc-stepper-arduino-electronic-components-hobby-kit/p/itm035f6479389ae",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000018",
                 "retailer": "Amazon",
-                "external_product_id": "B07B5N92M9",
-                "url": "https://www.amazon.in/dp/B07B5N92M9",
+                "external_product_id": "B0DYD468L5",
+                "url": "https://www.amazon.in/dp/B0DYD468L5",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -12243,23 +11406,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000018",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm035f6479389ae",
+                "url": "https://www.flipkart.com/tayal-l298n-motor-driver-module-dual-h-bridge-dc-stepper-arduino-electronic-components-hobby-kit/p/itm035f6479389ae",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>L298N%20Dual%20H-Bridge%20DC%20Stepper%20Moto</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/electronic-hobby-kit/c/d/e/l298n-motor-driver-module-dual-h-bridge-dc-stepper-for-arduino-original-imaghzsnvz5zqmse.jpeg?q=80",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000018-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000018",
                 "external_product_id": "B07B5N92M9",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>L298N%20Dual%20H-Bridge%20DC%20Stepper%20Moto</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/electronic-hobby-kit/c/d/e/l298n-motor-driver-module-dual-h-bridge-dc-stepper-for-arduino-original-imaghzsnvz5zqmse.jpeg?q=80",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c2000000-0000-0000-0000-000000000018-GALLERY",
+                "product_id": "c2000000-0000-0000-0000-000000000018",
+                "external_product_id": "B07B5N92M9",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/electronic-hobby-kit/f/q/u/l298n-motor-driver-module-dual-h-bridge-dc-stepper-for-arduino-original-imaghzsnnaqgqxbe.jpeg?q=80",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -12324,15 +11496,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 149.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B07V2P9M8X",
-        "amazon_url": "https://www.amazon.in/dp/B07V2P9M8X",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0FB3RKJ9T",
+        "amazon_url": "https://www.amazon.in/dp/B0FB3RKJ9T",
+        "flipkart_url": "https://www.flipkart.com/electro-global-servo-motor-sg90-tower-pro-9-gms-mini-micro-control-electronic-hobby-kit/p/itm051e374f20376",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000019",
                 "retailer": "Amazon",
-                "external_product_id": "B07V2P9M8X",
-                "url": "https://www.amazon.in/dp/B07V2P9M8X",
+                "external_product_id": "B0FB3RKJ9T",
+                "url": "https://www.amazon.in/dp/B0FB3RKJ9T",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -12340,23 +11512,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000019",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm051e374f20376",
+                "url": "https://www.flipkart.com/electro-global-servo-motor-sg90-tower-pro-9-gms-mini-micro-control-electronic-hobby-kit/p/itm051e374f20376",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>SG90%209g%20Micro%20Digital%20Servo%20Motor%20%28</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/electronic-hobby-kit/e/i/6/servo-motor-sg90-tower-pro-sg90-servo-motor-9-gms-mini-micro-original-imah79xdpfwyetzk.jpeg?q=80",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000019-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000019",
                 "external_product_id": "B07V2P9M8X",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>SG90%209g%20Micro%20Digital%20Servo%20Motor%20%28</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/electronic-hobby-kit/e/i/6/servo-motor-sg90-tower-pro-sg90-servo-motor-9-gms-mini-micro-original-imah79xdpfwyetzk.jpeg?q=80",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c2000000-0000-0000-0000-000000000019-GALLERY",
+                "product_id": "c2000000-0000-0000-0000-000000000019",
+                "external_product_id": "B07V2P9M8X",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/xif0q/electronic-hobby-kit/y/a/9/servo-motor-sg90-tower-pro-sg90-servo-motor-9-gms-mini-micro-original-imah79xdbasseypd.jpeg?q=80",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -12421,15 +11602,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 499.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B07V1M8V9A",
-        "amazon_url": "https://www.amazon.in/dp/B07V1M8V9A",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0DC5M3CTQ",
+        "amazon_url": "https://www.amazon.in/dp/B0DC5M3CTQ",
+        "flipkart_url": "https://www.flipkart.com/sunrobotics-lora-module-sx1278-433m-10km-ra-02-ai-thinker-wireless-spread-spectrum-transmission-socket-smart-home/p/itmfb7fgvandzzre",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000020",
                 "retailer": "Amazon",
-                "external_product_id": "B07V1M8V9A",
-                "url": "https://www.amazon.in/dp/B07V1M8V9A",
+                "external_product_id": "B0DC5M3CTQ",
+                "url": "https://www.amazon.in/dp/B0DC5M3CTQ",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -12437,23 +11618,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000020",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmfb7fgvandzzre",
+                "url": "https://www.flipkart.com/sunrobotics-lora-module-sx1278-433m-10km-ra-02-ai-thinker-wireless-spread-spectrum-transmission-socket-smart-home/p/itmfb7fgvandzzre",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>SX1278%20433MHz%20LoRa%20Wireless%20Transce</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/480/kngd0nk0/learning-toy/v/e/x/lora-module-sx1278-433m-10km-ra-02-ai-thinker-wireless-spread-original-imag24pr2qqmncgp.jpeg?q=80",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000020-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000020",
                 "external_product_id": "B07V1M8V9A",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>SX1278%20433MHz%20LoRa%20Wireless%20Transce</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/kngd0nk0/learning-toy/v/e/x/lora-module-sx1278-433m-10km-ra-02-ai-thinker-wireless-spread-original-imag24pr2qqmncgp.jpeg?q=80",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c2000000-0000-0000-0000-000000000020-GALLERY",
+                "product_id": "c2000000-0000-0000-0000-000000000020",
+                "external_product_id": "B07V1M8V9A",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/kngd0nk0/learning-toy/d/i/t/lora-module-sx1278-433m-10km-ra-02-ai-thinker-wireless-spread-original-imag24prtqh2kpft.jpeg?q=80",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -12518,15 +11708,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 649.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B07B5N92M0",
-        "amazon_url": "https://www.amazon.in/dp/B07B5N92M0",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B01D1D0F5M",
+        "amazon_url": "https://www.amazon.in/dp/B01D1D0F5M",
+        "flipkart_url": "https://www.flipkart.com/logicinside-ublox-neo-6m-gps-module-ceramic-antenna/p/itmeter4p7td7r2y",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000021",
                 "retailer": "Amazon",
-                "external_product_id": "B07B5N92M0",
-                "url": "https://www.amazon.in/dp/B07B5N92M0",
+                "external_product_id": "B01D1D0F5M",
+                "url": "https://www.amazon.in/dp/B01D1D0F5M",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -12534,23 +11724,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000021",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmeter4p7td7r2y",
+                "url": "https://www.flipkart.com/logicinside-ublox-neo-6m-gps-module-ceramic-antenna/p/itmeter4p7td7r2y",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>NEO-6M%20GPS%20Module%20with%20Ceramic%20Ante</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/480/j1xvzbk0/learning-toy/j/s/f/ublox-neo-6m-gps-module-with-ceramic-antenna-logicinside-original-imaetdhpaukyhw94.jpeg?q=80",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000021-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000021",
                 "external_product_id": "B07B5N92M0",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>NEO-6M%20GPS%20Module%20with%20Ceramic%20Ante</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/j1xvzbk0/learning-toy/j/s/f/ublox-neo-6m-gps-module-with-ceramic-antenna-logicinside-original-imaetdhpaukyhw94.jpeg?q=80",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c2000000-0000-0000-0000-000000000021-GALLERY",
+                "product_id": "c2000000-0000-0000-0000-000000000021",
+                "external_product_id": "B07B5N92M0",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/j1xvzbk0/learning-toy/j/s/f/ublox-neo-6m-gps-module-with-ceramic-antenna-logicinside-original-imaetdhpjyggb6eb.jpeg?q=80",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -12615,15 +11814,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 249.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B086MGV6F4",
-        "amazon_url": "https://www.amazon.in/dp/B086MGV6F4",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0C1XCFXMM",
+        "amazon_url": "https://www.amazon.in/dp/B0C1XCFXMM",
+        "flipkart_url": "https://www.flipkart.com/redprad-0-96-inch-128x64-iic-i2c-oled-display-module-blue-ssd1306-driver-miscellaneous-electronic-hobby-kit/p/itmc95b7d397dc65",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000022",
                 "retailer": "Amazon",
-                "external_product_id": "B086MGV6F4",
-                "url": "https://www.amazon.in/dp/B086MGV6F4",
+                "external_product_id": "B0C1XCFXMM",
+                "url": "https://www.amazon.in/dp/B0C1XCFXMM",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -12631,23 +11830,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000022",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmc95b7d397dc65",
+                "url": "https://www.flipkart.com/redprad-0-96-inch-128x64-iic-i2c-oled-display-module-blue-ssd1306-driver-miscellaneous-electronic-hobby-kit/p/itmc95b7d397dc65",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>0.96%20inch%20I2C%20OLED%20Display%20Module%201</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/480/xif0q/electronic-hobby-kit/j/r/p/0-96-inch-128x64-iic-i2c-oled-display-module-blue-ssd1306-driver-original-imagsz9n9hme2h55.jpeg?q=80",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000022-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000022",
                 "external_product_id": "B086MGV6F4",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>0.96%20inch%20I2C%20OLED%20Display%20Module%201</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/xif0q/electronic-hobby-kit/j/r/p/0-96-inch-128x64-iic-i2c-oled-display-module-blue-ssd1306-driver-original-imagsz9n9hme2h55.jpeg?q=80",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -12712,15 +11911,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 299.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B082F24NZM",
-        "amazon_url": "https://www.amazon.in/dp/B082F24NZM",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0HBKJSWDJ",
+        "amazon_url": "https://www.amazon.in/dp/B0HBKJSWDJ",
+        "flipkart_url": "https://www.flipkart.com/trustech-16x2-lcd-blue-i2c-module-ar-duino-electronic-components-hobby-kit/p/itmaafdad7bd7bb2",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000023",
                 "retailer": "Amazon",
-                "external_product_id": "B082F24NZM",
-                "url": "https://www.amazon.in/dp/B082F24NZM",
+                "external_product_id": "B0HBKJSWDJ",
+                "url": "https://www.amazon.in/dp/B0HBKJSWDJ",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -12728,23 +11927,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000023",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmaafdad7bd7bb2",
+                "url": "https://www.flipkart.com/trustech-16x2-lcd-blue-i2c-module-ar-duino-electronic-components-hobby-kit/p/itmaafdad7bd7bb2",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>16x2%20Character%20LCD%20Display%20Module%20w</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/640/krntoy80/electronic-hobby-kit/k/h/f/16x2-lcd-blue-with-i2c-module-for-ar-duino-trustech-original-imag5et9sbd8vdye.jpeg?q=80",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000023-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000023",
                 "external_product_id": "B082F24NZM",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>16x2%20Character%20LCD%20Display%20Module%20w</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/krntoy80/electronic-hobby-kit/k/h/f/16x2-lcd-blue-with-i2c-module-for-ar-duino-trustech-original-imag5et9sbd8vdye.jpeg?q=80",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c2000000-0000-0000-0000-000000000023-GALLERY",
+                "product_id": "c2000000-0000-0000-0000-000000000023",
+                "external_product_id": "B082F24NZM",
+                "image_url": "https://rukminim2.flixcart.com/image/480/640/krntoy80/electronic-hobby-kit/s/m/0/16x2-lcd-blue-with-i2c-module-for-ar-duino-trustech-original-imag5et9pzmm7pkp.jpeg?q=80",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -12809,15 +12017,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 129.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B00844XE95",
-        "amazon_url": "https://www.amazon.in/dp/B00844XE95",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B0F849GW3Y",
+        "amazon_url": "https://www.amazon.in/dp/B0F849GW3Y",
+        "flipkart_url": "https://www.flipkart.com/r-d-lm2596-dc-dc-buck-converter-4-5-40v-3a-step-down-voltage-regulator-module-power-supply-electronic-hobby-kit/p/itm0b45c0b556618",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000024",
                 "retailer": "Amazon",
-                "external_product_id": "B00844XE95",
-                "url": "https://www.amazon.in/dp/B00844XE95",
+                "external_product_id": "B0F849GW3Y",
+                "url": "https://www.amazon.in/dp/B0F849GW3Y",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -12825,23 +12033,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000024",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itm0b45c0b556618",
+                "url": "https://www.flipkart.com/r-d-lm2596-dc-dc-buck-converter-4-5-40v-3a-step-down-voltage-regulator-module-power-supply-electronic-hobby-kit/p/itm0b45c0b556618",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>LM2596%20DC-DC%20Step-Down%20Buck%20Convert</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/480/xif0q/electronic-hobby-kit/4/b/o/lm2596-dc-dc-buck-converter-4-5-40v-3a-step-down-voltage-original-imagsrfhxkjkbz4h.jpeg?q=80",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000024-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000024",
                 "external_product_id": "B00844XE95",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>LM2596%20DC-DC%20Step-Down%20Buck%20Convert</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/xif0q/electronic-hobby-kit/4/b/o/lm2596-dc-dc-buck-converter-4-5-40v-3a-step-down-voltage-original-imagsrfhxkjkbz4h.jpeg?q=80",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c2000000-0000-0000-0000-000000000024-GALLERY",
+                "product_id": "c2000000-0000-0000-0000-000000000024",
+                "external_product_id": "B00844XE95",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/xif0q/electronic-hobby-kit/6/k/d/lm2596-dc-dc-buck-converter-4-5-40v-3a-step-down-voltage-original-imagsrfhx7qavtyt.jpeg?q=80",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -12906,15 +12123,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 99.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0046AMGW1",
-        "amazon_url": "https://www.amazon.in/dp/B0046AMGW1",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B01KKKYV0E",
+        "amazon_url": "https://www.amazon.in/dp/B01KKKYV0E",
+        "flipkart_url": "https://www.flipkart.com/sunrobotics-i2c-logic-level-converter-4-ch-bi-directional-5-3-3v-electronic-components-hobby-kit/p/itmemfhzf8erv3mu",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000025",
                 "retailer": "Amazon",
-                "external_product_id": "B0046AMGW1",
-                "url": "https://www.amazon.in/dp/B0046AMGW1",
+                "external_product_id": "B01KKKYV0E",
+                "url": "https://www.amazon.in/dp/B01KKKYV0E",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -12922,40 +12139,22 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000025",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmemfhzf8erv3mu",
+                "url": "https://www.flipkart.com/sunrobotics-i2c-logic-level-converter-4-ch-bi-directional-5-3-3v-electronic-components-hobby-kit/p/itmemfhzf8erv3mu",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/61V--WZVUIL._SL1500_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1000/kwb07m80/electronic-hobby-kit/l/7/f/i2c-bi-directional-logic-level-converter-4-channel-pack-of-2-original-imaekz3yamqrpkeq.jpeg?q=90",
         "images": [
             {
-                "image_id": "IMG-c2000000-0000-0000-0000-000000000025-BOARD",
+                "image_id": "IMG-c2000000-0000-0000-0000-000000000025-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000025",
                 "external_product_id": "B0046AMGW1",
-                "image_url": "https://m.media-amazon.com/images/I/61V--WZVUIL._SL1500_.jpg",
-                "image_type": "board",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c2000000-0000-0000-0000-000000000025-CONNECTOR",
-                "product_id": "c2000000-0000-0000-0000-000000000025",
-                "external_product_id": "B0046AMGW1",
-                "image_url": "https://m.media-amazon.com/images/I/61u9O4G9FLL._SL1500_.jpg",
-                "image_type": "connector",
-                "source": "Amazon",
-                "verified": true
-            },
-            {
-                "image_id": "IMG-c2000000-0000-0000-0000-000000000025-GALLERY",
-                "product_id": "c2000000-0000-0000-0000-000000000025",
-                "external_product_id": "B0046AMGW1",
-                "image_url": "https://m.media-amazon.com/images/I/71m6R4W8T9L._SL1500_.jpg",
-                "image_type": "gallery",
-                "source": "Amazon",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1000/kwb07m80/electronic-hobby-kit/l/7/f/i2c-bi-directional-logic-level-converter-4-channel-pack-of-2-original-imaekz3yamqrpkeq.jpeg?q=90",
+                "image_type": "front",
+                "source": "Flipkart",
                 "verified": true
             }
         ],
@@ -13023,15 +12222,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 199.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0899VXM8G",
-        "amazon_url": "https://www.amazon.in/dp/B0899VXM8G",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B08Q7PCN9P",
+        "amazon_url": "https://www.amazon.in/dp/B08Q7PCN9P",
+        "flipkart_url": "https://www.flipkart.com/aktronics-gy-521-mpu-6050-mpu6050-3-axis-accelerometer-gyroscope-module-6-dof-6-axis-sensor-electronic-components-hobby-kit/p/itmb6d1683e8bb72",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000026",
                 "retailer": "Amazon",
-                "external_product_id": "B0899VXM8G",
-                "url": "https://www.amazon.in/dp/B0899VXM8G",
+                "external_product_id": "B08Q7PCN9P",
+                "url": "https://www.amazon.in/dp/B08Q7PCN9P",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -13039,23 +12238,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000026",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmb6d1683e8bb72",
+                "url": "https://www.flipkart.com/aktronics-gy-521-mpu-6050-mpu6050-3-axis-accelerometer-gyroscope-module-6-dof-6-axis-sensor-electronic-components-hobby-kit/p/itmb6d1683e8bb72",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>MPU-6050%206-Axis%20Gyroscope%20and%20Accel</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/480/koynr0w0/electronic-hobby-kit/5/y/b/gy-521-mpu-6050-mpu6050-3-axis-accelerometer-gyroscope-module-6-original-imag3anysnzb9m5z.jpeg?q=80",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000026-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000026",
                 "external_product_id": "B0899VXM8G",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>MPU-6050%206-Axis%20Gyroscope%20and%20Accel</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/koynr0w0/electronic-hobby-kit/5/y/b/gy-521-mpu-6050-mpu6050-3-axis-accelerometer-gyroscope-module-6-original-imag3anysnzb9m5z.jpeg?q=80",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c2000000-0000-0000-0000-000000000026-GALLERY",
+                "product_id": "c2000000-0000-0000-0000-000000000026",
+                "external_product_id": "B0899VXM8G",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/koynr0w0/electronic-hobby-kit/m/g/s/gy-521-mpu-6050-mpu6050-3-axis-accelerometer-gyroscope-module-6-original-imag3anypenrxg79.jpeg?q=80",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -13120,15 +12328,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 99.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0CN586R2B",
-        "amazon_url": "https://www.amazon.in/dp/B0CN586R2B",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B07QC8Q69X",
+        "amazon_url": "https://www.amazon.in/dp/B07QC8Q69X",
+        "flipkart_url": "https://www.flipkart.com/harical-tcrt-5000-infrared-ir-dual-channel-line-tracking-sensor-electronic-components-hobby-kit/p/itma2857885c1435",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000027",
                 "retailer": "Amazon",
-                "external_product_id": "B0CN586R2B",
-                "url": "https://www.amazon.in/dp/B0CN586R2B",
+                "external_product_id": "B07QC8Q69X",
+                "url": "https://www.amazon.in/dp/B07QC8Q69X",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -13136,23 +12344,32 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000027",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itma2857885c1435",
+                "url": "https://www.flipkart.com/harical-tcrt-5000-infrared-ir-dual-channel-line-tracking-sensor-electronic-components-hobby-kit/p/itma2857885c1435",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>TCRT5000%20Infrared%20Reflective%20Optica</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/480/xif0q/electronic-hobby-kit/f/v/r/tcrt-5000-infrared-ir-dual-channel-line-tracking-sensor-harical-original-imagrtdhyhc4bmmg.jpeg?q=80",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000027-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000027",
                 "external_product_id": "B0CN586R2B",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>TCRT5000%20Infrared%20Reflective%20Optica</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/xif0q/electronic-hobby-kit/f/v/r/tcrt-5000-infrared-ir-dual-channel-line-tracking-sensor-harical-original-imagrtdhyhc4bmmg.jpeg?q=80",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
+            },
+            {
+                "image_id": "IMG-c2000000-0000-0000-0000-000000000027-GALLERY",
+                "product_id": "c2000000-0000-0000-0000-000000000027",
+                "external_product_id": "B0CN586R2B",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/xif0q/electronic-hobby-kit/a/i/q/tcrt-5000-infrared-ir-dual-channel-line-tracking-sensor-harical-original-imagrtdhbhr2wqf2.jpeg?q=80",
+                "image_type": "gallery",
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -13217,15 +12434,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "price": 199.0
         },
         "source": "Amazon India / Flipkart",
-        "source_url": "https://www.amazon.in/dp/B0B7CBM4KW",
-        "amazon_url": "https://www.amazon.in/dp/B0B7CBM4KW",
-        "flipkart_url": null,
+        "source_url": "https://www.amazon.in/dp/B08RDKVDSS",
+        "amazon_url": "https://www.amazon.in/dp/B08RDKVDSS",
+        "flipkart_url": "https://www.flipkart.com/kitsguru-mq135-mq-135-air-quality-sensor-hazardous-gas-detection-module-electronic-components-hobby-kit/p/itmf7kskzqezzj74",
         "buy_links": [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000028",
                 "retailer": "Amazon",
-                "external_product_id": "B0B7CBM4KW",
-                "url": "https://www.amazon.in/dp/B0B7CBM4KW",
+                "external_product_id": "B08RDKVDSS",
+                "url": "https://www.amazon.in/dp/B08RDKVDSS",
                 "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
                 "availability_status": "available"
@@ -13233,23 +12450,23 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c2000000-0000-0000-0000-000000000028",
                 "retailer": "Flipkart",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "itmf7kskzqezzj74",
+                "url": "https://www.flipkart.com/kitsguru-mq135-mq-135-air-quality-sensor-hazardous-gas-detection-module-electronic-components-hobby-kit/p/itmf7kskzqezzj74",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>MQ-135%20Air%20Quality%20%26%20Hazardous%20Gas%20</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/480/480/jk5r3bk0/electronic-hobby-kit/x/5/t/mq135-mq-135-air-quality-sensor-hazardous-gas-detection-module-original-imaf7kska9yekszk.jpeg?q=80",
         "images": [
             {
                 "image_id": "IMG-c2000000-0000-0000-0000-000000000028-FRONT",
                 "product_id": "c2000000-0000-0000-0000-000000000028",
                 "external_product_id": "B0B7CBM4KW",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>MQ-135%20Air%20Quality%20%26%20Hazardous%20Gas%20</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/480/480/jk5r3bk0/electronic-hobby-kit/x/5/t/mq135-mq-135-air-quality-sensor-hazardous-gas-detection-module-original-imaf7kska9yekszk.jpeg?q=80",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Flipkart",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -13287,6 +12504,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         "product_image": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>MQ-135%20Air%20Quality%20%26%20Hazardous%20Gas%20</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='14' font-weight='500' fill='%2364748b'>[Front View]</text><text x='250' y='365' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Image unavailable</text></svg>"
     }
 ]
+
 
 def validate_product_image(product_id: str, image: Dict[str, Any], external_product_id: Optional[str] = None) -> bool:
     """Validate that an image strictly belongs to the candidate product identity."""

@@ -6,7 +6,7 @@ English and Hinglish queries using ModelGateway (Qwen 4B).
 
 import re
 import uuid
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 from langgraph.graph import StateGraph, START, END
 from langgraph.graph.state import CompiledStateGraph
@@ -19,6 +19,7 @@ from app.schemas.query_analysis import (
 )
 from app.services.factory import get_model_gateway
 from app.services.model_gateway import ModelGateway
+from app.services.session_context import SessionContextManager
 
 SYSTEM_PROMPT = """You are the expert Query Understanding Agent for Product Advisor, an intelligent platform for consumer electronics (laptops, phones, audio) and electronic components (microcontrollers, sensors, relays, ICs).
 
@@ -51,6 +52,7 @@ class QueryUnderstandingAgent:
     """Agent responsible for parsing, understanding, and validating user queries."""
 
     def __init__(self, model_gateway: Optional[ModelGateway] = None):
+        self._injected_gateway = model_gateway is not None
         self._gateway = model_gateway or get_model_gateway()
 
     def _detect_language(self, text: str) -> str:
@@ -194,13 +196,69 @@ class QueryUnderstandingAgent:
             "compatible with this board",
         ):
             return True
-        return False
+    @staticmethod
+    def classify_intent(raw_query: str) -> Tuple[str, bool, List[str]]:
+        """Classify user query into one of the 10 supported intent types:
+        SEARCH, PRODUCT_DETAILS, COMPARISON, RECOMMENDATION, REVIEW,
+        COMPATIBILITY, VISION, RETAILER_SEARCH, GENERAL_CATALOG_QUERY, UNKNOWN.
+        """
+        q_clean = raw_query.strip().lower()
+        is_rel = SessionContextManager.is_relative_query(raw_query)
+
+        # 1. VISION
+        if any(w in q_clean for w in ["image", "photo", "picture"]) and any(
+            w in q_clean for w in ["what is", "look", "shown", "show", "port", "see", "recognize"]
+        ):
+            return "VISION", is_rel, []
+
+        # 2. RETAILER_SEARCH
+        if any(w in q_clean for w in ["amazon", "flipkart", "croma", "reliance", "retailer"]):
+            return "RETAILER_SEARCH", is_rel, []
+
+        # 3. COMPATIBILITY
+        if any(w in q_clean for w in ["compatible", "compatibility", "pinout", "voltage match", "work with"]) or (
+            "esp32" in q_clean and "sensor" in q_clean
+        ):
+            return "COMPATIBILITY", is_rel, []
+
+        # 4. REVIEW
+        if any(w in q_clean for w in ["review", "reviews", "feedback", "rating", "ratings", "what do people say", "what users say"]):
+            return "REVIEW", is_rel, []
+
+        # 5. COMPARISON
+        if any(w in q_clean for w in ["compare", " vs ", " vs. ", "versus", "difference between", "better battery", "cheaper", "which is better", "which one is better"]):
+            return "COMPARISON", is_rel, []
+        if is_rel and any(w in q_clean for w in ["which one", "which has", "cheapest", "better"]):
+            return "COMPARISON", True, []
+
+        # 6. RECOMMENDATION
+        if any(w in q_clean for w in ["recommend", "recommendation", "suggest", "suggestion", "best for", "good for", "which laptop is good", "which phone is good", "which headphone is good", "what should i buy"]):
+            return "RECOMMENDATION", is_rel, []
+
+        # 7. PRODUCT_DETAILS
+        if any(w in q_clean for w in ["tell me about", "what is this", "tell me something about", "details of", "specs of", "specifications of"]):
+            return "PRODUCT_DETAILS", is_rel, []
+        if is_rel and any(w in q_clean for w in ["this product", "this laptop", "this phone", "about this"]):
+            return "PRODUCT_DETAILS", True, []
+
+        # 8. GENERAL_CATALOG_QUERY
+        if any(w in q_clean for w in ["what categories", "what products do you have", "what do you sell", "catalog categories"]):
+            return "GENERAL_CATALOG_QUERY", is_rel, []
+
+        # 9. UNKNOWN / AMBIGUOUS
+        if q_clean in ["kuch accha dikhao", "show me something good", "something good", "anything", "best products"]:
+            return "UNKNOWN", False, []
+
+        # 10. SEARCH (default for product queries)
+        return "SEARCH", is_rel, []
 
     def _heuristic_analyze(self, raw_query: str) -> Optional[QueryAnalysis]:
         """Fast-path deterministic intent extraction avoiding Qwen LLM latency before retrieval."""
         q_lower = raw_query.lower().strip()
         detected_lang = self._detect_language(raw_query)
+        intent_type, is_follow_up, product_mentions = self.classify_intent(raw_query)
 
+        # Detect category
         category = None
         subcategory = None
         if any(k in q_lower for k in ["laptop", "laptops", "notebook", "notebooks", "macbook", "ultrabook", "vivobook", "thinkpad"]):
@@ -211,14 +269,19 @@ class QueryUnderstandingAgent:
             category = "Smartphones"
         elif any(k in q_lower for k in ["headphone", "headphones", "earphone", "earphones", "earbud", "earbuds", "audio", "sound", "headset"]):
             category = "Headphones"
-        elif any(k in q_lower for k in ["esp32", "arduino", "raspberry", "sensor", "relay", "microcontroller", "mcu", "transducer", "bme280", "circuit", "breadboard", "electronics", "electronic", "component", "ic", "module"]):
+        elif any(k in q_lower for k in ["sensor", "temperature sensor", "bme280"]):
+            category = "Sensor"
+            if "temperature" in q_lower:
+                subcategory = "Temperature Sensor"
+        elif any(k in q_lower for k in ["relay", "relay module"]):
+            category = "Relay Module"
+            subcategory = "Relay Module"
+        elif any(k in q_lower for k in ["esp32", "arduino", "raspberry", "microcontroller", "mcu", "transducer", "circuit", "breadboard", "electronics", "electronic", "component", "components", "ic", "module"]):
             category = "Electronics"
-            if "sensor" in q_lower:
-                subcategory = "Sensor"
-            elif "microcontroller" in q_lower or "esp32" in q_lower or "mcu" in q_lower:
+            if "microcontroller" in q_lower or "esp32" in q_lower or "mcu" in q_lower:
                 subcategory = "Microcontroller"
 
-        if not category:
+        if not category and not is_follow_up and intent_type not in ("UNKNOWN", "GENERAL_CATALOG_QUERY", "VISION"):
             return None
 
         # Extract budget
@@ -243,9 +306,14 @@ class QueryUnderstandingAgent:
         elif any(k in q_lower for k in ["coding", "programming", "developer"]):
             use_case = "Coding"
         elif any(k in q_lower for k in ["ml", "machine learning", "ai"]):
-            use_case = "Machine Learning / ML"
+            use_case = "ML"
         elif any(k in q_lower for k in ["iot", "automation"]):
             use_case = "IoT / Automation"
+        elif any(k in q_lower for k in ["travel"]):
+            use_case = "Travel"
+
+        is_ambiguous = intent_type == "UNKNOWN"
+        clarification_q = "What is your approximate budget and primary use case for this product?" if is_ambiguous else None
 
         return QueryAnalysis(
             category=category,
@@ -255,8 +323,11 @@ class QueryUnderstandingAgent:
             hard_constraints=hard_constraints,
             use_case=use_case,
             language=detected_lang,
-            ambiguity=False,
-            clarification_question=None,
+            intent_type=intent_type,
+            product_mentions=product_mentions,
+            is_follow_up=is_follow_up,
+            ambiguity=is_ambiguous,
+            clarification_question=clarification_q,
         )
 
     async def analyze_query(
@@ -268,6 +339,32 @@ class QueryUnderstandingAgent:
         req_id = request_id or str(uuid.uuid4())
         normalized_text = normalize_hinglish_shorthand(raw_query)
         detected_lang = self._detect_language(raw_query)
+
+        # If a test or custom stub gateway is injected, use it directly
+        if self._injected_gateway:
+            prompt = (
+                f"Analyze this user query:\n"
+                f"Raw query: \"{raw_query}\"\n"
+                f"Preprocessed query: \"{normalized_text}\"\n"
+                f"Detected dialect: {detected_lang}\n\n"
+                f"Extract all constraints, budget limits, category, use cases, and ambiguity into the schema."
+            )
+            res = await self._gateway.generate_structured(
+                prompt=prompt,
+                schema=QueryAnalysis,
+                system_prompt=SYSTEM_PROMPT,
+                temperature=0.1,
+                request_id=req_id,
+            )
+            analysis: QueryAnalysis = res.content
+            if analysis.language == "en":
+                analysis.language = detected_lang
+            if self._contains_currency_hint(raw_query) and not analysis.currency:
+                analysis.currency = "INR"
+            elif any(w in raw_query.lower() for w in ["dollar", "usd", "$"]) and not analysis.currency:
+                analysis.currency = "USD"
+            self._preserve_explicit_technical_constraints(analysis, raw_query)
+            return analysis
 
         # Handle trivial vague queries immediately if obvious
         if self._is_obviously_vague(raw_query):
@@ -281,6 +378,7 @@ class QueryUnderstandingAgent:
                 )
             return QueryAnalysis(
                 language=detected_lang,
+                intent_type="UNKNOWN",
                 ambiguity=True,
                 clarification_question=clarification,
             )
@@ -293,6 +391,7 @@ class QueryUnderstandingAgent:
                 extra={
                     "request_id": req_id,
                     "category": heuristic_res.category,
+                    "intent_type": heuristic_res.intent_type,
                     "budget_max": heuristic_res.budget_max,
                     "ambiguity": heuristic_res.ambiguity,
                     "language": heuristic_res.language,
@@ -316,7 +415,13 @@ class QueryUnderstandingAgent:
                 temperature=0.1,
                 request_id=req_id,
             )
-            analysis: QueryAnalysis = res.content
+            # Populate intent_type, follow_up, product mentions
+            intent_type, is_follow_up, product_mentions = self.classify_intent(raw_query)
+            if intent_type != "SEARCH" or not getattr(analysis, "intent_type", None):
+                analysis.intent_type = intent_type
+            analysis.is_follow_up = is_follow_up
+            if not getattr(analysis, "product_mentions", None):
+                analysis.product_mentions = product_mentions
 
             # Post-validate and enrich language if missed
             if analysis.language == "en":
@@ -430,8 +535,7 @@ class QueryUnderstandingAgent:
                 use_case = "General Use"
 
             # Ambiguity: only True if query has essentially no substantive words
-            words = [w for w in re.findall(r"\w+", raw_query) if len(w) > 1]
-            is_ambiguous = len(words) <= 1 and heur_budget is None and category == "Consumer Tech"
+            intent_type, is_follow_up, product_mentions = self.classify_intent(raw_query)
 
             return QueryAnalysis(
                 category=category,
@@ -440,6 +544,9 @@ class QueryUnderstandingAgent:
                 budget_max=heur_budget,
                 currency="INR" if (heur_budget or detected_lang == "hinglish") else "INR",
                 language=detected_lang,
+                intent_type=intent_type,
+                product_mentions=product_mentions,
+                is_follow_up=is_follow_up,
                 ambiguity=is_ambiguous,
                 clarification_question="What product category, budget, and use case do you have in mind?" if is_ambiguous else None,
             )

@@ -211,26 +211,55 @@ async def get_product_images_endpoint(id: str):
     }
 
 
+async def _get_canonical_product(product_id: str):
+    """Retrieve canonical product entity from PostgreSQL or fallback catalog."""
+    try:
+        pid = uuid.UUID(product_id)
+        from app.services.product_catalog_service import ProductCatalogService
+        cat_service = ProductCatalogService()
+        p = await cat_service.get_product(pid)
+        if p:
+            return p
+
+        # Check if pid is a Component.id
+        from app.services.factory import get_db_service
+        from app.models.components import Component
+        from sqlalchemy import select
+        db = get_db_service()
+        async with db.session() as session:
+            stmt = select(Component).where(Component.id == pid)
+            res = await session.execute(stmt)
+            comp = res.scalar_one_or_none()
+            if comp and comp.product_id:
+                p = await cat_service.get_product(comp.product_id)
+                if p:
+                    return p
+            elif comp:
+                return {
+                    "id": str(comp.id),
+                    "title": comp.part_number,
+                    "brand": "Electronics",
+                    "model": comp.part_number,
+                    "variant": comp.package_type or "",
+                    "retailer_offers": [],
+                }
+    except Exception:
+        pass
+    return get_fallback_product(product_id)
+
+
 @router.get("/{id}/offers")
 async def get_product_offers(id: str):
     """Retrieve normalized retailer offers for canonical product_id."""
-    offers = get_canonical_product_offers(id)
-    if not offers:
-        fallback = get_fallback_product(id)
-        if not fallback:
-            raise HTTPException(status_code=404, detail=f"Product with id '{id}' not found")
-        offers = fallback.get("retailer_offers") or fallback.get("buy_links", [])
+    prod = await _get_canonical_product(id)
+    if not prod:
+        raise HTTPException(status_code=404, detail=f"Product with id '{id}' not found")
 
-    normalized = []
-    for o in offers:
-        if o.get("product_id") and o.get("product_id") != id:
-            continue
-        normalized.append(dict(o))
-
+    offers = get_canonical_product_offers(id, product_obj=prod)
     return {
         "status": "success",
         "product_id": id,
-        "offers": normalized,
+        "offers": offers,
     }
 
 
@@ -239,31 +268,25 @@ async def get_product_buy_links(id: str):
     """Retrieve canonical verified retailer buy links for product_id."""
     from app.services.retailer_offers import is_verification_stale
 
-    offers = get_canonical_product_offers(id)
-    if not offers:
-        fallback = get_fallback_product(id)
-        if not fallback:
-            raise HTTPException(status_code=404, detail=f"Product with id '{id}' not found")
-        offers = fallback.get("retailer_offers") or fallback.get("buy_links", [])
+    prod = await _get_canonical_product(id)
+    if not prod:
+        raise HTTPException(status_code=404, detail=f"Product with id '{id}' not found")
 
-    normalized = []
-    for o in offers:
-        if o.get("product_id") and o.get("product_id") != id:
-            continue
-        normalized.append(dict(o))
+    offers = get_canonical_product_offers(id, product_obj=prod)
 
-    # Separate verified and available buy links from unverified/broken/unavailable
+    # Separate verified and available direct buy links from unverified/broken/unavailable
     verified = [
-        o for o in normalized
+        o for o in offers
         if o.get("verification_status") == "verified"
         and o.get("availability_status") == "available"
+        and o.get("is_direct", False)
         and not is_verification_stale(o.get("last_verified"))
     ]
 
     return {
         "status": "success",
         "product_id": id,
-        "buy_links": normalized,
+        "buy_links": offers,
         "verified_buy_links": verified,
     }
 
@@ -271,18 +294,22 @@ async def get_product_buy_links(id: str):
 @router.get("/{id}/compare")
 async def get_product_compare(id: str):
     """Retrieve canonical product marketplace comparison and offers for Compare view."""
-    comparison = get_canonical_comparison(id)
+    prod = await _get_canonical_product(id)
+    if not prod:
+        raise HTTPException(status_code=404, detail=f"Product with id '{id}' not found")
+
+    comparison = get_canonical_comparison(id, product_obj=prod)
     if not comparison:
-        fallback = get_fallback_product(id)
-        if not fallback:
-            raise HTTPException(status_code=404, detail=f"Product with id '{id}' not found")
-        offers = get_canonical_product_offers(id) or fallback.get("retailer_offers", [])
+        offers = get_canonical_product_offers(id, product_obj=prod)
+        title = prod.title if hasattr(prod, "title") else prod.get("title", "")
+        specs = prod.specifications if hasattr(prod, "specifications") else prod.get("specs", {})
         comparison = {
+            "productId": id,
             "product_id": id,
-            "title": fallback.get("title", ""),
+            "title": title,
             "offers": offers,
             "best_deal": offers[0] if offers else None,
-            "specs": fallback.get("specs", {}),
+            "specs": specs,
         }
     else:
         comparison["product_id"] = id

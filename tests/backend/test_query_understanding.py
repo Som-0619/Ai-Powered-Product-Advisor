@@ -124,6 +124,8 @@ async def test_node_uses_injected_gateway(gateway):
 
 def test_agent_has_no_direct_ollama_or_vendor_sdk_imports():
     agent_file = Path(__file__).parents[2] / "backend/app/agents/query_understanding.py"
+    if not agent_file.exists():
+        agent_file = Path(__file__).parents[2] / "app/agents/query_understanding.py"
     imports = [node for node in ast.walk(ast.parse(agent_file.read_text())) if isinstance(node, (ast.Import, ast.ImportFrom))]
     modules = [alias.name for node in imports for alias in node.names]
     modules.extend(node.module for node in imports if isinstance(node, ast.ImportFrom) and node.module)

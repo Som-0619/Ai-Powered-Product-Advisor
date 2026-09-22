@@ -56,6 +56,18 @@ class QueryAnalysis(BaseModel):
         default=False,
         description="True if the query is too vague, underspecified, or lacks clear criteria to proceed with product search.",
     )
+    intent_type: str = Field(
+        default="SEARCH",
+        description="Classified query intent: SEARCH, PRODUCT_DETAILS, COMPARISON, RECOMMENDATION, REVIEW, COMPATIBILITY, VISION, RETAILER_SEARCH, GENERAL_CATALOG_QUERY, UNKNOWN.",
+    )
+    product_mentions: List[str] = Field(
+        default_factory=list,
+        description="Specific product names, models, or entities mentioned in query.",
+    )
+    is_follow_up: bool = Field(
+        default=False,
+        description="Whether this query refers to previous conversational context or products.",
+    )
     clarification_question: Optional[str] = Field(
         default=None,
         description="If ambiguity is True, exactly ONE concise clarification question to narrow down user needs. None if query is clear.",
