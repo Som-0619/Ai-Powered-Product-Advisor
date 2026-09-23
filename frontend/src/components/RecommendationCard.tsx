@@ -155,7 +155,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
                   rel="noopener noreferrer"
                   className={`px-2.5 py-1 rounded-lg text-[11px] font-bold flex items-center space-x-1 transition-all hover:scale-[1.04] active:scale-95 ${
                     comparison.deals.amazon.isLowestPrice
-                      ? "bg-amber-500 text-slate-950 shadow-sm hover:shadow-md hover:shadow-amber-500/20"
+                      ? "bg-pa-yellow text-slate-950 shadow-sm hover:shadow-md hover:shadow-pa-yellow/30"
                       : "bg-surface-200 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white"
                   }`}
                   title="View on Amazon"
@@ -190,14 +190,14 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
           {/* Pros */}
           <div className="space-y-1.5">
-            <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider flex items-center space-x-1">
+            <span className="text-[11px] font-semibold text-pa-mint uppercase tracking-wider flex items-center space-x-1">
               <Check className="w-3 h-3" />
               <span>Key Advantages</span>
             </span>
             <ul className="space-y-1">
               {item.pros.slice(0, 2).map((pro, i) => (
                 <li key={i} className="text-xs text-slate-600 dark:text-slate-300 flex items-start space-x-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-pa-mint mt-1.5 shrink-0" />
                   <span className="line-clamp-1">{pro}</span>
                 </li>
               ))}
@@ -206,14 +206,14 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
 
           {/* Cons */}
           <div className="space-y-1.5">
-            <span className="text-[11px] font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wider flex items-center space-x-1">
+            <span className="text-[11px] font-semibold text-pa-coral uppercase tracking-wider flex items-center space-x-1">
               <AlertTriangle className="w-3 h-3" />
               <span>Caveats / Tradeoffs</span>
             </span>
             <ul className="space-y-1">
               {item.cons.slice(0, 1).map((con, i) => (
                 <li key={i} className="text-xs text-slate-500 dark:text-slate-400 flex items-start space-x-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-pa-coral mt-1.5 shrink-0" />
                   <span className="line-clamp-1">{con}</span>
                 </li>
               ))}

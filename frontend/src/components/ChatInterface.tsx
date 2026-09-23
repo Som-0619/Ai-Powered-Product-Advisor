@@ -189,8 +189,8 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
             <div
               className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-transform ${
                 msg.sender === "user"
-                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-500/20"
-                  : "bg-surface-100 border border-slate-200/80 dark:border-white/10 text-indigo-600 dark:text-indigo-400"
+                  ? "bg-pa-blue text-white shadow-md shadow-pa-blue/20"
+                  : "bg-surface-100 border border-slate-200/80 dark:border-white/10 text-pa-violet"
               }`}
             >
               {msg.sender === "user" ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
@@ -201,13 +201,13 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
               <div
                 className={`p-4 rounded-2xl text-xs sm:text-sm leading-relaxed shadow-sm transition-shadow ${
                   msg.sender === "user"
-                    ? "bg-indigo-600 text-white rounded-tr-none"
+                    ? "bg-pa-blue text-white rounded-tr-none"
                     : "bg-surface-100 text-slate-800 dark:text-slate-200 border border-slate-200/60 dark:border-white/5 rounded-tl-none"
                 }`}
               >
                 {/* Live Real Progress Indicator */}
                 {msg.status === "streaming" && (
-                  <div className="flex items-center space-x-2.5 text-indigo-600 dark:text-indigo-400 py-1">
+                  <div className="flex items-center space-x-2.5 text-pa-violet py-1">
                     <span className="flex items-center gap-1">
                       <span className="typing-dot w-1.5 h-1.5 rounded-full bg-current" />
                       <span className="typing-dot w-1.5 h-1.5 rounded-full bg-current" />
@@ -223,10 +223,10 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
 
                 {/* Clarification prompt card */}
                 {msg.clarificationQuestion && (
-                  <div className="mt-3 p-3 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-start space-x-2.5">
-                    <HelpCircle className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" />
+                  <div className="mt-3 p-3 rounded-xl bg-pa-violet/10 border border-pa-violet/20 flex items-start space-x-2.5">
+                    <HelpCircle className="w-4 h-4 text-pa-violet shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-[11px] uppercase font-bold text-indigo-600 dark:text-indigo-300 block">
+                      <span className="text-[11px] uppercase font-bold text-pa-violet block">
                         Clarification Needed
                       </span>
                       <p className="text-xs text-slate-900 dark:text-white mt-0.5">{msg.clarificationQuestion}</p>
@@ -239,7 +239,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
               {msg.recommendations && msg.recommendations.length > 0 && (
                 <div className="space-y-4 pt-1 w-full">
                   <div className="flex items-center space-x-2 text-xs text-slate-500 dark:text-slate-400 px-1">
-                    <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
+                    <Sparkles className="w-3.5 h-3.5 text-pa-violet" />
                     <span>Top Verified Matches ({msg.recommendations.length})</span>
                   </div>
                   <div className="grid grid-cols-1 gap-4">
@@ -297,7 +297,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
           <button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white text-xs font-semibold flex items-center space-x-1.5 transition-all disabled:opacity-40 disabled:hover:bg-indigo-600 shrink-0 shadow-sm"
+            className="px-4 py-2.5 rounded-xl bg-pa-blue hover:brightness-110 active:scale-95 text-white text-xs font-semibold flex items-center space-x-1.5 transition-all disabled:opacity-40 shrink-0 shadow-sm"
           >
             {isLoading ? (
               <Loader2 className="w-4 h-4 animate-spin" />

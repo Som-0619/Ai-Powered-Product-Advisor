@@ -40,6 +40,17 @@ const config: Config = {
           rose: "#f43f5e",
           violet: "#8b5cf6",
         },
+        /* Purposeful accent palette -- assign by meaning, not decoration.
+           blue = primary actions/search, violet = AI/intelligence,
+           mint = success/availability, coral = warnings/caveats,
+           yellow = highlights/deals. */
+        pa: {
+          blue: "#4F7CFF",
+          violet: "#8B5CF6",
+          coral: "#FF6B6B",
+          mint: "#35C99A",
+          yellow: "#F4C95D",
+        },
       },
       fontFamily: {
         sans: ["var(--font-body)", "sans-serif"],
