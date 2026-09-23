@@ -45,6 +45,17 @@ def _guess_brand(title: str) -> Optional[str]:
     return title.split()[0] if title.split() else None
 
 
+def _guess_model(title: str, brand: Optional[str]) -> str:
+    """Best-effort model name: the title with the brand prefix stripped and
+    trailing parenthetical variant/spec details removed. Never fabricated --
+    derived purely from the scraped title, empty string if nothing usable."""
+    text = title
+    if brand:
+        text = re.sub(rf"^\s*{re.escape(brand)}\s+", "", text, flags=re.IGNORECASE)
+    text = re.split(r"[\(\-]", text)[0].strip()
+    return text
+
+
 def _parse_price(text: Optional[str]) -> Optional[float]:
     if not text:
         return None
@@ -266,18 +277,26 @@ def _search_amazon_sync(
                     specs, product_reviews = _extract_specs_and_reviews(detail_page, product_url)
 
                     pid = str(uuid.uuid5(uuid.NAMESPACE_URL, product_url))
+                    guessed_brand = _guess_brand(title)
+                    # Never claim availability we can't back with a scraped
+                    # price -- "unknown" rather than defaulting to "available".
+                    availability = "available" if price is not None else "unknown"
                     results.append({
                         "id": pid,
                         "title": title,
-                        "brand": _guess_brand(title),
+                        "brand": guessed_brand,
+                        "model": _guess_model(title, guessed_brand),
                         "category": category_query,
                         "price": price,
                         "currency": "INR",
+                        "availability": availability,
                         "is_component": False,
                         "retrieval_score": 5.0,
                         "external_product_id": asin,
                         "image_url": image_url,
                         "source": "web",
+                        "source_type": "web",
+                        "source_url": product_url,
                         "specs": specs,
                         "_reviews": product_reviews,
                         "retailer_offers": [{
@@ -287,7 +306,7 @@ def _search_amazon_sync(
                             "url": product_url,
                             "price": price,
                             "currency": "INR",
-                            "availability_status": "available",
+                            "availability_status": availability,
                             "verification_status": "verified",
                         }] if price is not None else [],
                     })

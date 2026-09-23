@@ -52,6 +52,32 @@ def _record_trace(trace_list: List[Dict[str, Any]], node: str, status: str, late
     })
 
 
+def _salvage_query_analysis(qu_agent: "QueryUnderstandingAgent", user_query: str) -> QueryAnalysis:
+    """Used when the LLM query-understanding fallback times out or errors on a
+    query the fast-path heuristic couldn't classify a category for (e.g. a
+    category entirely absent from the catalog, like "electric toothbrush").
+    Previously this returned an unconstrained QueryAnalysis(category="General"),
+    which silently dropped any stated budget too -- leaving nothing to gate the
+    internal candidates, so unrelated products (keyboards, Arduino boards...)
+    came back as "eligible" for a completely different product. Salvage the
+    budget/brand via the same regex heuristics the fast-path uses, so at
+    minimum a stated "under 3000" is still honored even when we can't tell
+    what category the item belongs to -- and leave category unset so the
+    downstream too-few-candidates check can trigger the web-retrieval fallback
+    instead of accepting whatever the broad OpenSearch match returned."""
+    budget_min: Optional[float] = None
+    budget_max: Optional[float] = None
+    try:
+        budget_range = qu_agent._extract_heuristic_budget_range(user_query)
+        if budget_range:
+            budget_min, budget_max = budget_range
+        else:
+            budget_max = qu_agent._extract_heuristic_budget(user_query)
+    except Exception:  # noqa: BLE001
+        pass
+    return QueryAnalysis(category=None, budget_min=budget_min, budget_max=budget_max, ambiguity=False)
+
+
 def _card_from_web_item(item: Dict[str, Any], analysis: QueryAnalysis, rank: int) -> Dict[str, Any]:
     """Build a card in the exact same shape as an internal-catalog card, from a
     live Browserbase web-retrieval item. Never fabricates a field: price/URL
@@ -65,7 +91,7 @@ def _card_from_web_item(item: Dict[str, Any], analysis: QueryAnalysis, rank: int
         product_id=str(item["id"]),
         title=title,
         brand=item.get("brand", ""),
-        model="",
+        model=item.get("model", ""),
         variant="",
         external_product_id=item.get("external_product_id"),
         stored_offers=item.get("retailer_offers") or [],
@@ -157,7 +183,7 @@ def _card_from_web_item(item: Dict[str, Any], analysis: QueryAnalysis, rank: int
         "retailer_offers": resolved_offers,
         "buy_links": resolved_offers,
         "specs": item_specs,
-        "model_number": "",
+        "model_number": item.get("model", ""),
         "sku": "",
         "amazon_url": az_url,
         "flipkart_url": fk_url,
@@ -189,6 +215,9 @@ def _card_from_web_item(item: Dict[str, Any], analysis: QueryAnalysis, rank: int
         },
         "vision_summary": "Live web-sourced listing; multi-angle inspection not performed.",
         "source": "web",
+        "source_type": "web",
+        "source_url": item.get("source_url") or az_url or "",
+        "availability": item.get("availability", "unknown"),
     }
 
     # Cache the full product record (shaped like a FALLBACK_CATALOG entry) so
@@ -293,10 +322,10 @@ class WorkflowOrchestrator:
             )
         except asyncio.TimeoutError:
             logger.warning("Query understanding LLM fallback timed out; using a general search instead")
-            analysis = QueryAnalysis(category="General", ambiguity=False)
+            analysis = _salvage_query_analysis(qu_agent, user_query)
         except Exception as exc:
             logger.error("Query understanding failed", extra={"error": str(exc)})
-            analysis = QueryAnalysis(category="General", ambiguity=False)
+            analysis = _salvage_query_analysis(qu_agent, user_query)
 
         qu_latency = (time.perf_counter() - t0) * 1000
         _record_trace(
@@ -614,13 +643,32 @@ class WorkflowOrchestrator:
                     if analysis.brand_preferences:
                         web_brand = analysis.brand_preferences[0]
 
-                    web_items = await search_web_products(
+                    # A live Browserbase search can legitimately take 60-150s.
+                    # Awaiting it directly would leave the SSE stream silent
+                    # that whole time -- long enough to trip the frontend's
+                    # idle-abort timer and show a "Search Error" even though
+                    # the backend is working correctly. Yield a heartbeat
+                    # step event every 15s while it's in flight so the
+                    # connection visibly stays alive.
+                    web_task = asyncio.ensure_future(search_web_products(
                         category_query=web_category,
                         brand=web_brand,
                         budget_min=analysis.budget_min,
                         budget_max=analysis.budget_max,
                         limit=6,
-                    )
+                    ))
+                    while True:
+                        try:
+                            web_items = await asyncio.wait_for(asyncio.shield(web_task), timeout=15)
+                            break
+                        except asyncio.TimeoutError:
+                            yield {
+                                "type": "step",
+                                "step": "Retrieval",
+                                "status": "in_progress",
+                                "message": "Searching live listings on Amazon (this can take a minute)...",
+                                "request_id": req_id,
+                            }
 
                     existing_titles = [c.get("title", "") for c in candidates_raw]
 
@@ -1408,10 +1456,35 @@ class WorkflowOrchestrator:
         if analysis.budget_max is not None or analysis.budget_min is not None:
             cards = [c for c in cards if c["eligible"]]
 
+        wanted_brands: set[str] = set()
         if analysis.brand_preferences:
             wanted_brands = {b.strip().lower() for b in analysis.brand_preferences if b.strip()}
             if wanted_brands:
                 cards = [c for c in cards if (c.get("brand") or "").strip().lower() in wanted_brands]
+
+        # When the shopper named a specific model ("iPhone 15 Pro", "Galaxy S23
+        # Ultra"), narrow to cards whose product name actually contains that
+        # model's tokens. Only applied when it wouldn't zero out the results --
+        # a partial/fuzzy model mention shouldn't produce "no results" the way
+        # an explicit budget/brand mismatch honestly should.
+        wanted_model_tokens = [t for t in (analysis.product_mentions or []) if t.strip()]
+        if wanted_model_tokens:
+            model_tokens = [tok for phrase in wanted_model_tokens for tok in phrase.split() if tok]
+            # Base tokens (the ones carrying a digit, e.g. "s23") vs. qualifiers
+            # ("ultra", "pro") -- the catalog may not stock every qualifier
+            # variant of a model, so fall back to matching just the base model
+            # number rather than dumping every other model of the brand back in.
+            base_tokens = [t for t in model_tokens if re.search(r"\d", t)]
+            if model_tokens:
+                def _matches_tokens(card: dict, tokens: list) -> bool:
+                    name = (card.get("product_name") or "").lower()
+                    return all(tok in name for tok in tokens)
+
+                model_matched_cards = [c for c in cards if _matches_tokens(c, model_tokens)]
+                if not model_matched_cards and base_tokens:
+                    model_matched_cards = [c for c in cards if _matches_tokens(c, base_tokens)]
+                if model_matched_cards:
+                    cards = model_matched_cards
 
         # The internal catalog's raw candidate count looked sufficient earlier,
         # but after the strict budget/brand hard filter too few (or zero) survive
@@ -1438,13 +1511,29 @@ class WorkflowOrchestrator:
                     web_category = analysis.category or user_query
 
                 web_brand = analysis.brand_preferences[0] if analysis.brand_preferences else None
-                web_items = await search_web_products(
+                # Same heartbeat pattern as the earlier retrieval-stage hook --
+                # this call can run 60-150s with nothing else to report, which
+                # would otherwise leave the SSE stream silent long enough to
+                # trip the frontend's idle-abort timer.
+                web_task = asyncio.ensure_future(search_web_products(
                     category_query=web_category,
                     brand=web_brand,
                     budget_min=analysis.budget_min,
                     budget_max=analysis.budget_max,
                     limit=6,
-                )
+                ))
+                while True:
+                    try:
+                        web_items = await asyncio.wait_for(asyncio.shield(web_task), timeout=15)
+                        break
+                    except asyncio.TimeoutError:
+                        yield {
+                            "type": "step",
+                            "step": "Generating recommendation",
+                            "status": "in_progress",
+                            "message": "Searching live listings on Amazon (this can take a minute)...",
+                            "request_id": req_id,
+                        }
 
                 existing_titles = [c.get("product_name", "") for c in cards]
 
@@ -1461,6 +1550,12 @@ class WorkflowOrchestrator:
 
                 added = 0
                 for item in web_items:
+                    # Re-apply the same brand hard filter used on internal cards --
+                    # `search_web_products(brand=...)` is only a query hint, not a
+                    # guarantee, so a live result for the wrong brand must still be
+                    # dropped here or a "Samsung phone" search could show iPhones.
+                    if wanted_brands and (item.get("brand") or "").strip().lower() not in wanted_brands:
+                        continue
                     if _is_probable_duplicate_card(item["title"]):
                         continue
                     cards.append(_card_from_web_item(item, analysis, len(cards) + 1))

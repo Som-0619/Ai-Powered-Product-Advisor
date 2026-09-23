@@ -114,8 +114,17 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
     setIsLoading(true);
 
     await streamRecommendation(textToSend, {
-      onStep: () => {
-        setLiveStepMessage("Finding recommendations...");
+      onStep: (stepEvent) => {
+        // Surface the real step/heartbeat text (e.g. "Searching live listings
+        // on Amazon...") instead of a static message, so a long-but-alive
+        // Browserbase search doesn't look stuck to the user.
+        const text = stepEvent.message || stepEvent.step || "Finding recommendations...";
+        setLiveStepMessage(text);
+        setMessages((prev) =>
+          prev.map((msgItem) =>
+            msgItem.id === assistantMsgId ? { ...msgItem, currentStepMessage: text } : msgItem
+          )
+        );
       },
       onComplete: (result: RecommendationResponse) => {
         setIsLoading(false);

@@ -430,11 +430,67 @@ class QueryUnderstandingAgent:
             "marshall", "jabra", "shure", "corsair", "logitech", "espressif",
             "arduino", "raspberry pi", "raspberry",
         ]
+        # Model-name phrasings that imply a brand but aren't the brand word itself
+        # ("iphone", "galaxy") -- without this a query like "iPhone under 50000"
+        # never populates brand_preferences at all, silently skipping the brand
+        # hard filter and letting other brands leak into results.
+        brand_aliases = {
+            "iphone": "Apple", "macbook": "Apple", "ipad": "Apple", "airpods": "Apple",
+            "galaxy": "Samsung",
+            "redmi note": "Redmi", "mi band": "Xiaomi",
+            "thinkpad": "Lenovo", "surface": "Microsoft",
+        }
         brand_preferences: List[str] = []
+        matched_brand_word: Optional[str] = None
         for b in known_brands:
-            if re.search(rf"\b{re.escape(b)}\b", q_lower):
+            m = re.search(rf"\b{re.escape(b)}\b", q_lower)
+            if m:
                 brand_preferences.append(b.title())
+                matched_brand_word = m.group(0)
                 break
+        if not brand_preferences:
+            for alias, brand in brand_aliases.items():
+                m = re.search(rf"\b{re.escape(alias)}\b", q_lower)
+                if m:
+                    brand_preferences.append(brand)
+                    matched_brand_word = m.group(0)
+                    break
+
+        # Specific-model detection: when the user names a brand AND immediately
+        # follows it with model-like tokens ("iPhone 15 Pro", "Galaxy S23 Ultra",
+        # "Redmi Note 13"), capture those so results can be scoped to that exact
+        # model instead of every phone from that brand -- without this, a query
+        # for one specific model surfaces every other model of the same brand
+        # too, which looks like "unwanted products" to the user.
+        product_mentions_heuristic: List[str] = []
+        if matched_brand_word:
+            tail = q_lower[q_lower.find(matched_brand_word) + len(matched_brand_word):]
+            tail_tokens = re.findall(r"[a-z0-9]+", tail)
+            stopwords = {
+                "under", "below", "for", "with", "rs", "inr", "budget", "phone", "mobile",
+                "smartphone", "price", "range", "buy", "the", "a", "an", "in", "india",
+                "please", "chahiye", "ka", "ke", "ki", "wala", "hai", "mein", "tak", "andar",
+            }
+            qualifiers = {"pro", "ultra", "plus", "max", "se", "fe", "note", "mini", "lite", "edge", "gen"}
+            # Product-line words that precede the actual model number ("galaxy
+            # S23", "iphone note-less numbering") -- skip over them rather than
+            # treating their presence as "no model mentioned".
+            line_words = {"galaxy", "watch", "buds", "tab", "pixel"}
+            model_tokens: List[str] = []
+            for tok in tail_tokens[:5]:
+                if tok in stopwords:
+                    break
+                if tok in line_words:
+                    continue
+                if re.search(r"\d", tok) or tok in qualifiers:
+                    model_tokens.append(tok)
+                else:
+                    break
+            if model_tokens:
+                product_mentions_heuristic = [" ".join(model_tokens)]
+
+        if product_mentions_heuristic:
+            product_mentions = product_mentions_heuristic
 
         if not category and not brand_preferences and not is_follow_up and intent_type not in ("UNKNOWN", "GENERAL_CATALOG_QUERY", "VISION"):
             return None
