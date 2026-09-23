@@ -148,7 +148,7 @@ export default function LandingPage() {
           {PIPELINE_STEPS.map((step, idx) => (
             <div
               key={step.title}
-              className="relative rounded-2xl border border-border bg-card p-5 shadow-sm hover:border-blue-500/30 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group animate-rise-in"
+              className="tilt-card relative rounded-2xl border border-border bg-card p-5 shadow-sm hover:border-blue-500/30 group animate-rise-in"
               style={{ animationDelay: `${Math.min(idx, 6) * 70}ms` }}
             >
               <div className="flex items-center justify-between mb-4">

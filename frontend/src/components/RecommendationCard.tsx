@@ -69,7 +69,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
 
   return (
     <SpotlightCard
-      className="bg-surface-50 border border-slate-200/80 dark:border-white/10 rounded-2xl p-5 sm:p-6 shadow-sm hover:shadow-xl dark:hover:shadow-indigo-500/5 hover:border-indigo-500/40 dark:hover:border-indigo-500/40 hover:-translate-y-0.5 transition-all duration-300 group flex flex-col justify-between h-full"
+      className="tilt-card bg-surface-50 border border-slate-200/80 dark:border-white/10 rounded-2xl p-5 sm:p-6 shadow-sm hover:border-indigo-500/40 dark:hover:border-indigo-500/40 group flex flex-col justify-between h-full"
       spotlightColor="rgba(129, 140, 248, 0.14)"
     >
       {/* Top Banner & Badges */}
@@ -101,7 +101,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
                   {item.category || "Hardware"}
                 </span>
                 {item.rank && (
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-bold">
+                  <span className="font-technical text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-bold">
                     #{item.rank}
                   </span>
                 )}
@@ -113,7 +113,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
               >
                 {item.product_name}
               </h4>
-              <p className="text-lg font-extrabold text-emerald-600 dark:text-emerald-400 mt-0.5 tracking-tight tabular-nums">
+              <p className="font-technical text-lg font-extrabold text-emerald-600 dark:text-emerald-400 mt-0.5 tracking-tight">
                 {item.formatted_price || `$${item.price.toFixed(2)}`}
               </p>
             </div>
@@ -131,7 +131,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
                   style={{ width: `${confidencePct}%` }}
                 />
               </div>
-              <span className="text-xs font-bold text-slate-800 dark:text-slate-200">{confidencePct}%</span>
+              <span className="font-technical text-xs font-bold text-slate-800 dark:text-slate-200">{confidencePct}%</span>
             </div>
           </div>
         </div>

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Bricolage_Grotesque, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "../components/Header";
 import { ThemeProvider } from "../components/ThemeProvider";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const bricolage = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-heading" });
+const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-body" });
+const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
   title: "Product Advisor | Multimodal Product Intelligence",
@@ -43,7 +45,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} min-h-screen bg-background text-foreground flex flex-col font-sans antialiased`}
+        className={`${bricolage.variable} ${dmSans.variable} ${jetbrainsMono.variable} min-h-screen bg-background text-foreground flex flex-col font-sans antialiased`}
       >
         <ThemeProvider>
           <Header />

@@ -12,13 +12,13 @@ export const Header: React.FC = () => {
     <header className="border-b border-border bg-card/80 backdrop-blur-md sticky top-0 z-50 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand identity */}
-        <Link href="/" className="flex items-center space-x-3 cursor-pointer">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-pink-500 flex items-center justify-center shadow-sm">
+        <Link href="/" className="group flex items-center space-x-3 cursor-pointer">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-pink-500 flex items-center justify-center shadow-sm transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105">
             <Cpu className="w-5 h-5 text-white" />
           </div>
           <div>
             <div className="flex items-center space-x-2">
-              <span className="font-bold text-base sm:text-lg tracking-tight text-foreground">
+              <span className="font-heading font-bold text-base sm:text-lg tracking-tight text-foreground">
                 Product Advisor
               </span>
             </div>

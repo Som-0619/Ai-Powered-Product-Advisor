@@ -4,55 +4,60 @@
 
 @layer base {
   :root {
-    --background: #fafafa;
-    --foreground: #090d16;
-    --card: #ffffff;
-    --card-foreground: #090d16;
-    --border: #e2e8f0;
-    --muted: #f1f5f9;
-    --muted-foreground: #64748b;
+    /* Warm engineering-notebook paper, not cool app-gray */
+    --background: #faf7ef;
+    --foreground: #1c1912;
+    --card: #fffdf8;
+    --card-foreground: #1c1912;
+    --border: #e6ddc9;
+    --muted: #f3ecda;
+    --muted-foreground: #6b6250;
     --accent: #6366f1;
     --accent-foreground: #ffffff;
     --accent-secondary: #ec4899;
+    --grid-line: rgba(92, 74, 40, 0.08);
+    --grid-line-strong: rgba(92, 74, 40, 0.14);
 
     /* Semantic surface mappings for existing component tokens */
-    --bg: #fafafa;
-    --surface-50: #ffffff;
-    --surface-100: #f8fafc;
-    --surface-200: #f1f5f9;
-    --surface-300: #e2e8f0;
-    --text-primary: #090d16;
-    --text-secondary: #475569;
-    --text-muted: #64748b;
-    --border-subtle: rgba(15, 23, 42, 0.08);
-    --glass-bg: rgba(255, 255, 255, 0.92);
-    --glass-border: rgba(15, 23, 42, 0.08);
+    --bg: #faf7ef;
+    --surface-50: #fffdf8;
+    --surface-100: #f6f0e2;
+    --surface-200: #efe6d0;
+    --surface-300: #e6ddc9;
+    --text-primary: #1c1912;
+    --text-secondary: #56503f;
+    --text-muted: #6b6250;
+    --border-subtle: rgba(92, 74, 40, 0.1);
+    --glass-bg: rgba(255, 253, 248, 0.92);
+    --glass-border: rgba(92, 74, 40, 0.1);
   }
 
   .dark {
-    --background: #05050a;
-    --foreground: #f8fafc;
-    --card: #10111a;
-    --card-foreground: #f8fafc;
-    --border: rgba(255, 255, 255, 0.08);
-    --muted: #15161f;
-    --muted-foreground: #94a3b8;
+    --background: #17150f;
+    --foreground: #f7f3e8;
+    --card: #201d15;
+    --card-foreground: #f7f3e8;
+    --border: rgba(247, 243, 232, 0.1);
+    --muted: #26221a;
+    --muted-foreground: #b5ac96;
     --accent: #818cf8;
     --accent-foreground: #ffffff;
     --accent-secondary: #f472b6;
+    --grid-line: rgba(247, 243, 232, 0.05);
+    --grid-line-strong: rgba(247, 243, 232, 0.08);
 
     /* Semantic surface mappings for existing component tokens */
-    --bg: #05050a;
-    --surface-50: #10111a;
-    --surface-100: #15161f;
-    --surface-200: #1c1e2b;
-    --surface-300: #262838;
-    --text-primary: #f8fafc;
-    --text-secondary: #cbd5e1;
-    --text-muted: #94a3b8;
-    --border-subtle: rgba(255, 255, 255, 0.08);
-    --glass-bg: rgba(18, 21, 30, 0.88);
-    --glass-border: rgba(255, 255, 255, 0.08);
+    --bg: #17150f;
+    --surface-50: #201d15;
+    --surface-100: #26221a;
+    --surface-200: #2e291f;
+    --surface-300: #383225;
+    --text-primary: #f7f3e8;
+    --text-secondary: #cec5ac;
+    --text-muted: #b5ac96;
+    --border-subtle: rgba(247, 243, 232, 0.08);
+    --glass-bg: rgba(32, 29, 21, 0.88);
+    --glass-border: rgba(247, 243, 232, 0.08);
   }
 
   body {
@@ -60,6 +65,19 @@
     color: var(--foreground);
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     transition: background-color 0.2s ease, color 0.2s ease;
+    /* Subtle engineering-notebook grid, fixed to the viewport so it doesn't
+       scroll/tile awkwardly, with a faint dot at every intersection. */
+    background-image:
+      radial-gradient(var(--grid-line-strong) 1px, transparent 1px),
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 24px 24px, 24px 24px, 24px 24px;
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading), sans-serif;
+    letter-spacing: -0.01em;
   }
 }
 
@@ -204,6 +222,32 @@
 
 .typing-dot:nth-child(3) {
   animation-delay: 0.3s;
+}
+
+/* Playful tactile card hover -- a slight lift and a hint of tilt, like
+   picking a card up off the page, not a generic dashboard hover state. */
+.tilt-card {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.tilt-card:hover {
+  transform: translateY(-4px) rotate(-0.35deg);
+  box-shadow: 0 16px 32px -16px rgba(28, 25, 18, 0.18);
+}
+
+.dark .tilt-card:hover {
+  box-shadow: 0 16px 32px -16px rgba(0, 0, 0, 0.5);
+}
+
+.tilt-card:nth-child(even):hover {
+  transform: translateY(-4px) rotate(0.35deg);
+}
+
+/* Monospace treatment for technical/numeric metadata (prices, SKUs, ranks,
+   confidence scores) -- JetBrains Mono, used sparingly, never for prose. */
+.font-technical {
+  font-family: var(--font-mono), monospace;
+  font-variant-numeric: tabular-nums;
 }
 
 @media (prefers-reduced-motion: reduce) {
