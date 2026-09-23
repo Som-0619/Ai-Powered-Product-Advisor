@@ -555,12 +555,16 @@ export function getProductStoreComparison(
   const isFlipkartCheaper = normalizedHash % 2 === 0;
   const variancePct = 0.015 + ((normalizedHash % 30) / 1000);
 
+  // If no real price is known for this product, never fabricate one (e.g. a
+  // hash-seeded ₹49,990) — the UI must show "Price unavailable" instead.
+  const priceUnknown = basePrice <= 0;
+
   let amazonPrice: number;
   let flipkartPrice: number;
 
-  if (basePrice <= 0) {
-    amazonPrice = 49990;
-    flipkartPrice = 47990;
+  if (priceUnknown) {
+    amazonPrice = 0;
+    flipkartPrice = 0;
   } else if (isFlipkartCheaper) {
     amazonPrice = Math.round(basePrice);
     flipkartPrice = Math.max(1, Math.round(basePrice * (1 - variancePct)));
@@ -623,11 +627,11 @@ export function getProductStoreComparison(
         badgeColor: "bg-amber-500/10 text-amber-600 border-amber-500/20 dark:bg-amber-400/10 dark:text-amber-300 dark:border-amber-400/20",
         url: amazonUrl,
         price: amazonPrice,
-        formattedPrice: `${currencySymbol}${amazonPrice.toLocaleString()}`,
-        originalPrice: amazonOriginal,
-        formattedOriginalPrice: `${currencySymbol}${amazonOriginal.toLocaleString()}`,
-        discountPercent: Math.round(((amazonOriginal - amazonPrice) / amazonOriginal) * 100),
-        isLowestPrice: amazonPrice <= flipkartPrice,
+        formattedPrice: priceUnknown ? "Price unavailable" : `${currencySymbol}${amazonPrice.toLocaleString()}`,
+        originalPrice: priceUnknown ? undefined : amazonOriginal,
+        formattedOriginalPrice: priceUnknown ? undefined : `${currencySymbol}${amazonOriginal.toLocaleString()}`,
+        discountPercent: priceUnknown ? 0 : Math.round(((amazonOriginal - amazonPrice) / amazonOriginal) * 100),
+        isLowestPrice: !priceUnknown && amazonPrice <= flipkartPrice,
         deliveryTime: "Tomorrow by 11:00 AM",
         deliveryBadge: "Prime Free 1-Day Delivery",
         rating: Math.round(amazonRating * 10) / 10,
@@ -644,11 +648,11 @@ export function getProductStoreComparison(
         badgeColor: "bg-blue-500/10 text-blue-600 border-blue-500/20 dark:bg-blue-400/10 dark:text-blue-300 dark:border-blue-400/20",
         url: flipkartUrl,
         price: flipkartPrice,
-        formattedPrice: `${currencySymbol}${flipkartPrice.toLocaleString()}`,
-        originalPrice: flipkartOriginal,
-        formattedOriginalPrice: `${currencySymbol}${flipkartOriginal.toLocaleString()}`,
-        discountPercent: Math.round(((flipkartOriginal - flipkartPrice) / flipkartOriginal) * 100),
-        isLowestPrice: flipkartPrice <= amazonPrice,
+        formattedPrice: priceUnknown ? "Price unavailable" : `${currencySymbol}${flipkartPrice.toLocaleString()}`,
+        originalPrice: priceUnknown ? undefined : flipkartOriginal,
+        formattedOriginalPrice: priceUnknown ? undefined : `${currencySymbol}${flipkartOriginal.toLocaleString()}`,
+        discountPercent: priceUnknown ? 0 : Math.round(((flipkartOriginal - flipkartPrice) / flipkartOriginal) * 100),
+        isLowestPrice: !priceUnknown && flipkartPrice <= amazonPrice,
         deliveryTime: "Delivery in 2 Days",
         deliveryBadge: "Flipkart Plus Assured",
         rating: Math.round(flipkartRating * 10) / 10,

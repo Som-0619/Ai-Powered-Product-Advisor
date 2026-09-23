@@ -16,6 +16,7 @@ from app.schemas.query_analysis import (
     QueryAnalysis,
     QueryUnderstandingState,
     normalize_hinglish_shorthand,
+    normalize_hinglish_fillers,
 )
 from app.services.factory import get_model_gateway
 from app.services.model_gateway import ModelGateway
@@ -253,8 +254,11 @@ class QueryUnderstandingAgent:
         return "SEARCH", is_rel, []
 
     def _heuristic_analyze(self, raw_query: str) -> Optional[QueryAnalysis]:
-        """Fast-path deterministic intent extraction avoiding Qwen LLM latency before retrieval."""
-        q_lower = raw_query.lower().strip()
+        """Fast-path deterministic intent extraction avoiding LLM latency before retrieval."""
+        # Strip conversational Hinglish filler words (mujhe/chahiye/dikhao/...) so
+        # category keyword matching is driven by the actual product intent tokens.
+        filler_stripped = normalize_hinglish_fillers(raw_query)
+        q_lower = filler_stripped.lower().strip()
         detected_lang = self._detect_language(raw_query)
         intent_type, is_follow_up, product_mentions = self.classify_intent(raw_query)
 
@@ -265,10 +269,12 @@ class QueryUnderstandingAgent:
             category = "Laptop"
             if "gaming" in q_lower:
                 subcategory = "Gaming Laptop"
-        elif any(k in q_lower for k in ["phone", "phones", "smartphone", "smartphones", "mobile", "iphone", "galaxy", "pixel", "oneplus"]):
-            category = "Smartphones"
+        # Check Audio & Headphones before Smartphones: "headphone"/"earphone" both
+        # contain the substring "phone" and would otherwise be misclassified.
         elif any(k in q_lower for k in ["headphone", "headphones", "earphone", "earphones", "earbud", "earbuds", "audio", "sound", "headset"]):
             category = "Headphones"
+        elif re.search(r"\b(phone|phones|smartphone|smartphones|mobile|mobiles|iphone|galaxy|pixel|oneplus)\b", q_lower):
+            category = "Smartphones"
         elif any(k in q_lower for k in ["sensor", "temperature sensor", "bme280"]):
             category = "Sensor"
             if "temperature" in q_lower:
@@ -340,6 +346,42 @@ class QueryUnderstandingAgent:
         normalized_text = normalize_hinglish_shorthand(raw_query)
         detected_lang = self._detect_language(raw_query)
 
+        # Handle trivial vague queries immediately if obvious (no LLM needed)
+        if self._is_obviously_vague(raw_query):
+            if "board" in raw_query.lower() or "compatible" in raw_query.lower():
+                clarification = "Could you specify which board or microcontroller model (such as ESP32, Arduino Uno, or Raspberry Pi) you are working with?"
+            else:
+                clarification = (
+                    "Aapka budget kitna hai aur aap isse kis specific use case (jaise gaming, programming, ya general use) ke liye lena chahte hain?"
+                    if detected_lang == "hinglish"
+                    else "What is your approximate budget and primary use case for this product?"
+                )
+            return QueryAnalysis(
+                language=detected_lang,
+                intent_type="UNKNOWN",
+                ambiguity=True,
+                clarification_question=clarification,
+            )
+
+        # Fast-path deterministic intent extraction for simple/obvious category
+        # queries: lightweight regex normalization -> category match, skipping
+        # the LLM call entirely (avoids multi-second latency for e.g. "phone",
+        # "laptop", "mujhe headphones dikhao").
+        heuristic_res = self._heuristic_analyze(raw_query)
+        if heuristic_res is not None:
+            logger.info(
+                "[DEV_TRACE] Fast-path intent extraction completed (bypassed LLM before retrieval)",
+                extra={
+                    "request_id": req_id,
+                    "category": heuristic_res.category,
+                    "intent_type": heuristic_res.intent_type,
+                    "budget_max": heuristic_res.budget_max,
+                    "ambiguity": heuristic_res.ambiguity,
+                    "language": heuristic_res.language,
+                },
+            )
+            return heuristic_res
+
         # If a test or custom stub gateway is injected, use it directly
         if self._injected_gateway:
             prompt = (
@@ -366,39 +408,6 @@ class QueryUnderstandingAgent:
             self._preserve_explicit_technical_constraints(analysis, raw_query)
             return analysis
 
-        # Handle trivial vague queries immediately if obvious
-        if self._is_obviously_vague(raw_query):
-            if "board" in raw_query.lower() or "compatible" in raw_query.lower():
-                clarification = "Could you specify which board or microcontroller model (such as ESP32, Arduino Uno, or Raspberry Pi) you are working with?"
-            else:
-                clarification = (
-                    "Aapka budget kitna hai aur aap isse kis specific use case (jaise gaming, programming, ya general use) ke liye lena chahte hain?"
-                    if detected_lang == "hinglish"
-                    else "What is your approximate budget and primary use case for this product?"
-                )
-            return QueryAnalysis(
-                language=detected_lang,
-                intent_type="UNKNOWN",
-                ambiguity=True,
-                clarification_question=clarification,
-            )
-
-        # Fast-path deterministic intent extraction without calling Qwen LLM before retrieval
-        heuristic_res = self._heuristic_analyze(raw_query)
-        if heuristic_res is not None:
-            logger.info(
-                "[DEV_TRACE] Fast-path intent extraction completed (bypassed Qwen before retrieval)",
-                extra={
-                    "request_id": req_id,
-                    "category": heuristic_res.category,
-                    "intent_type": heuristic_res.intent_type,
-                    "budget_max": heuristic_res.budget_max,
-                    "ambiguity": heuristic_res.ambiguity,
-                    "language": heuristic_res.language,
-                },
-            )
-            return heuristic_res
-
         prompt = (
             f"Analyze this user query:\n"
             f"Raw query: \"{raw_query}\"\n"
@@ -415,6 +424,7 @@ class QueryUnderstandingAgent:
                 temperature=0.1,
                 request_id=req_id,
             )
+            analysis: QueryAnalysis = res.content
             # Populate intent_type, follow_up, product mentions
             intent_type, is_follow_up, product_mentions = self.classify_intent(raw_query)
             if intent_type != "SEARCH" or not getattr(analysis, "intent_type", None):

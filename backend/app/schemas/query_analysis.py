@@ -113,3 +113,28 @@ def normalize_hinglish_shorthand(text: str) -> str:
         text_norm,
     )
     return text_norm
+
+
+# Common conversational Hinglish filler words/phrases that carry no product
+# intent themselves (requester, politeness, verb fillers). Stripped so a
+# shorter, cleaner query can be matched/prompted, without touching the
+# actual product/category/constraint tokens.
+_HINGLISH_FILLER_PATTERN = re.compile(
+    r"(?i)\b(mujhe|mujhko|humein|hamein|chahiye|dikhao|dikha|batao|bata|"
+    r"accha|acha|acchi|achi|kaunsa|kaunsi|konsa|konsi|ke\s+liye|lena\s+hai|"
+    r"lene\s+hai|wala|wali|bhai|please|plz|thoda|zara)\b"
+)
+
+
+def normalize_hinglish_fillers(text: str) -> str:
+    """Strip common Hinglish conversational filler words (mujhe, chahiye, dikhao,
+    batao, accha/acha, kaunsa/konsa, ke liye, lena hai, wala/wali, ...) while
+    preserving the actual product intent tokens, e.g.:
+        "mujhe gaming laptop chahiye" -> "gaming laptop"
+        "mujhe phone chahiye"         -> "phone"
+        "mujhe headphones dikhao"     -> "headphones"
+    Lightweight regex pass only — no LLM call.
+    """
+    cleaned = _HINGLISH_FILLER_PATTERN.sub(" ", text)
+    cleaned = re.sub(r"\s+", " ", cleaned).strip()
+    return cleaned or text.strip()
