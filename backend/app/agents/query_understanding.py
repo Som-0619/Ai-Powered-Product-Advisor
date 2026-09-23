@@ -294,7 +294,9 @@ class QueryUnderstandingAgent:
         budget_max = self._extract_heuristic_budget(raw_query)
         currency = "INR" if self._contains_currency_hint(raw_query) else ("USD" if any(w in q_lower for w in ["dollar", "usd", "$"]) else None)
         if budget_max and not currency:
-            currency = "INR" if self._contains_currency_hint(raw_query) else "USD"
+            # This catalog/marketplace is INR-only (Amazon.in / Flipkart); a bare
+            # number with no "$"/"dollar" marker is INR, not USD.
+            currency = "INR"
 
         # Hard constraints
         hard_constraints: List[str] = []
@@ -454,9 +456,10 @@ class QueryUnderstandingAgent:
                     analysis.budget_max = heur_budget
                     analysis.currency = "INR" if self._contains_currency_hint(raw_query) else analysis.currency
 
-            # Post-validate currency default for Indian queries
+            # Post-validate currency default for Indian queries -- this catalog is
+            # INR-only, so a bare budget number defaults to INR, not USD.
             if (analysis.budget_max is not None or analysis.budget_min is not None) and not analysis.currency:
-                analysis.currency = "INR" if self._contains_currency_hint(raw_query) else "USD"
+                analysis.currency = "INR"
 
             self._preserve_explicit_technical_constraints(analysis, raw_query)
 

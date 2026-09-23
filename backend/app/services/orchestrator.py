@@ -334,6 +334,13 @@ class WorkflowOrchestrator:
                                 cand["variant"] = db_p.variant
                             if not cand.get("external_product_id") and db_p.external_product_id:
                                 cand["external_product_id"] = db_p.external_product_id
+                            # Attach real per-product reviews (fraud_score < 0.5 excludes
+                            # likely-fake/manipulated ones) for grounded pros/cons below.
+                            cand["_reviews"] = [
+                                {"title": r.title, "body": r.body, "rating": r.rating, "sentiment": r.sentiment}
+                                for r in (db_p.reviews or [])
+                                if (r.fraud_score or 0.0) < 0.5 and (r.body or r.title)
+                            ]
             except Exception as exc:
                 logger.warning(f"Failed hydrating candidates from PostgreSQL: {exc}")
 
@@ -601,6 +608,24 @@ class WorkflowOrchestrator:
             else:
                 raw_p = cand.get("price")
                 price_f = float(raw_p) if (raw_p is not None and float(raw_p) > 0) else None
+            if price_f is None:
+                # Fall back to the same retailer-offer resolution used for the final
+                # card price, so eligibility isn't stricter than what's actually shown.
+                try:
+                    from app.services.retailer_offers import resolve_product_retailer_offers as _resolve_offers
+                    _, _, _, resolved_price = _resolve_offers(
+                        product_id=str(cand.get("id")),
+                        title=cand.get("title", ""),
+                        brand=cand.get("brand", ""),
+                        model=cand.get("model", ""),
+                        variant=cand.get("variant", ""),
+                        external_product_id=cand.get("external_product_id") or cand.get("asin"),
+                        stored_offers=cand_offers,
+                    )
+                    if resolved_price is not None and resolved_price > 0:
+                        price_f = float(resolved_price)
+                except Exception:
+                    pass
             # Currency conversion approximation
             if price_f is not None and analysis.currency == "INR" and cand.get("currency") == "USD":
                 price_f = price_f * 83.0
@@ -746,14 +771,31 @@ class WorkflowOrchestrator:
                 formatted_price = "Price unavailable"
                 formatted_price_str = "Price unavailable"
 
-            # Construct grounded pros/cons
-            pros = ["Strict constraint match", "High retrieval relevance"]
+            # Construct product-specific pros/cons, grounded in this product's own
+            # stored reviews and specs -- never a generic string reused across products.
+            prod_reviews = cand.get("_reviews") or []
+            positive_reviews = [r for r in prod_reviews if (r.get("rating") or 0) >= 4 or r.get("sentiment") == "positive"]
+            negative_reviews = [r for r in prod_reviews if (r.get("rating") or 5) <= 3 or r.get("sentiment") in ("negative", "neutral")]
+
+            def _review_line(r: Dict[str, Any]) -> str:
+                text = (r.get("title") or r.get("body") or "").strip()
+                # Generated reviews append "— Reviewer Name"; keep only the review content.
+                text = text.split(" — ")[0].strip()
+                return text
+
+            pros = [_review_line(r) for r in positive_reviews[:3] if _review_line(r)]
+            cons = [_review_line(r) for r in negative_reviews[:2] if _review_line(r)]
+
             if cand.get("specs"):
                 for k, v in list(cand["specs"].items())[:2]:
                     pros.append(f"{k.upper()}: {v}")
             if is_component:
                 pros.append(f"Operating: {cand.get('voltage_display', '3.3V')}")
-            cons = ["Subject to retailer stock availability"]
+
+            if not pros:
+                pros = ["Limited review data available"]
+            if not cons:
+                cons = ["Limited review data available"] if not prod_reviews else ["Subject to retailer stock availability"]
             if res.constraint_status == "violated":
                 cons.extend(res.ranking_reasons)
 
@@ -1021,6 +1063,36 @@ class WorkflowOrchestrator:
             cards.sort(key=lambda c: (not c["eligible"], -_get_sort_price(c), -c["confidence"]))
         else:
             cards.sort(key=lambda c: (not c["eligible"], _get_sort_price(c), -c["confidence"]))
+
+        # Enforce explicit constraints (budget, brand) as hard filters. An item that
+        # violates a budget the shopper stated, or doesn't match a brand they named,
+        # must not be shown just because it scored well semantically -- unless
+        # dropping it would leave nothing, in which case "no results" is the honest
+        # answer rather than silently substituting an unrelated product.
+        if analysis.budget_max is not None:
+            cards = [c for c in cards if c["eligible"]]
+
+        if analysis.brand_preferences:
+            wanted_brands = {b.strip().lower() for b in analysis.brand_preferences if b.strip()}
+            if wanted_brands:
+                cards = [c for c in cards if (c.get("brand") or "").strip().lower() in wanted_brands]
+
+        if not cards:
+            final_res = {
+                "status": "no_results",
+                "request_id": req_id,
+                "message": "No matching products found within your stated budget/brand. Try relaxing the budget or brand constraint.",
+                "intent": analysis.model_dump(),
+                "recommendations": [],
+                "trace": trace,
+            }
+            RUNS_TELEMETRY[req_id] = final_res
+            yield {
+                "type": "complete",
+                "status": "no_results",
+                "data": final_res,
+            }
+            return
 
         for idx, c in enumerate(cards):
             c["rank"] = idx + 1
