@@ -189,13 +189,32 @@ class WorkflowOrchestrator:
         # product intent instead of being diluted by noise words.
         search_query = normalize_hinglish_fillers(user_query)
         search_query = re.sub(r"(?i)\bshow\s+me\b|\bshow\b", " ", search_query).strip()
+        # Budget/price phrases ("under 90k", "below ₹60000", "2 lakhs ke andar") are
+        # already parsed into analysis.budget_max and enforced as a hard filter later --
+        # left in the search text they just dilute/change what OpenSearch retrieves
+        # (e.g. "laptop under 90000" can surface a different, worse candidate set than
+        # "laptop" alone). Strip them from the text actually sent to OpenSearch.
+        search_query = re.sub(
+            r"(?i)\b(under|below|less\s+than|max|upto|up\s+to|around)\s*[:=]?\s*[₹]?\s*(?:rs\.?|inr)?\s*\d+(?:\.\d+)?\s*(?:k|l|lakhs?|lacs?|crores?)?\b",
+            " ", search_query,
+        )
+        search_query = re.sub(r"(?i)[₹]\s*\d+(?:\.\d+)?\s*k?\b|\bke\s+andar\b|\bandar\b", " ", search_query)
+        search_query = re.sub(r"\s+", " ", search_query).strip()
         if not search_query:
             search_query = user_query
+
+        # A fixed top-8 pulled by text relevance alone can miss genuinely cheaper
+        # products that just don't rank as the closest text match (e.g. "laptop"
+        # surfaces flagship gaming laptops before a budget one). When the shopper
+        # gave an explicit budget, widen the candidate pool so the later hard
+        # budget filter has real affordable options to keep instead of finding
+        # nothing and reporting "no results" too eagerly.
+        retrieval_limit = 20 if analysis.budget_max is not None else 8
 
         try:
             if is_comp_query:
                 # Search components index first
-                comp_res = await self.search.hybrid_search("components", search_query, limit=8)
+                comp_res = await self.search.hybrid_search("components", search_query, limit=retrieval_limit)
                 for hit in comp_res.hits:
                     src = dict(hit.source)
                     # The components index keys documents by the component row's own id,
@@ -208,7 +227,7 @@ class WorkflowOrchestrator:
                     candidates_raw.append(src)
 
                 # Also search products index for component items only
-                prod_res = await self.search.hybrid_search(settings.OPENSEARCH_ALIAS, search_query, filters={"is_component": True}, limit=8)
+                prod_res = await self.search.hybrid_search(settings.OPENSEARCH_ALIAS, search_query, filters={"is_component": True}, limit=retrieval_limit)
                 for hit in prod_res.hits:
                     src = dict(hit.source)
                     src["id"] = hit.id
@@ -217,7 +236,7 @@ class WorkflowOrchestrator:
                     candidates_raw.append(src)
             else:
                 # Consumer query (Smartphones, Laptops, Audio): strictly search products with is_component=False
-                prod_res = await self.search.hybrid_search(settings.OPENSEARCH_ALIAS, search_query, filters={"is_component": False}, limit=8)
+                prod_res = await self.search.hybrid_search(settings.OPENSEARCH_ALIAS, search_query, filters={"is_component": False}, limit=retrieval_limit)
                 for hit in prod_res.hits:
                     src = dict(hit.source)
                     src["id"] = hit.id
@@ -260,7 +279,7 @@ class WorkflowOrchestrator:
                 )
                 retry_candidates: List[Dict[str, Any]] = []
                 if is_comp_query:
-                    retry_res = await self.search.hybrid_search("components", category_term, limit=8)
+                    retry_res = await self.search.hybrid_search("components", category_term, limit=retrieval_limit)
                     for hit in retry_res.hits:
                         src = dict(hit.source)
                         src["id"] = src.get("product_id") or hit.id
@@ -268,7 +287,7 @@ class WorkflowOrchestrator:
                         src["retrieval_score"] = hit.score
                         retry_candidates.append(src)
                 retry_prod_res = await self.search.hybrid_search(
-                    settings.OPENSEARCH_ALIAS, category_term, filters={"is_component": is_comp_query}, limit=8
+                    settings.OPENSEARCH_ALIAS, category_term, filters={"is_component": is_comp_query}, limit=retrieval_limit
                 )
                 for hit in retry_prod_res.hits:
                     src = dict(hit.source)
