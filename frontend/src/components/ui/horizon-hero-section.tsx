@@ -6,6 +6,8 @@
 // is disabled for this file since it's a drop-in component with loose/implicit
 // typing by design -- see the integration notes shared alongside it.
 import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { Sparkles, MessagesSquare, SearchCheck, ArrowRight } from "lucide-react";
 import * as THREE from "three";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -582,74 +584,44 @@ export const Component = () => {
     <div ref={containerRef} className="hero-container cosmos-style">
       <canvas ref={canvasRef} className="hero-canvas" />
 
-      {/* Side menu */}
-      <div ref={menuRef} className="side-menu" style={{ visibility: "hidden" }}>
-        <div className="menu-icon">
-          <span></span>
-          <span></span>
-          <span></span>
+      {/* Main content -- real product hero, overlaid directly on the canvas
+          (no boxed card), left-aligned, theme-aware text colors so it reads
+          correctly in both light and dark mode. */}
+      <div className="hero-content">
+        <div ref={menuRef} className="hero-badge" style={{ visibility: "hidden" }}>
+          <Sparkles className="w-3.5 h-3.5" />
+          Agentic, multimodal product intelligence
         </div>
-        <div className="vertical-text">SPACE</div>
-      </div>
 
-      {/* Main content */}
-      <div className="hero-content cosmos-content">
         <h1 ref={titleRef} className="hero-title">
-          {splitTitle("HORIZON")}
+          {splitTitle("Product Advisor")}
         </h1>
 
-        <div ref={subtitleRef} className="hero-subtitle cosmos-subtitle">
-          <p className="subtitle-line">Where vision meets reality,</p>
-          <p className="subtitle-line">we shape the future of tomorrow</p>
+        <div ref={subtitleRef} className="hero-subtitle">
+          <p className="subtitle-line">
+            Product recommendations you can actually verify. Tell it what you need in plain
+          </p>
+          <p className="subtitle-line">English or Hinglish, and get evidence-backed picks — never a guess.</p>
+        </div>
+
+        <div ref={scrollProgressRef} className="hero-cta" style={{ visibility: "hidden" }}>
+          <Link href="/advisor?mode=chat" className="hero-cta-primary">
+            <MessagesSquare className="w-4 h-4" />
+            <span>Try the interactive chat</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+          <Link href="/advisor" className="hero-cta-secondary">
+            <SearchCheck className="w-4 h-4" />
+            <span>Browse the advisor</span>
+          </Link>
         </div>
       </div>
 
-      {/* Scroll progress indicator */}
-      <div ref={scrollProgressRef} className="scroll-progress" style={{ visibility: "hidden" }}>
-        <div className="scroll-text">SCROLL</div>
-        <div className="progress-track">
-          <div className="progress-fill" style={{ width: `${scrollProgress * 100}%` }} />
-        </div>
-        <div className="section-counter">
-          {String(currentSection).padStart(2, "0")} / {String(totalSections).padStart(2, "0")}
-        </div>
-      </div>
-
-      {/* Additional sections for scrolling */}
+      {/* Spacer sections -- no text, just scroll distance for the camera/
+          parallax animation to play out over. */}
       <div className="scroll-sections">
-        {[...Array(2)].map((_, i) => {
-          const titles = {
-            0: "HORIZON",
-            1: "COSMOS",
-            2: "INFINITY",
-          };
-
-          const subtitles = {
-            0: {
-              line1: "Where vision meets reality,",
-              line2: "we shape the future of tomorrow",
-            },
-            1: {
-              line1: "Beyond the boundaries of imagination,",
-              line2: "lies the universe of possibilities",
-            },
-            2: {
-              line1: "In the space between thought and creation,",
-              line2: "we find the essence of true innovation",
-            },
-          };
-
-          return (
-            <section key={i} className="content-section">
-              <h1 className="hero-title">{titles[i + 1] || "DEFAULT"}</h1>
-
-              <div className="hero-subtitle cosmos-subtitle">
-                <p className="subtitle-line">{subtitles[i + 1].line1}</p>
-                <p className="subtitle-line">{subtitles[i + 1].line2}</p>
-              </div>
-            </section>
-          );
-        })}
+        <section className="content-section" />
+        <section className="content-section" />
       </div>
     </div>
   );

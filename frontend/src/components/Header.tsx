@@ -29,13 +29,6 @@ export const Header: React.FC = () => {
         </Link>
 
         <div className="flex items-center gap-4">
-          <Link
-            href="/advisor?mode=chat"
-            className="hidden sm:inline-flex items-center px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-indigo-400 hover:to-pink-400 text-white text-xs font-semibold transition-all cursor-pointer"
-          >
-            Try now
-          </Link>
-
         {/* Minimal Theme Switch */}
         <div className="flex items-center">
           <button

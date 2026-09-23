@@ -213,7 +213,6 @@
   position: relative;
   width: 100%;
   background: #030308;
-  color: #fff;
 }
 
 .hero-canvas {
@@ -225,120 +224,134 @@
   display: block;
 }
 
+/* Overlaid directly on the canvas -- no card, no border, no centered box.
+   Left-aligned like the rest of the site's content, with a soft radial
+   scrim (not a hard-edged panel) behind the text purely for legibility
+   against the moving scene. */
 .hero-content {
   position: relative;
   z-index: 10;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  text-align: center;
+  text-align: left;
+  gap: 0.5rem;
+  max-width: 40rem;
   padding: 0 1.5rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-content::before {
+  content: "";
+  position: absolute;
+  inset: -4rem -2rem -4rem -100vw;
+  z-index: -1;
+  background: linear-gradient(
+    100deg,
+    var(--hero-scrim, rgba(3, 3, 8, 0.7)) 0%,
+    var(--hero-scrim, rgba(3, 3, 8, 0.7)) 78%,
+    transparent 100%
+  );
+}
+
+:root .hero-content {
+  --hero-scrim: rgba(255, 255, 255, 0.82);
+}
+
+.dark .hero-content {
+  --hero-scrim: rgba(3, 3, 8, 0.72);
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--foreground);
+  background: var(--surface-100);
+  border: 1px solid var(--border);
+  margin-bottom: 0.5rem;
 }
 
 .hero-title {
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  font-size: clamp(2.75rem, 9vw, 7rem);
+  font-size: clamp(2.5rem, 7vw, 5rem);
   font-weight: 800;
-  letter-spacing: 0.04em;
-  line-height: 1;
-  color: #fff;
-  text-shadow: 0 0 60px rgba(129, 140, 248, 0.45), 0 0 120px rgba(236, 72, 153, 0.25);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--foreground);
 }
 
 .title-char {
   display: inline-block;
-  min-width: 0.3em;
+  min-width: 0.2em;
 }
 
 .hero-subtitle {
-  margin-top: 1.75rem;
+  margin-top: 0.5rem;
+  max-width: 34rem;
 }
 
 .subtitle-line {
   margin: 0;
-  font-size: clamp(0.95rem, 2vw, 1.2rem);
-  font-weight: 300;
-  letter-spacing: 0.02em;
-  color: rgba(226, 232, 240, 0.72);
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-secondary);
 }
 
-.side-menu {
-  position: fixed;
-  left: 2rem;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 20;
+.hero-cta {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1.5rem;
-  visibility: hidden;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
 }
 
-.menu-icon {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-}
-
-.menu-icon span {
-  width: 22px;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 2px;
-}
-
-.vertical-text {
-  writing-mode: vertical-rl;
-  font-size: 0.7rem;
-  letter-spacing: 0.35em;
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.scroll-progress {
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 20;
-  display: flex;
-  flex-direction: column;
+.hero-cta-primary {
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  visibility: hidden;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(to right, #6366f1, #ec4899);
+  box-shadow: 0 8px 24px -8px rgba(99, 102, 241, 0.5);
+  transition: filter 0.2s ease, transform 0.2s ease;
 }
 
-.scroll-text {
-  font-size: 0.65rem;
-  letter-spacing: 0.35em;
-  color: rgba(255, 255, 255, 0.5);
+.hero-cta-primary:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
 }
 
-.progress-track {
-  width: 120px;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 9999px;
-  overflow: hidden;
+.hero-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+  background: var(--card);
+  border: 1px solid var(--border);
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #818cf8, #ec4899);
-  border-radius: 9999px;
-}
-
-.section-counter {
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.4);
-  font-variant-numeric: tabular-nums;
+.hero-cta-secondary:hover {
+  background: var(--surface-100);
+  transform: translateY(-1px);
 }
 
 .scroll-sections {
@@ -348,12 +361,6 @@
 
 .content-section {
   min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0 1.5rem;
 }
 
 @media (max-width: 640px) {
