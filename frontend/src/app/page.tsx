@@ -22,6 +22,12 @@ import {
   Cpu,
   Binary,
   Zap,
+  Radio,
+  Wifi,
+  Plug,
+  BatteryMedium,
+  Bluetooth,
+  Gauge,
 } from "lucide-react";
 
 const SUGGESTIONS = ["Phones under ₹30K", "Gaming laptops", "Wireless earbuds", "Arduino sensors"];
@@ -129,8 +135,69 @@ export default function LandingPage() {
             className="absolute bottom-10 right-8 w-5 h-5 text-pa-yellow/40 animate-float-slow"
             style={{ animationDelay: "2s" }}
           />
+          <Radio
+            className="absolute top-1/3 left-4 w-5 h-5 text-pa-coral/30 animate-float-slow"
+            style={{ animationDelay: "0.6s", ["--float-rot" as any]: "-5deg" }}
+          />
+          <Wifi
+            className="absolute bottom-1/3 right-4 w-5 h-5 text-pa-blue/30 animate-float-slow"
+            style={{ animationDelay: "1.8s", ["--float-rot" as any]: "4deg" }}
+          />
+          <Plug
+            className="absolute top-1/2 right-16 w-4 h-4 text-pa-mint/35 animate-float-slow"
+            style={{ animationDelay: "1s" }}
+          />
+          <BatteryMedium
+            className="absolute bottom-4 left-16 w-5 h-5 text-pa-violet/30 animate-float-slow"
+            style={{ animationDelay: "2.4s", ["--float-rot" as any]: "-4deg" }}
+          />
+          <Bluetooth
+            className="absolute top-10 left-1/3 w-4 h-4 text-pa-blue/25 animate-float-slow"
+            style={{ animationDelay: "1.4s" }}
+          />
+          <Gauge
+            className="absolute bottom-6 right-1/3 w-5 h-5 text-pa-coral/25 animate-float-slow"
+            style={{ animationDelay: "0.2s", ["--float-rot" as any]: "6deg" }}
+          />
+          <span
+            className="font-technical absolute bottom-16 left-1/4 text-[10px] text-pa-mint/40 border border-pa-mint/20 rounded px-1.5 py-0.5 animate-float-slow"
+            style={{ animationDelay: "0.5s", ["--float-rot" as any]: "-2deg" }}
+          >
+            I2C
+          </span>
+          <span
+            className="font-technical absolute top-8 right-1/3 text-[10px] text-pa-coral/40 border border-pa-coral/20 rounded px-1.5 py-0.5 animate-float-slow"
+            style={{ animationDelay: "1.6s", ["--float-rot" as any]: "3deg" }}
+          >
+            5V
+          </span>
+          <span
+            className="font-heading absolute top-1/2 left-1/4 text-lg text-pa-violet/25 animate-float-slow"
+            style={{ animationDelay: "0.9s" }}
+          >
+            Σ
+          </span>
+          <span
+            className="font-heading absolute bottom-1/4 right-1/4 text-base text-pa-blue/25 animate-float-slow"
+            style={{ animationDelay: "2.2s" }}
+          >
+            +
+          </span>
+          <span
+            className="font-heading absolute top-16 right-6 text-base text-pa-mint/25 animate-float-slow"
+            style={{ animationDelay: "1.1s" }}
+          >
+            Δ
+          </span>
+          {/* tiny product-outline shape */}
+          <div
+            className="absolute bottom-2 right-1/4 w-6 h-8 rounded-sm border border-pa-violet/25 animate-float-slow"
+            style={{ animationDelay: "0.3s", ["--float-rot" as any]: "-6deg" }}
+          />
           <div className="absolute top-1/2 left-6 w-10 border-t border-dashed border-pa-blue/20" />
           <div className="absolute top-1/3 right-10 w-8 border-t border-dashed border-pa-violet/20 rotate-45" />
+          <div className="absolute bottom-1/4 left-1/3 w-6 border-t border-dashed border-pa-coral/20 -rotate-12" />
+          <div className="absolute top-14 right-1/4 w-6 border-t border-dashed border-pa-mint/20 rotate-12" />
         </div>
 
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-100 border border-border text-[11px] font-technical font-semibold tracking-wide uppercase text-muted-foreground mb-6 animate-fade-up">
