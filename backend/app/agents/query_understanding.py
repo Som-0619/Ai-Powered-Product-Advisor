@@ -387,6 +387,35 @@ class QueryUnderstandingAgent:
             category = "Electronics"
             if "microcontroller" in q_lower or "esp32" in q_lower or "mcu" in q_lower:
                 subcategory = "Microcontroller"
+        # Broader consumer-electronics categories not in the internal catalog
+        # today -- still worth resolving heuristically (skipping the slow LLM
+        # fallback entirely) so these fall straight through to the live web
+        # retrieval path instead, which is far faster and more reliable than
+        # a local LLM call on this hardware.
+        elif any(re.search(rf"\b{re.escape(k)}\b", q_lower) for k in ["keyboard", "keyboards", "mechanical keyboard"]):
+            category = "Keyboards"
+        elif any(re.search(rf"\b{re.escape(k)}\b", q_lower) for k in ["mouse", "mice", "trackpad"]):
+            category = "Computer Mice"
+        elif any(re.search(rf"\b{re.escape(k)}\b", q_lower) for k in ["monitor", "monitors", "display panel"]):
+            category = "Monitors"
+        elif any(re.search(rf"\b{re.escape(k)}\b", q_lower) for k in ["smartwatch", "smartwatches", "smart watch", "fitness band"]):
+            category = "Smartwatches"
+        elif any(re.search(rf"\b{re.escape(k)}\b", q_lower) for k in ["tablet", "tablets", "ipad"]):
+            category = "Tablets"
+        elif any(re.search(rf"\b{re.escape(k)}\b", q_lower) for k in ["router", "routers", "wifi router", "modem"]):
+            category = "Routers"
+        elif any(re.search(rf"\b{re.escape(k)}\b", q_lower) for k in ["power bank", "powerbank", "power banks"]):
+            category = "Power Banks"
+        elif any(re.search(rf"\b{re.escape(k)}\b", q_lower) for k in ["camera", "cameras", "dslr", "webcam"]):
+            category = "Cameras"
+        elif any(re.search(rf"\b{re.escape(k)}\b", q_lower) for k in ["speaker", "speakers", "bluetooth speaker", "soundbar"]):
+            category = "Speakers"
+        elif any(re.search(rf"\b{re.escape(k)}\b", q_lower) for k in ["printer", "printers"]):
+            category = "Printers"
+        elif any(re.search(rf"\b{re.escape(k)}\b", q_lower) for k in ["smart bulb", "smart bulbs", "smart plug", "smart light"]):
+            category = "Smart Home"
+        elif any(re.search(rf"\b{re.escape(k)}\b", q_lower) for k in ["charger", "chargers", "cable", "cables", "adapter"]):
+            category = "Chargers & Cables"
 
         # Detect a known catalog brand even when typed alone with no category word
         # ("Samsung", "Apple", "Sony", "Dell") so a bare brand name still resolves

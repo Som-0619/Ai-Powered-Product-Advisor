@@ -279,7 +279,21 @@ class WorkflowOrchestrator:
         t0 = time.perf_counter()
         qu_agent = QueryUnderstandingAgent(model_gateway=self.model_gateway)
         try:
-            analysis: QueryAnalysis = await qu_agent.analyze_query(raw_query=user_query, request_id=req_id)
+            # Hard ceiling on the LLM fallback path: the heuristic fast-path
+            # above handles most queries instantly, but a query that misses
+            # it falls through to a real LLM call -- on a slow/CPU-only local
+            # Ollama runtime that call can take minutes rather than seconds.
+            # Never let that turn into an indefinite hang (or a scary
+            # timeout error) for the shopper: bound it and fall back to a
+            # general, unconstrained search so the pipeline still returns
+            # something useful quickly.
+            analysis: QueryAnalysis = await asyncio.wait_for(
+                qu_agent.analyze_query(raw_query=user_query, request_id=req_id),
+                timeout=20.0,
+            )
+        except asyncio.TimeoutError:
+            logger.warning("Query understanding LLM fallback timed out; using a general search instead")
+            analysis = QueryAnalysis(category="General", ambiguity=False)
         except Exception as exc:
             logger.error("Query understanding failed", extra={"error": str(exc)})
             analysis = QueryAnalysis(category="General", ambiguity=False)
