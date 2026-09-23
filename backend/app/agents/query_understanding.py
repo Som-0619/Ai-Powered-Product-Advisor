@@ -209,6 +209,22 @@ class QueryUnderstandingAgent:
                 val *= 1000
             return val
 
+        # 3b. Hinglish postposition -- "<num> ke andar", "<num> ke niche", "<num>
+        # tak", "<num> se kam". Unlike English "under 50000", Hindi/Hinglish
+        # puts the number FIRST and the bound-word after it ("5000 ke andar"
+        # = "under 5000"), which none of the keyword-first patterns above
+        # match -- that gap silently dropped the budget entirely for queries
+        # like "headphones chahiye 5000 ke andar".
+        postpos_match = re.search(
+            r"(\d+(?:\.\d+)?)\s*(k)?\s*(?:ke\s+andar|ke\s+niche|se\s+kam|tak)\b",
+            text_clean, re.IGNORECASE,
+        )
+        if postpos_match:
+            val = float(postpos_match.group(1))
+            if postpos_match.group(2) or val < 500:
+                val *= 1000
+            return val
+
         # 4. Negation / upper bound: "no ... above 50000", "not above 50000", "not more than 50000"
         neg_match = re.search(r"(?:no\s+\w+\s+above|not\s+above|not\s+more\s+than|less\s+than|below|under|max|upto|up to)\s*[:=]?\s*[₹]?(?:rs\.?|inr)?\s*(\d+(?:\.\d+)?)\s*k?\b", text_clean, re.IGNORECASE)
         if neg_match:

@@ -358,7 +358,7 @@ export async function streamRecommendation(
     onComplete?: (result: RecommendationResponse) => void;
     onError?: (error: Error) => void;
   },
-  timeoutMs: number = 120000
+  timeoutMs: number = 180000
 ): Promise<void> {
   const controller = new AbortController();
   // Local LLM inference can be slow (cold model load, CPU-only queries), but a request

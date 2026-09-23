@@ -104,8 +104,8 @@ def _extract_specs_and_reviews(page, product_url: str) -> tuple:
     specs: Dict[str, str] = {}
     reviews: List[Dict[str, Any]] = []
     try:
-        page.goto(product_url, wait_until="domcontentloaded", timeout=12000)
-        page.wait_for_timeout(800)
+        page.goto(product_url, wait_until="domcontentloaded", timeout=9000)
+        page.wait_for_timeout(500)
 
         rows = page.locator("#productOverview_feature_div table tr")
         row_count = min(rows.count(), 8)
@@ -132,12 +132,12 @@ def _extract_specs_and_reviews(page, product_url: str) -> tuple:
                     continue
 
         review_blocks = page.locator('[data-hook="review"]')
-        rb_count = min(review_blocks.count(), 5)
+        rb_count = min(review_blocks.count(), 4)
         for i in range(rb_count):
             if len(reviews) >= 3:
                 break
             try:
-                block_text = review_blocks.nth(i).inner_text(timeout=1500)
+                block_text = review_blocks.nth(i).inner_text(timeout=1200)
                 parsed = _parse_review_block(block_text)
                 if parsed:
                     reviews.append(parsed)
@@ -258,12 +258,12 @@ def _search_amazon_sync(
                     image_url = img_el.get_attribute("src", timeout=1500) if img_el.count() else None
 
                     # Visit this product's own page for its real specs and
-                    # reviews -- capped so total latency stays bounded even
-                    # when several candidates pass the budget filter.
-                    specs: Dict[str, str] = {}
-                    product_reviews: List[Dict[str, Any]] = []
-                    if len(results) < 4:
-                        specs, product_reviews = _extract_specs_and_reviews(detail_page, product_url)
+                    # reviews -- every returned result gets this (not just the
+                    # first few), so specs aren't missing for "later" products
+                    # in the list. Per-visit timeouts below are kept tight so
+                    # this stays within the overall search timeout even for
+                    # the full result set.
+                    specs, product_reviews = _extract_specs_and_reviews(detail_page, product_url)
 
                     pid = str(uuid.uuid5(uuid.NAMESPACE_URL, product_url))
                     results.append({
