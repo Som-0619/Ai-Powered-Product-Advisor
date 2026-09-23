@@ -7,6 +7,10 @@
  */
 
 export const PRODUCT_IMAGE_REGISTRY: Record<string, string> = {
+  "a9280cd1-7d3e-5d9a-8ebc-8c072c55b799": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/8/c/u/-original-imagypv6yyg96khh.jpeg?q=90",
+  "7f4d6577-0809-5371-ae95-28116fe22690": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/m/7/y/-original-imagypv6datec8tp.jpeg?q=90",
+  "114aa421-c4d1-5648-abeb-d171829726dd": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'><rect width='400' height='400' fill='%23f1f5f9'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%2364748b'>Image unavailable</text></svg>",
+  "d07bcb3e-55b9-50a6-85ac-3bb51e2463bd": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/7/r/w/-original-imaguw3hpuzcwvdp.jpeg?q=90",
   "4c3049ae-10f3-5c63-b08a-8416a56c1b5a": "https://m.media-amazon.com/images/I/61X7ynACnQL._SX679_.jpg",
   "0f852853-07c2-4370-b88d-e770f1d34b18": "https://m.media-amazon.com/images/I/51dVrlj0hTL._SX679_.jpg",
   "012cf2e7-a35e-53ef-8711-5aad00c29489": "https://m.media-amazon.com/images/I/61y5-UNWNLL._SX679_.jpg",
@@ -25,7 +29,7 @@ export const PRODUCT_IMAGE_REGISTRY: Record<string, string> = {
   "c1000000-0000-0000-0000-000000000007": "data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'500\' height=\'500\' viewBox=\'0 0 500 500\'><rect width=\'500\' height=\'500\' fill=\'%23f8fafc\'/><rect x=\'40\' y=\'40\' width=\'420\' height=\'420\' rx=\'16\' fill=\'%23f1f5f9\' stroke=\'%23cbd5e1\' stroke-width=\'2\'/><circle cx=\'250\' cy=\'200\' r=\'45\' fill=\'%23e2e8f0\'/><path d=\'M225 200 L275 200 M250 175 L250 225\' stroke=\'%2394a3b8\' stroke-width=\'3\' stroke-linecap=\'round\'/><text x=\'250\' y=\'290\' text-anchor=\'middle\' font-family=\'-apple-system, BlinkMacSystemFont, sans-serif\' font-size=\'16\' font-weight=\'600\' fill=\'%23334155\'>Image unavailable</text><text x=\'250\' y=\'325\' text-anchor=\'middle\' font-family=\'-apple-system, BlinkMacSystemFont, sans-serif\' font-size=\'13\' font-style=\'italic\' fill=\'%2394a3b8\'>Verified link not found</text></svg>",
   "c1000000-0000-0000-0000-000000000008": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/1/z/w/-enriched-transparent-original-imahg5fx53zsqcs4.png?q=90",
   "c1000000-0000-0000-0000-000000000009": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/a/z/m/g614jv-n3474ws-gaming-laptop-asus-original-imah2fk856vncuqu.jpeg?q=90",
-  "c1000000-0000-0000-0000-000000000010": "data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'500\' height=\'500\' viewBox=\'0 0 500 500\'><rect width=\'500\' height=\'500\' fill=\'%23f8fafc\'/><rect x=\'40\' y=\'40\' width=\'420\' height=\'420\' rx=\'16\' fill=\'%23f1f5f9\' stroke=\'%23cbd5e1\' stroke-width=\'2\'/><circle cx=\'250\' cy=\'200\' r=\'45\' fill=\'%23e2e8f0\'/><path d=\'M225 200 L275 200 M250 175 L250 225\' stroke=\'%2394a3b8\' stroke-width=\'3\' stroke-linecap=\'round\'/><text x=\'250\' y=\'290\' text-anchor=\'middle\' font-family=\'-apple-system, BlinkMacSystemFont, sans-serif\' font-size=\'16\' font-weight=\'600\' fill=\'%23334155\'>Image unavailable</text><text x=\'250\' y=\'325\' text-anchor=\'middle\' font-family=\'-apple-system, BlinkMacSystemFont, sans-serif\' font-size=\'13\' font-style=\'italic\' fill=\'%2394a3b8\'>Verified link not found</text></svg>",
+  "c1000000-0000-0000-0000-000000000010": "https://rukminim2.flixcart.com/image/312/312/xif0q/computer/2/v/v/-original-imagfdeqter4sj2j.jpeg?q=70",
   "c1000000-0000-0000-0000-000000000011": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/h/w/b/-original-imagtzvhxxuhzr4g.jpeg?q=90",
   "c1000000-0000-0000-0000-000000000012": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/z/o/8/-original-imahg4pa9rdaem5n.jpeg?q=90",
   "c1000000-0000-0000-0000-000000000013": "https://m.media-amazon.com/images/I/71jG+e7roXL._SL1500_.jpg",
@@ -45,7 +49,7 @@ export const PRODUCT_IMAGE_REGISTRY: Record<string, string> = {
   "c1000000-0000-0000-0000-000000000027": "https://m.media-amazon.com/images/I/51z9ezfuiBL._SX679_.jpg",
   "c1000000-0000-0000-0000-000000000028": "https://m.media-amazon.com/images/I/71bRz-UEILL._SX679_.jpg",
   "c1000000-0000-0000-0000-000000000029": "https://m.media-amazon.com/images/I/71MFoXmeDtL._SX679_.jpg",
-  "c1000000-0000-0000-0000-000000000030": "https://m.media-amazon.com/images/I/612QNnTYz0L._SX679_.jpg",
+  "c1000000-0000-0000-0000-000000000030": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/7/r/w/-original-imaguw3hpuzcwvdp.jpeg?q=90",
   "c1000000-0000-0000-0000-000000000031": "https://m.media-amazon.com/images/I/81x+1vl1kCL._SX679_.jpg",
   "c1000000-0000-0000-0000-000000000032": "https://m.media-amazon.com/images/I/61I4-3x8rtL._SX679_.jpg",
   "c1000000-0000-0000-0000-000000000101": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/mobile/p/b/q/-original-imahggex2ye98xfn.jpeg?q=90",

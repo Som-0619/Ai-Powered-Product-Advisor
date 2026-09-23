@@ -3108,15 +3108,15 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "availability_status": "available"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/612QNnTYz0L._SX679_.jpg",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/7/r/w/-original-imaguw3hpuzcwvdp.jpeg?q=90",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000030-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000030",
                 "external_product_id": "B0CM5L15NW",
-                "image_url": "https://m.media-amazon.com/images/I/612QNnTYz0L._SX679_.jpg",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/7/r/w/-original-imaguw3hpuzcwvdp.jpeg?q=90",
                 "image_type": "front",
-                "source": "Amazon",
+                "source": "Flipkart",
                 "verified": true
             }
         ],

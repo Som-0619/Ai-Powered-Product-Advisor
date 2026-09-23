@@ -287,7 +287,26 @@ class QueryUnderstandingAgent:
             if "microcontroller" in q_lower or "esp32" in q_lower or "mcu" in q_lower:
                 subcategory = "Microcontroller"
 
-        if not category and not is_follow_up and intent_type not in ("UNKNOWN", "GENERAL_CATALOG_QUERY", "VISION"):
+        # Detect a known catalog brand even when typed alone with no category word
+        # ("Samsung", "Apple", "Sony", "Dell") so a bare brand name still resolves
+        # to that brand's products instead of falling through to the LLM path and
+        # being misclassified as an unrelated category.
+        known_brands = [
+            "apple", "samsung", "sony", "dell", "hp", "asus", "acer", "lenovo", "msi",
+            "razer", "microsoft", "lg", "gigabyte", "framework", "oneplus", "xiaomi",
+            "redmi", "realme", "motorola", "moto", "nothing", "iqoo", "poco", "vivo",
+            "oppo", "google", "pixel", "sennheiser", "bose", "jbl", "boat", "beats",
+            "audio-technica", "beyerdynamic", "hyperx", "steelseries", "anker",
+            "marshall", "jabra", "shure", "corsair", "logitech", "espressif",
+            "arduino", "raspberry pi", "raspberry",
+        ]
+        brand_preferences: List[str] = []
+        for b in known_brands:
+            if re.search(rf"\b{re.escape(b)}\b", q_lower):
+                brand_preferences.append(b.title())
+                break
+
+        if not category and not brand_preferences and not is_follow_up and intent_type not in ("UNKNOWN", "GENERAL_CATALOG_QUERY", "VISION"):
             return None
 
         # Extract budget
@@ -336,6 +355,7 @@ class QueryUnderstandingAgent:
             is_follow_up=is_follow_up,
             ambiguity=is_ambiguous,
             clarification_question=clarification_q,
+            brand_preferences=brand_preferences,
         )
 
     async def analyze_query(
