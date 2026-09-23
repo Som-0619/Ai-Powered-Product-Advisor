@@ -163,7 +163,7 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ item, 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 dark:bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-surface-50 border border-slate-200/80 dark:border-white/10 rounded-2xl max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-2xl p-5 sm:p-7 relative transition-colors duration-200">
+      <div className="bg-surface-50 border border-slate-200/80 dark:border-white/10 rounded-2xl max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-2xl p-5 sm:p-7 relative transition-colors duration-200 animate-rise-in">
         {/* Close Button */}
         <button
           onClick={onClose}

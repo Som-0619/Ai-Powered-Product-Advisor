@@ -69,7 +69,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
 
   return (
     <SpotlightCard
-      className="bg-surface-50 border border-slate-200/80 dark:border-white/10 rounded-2xl p-5 sm:p-6 shadow-sm hover:shadow-xl dark:hover:shadow-blue-500/5 hover:border-blue-500/40 dark:hover:border-blue-500/40 transition-all group flex flex-col justify-between"
+      className="bg-surface-50 border border-slate-200/80 dark:border-white/10 rounded-2xl p-5 sm:p-6 shadow-sm hover:shadow-xl dark:hover:shadow-blue-500/5 hover:border-blue-500/40 dark:hover:border-blue-500/40 hover:-translate-y-0.5 transition-all duration-300 group flex flex-col justify-between h-full"
       spotlightColor="rgba(59, 130, 246, 0.12)"
     >
       {/* Top Banner & Badges */}
@@ -113,7 +113,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
               >
                 {item.product_name}
               </h4>
-              <p className="text-sm font-extrabold text-emerald-600 dark:text-emerald-400 mt-0.5">
+              <p className="text-lg font-extrabold text-emerald-600 dark:text-emerald-400 mt-0.5 tracking-tight tabular-nums">
                 {item.formatted_price || `$${item.price.toFixed(2)}`}
               </p>
             </div>
@@ -153,9 +153,9 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
                   href={amazonBuyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`px-2.5 py-1 rounded-lg text-[11px] font-bold flex items-center space-x-1 transition-all ${
+                  className={`px-2.5 py-1 rounded-lg text-[11px] font-bold flex items-center space-x-1 transition-all hover:scale-[1.04] active:scale-95 ${
                     comparison.deals.amazon.isLowestPrice
-                      ? "bg-amber-500 text-slate-950 shadow-sm"
+                      ? "bg-amber-500 text-slate-950 shadow-sm hover:shadow-md hover:shadow-amber-500/20"
                       : "bg-surface-200 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white"
                   }`}
                   title="View on Amazon"
@@ -171,9 +171,9 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
                   href={flipkartBuyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`px-2.5 py-1 rounded-lg text-[11px] font-bold flex items-center space-x-1 transition-all ${
+                  className={`px-2.5 py-1 rounded-lg text-[11px] font-bold flex items-center space-x-1 transition-all hover:scale-[1.04] active:scale-95 ${
                     comparison.deals.flipkart.isLowestPrice
-                      ? "bg-blue-600 text-white shadow-sm"
+                      ? "bg-blue-600 text-white shadow-sm hover:shadow-md hover:shadow-blue-500/20"
                       : "bg-surface-200 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white"
                   }`}
                   title="View on Flipkart"
@@ -225,11 +225,11 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
       {/* Interactive Action Bar */}
       <div className="border-t border-slate-200/80 dark:border-white/5 pt-3.5 mt-1">
         <div className="flex items-center justify-between flex-wrap gap-2">
-          <div className="flex items-center space-x-1.5">
+          <div className="flex items-center flex-wrap gap-1.5">
             {/* Specs Button */}
             <button
               onClick={() => onOpenDetails(item)}
-              className="px-2.5 py-1.5 rounded-lg bg-surface-100 hover:bg-surface-200 border border-slate-200/80 dark:border-white/5 text-xs text-slate-700 dark:text-slate-200 font-medium flex items-center space-x-1 transition-all"
+              className="px-2.5 py-1.5 rounded-lg bg-surface-100 hover:bg-surface-200 hover:-translate-y-px active:translate-y-0 active:scale-95 border border-slate-200/80 dark:border-white/5 text-xs text-slate-700 dark:text-slate-200 font-medium flex items-center space-x-1 transition-all cursor-pointer"
             >
               <Layers className="w-3.5 h-3.5 text-blue-500" />
               <span>Specs</span>
@@ -240,7 +240,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
             {item.reviews && (
               <button
                 onClick={() => onOpenReviews(item)}
-                className="px-2.5 py-1.5 rounded-lg bg-surface-100 hover:bg-surface-200 border border-slate-200/80 dark:border-white/5 text-xs text-slate-700 dark:text-slate-200 font-medium flex items-center space-x-1 transition-all"
+                className="px-2.5 py-1.5 rounded-lg bg-surface-100 hover:bg-surface-200 hover:-translate-y-px active:translate-y-0 active:scale-95 border border-slate-200/80 dark:border-white/5 text-xs text-slate-700 dark:text-slate-200 font-medium flex items-center space-x-1 transition-all cursor-pointer"
               >
                 <MessageSquare className="w-3.5 h-3.5 text-indigo-500" />
                 <span>Reviews</span>
@@ -251,7 +251,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
             {item.compatibility && (
               <button
                 onClick={() => onOpenCompatibility(item)}
-                className="px-2.5 py-1.5 rounded-lg bg-surface-100 hover:bg-surface-200 border border-slate-200/80 dark:border-white/5 text-xs text-slate-700 dark:text-slate-200 font-medium flex items-center space-x-1 transition-all"
+                className="px-2.5 py-1.5 rounded-lg bg-surface-100 hover:bg-surface-200 hover:-translate-y-px active:translate-y-0 active:scale-95 border border-slate-200/80 dark:border-white/5 text-xs text-slate-700 dark:text-slate-200 font-medium flex items-center space-x-1 transition-all cursor-pointer"
               >
                 <ShieldCheck className="w-3.5 h-3.5 text-purple-500" />
                 <span>Compatibility</span>
@@ -260,7 +260,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
           </div>
 
           {/* Direct Amazon / Flipkart Buy Links & Compare Deals */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center flex-wrap gap-2">
             <button
               onClick={() => onOpenDetails(item)}
               className="px-2.5 py-1.5 rounded-xl bg-surface-100 hover:bg-surface-200 border border-slate-200/80 dark:border-white/10 text-xs font-semibold text-slate-700 dark:text-slate-200 flex items-center space-x-1 transition-all active:scale-95 cursor-pointer"

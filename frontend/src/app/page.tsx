@@ -72,16 +72,17 @@ export default function LandingPage() {
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-[32rem] w-[60rem] rounded-full bg-blue-500/10 blur-[120px]" />
         <div className="absolute top-1/3 -left-40 h-96 w-96 rounded-full bg-violet-500/10 blur-[100px]" />
         <div className="absolute bottom-0 -right-40 h-96 w-96 rounded-full bg-emerald-500/10 blur-[100px]" />
+        <div className="absolute inset-x-0 top-0 h-[36rem] bg-grid-fade" />
       </div>
 
       {/* Hero */}
-      <section className="max-w-5xl mx-auto text-center pt-10 sm:pt-16 pb-14 px-2 animate-fade-up">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-100 border border-border text-[11px] font-semibold text-muted-foreground mb-6">
+      <section className="max-w-5xl mx-auto text-center pt-10 sm:pt-16 pb-14 px-2">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-100 border border-border text-[11px] font-semibold text-muted-foreground mb-6 animate-fade-up">
           <Sparkles className="w-3.5 h-3.5 text-blue-500" />
           Agentic, multimodal product intelligence
         </div>
 
-        <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-foreground leading-[1.08]">
+        <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-foreground leading-[1.08] animate-fade-up [animation-delay:60ms]">
           Product recommendations
           <br className="hidden sm:block" />
           <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-violet-500 bg-clip-text text-transparent">
@@ -90,16 +91,16 @@ export default function LandingPage() {
           </span>
         </h1>
 
-        <p className="mt-5 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+        <p className="mt-5 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-up [animation-delay:120ms]">
           Tell it what you need in plain English or Hinglish. An autonomous agent plans its steps,
           retrieves real candidates, reads the reviews, checks the product photos against the specs,
           and explains every pick with cited evidence — never a guess.
         </p>
 
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 animate-fade-up [animation-delay:180ms]">
           <Link
             href="/advisor?mode=chat"
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold shadow-lg shadow-blue-600/25 transition-all cursor-pointer"
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 active:scale-[0.98] text-white text-sm font-semibold shadow-lg shadow-blue-600/25 hover:shadow-xl hover:shadow-blue-600/30 transition-all cursor-pointer"
           >
             <MessagesSquare className="w-4 h-4" />
             <span>Try the interactive chat</span>
@@ -107,21 +108,21 @@ export default function LandingPage() {
           </Link>
           <Link
             href="/advisor"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-card hover:bg-surface-100 text-foreground text-sm font-semibold border border-border transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-card hover:bg-surface-100 active:scale-[0.98] text-foreground text-sm font-semibold border border-border transition-all cursor-pointer"
           >
             <SearchCheck className="w-4 h-4 text-blue-500" />
             <span>Browse the advisor</span>
           </Link>
         </div>
 
-        <p className="mt-4 text-xs text-muted-foreground">
+        <p className="mt-4 text-xs text-muted-foreground animate-fade-up [animation-delay:220ms]">
           No signup needed — jump straight into a live query.
         </p>
       </section>
 
       {/* Example query strip */}
-      <section className="max-w-3xl mx-auto px-2 pb-16 animate-fade-up [animation-delay:80ms]">
-        <div className="rounded-2xl border border-border bg-card shadow-sm p-1.5">
+      <section className="max-w-3xl mx-auto px-2 pb-16 animate-fade-up [animation-delay:280ms]">
+        <div className="rounded-2xl border border-border bg-card shadow-sm hover:shadow-md transition-shadow p-1.5">
           <div className="rounded-xl bg-surface-100 border border-border px-4 py-3 flex items-center gap-3">
             <Quote className="w-4 h-4 text-blue-500 shrink-0" />
             <p className="text-sm text-foreground font-medium truncate">
@@ -147,7 +148,8 @@ export default function LandingPage() {
           {PIPELINE_STEPS.map((step, idx) => (
             <div
               key={step.title}
-              className="relative rounded-2xl border border-border bg-card p-5 shadow-sm hover:border-blue-500/30 hover:shadow-md transition-all group"
+              className="relative rounded-2xl border border-border bg-card p-5 shadow-sm hover:border-blue-500/30 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group animate-rise-in"
+              style={{ animationDelay: `${Math.min(idx, 6) * 70}ms` }}
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center group-hover:bg-blue-500/15 transition-colors">
