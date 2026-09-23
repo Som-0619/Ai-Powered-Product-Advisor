@@ -29,7 +29,7 @@ from app.ranking.engine import DeterministicRankingEngine
 from app.agents.evidence import EvidenceAgent
 from app.agents.critic import CriticAgent
 from app.services.catalog_fallback import search_fallback_catalog, get_fallback_product, get_product_images
-from app.schemas.query_analysis import QueryAnalysis
+from app.schemas.query_analysis import QueryAnalysis, normalize_hinglish_fillers
 from app.schemas.ranking import RankingCandidate, RankingConstraints, HardConstraint, RankingWeights
 from app.schemas.review_analysis import ReviewInput
 from app.schemas.parts_analysis import PartInput, PartSpecification
@@ -50,6 +50,15 @@ def _record_trace(trace_list: List[Dict[str, Any]], node: str, status: str, late
         "details": details,
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     })
+
+
+def _is_phone_category(category: str) -> bool:
+    """True for smartphone/mobile categories, never for headphone/earphone
+    categories (which contain "phone" as a substring, e.g. "Audio & Headphones")."""
+    cat = (category or "").lower()
+    if any(k in cat for k in ("headphone", "earphone")):
+        return False
+    return bool(re.search(r"\b(smartphones?|phones?|mobiles?)\b", cat))
 
 
 class WorkflowOrchestrator:
@@ -175,10 +184,18 @@ class WorkflowOrchestrator:
         cheap_indicators = ["cheap", "cheapest", "budget", "affordable", "sasta", "low price", "least price", "lowest price"]
         sort_expensive_first = not any(k in user_query_lower for k in cheap_indicators)
 
+        # Clean conversational filler ("show me", "mujhe ... chahiye", "dikhao", ...) out of
+        # the text actually sent to OpenSearch, so retrieval scores products against the real
+        # product intent instead of being diluted by noise words.
+        search_query = normalize_hinglish_fillers(user_query)
+        search_query = re.sub(r"(?i)\bshow\s+me\b|\bshow\b", " ", search_query).strip()
+        if not search_query:
+            search_query = user_query
+
         try:
             if is_comp_query:
                 # Search components index first
-                comp_res = await self.search.hybrid_search("components", user_query, limit=8)
+                comp_res = await self.search.hybrid_search("components", search_query, limit=8)
                 for hit in comp_res.hits:
                     src = dict(hit.source)
                     # The components index keys documents by the component row's own id,
@@ -191,7 +208,7 @@ class WorkflowOrchestrator:
                     candidates_raw.append(src)
 
                 # Also search products index for component items only
-                prod_res = await self.search.hybrid_search(settings.OPENSEARCH_ALIAS, user_query, filters={"is_component": True}, limit=8)
+                prod_res = await self.search.hybrid_search(settings.OPENSEARCH_ALIAS, search_query, filters={"is_component": True}, limit=8)
                 for hit in prod_res.hits:
                     src = dict(hit.source)
                     src["id"] = hit.id
@@ -200,7 +217,7 @@ class WorkflowOrchestrator:
                     candidates_raw.append(src)
             else:
                 # Consumer query (Smartphones, Laptops, Audio): strictly search products with is_component=False
-                prod_res = await self.search.hybrid_search(settings.OPENSEARCH_ALIAS, user_query, filters={"is_component": False}, limit=8)
+                prod_res = await self.search.hybrid_search(settings.OPENSEARCH_ALIAS, search_query, filters={"is_component": False}, limit=8)
                 for hit in prod_res.hits:
                     src = dict(hit.source)
                     src["id"] = hit.id
@@ -222,14 +239,65 @@ class WorkflowOrchestrator:
             elif is_audio_query:
                 candidates_raw = [c for c in unique_candidates if not c.get("is_component") and any(k in (c.get("category") or "").lower() for k in ["audio", "headphone", "earphone", "sound"])]
             elif is_phone_query:
-                candidates_raw = [c for c in unique_candidates if not c.get("is_component") and any(k in (c.get("category") or "").lower() for k in ["smartphones", "phone", "mobile"])]
+                candidates_raw = [c for c in unique_candidates if not c.get("is_component") and _is_phone_category(c.get("category") or "")]
             elif is_laptop_query:
                 candidates_raw = [c for c in unique_candidates if not c.get("is_component") and any(k in (c.get("category") or "").lower() for k in ["laptop", "ultrabook", "notebook", "computer"])]
             else:
                 candidates_raw = [c for c in unique_candidates if not c.get("is_component")]
 
-            # If filtered candidates are empty, use unique candidates directly from OpenSearch
-            if not candidates_raw and unique_candidates:
+            # If filtered candidates are empty but a strict category was detected
+            # (phone/laptop/audio/component), do NOT fall back to unrelated candidates
+            # from other categories -- that is exactly how a phone search could return
+            # laptops or headphones. Retry retrieval using just the canonical category
+            # name as the search text instead, and re-apply the same category filter.
+            strict_category_active = is_comp_query or is_audio_query or is_phone_query or is_laptop_query
+            if not candidates_raw and strict_category_active:
+                category_term = (
+                    "Electronic Components & Modules" if is_comp_query
+                    else "Audio & Headphones" if is_audio_query
+                    else "Smartphones" if is_phone_query
+                    else "Laptops & Ultrabooks"
+                )
+                retry_candidates: List[Dict[str, Any]] = []
+                if is_comp_query:
+                    retry_res = await self.search.hybrid_search("components", category_term, limit=8)
+                    for hit in retry_res.hits:
+                        src = dict(hit.source)
+                        src["id"] = src.get("product_id") or hit.id
+                        src["is_component"] = True
+                        src["retrieval_score"] = hit.score
+                        retry_candidates.append(src)
+                retry_prod_res = await self.search.hybrid_search(
+                    settings.OPENSEARCH_ALIAS, category_term, filters={"is_component": is_comp_query}, limit=8
+                )
+                for hit in retry_prod_res.hits:
+                    src = dict(hit.source)
+                    src["id"] = hit.id
+                    src["is_component"] = is_comp_query
+                    src["retrieval_score"] = hit.score
+                    retry_candidates.append(src)
+
+                retry_seen = set()
+                retry_unique = []
+                for c in retry_candidates:
+                    cid = c.get("id") or c.get("product_id")
+                    if cid not in retry_seen:
+                        retry_seen.add(cid)
+                        retry_unique.append(c)
+
+                if is_comp_query:
+                    candidates_raw = [c for c in retry_unique if c.get("is_component") is True]
+                elif is_audio_query:
+                    candidates_raw = [c for c in retry_unique if not c.get("is_component") and any(k in (c.get("category") or "").lower() for k in ["audio", "headphone", "earphone", "sound"])]
+                elif is_phone_query:
+                    candidates_raw = [c for c in retry_unique if not c.get("is_component") and _is_phone_category(c.get("category") or "")]
+                elif is_laptop_query:
+                    candidates_raw = [c for c in retry_unique if not c.get("is_component") and any(k in (c.get("category") or "").lower() for k in ["laptop", "ultrabook", "notebook", "computer"])]
+                # If still empty after the category-term retry, leave candidates_raw
+                # empty -- an honest "no results" beats showing the wrong category.
+            elif not candidates_raw and unique_candidates:
+                # No strict category was detected at all (a genuinely open-ended
+                # query) -- showing the best-effort unfiltered matches is reasonable.
                 candidates_raw = unique_candidates
 
             # Hydrate candidate details (retailer offers, verified prices, specs) from PostgreSQL canonical source
