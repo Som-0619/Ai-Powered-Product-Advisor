@@ -153,47 +153,47 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CM5JV232",
-        "amazon_url": "https://www.amazon.in/dp/B0CM5JV232",
-        "flipkart_url": "https://www.flipkart.com/apple-macbook-pro-m3-18-gb-512-gb-ssd-macos-sonoma-mrx33hn-a/p/itmc6c3726cfd382",
+        "amazon_url": null,
+        "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000002",
                 "retailer": "Amazon",
-                "external_product_id": "B0CM5JV232",
-                "url": "https://www.amazon.in/dp/B0CM5JV232",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             },
             {
                 "product_id": "c1000000-0000-0000-0000-000000000002",
                 "retailer": "Flipkart",
-                "external_product_id": "itmc6c3726cfd382",
-                "url": "https://www.flipkart.com/apple-macbook-pro-m3-18-gb-512-gb-ssd-macos-sonoma-mrx33hn-a/p/itmc6c3726cfd382",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             }
         ],
-        "image_url": "https://m.media-amazon.com/images/I/618d5bS2lUL._SL1500_.jpg",
+        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000002-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000002",
                 "external_product_id": "B0CM5JV232",
-                "image_url": "https://m.media-amazon.com/images/I/618d5bS2lUL._SL1500_.jpg",
+                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
                 "image_type": "front",
-                "source": "Amazon",
-                "verified": true
+                "source": "Placeholder",
+                "verified": false
             },
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000002-BACK",
                 "product_id": "c1000000-0000-0000-0000-000000000002",
                 "external_product_id": "B0CM5JV232",
-                "image_url": "https://m.media-amazon.com/images/I/61Ch8vjN+mL._SL1500_.jpg",
+                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
                 "image_type": "back",
-                "source": "Amazon",
-                "verified": true
+                "source": "Placeholder",
+                "verified": false
             }
         ],
         "media_gallery": {
@@ -219,11 +219,11 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000002",
                 "retailer": "Amazon",
-                "external_product_id": "B0CM5JV232",
-                "url": "https://www.amazon.in/dp/B0CM5JV232",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             },
             {
                 "product_id": "c1000000-0000-0000-0000-000000000002",
@@ -267,47 +267,47 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CX21C8T8",
-        "amazon_url": "https://www.amazon.in/dp/B0CX21C8T8",
-        "flipkart_url": "https://www.flipkart.com/apple-macbook-air-m3-16-gb-512-gb-ssd-macos-sonoma-mxd43hn-a/p/itm4da8daafa869b",
+        "amazon_url": null,
+        "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000003",
                 "retailer": "Amazon",
-                "external_product_id": "B0CX21C8T8",
-                "url": "https://www.amazon.in/dp/B0CX21C8T8",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             },
             {
                 "product_id": "c1000000-0000-0000-0000-000000000003",
                 "retailer": "Flipkart",
-                "external_product_id": "itm4da8daafa869b",
-                "url": "https://www.flipkart.com/apple-macbook-air-m3-16-gb-512-gb-ssd-macos-sonoma-mxd43hn-a/p/itm4da8daafa869b",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             }
         ],
-        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/m/7/y/-original-imagypv6datec8tp.jpeg?q=90",
+        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000003-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000003",
                 "external_product_id": "B0CX21C8T8",
-                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/m/7/y/-original-imagypv6datec8tp.jpeg?q=90",
+                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
                 "image_type": "front",
-                "source": "Flipkart",
-                "verified": true
+                "source": "Placeholder",
+                "verified": false
             },
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000003-GALLERY",
                 "product_id": "c1000000-0000-0000-0000-000000000003",
                 "external_product_id": "B0CX21C8T8",
-                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/0/j/k/-original-imagypv6zewrxyf9.jpeg?q=90",
+                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
                 "image_type": "gallery",
-                "source": "Flipkart",
-                "verified": true
+                "source": "Placeholder",
+                "verified": false
             }
         ],
         "media_gallery": {
@@ -329,11 +329,11 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000003",
                 "retailer": "Amazon",
-                "external_product_id": "B0CX21C8T8",
-                "url": "https://www.amazon.in/dp/B0CX21C8T8",
-                "verification_status": "verified",
+                "external_product_id": null,
+                "url": null,
+                "verification_status": "unverified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "available"
+                "availability_status": "unavailable"
             },
             {
                 "product_id": "c1000000-0000-0000-0000-000000000003",
@@ -1584,16 +1584,16 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "availability_status": "unavailable"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1000/l5bd5zk0/computer/x/o/6/15-fb0040ax-gaming-laptop-hp-original-imaggyue2b3anwr9.jpeg?q=70",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000015-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000015",
                 "external_product_id": "B0B5HCBG18",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1000/l5bd5zk0/computer/x/o/6/15-fb0040ax-gaming-laptop-hp-original-imaggyue2b3anwr9.jpeg?q=70",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Verified",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -1785,16 +1785,16 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "availability_status": "unavailable"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
+        "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/q/g/z/-original-imahcyp7n3yyvxyr.jpeg?q=90",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000017-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000017",
                 "external_product_id": "B0CHJJZ9G8",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
+                "image_url": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/q/g/z/-original-imahcyp7n3yyvxyr.jpeg?q=90",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Verified",
+                "verified": true
             }
         ],
         "media_gallery": {
@@ -2693,18 +2693,18 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
             "resolution": "1920x1200"
         },
         "source": "Amazon India / Flipkart",
-        "source_url": null,
-        "amazon_url": null,
+        "source_url": "https://www.amazon.in/dp/B0FJFTRVJ6",
+        "amazon_url": "https://www.amazon.in/dp/B0FJFTRVJ6",
         "flipkart_url": null,
         "buy_links": [
             {
                 "product_id": "c1000000-0000-0000-0000-000000000026",
                 "retailer": "Amazon",
-                "external_product_id": null,
-                "url": null,
-                "verification_status": "unverified",
+                "external_product_id": "B0FJFTRVJ6",
+                "url": "https://www.amazon.in/dp/B0FJFTRVJ6",
+                "verification_status": "verified",
                 "last_verified": "2026-09-18T00:00:00Z",
-                "availability_status": "unavailable"
+                "availability_status": "available"
             },
             {
                 "product_id": "c1000000-0000-0000-0000-000000000026",
@@ -2716,16 +2716,16 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
                 "availability_status": "unavailable"
             }
         ],
-        "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
+        "image_url": "https://m.media-amazon.com/images/I/71hq8nnlZXL._SX679_.jpg",
         "images": [
             {
                 "image_id": "IMG-c1000000-0000-0000-0000-000000000026-FRONT",
                 "product_id": "c1000000-0000-0000-0000-000000000026",
                 "external_product_id": "B0C9YQ88Z7",
-                "image_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'><rect width='500' height='500' fill='%23f8fafc'/><rect x='40' y='40' width='420' height='420' rx='16' fill='%23f1f5f9' stroke='%23cbd5e1' stroke-width='2'/><circle cx='250' cy='200' r='45' fill='%23e2e8f0'/><path d='M225 200 L275 200 M250 175 L250 225' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/><text x='250' y='290' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='16' font-weight='600' fill='%23334155'>Image unavailable</text><text x='250' y='325' text-anchor='middle' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='13' font-style='italic' fill='%2394a3b8'>Verified link not found</text></svg>",
+                "image_url": "https://m.media-amazon.com/images/I/71hq8nnlZXL._SX679_.jpg",
                 "image_type": "front",
-                "source": "Placeholder",
-                "verified": false
+                "source": "Verified",
+                "verified": true
             }
         ],
         "media_gallery": {
