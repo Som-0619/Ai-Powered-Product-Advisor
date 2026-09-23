@@ -48,7 +48,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CBGF51G3",
-        "amazon_url": "https://www.amazon.in/dp/B0CBGF51G3",
+        "amazon_url": null,
         "flipkart_url": null,
         "buy_links": [
             {
@@ -377,7 +377,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0B3B7NWVG",
-        "amazon_url": "https://www.amazon.in/dp/B0B3B7NWVG",
+        "amazon_url": null,
         "flipkart_url": "https://www.flipkart.com/apple-macbook-air-m2-8-gb-256-gb-ssd-mac-os-monterey-mly33hn-a/p/itmd5543c749eb35",
         "buy_links": [
             {
@@ -490,7 +490,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CJ2B8K6V",
-        "amazon_url": "https://www.amazon.in/dp/B0CJ2B8K6V",
+        "amazon_url": null,
         "flipkart_url": null,
         "buy_links": [
             {
@@ -595,7 +595,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CFF7NL2L",
-        "amazon_url": "https://www.amazon.in/dp/B0CFF7NL2L",
+        "amazon_url": null,
         "flipkart_url": null,
         "buy_links": [
             {
@@ -700,7 +700,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CX8R22R7",
-        "amazon_url": "https://www.amazon.in/dp/B0CX8R22R7",
+        "amazon_url": null,
         "flipkart_url": null,
         "buy_links": [
             {
@@ -801,7 +801,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0B8K37937",
-        "amazon_url": "https://www.amazon.in/dp/B0B8K37937",
+        "amazon_url": null,
         "flipkart_url": "https://www.flipkart.com/lenovo-ideapad-slim-3-intel-core-i3-12th-gen-1215u-8-gb-512-gb-ssd-windows-11-home-15iau7-thin-light-laptop/p/itm58722d471ef90?pid=COMGP26H8PHCAMZE",
         "buy_links": [
             {
@@ -915,7 +915,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0BT9SJG58",
-        "amazon_url": "https://www.amazon.in/dp/B0BT9SJG58",
+        "amazon_url": null,
         "flipkart_url": "https://www.flipkart.com/asus-intel-core-i7-13th-gen-16-gb-1-tb-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-4060-g614jv-n3474ws-gaming-laptop/p/itm02b25080a5259?pid=COMH2FK8CM49KYYV",
         "buy_links": [
             {
@@ -1125,7 +1125,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0C27V76F7",
-        "amazon_url": "https://www.amazon.in/dp/B0C27V76F7",
+        "amazon_url": null,
         "flipkart_url": "https://www.flipkart.com/asus-tuf-gaming-f15-ai-powered-intel-core-i5-11th-gen-11400h-16-gb-512-gb-ssd-windows-11-home-4-graphics-nvidia-geforce-rtx-2050-144-hz-70-tgp-fx506hf-hn025w-laptop/p/itma4f834884f6b1?pid=COMGZKHQFQENGQSG",
         "buy_links": [
             {
@@ -1239,7 +1239,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CR1DP82M",
-        "amazon_url": "https://www.amazon.in/dp/B0CR1DP82M",
+        "amazon_url": null,
         "flipkart_url": "https://www.flipkart.com/asus-zenbook-14-oled-intel-core-ultra-7-155h-16-gb-1-tb-ssd-windows-11-home-ux3405ma-pz752ws-thin-light-laptop/p/itm36bde93628279",
         "buy_links": [
             {
@@ -1348,7 +1348,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0C9YQG56Z",
-        "amazon_url": "https://www.amazon.in/dp/B0C9YQG56Z",
+        "amazon_url": null,
         "flipkart_url": "https://www.flipkart.com/asus-vivobook-16x-intel-core-i5-12th-gen-12450h-16-gb-512-gb-ssd-windows-11-home-4-graphics-nvidia-geforce-rtx-2050-120-hz-k3605zf-mb542ws-laptop/p/itm5fe1a82fcae92",
         "buy_links": [
             {
@@ -1459,7 +1459,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CDG7LMS2",
-        "amazon_url": "https://www.amazon.in/dp/B0CDG7LMS2",
+        "amazon_url": null,
         "flipkart_url": null,
         "buy_links": [
             {
@@ -1562,7 +1562,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0B5HCBG18",
-        "amazon_url": "https://www.amazon.in/dp/B0B5HCBG18",
+        "amazon_url": null,
         "flipkart_url": null,
         "buy_links": [
             {
@@ -1861,7 +1861,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0C3HTXB58",
-        "amazon_url": "https://www.amazon.in/dp/B0C3HTXB58",
+        "amazon_url": null,
         "flipkart_url": "https://www.flipkart.com/acer-predator-neo-intel-core-i7-13th-gen-13700hx-16-gb-1-tb-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-4060-165-hz-140-w-phn16-71-78r1-gaming-laptop/p/itm4295aa0d4297e?pid=COMGZS9GHNQCJC26",
         "buy_links": [
             {
@@ -1969,7 +1969,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CDLR4P9C",
-        "amazon_url": "https://www.amazon.in/dp/B0CDLR4P9C",
+        "amazon_url": null,
         "flipkart_url": null,
         "buy_links": [
             {
@@ -2067,7 +2067,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0C5MC4Y4G",
-        "amazon_url": "https://www.amazon.in/dp/B0C5MC4Y4G",
+        "amazon_url": null,
         "flipkart_url": "https://www.flipkart.com/acer-aspire-7-intel-core-i5-12th-gen-12450h-8-gb-512-gb-ssd-windows-11-home-4-graphics-nvidia-geforce-rtx-nvidia-2050-144-hz-a715-76g-59wg-gaming-laptop/p/itm45fad0c290245?pid=COMGRHJUAHMRWTHH",
         "buy_links": [
             {
@@ -2177,7 +2177,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0BVT87383",
-        "amazon_url": "https://www.amazon.in/dp/B0BVT87383",
+        "amazon_url": null,
         "flipkart_url": "https://www.flipkart.com/msi-katana-15-intel-core-i7-13th-gen-13620h-16-gb-1-tb-ssd-windows-11-home-8-gb-graphics-nvidia-geforce-rtx-4060-144-hz-b13vfk-296in-gaming-laptop/p/itm575c0dfc9902c",
         "buy_links": [
             {
@@ -2284,7 +2284,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CSYWW88J",
-        "amazon_url": "https://www.amazon.in/dp/B0CSYWW88J",
+        "amazon_url": null,
         "flipkart_url": "https://www.flipkart.com/samsung-galaxy-book4-pro-360-evo-intel-core-ultra-7-155h-16-gb-1-tb-ssd-windows-11-home-np960qgk-kg2-2-1-laptop/p/itmd96213edabd07",
         "buy_links": [
             {
@@ -2391,7 +2391,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0B8KBD399",
-        "amazon_url": "https://www.amazon.in/dp/B0B8KBD399",
+        "amazon_url": null,
         "flipkart_url": "https://www.flipkart.com/microsoft-surface-laptop-5-intel-core-i7-12th-gen-1255u-16-gb-512-gb-ssd-windows-11-home-rbg-00048-thin-light/p/itmad4ecb41f26bf",
         "buy_links": [
             {
@@ -3828,7 +3828,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0CS5X81L4",
-        "amazon_url": "https://www.amazon.in/dp/B0CS5X81L4",
+        "amazon_url": null,
         "flipkart_url": "https://www.flipkart.com/samsung-galaxy-s24-ultra-5g-titanium-black-256-gb/p/itm60d6a4ba69e8c",
         "buy_links": [
             {
@@ -4161,7 +4161,7 @@ FALLBACK_CATALOG: List[Dict[str, Any]] = [
         },
         "source": "Amazon India / Flipkart",
         "source_url": "https://www.amazon.in/dp/B0C7BGD91G",
-        "amazon_url": "https://www.amazon.in/dp/B0C7BGD91G",
+        "amazon_url": null,
         "flipkart_url": "https://www.flipkart.com/samsung-galaxy-m34-5g-without-charger-prism-silver-128-gb/p/itm055143784ac74",
         "buy_links": [
             {
