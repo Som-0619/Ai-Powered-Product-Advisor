@@ -92,7 +92,7 @@ function AdvisorScreen() {
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
-          <Sparkles className="w-3.5 h-3.5 text-blue-500" />
+          <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
           <span>Product Advisor</span>
         </button>
         <button
@@ -103,7 +103,7 @@ function AdvisorScreen() {
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
-          <MessageSquare className="w-3.5 h-3.5 text-blue-500" />
+          <MessageSquare className="w-3.5 h-3.5 text-indigo-500" />
           <span>Interactive Chat</span>
         </button>
       </div>
@@ -142,7 +142,7 @@ function AdvisorScreen() {
               <div className="focus-glow rounded-xl p-1.5 flex items-center bg-card border border-border shadow-sm hover:border-slate-300 dark:hover:border-white/20 transition-all gap-2">
                 <Search
                   className={`w-4 h-4 ml-2.5 shrink-0 pointer-events-none transition-colors duration-200 ${
-                    query ? "text-blue-500" : "text-muted-foreground"
+                    query ? "text-indigo-500" : "text-muted-foreground"
                   }`}
                 />
                 <input
@@ -157,7 +157,7 @@ function AdvisorScreen() {
                 <button
                   type="submit"
                   disabled={isLoading || !query.trim()}
-                  className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 active:scale-[0.97] text-white text-xs font-semibold flex items-center space-x-1.5 transition-all shrink-0 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                  className="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 active:scale-[0.97] text-white text-xs font-semibold flex items-center space-x-1.5 transition-all shrink-0 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                 >
                   {isLoading ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
@@ -209,7 +209,7 @@ function AdvisorScreen() {
           {isLoading && (
             <div className="max-w-5xl mx-auto w-full space-y-4 animate-fade-up">
               <div className="max-w-md mx-auto p-4 rounded-xl bg-surface-100 border border-border flex items-center justify-center space-x-3 shadow-sm">
-                <Loader2 className="w-4 h-4 animate-spin text-blue-600 dark:text-blue-400 shrink-0" />
+                <Loader2 className="w-4 h-4 animate-spin text-indigo-600 dark:text-indigo-400 shrink-0" />
                 <span className="text-sm font-semibold text-foreground">
                   Finding the best recommendations...
                 </span>
@@ -254,7 +254,7 @@ function AdvisorScreen() {
           {/* Clarification Notice */}
           {recommendationResult?.status === "clarification" && (
             <div className="max-w-3xl mx-auto p-5 rounded-xl bg-card border border-border shadow-sm space-y-3">
-              <div className="flex items-center space-x-2 text-blue-600 dark:text-blue-400">
+              <div className="flex items-center space-x-2 text-indigo-600 dark:text-indigo-400">
                 <HelpCircle className="w-5 h-5" />
                 <h3 className="text-sm font-bold uppercase tracking-wider">Clarification Required</h3>
               </div>

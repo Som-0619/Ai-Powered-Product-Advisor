@@ -44,7 +44,7 @@ export const CompatibilityPanel: React.FC<CompatibilityPanelProps> = ({ item, on
             isCompatible
               ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-300"
               : isPossibly
-              ? "bg-blue-500/10 border-blue-500/20 text-blue-700 dark:text-blue-300"
+              ? "bg-indigo-500/10 border-indigo-500/20 text-indigo-700 dark:text-indigo-300"
               : isIncompatible
               ? "bg-rose-500/10 border-rose-500/20 text-rose-700 dark:text-rose-300"
               : "bg-slate-500/10 border-slate-500/20 text-slate-700 dark:text-slate-300"
@@ -54,7 +54,7 @@ export const CompatibilityPanel: React.FC<CompatibilityPanelProps> = ({ item, on
             {isCompatible ? (
               <CheckCircle2 className="w-6 h-6 text-emerald-500 shrink-0" />
             ) : isPossibly ? (
-              <AlertTriangle className="w-6 h-6 text-blue-500 shrink-0" />
+              <AlertTriangle className="w-6 h-6 text-indigo-500 shrink-0" />
             ) : isIncompatible ? (
               <AlertCircle className="w-6 h-6 text-rose-500 shrink-0" />
             ) : (

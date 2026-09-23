@@ -13,7 +13,7 @@ export const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand identity */}
         <Link href="/" className="flex items-center space-x-3 cursor-pointer">
-          <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center shadow-sm">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-pink-500 flex items-center justify-center shadow-sm">
             <Cpu className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -31,7 +31,7 @@ export const Header: React.FC = () => {
         <div className="flex items-center gap-4">
           <Link
             href="/advisor?mode=chat"
-            className="hidden sm:inline-flex items-center px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold transition-all cursor-pointer"
+            className="hidden sm:inline-flex items-center px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-indigo-400 hover:to-pink-400 text-white text-xs font-semibold transition-all cursor-pointer"
           >
             Try now
           </Link>
@@ -43,7 +43,7 @@ export const Header: React.FC = () => {
             onClick={toggleTheme}
             aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
             title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            className="p-2 rounded-xl bg-surface-100 hover:bg-surface-200 border border-border text-foreground transition-all duration-150 cursor-pointer flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+            className="p-2 rounded-xl bg-surface-100 hover:bg-surface-200 border border-border text-foreground transition-all duration-150 cursor-pointer flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
           >
             {theme === "dark" ? (
               <Sun className="w-4 h-4 text-amber-400" aria-hidden="true" />

@@ -11,8 +11,9 @@
     --border: #e2e8f0;
     --muted: #f1f5f9;
     --muted-foreground: #64748b;
-    --accent: #2563eb;
+    --accent: #6366f1;
     --accent-foreground: #ffffff;
+    --accent-secondary: #ec4899;
 
     /* Semantic surface mappings for existing component tokens */
     --bg: #fafafa;
@@ -29,22 +30,23 @@
   }
 
   .dark {
-    --background: #090a0f;
+    --background: #05050a;
     --foreground: #f8fafc;
-    --card: #12151e;
+    --card: #10111a;
     --card-foreground: #f8fafc;
     --border: rgba(255, 255, 255, 0.08);
-    --muted: #181c27;
+    --muted: #15161f;
     --muted-foreground: #94a3b8;
-    --accent: #3b82f6;
+    --accent: #818cf8;
     --accent-foreground: #ffffff;
+    --accent-secondary: #f472b6;
 
     /* Semantic surface mappings for existing component tokens */
-    --bg: #090a0f;
-    --surface-50: #12151e;
-    --surface-100: #181c27;
-    --surface-200: #202636;
-    --surface-300: #2a3245;
+    --bg: #05050a;
+    --surface-50: #10111a;
+    --surface-100: #15161f;
+    --surface-200: #1c1e2b;
+    --surface-300: #262838;
     --text-primary: #f8fafc;
     --text-secondary: #cbd5e1;
     --text-muted: #94a3b8;
@@ -76,7 +78,7 @@
 }
 
 .glass-card:hover {
-  border-color: rgba(59, 130, 246, 0.35);
+  border-color: rgba(99, 102, 241, 0.35);
 }
 
 /* Minimalist subtle scrollbar */
@@ -153,8 +155,8 @@
 }
 
 .focus-glow:focus-within {
-  border-color: rgba(59, 130, 246, 0.55);
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12), 0 4px 24px -8px rgba(59, 130, 246, 0.25);
+  border-color: rgba(129, 140, 248, 0.55);
+  box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.14), 0 4px 24px -8px rgba(236, 72, 153, 0.2);
 }
 
 /* Skeleton loading shimmer */
@@ -202,6 +204,162 @@
 
 .typing-dot:nth-child(3) {
   animation-delay: 0.3s;
+}
+
+/* ------------------------------------------------------------------ */
+/* Horizon hero section (components/ui/horizon-hero-section.tsx)      */
+/* ------------------------------------------------------------------ */
+.hero-container {
+  position: relative;
+  width: 100%;
+  background: #030308;
+  color: #fff;
+}
+
+.hero-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  display: block;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+.hero-title {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: clamp(2.75rem, 9vw, 7rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 0 60px rgba(129, 140, 248, 0.45), 0 0 120px rgba(236, 72, 153, 0.25);
+}
+
+.title-char {
+  display: inline-block;
+  min-width: 0.3em;
+}
+
+.hero-subtitle {
+  margin-top: 1.75rem;
+}
+
+.subtitle-line {
+  margin: 0;
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: rgba(226, 232, 240, 0.72);
+}
+
+.side-menu {
+  position: fixed;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  visibility: hidden;
+}
+
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.menu-icon span {
+  width: 22px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 2px;
+}
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.scroll-progress {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  visibility: hidden;
+}
+
+.scroll-text {
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.progress-track {
+  width: 120px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #818cf8, #ec4899);
+  border-radius: 9999px;
+}
+
+.section-counter {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.4);
+  font-variant-numeric: tabular-nums;
+}
+
+.scroll-sections {
+  position: relative;
+  z-index: 5;
+}
+
+.content-section {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .side-menu {
+    left: 1rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

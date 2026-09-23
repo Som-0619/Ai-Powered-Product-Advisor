@@ -43,7 +43,7 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
           <div className="mb-6 p-4 rounded-xl bg-surface-100/70 border border-slate-200/80 dark:border-white/5">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center space-x-2">
-                <ShieldCheck className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                <ShieldCheck className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
                 <span className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">
                   Critic Verification Findings
                 </span>
@@ -119,7 +119,7 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
                     <span>Claim #{idx + 1}</span>
                   </div>
                   {ev.confidence !== undefined && (
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 font-bold">
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 font-bold">
                       {Math.round(ev.confidence * 100)}% Confidence
                     </span>
                   )}

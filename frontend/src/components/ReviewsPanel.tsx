@@ -44,7 +44,7 @@ export const ReviewsPanel: React.FC<ReviewsPanelProps> = ({ item, onClose }) => 
           </div>
           <div className="bg-surface-100 p-3 rounded-xl border border-slate-200/80 dark:border-white/5">
             <span className="text-[11px] text-slate-500 dark:text-slate-400 block uppercase font-semibold">Fraud Risk</span>
-            <span className="text-sm font-bold text-blue-600 dark:text-blue-400">
+            <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
               {reviews?.suspicious_signals?.length ? "Signals Flagged" : "Low Risk (Clean)"}
             </span>
           </div>

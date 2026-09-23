@@ -50,7 +50,7 @@ export const AgentTracePanel: React.FC<AgentTracePanelProps> = ({
     <div className="bg-surface-50 border border-slate-200/80 dark:border-white/10 rounded-2xl p-5 shadow-sm transition-colors duration-200">
       <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-white/5 pb-4 mb-4">
         <div className="flex items-center space-x-2.5">
-          <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400">
+          <div className="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
             <Brain className="w-4 h-4" />
           </div>
           <div>
@@ -61,7 +61,7 @@ export const AgentTracePanel: React.FC<AgentTracePanelProps> = ({
 
         {totalLatencyMs !== undefined && (
           <div className="flex items-center space-x-1.5 px-3 py-1 rounded-full bg-surface-100 border border-slate-200/80 dark:border-white/5 text-xs text-slate-600 dark:text-slate-300">
-            <Clock className="w-3.5 h-3.5 text-blue-500" />
+            <Clock className="w-3.5 h-3.5 text-indigo-500" />
             <span>Total: {totalLatencyMs.toFixed(0)} ms</span>
           </div>
         )}
@@ -80,8 +80,8 @@ export const AgentTracePanel: React.FC<AgentTracePanelProps> = ({
           let badge = null;
 
           if (isActive) {
-            borderStyle = "border-blue-500 bg-blue-500/10 text-blue-600 dark:text-blue-400 shadow-sm animate-pulse";
-            badge = <Loader2 className="w-3 h-3 animate-spin text-blue-500" />;
+            borderStyle = "border-indigo-500 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 shadow-sm animate-pulse";
+            badge = <Loader2 className="w-3 h-3 animate-spin text-indigo-500" />;
           } else if (isCompleted) {
             borderStyle = "border-emerald-500/30 bg-emerald-500/5 text-slate-900 dark:text-slate-200";
             badge = <CheckCircle2 className="w-3 h-3 text-emerald-500" />;
