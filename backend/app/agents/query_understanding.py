@@ -103,6 +103,14 @@ class QueryUnderstandingAgent:
         if not m:
             # Hinglish: "<num> se <num> (hazar) ke beech/bich"
             m = re.search(rf"({num})\s+se\s+({num})\s*(?:ke\s+)?(?:beech|bich)\b", raw_query, re.IGNORECASE)
+        if not m and self._contains_currency_hint(raw_query):
+            # "range of <num>-<num>", "<num> to <num>", or bare "<num>-<num>k"
+            # shorthand (e.g. "40-50k", "within the range of 40-50k"). Gated on
+            # a currency hint (k/lakh/₹) being present anywhere in the query so
+            # this broad hyphen/"to" pattern doesn't misfire on things like a
+            # CPU model number ("i5-13400H") that happen to contain a hyphen
+            # between two numbers.
+            m = re.search(rf"(?:range\s+of\s+)?({num})\s*(?:-|to)\s*({num})\b", raw_query, re.IGNORECASE)
         if not m:
             return None
 
