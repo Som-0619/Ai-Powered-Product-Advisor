@@ -7,6 +7,15 @@
  */
 
 export const PRODUCT_IMAGE_REGISTRY: Record<string, string> = {
+  "4c3049ae-10f3-5c63-b08a-8416a56c1b5a": "https://m.media-amazon.com/images/I/61X7ynACnQL._SX679_.jpg",
+  "0f852853-07c2-4370-b88d-e770f1d34b18": "https://m.media-amazon.com/images/I/51dVrlj0hTL._SX679_.jpg",
+  "012cf2e7-a35e-53ef-8711-5aad00c29489": "https://m.media-amazon.com/images/I/61y5-UNWNLL._SX679_.jpg",
+  "7957ff81-e400-5cb4-a0e6-9135797e7c85": "https://m.media-amazon.com/images/I/71pSZbUZMxL._SX522_.jpg",
+  "d65a75f8-b4bb-56ae-be17-f94de8b641c4": "https://m.media-amazon.com/images/I/61HRRrSTEQL._SX522_.jpg",
+  "a7c5b7be-de3f-46df-af0c-28c6f010ffc0": "https://m.media-amazon.com/images/I/617y12kla3L.jpg",
+  "236fbe49-6434-46f6-a857-4483549f0072": "https://m.media-amazon.com/images/I/61ZFj+wanLL.jpg",
+  "90b32685-1c65-4691-acba-15c54c927ba8": "https://mm.digikey.com/Volume0/opasdata/d220001/derivates/3/002/622/019/C%20Series%200603%281608%20Metric%29%209.jpg",
+  "311d4fff-66d6-4fb5-8f56-df2472bdeb11": "https://m.media-amazon.com/images/I/61u9f2GfHPL._SL1100_.jpg",
   "c1000000-0000-0000-0000-000000000001": "data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'500\' height=\'500\' viewBox=\'0 0 500 500\'><rect width=\'500\' height=\'500\' fill=\'%23f8fafc\'/><rect x=\'40\' y=\'40\' width=\'420\' height=\'420\' rx=\'16\' fill=\'%23f1f5f9\' stroke=\'%23cbd5e1\' stroke-width=\'2\'/><circle cx=\'250\' cy=\'200\' r=\'45\' fill=\'%23e2e8f0\'/><path d=\'M225 200 L275 200 M250 175 L250 225\' stroke=\'%2394a3b8\' stroke-width=\'3\' stroke-linecap=\'round\'/><text x=\'250\' y=\'290\' text-anchor=\'middle\' font-family=\'-apple-system, BlinkMacSystemFont, sans-serif\' font-size=\'16\' font-weight=\'600\' fill=\'%23334155\'>Image unavailable</text><text x=\'250\' y=\'325\' text-anchor=\'middle\' font-family=\'-apple-system, BlinkMacSystemFont, sans-serif\' font-size=\'13\' font-style=\'italic\' fill=\'%2394a3b8\'>Verified link not found</text></svg>",
   "c1000000-0000-0000-0000-000000000002": "https://m.media-amazon.com/images/I/618d5bS2lUL._SL1500_.jpg",
   "c1000000-0000-0000-0000-000000000003": "https://rukminim2.flixcart.com/image/1000/1330/xif0q/computer/m/7/y/-original-imagypv6datec8tp.jpeg?q=90",
