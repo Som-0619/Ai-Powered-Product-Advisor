@@ -69,7 +69,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
 
   return (
     <SpotlightCard
-      className="tilt-card bg-surface-50 border border-slate-200/80 dark:border-white/10 rounded-2xl p-5 sm:p-6 shadow-sm hover:border-indigo-500/40 dark:hover:border-indigo-500/40 group flex flex-col justify-between h-full"
+      className="tilt-card bg-surface-50 border border-border rounded-2xl p-5 sm:p-6 shadow-sm hover:border-indigo-500/40 dark:hover:border-indigo-500/40 group flex flex-col justify-between h-full"
       spotlightColor="rgba(129, 140, 248, 0.14)"
     >
       {/* Top Banner & Badges */}
@@ -77,7 +77,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
         <div className="flex items-start justify-between gap-3 mb-4">
           <div className="flex items-start space-x-3 min-w-0">
             {/* Product Image Showcase */}
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-surface-100 border border-slate-200/80 dark:border-white/10 flex items-center justify-center shrink-0 overflow-hidden relative group-hover:scale-105 transition-transform shadow-inner">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-surface-100 border border-border flex items-center justify-center shrink-0 overflow-hidden relative group-hover:scale-105 transition-transform shadow-inner">
               <img
                 src={productImage}
                 alt={item.product_name}
@@ -97,7 +97,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
                     {item.brand}
                   </span>
                 )}
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 border border-slate-200/80 dark:border-white/5">
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-surface-100 text-muted-foreground border border-border">
                   {item.category || "Hardware"}
                 </span>
                 {item.rank && (
@@ -108,7 +108,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
               </div>
               <h4
                 onClick={() => onOpenDetails(item)}
-                className="text-base font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-1 cursor-pointer"
+                className="text-base font-bold text-foreground group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-1 cursor-pointer"
                 title={item.product_name}
               >
                 {item.product_name}
@@ -121,7 +121,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
 
           {/* Confidence Score Gauge */}
           <div className="flex flex-col items-end shrink-0 pl-2">
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
+            <span className="text-[10px] text-muted-foreground uppercase tracking-wider font-semibold">
               Confidence
             </span>
             <div className="flex items-center space-x-1.5 mt-0.5">
@@ -131,17 +131,17 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
                   style={{ width: `${confidencePct}%` }}
                 />
               </div>
-              <span className="font-technical text-xs font-bold text-slate-800 dark:text-slate-200">{confidencePct}%</span>
+              <span className="font-technical text-xs font-bold text-foreground">{confidencePct}%</span>
             </div>
           </div>
         </div>
 
         {/* Quick Buy Marketplace Badges (Amazon & Flipkart) */}
         {(amazonBuyUrl || flipkartBuyUrl) && (
-          <div className="mb-3.5 p-2.5 rounded-xl bg-surface-100/70 border border-slate-200/80 dark:border-white/5 flex items-center justify-between flex-wrap gap-2">
+          <div className="mb-3.5 p-2.5 rounded-xl bg-surface-100/70 border border-border flex items-center justify-between flex-wrap gap-2">
             <div className="flex items-center space-x-1 text-xs">
               <ShoppingCart className="w-3.5 h-3.5 text-indigo-500" />
-              <span className="text-[11px] font-semibold text-slate-700 dark:text-slate-300">
+              <span className="text-[11px] font-semibold text-foreground">
                 Live Deals:
               </span>
             </div>
@@ -156,7 +156,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
                   className={`px-2.5 py-1 rounded-lg text-[11px] font-bold flex items-center space-x-1 transition-all hover:scale-[1.04] active:scale-95 ${
                     comparison.deals.amazon.isLowestPrice
                       ? "bg-pa-yellow text-slate-950 shadow-sm hover:shadow-md hover:shadow-pa-yellow/30"
-                      : "bg-surface-200 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white"
+                      : "bg-surface-200 text-foreground hover:text-foreground"
                   }`}
                   title="View on Amazon"
                 >
@@ -174,7 +174,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
                   className={`px-2.5 py-1 rounded-lg text-[11px] font-bold flex items-center space-x-1 transition-all hover:scale-[1.04] active:scale-95 ${
                     comparison.deals.flipkart.isLowestPrice
                       ? "bg-indigo-600 text-white shadow-sm hover:shadow-md hover:shadow-indigo-500/20"
-                      : "bg-surface-200 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white"
+                      : "bg-surface-200 text-foreground hover:text-foreground"
                   }`}
                   title="View on Flipkart"
                 >
@@ -196,7 +196,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
             </span>
             <ul className="space-y-1">
               {item.pros.slice(0, 2).map((pro, i) => (
-                <li key={i} className="text-xs text-slate-600 dark:text-slate-300 flex items-start space-x-1.5">
+                <li key={i} className="text-xs text-muted-foreground flex items-start space-x-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-pa-mint mt-1.5 shrink-0" />
                   <span className="line-clamp-1">{pro}</span>
                 </li>
@@ -212,7 +212,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
             </span>
             <ul className="space-y-1">
               {item.cons.slice(0, 1).map((con, i) => (
-                <li key={i} className="text-xs text-slate-500 dark:text-slate-400 flex items-start space-x-1.5">
+                <li key={i} className="text-xs text-muted-foreground flex items-start space-x-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-pa-coral mt-1.5 shrink-0" />
                   <span className="line-clamp-1">{con}</span>
                 </li>
@@ -223,13 +223,13 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
       </div>
 
       {/* Interactive Action Bar */}
-      <div className="border-t border-slate-200/80 dark:border-white/5 pt-3.5 mt-1">
+      <div className="border-t border-border pt-3.5 mt-1">
         <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center flex-wrap gap-1.5">
             {/* Specs Button */}
             <button
               onClick={() => onOpenDetails(item)}
-              className="px-2.5 py-1.5 rounded-lg bg-surface-100 hover:bg-surface-200 hover:-translate-y-px active:translate-y-0 active:scale-95 border border-slate-200/80 dark:border-white/5 text-xs text-slate-700 dark:text-slate-200 font-medium flex items-center space-x-1 transition-all cursor-pointer"
+              className="px-2.5 py-1.5 rounded-lg bg-surface-100 hover:bg-surface-200 hover:-translate-y-px active:translate-y-0 active:scale-95 border border-border text-xs text-foreground font-medium flex items-center space-x-1 transition-all cursor-pointer"
             >
               <Layers className="w-3.5 h-3.5 text-indigo-500" />
               <span>Specs</span>
@@ -240,7 +240,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
             {item.reviews && (
               <button
                 onClick={() => onOpenReviews(item)}
-                className="px-2.5 py-1.5 rounded-lg bg-surface-100 hover:bg-surface-200 hover:-translate-y-px active:translate-y-0 active:scale-95 border border-slate-200/80 dark:border-white/5 text-xs text-slate-700 dark:text-slate-200 font-medium flex items-center space-x-1 transition-all cursor-pointer"
+                className="px-2.5 py-1.5 rounded-lg bg-surface-100 hover:bg-surface-200 hover:-translate-y-px active:translate-y-0 active:scale-95 border border-border text-xs text-foreground font-medium flex items-center space-x-1 transition-all cursor-pointer"
               >
                 <MessageSquare className="w-3.5 h-3.5 text-indigo-500" />
                 <span>Reviews</span>
@@ -251,7 +251,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
             {item.compatibility && (
               <button
                 onClick={() => onOpenCompatibility(item)}
-                className="px-2.5 py-1.5 rounded-lg bg-surface-100 hover:bg-surface-200 hover:-translate-y-px active:translate-y-0 active:scale-95 border border-slate-200/80 dark:border-white/5 text-xs text-slate-700 dark:text-slate-200 font-medium flex items-center space-x-1 transition-all cursor-pointer"
+                className="px-2.5 py-1.5 rounded-lg bg-surface-100 hover:bg-surface-200 hover:-translate-y-px active:translate-y-0 active:scale-95 border border-border text-xs text-foreground font-medium flex items-center space-x-1 transition-all cursor-pointer"
               >
                 <ShieldCheck className="w-3.5 h-3.5 text-purple-500" />
                 <span>Compatibility</span>
@@ -263,7 +263,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
           <div className="flex items-center flex-wrap gap-2">
             <button
               onClick={() => onOpenDetails(item)}
-              className="px-2.5 py-1.5 rounded-xl bg-surface-100 hover:bg-surface-200 border border-slate-200/80 dark:border-white/10 text-xs font-semibold text-slate-700 dark:text-slate-200 flex items-center space-x-1 transition-all active:scale-95 cursor-pointer"
+              className="px-2.5 py-1.5 rounded-xl bg-surface-100 hover:bg-surface-200 border border-border text-xs font-semibold text-foreground flex items-center space-x-1 transition-all active:scale-95 cursor-pointer"
               title="Compare Amazon vs Flipkart Deals"
             >
               <span>Compare</span>

@@ -47,20 +47,20 @@ export const AgentTracePanel: React.FC<AgentTracePanelProps> = ({
   });
 
   return (
-    <div className="bg-surface-50 border border-slate-200/80 dark:border-white/10 rounded-2xl p-5 shadow-sm transition-colors duration-200">
-      <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-white/5 pb-4 mb-4">
+    <div className="bg-surface-50 border border-border rounded-2xl p-5 shadow-sm transition-colors duration-200">
+      <div className="flex items-center justify-between border-b border-border pb-4 mb-4">
         <div className="flex items-center space-x-2.5">
           <div className="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
             <Brain className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white tracking-tight">Multi-Agent Supervisor Trace</h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400">Real-time LangGraph node progression & telemetry</p>
+            <h3 className="text-sm font-bold text-foreground tracking-tight">Multi-Agent Supervisor Trace</h3>
+            <p className="text-xs text-muted-foreground">Real-time LangGraph node progression & telemetry</p>
           </div>
         </div>
 
         {totalLatencyMs !== undefined && (
-          <div className="flex items-center space-x-1.5 px-3 py-1 rounded-full bg-surface-100 border border-slate-200/80 dark:border-white/5 text-xs text-slate-600 dark:text-slate-300">
+          <div className="flex items-center space-x-1.5 px-3 py-1 rounded-full bg-surface-100 border border-border text-xs text-muted-foreground">
             <Clock className="w-3.5 h-3.5 text-indigo-500" />
             <span>Total: {totalLatencyMs.toFixed(0)} ms</span>
           </div>
@@ -76,18 +76,18 @@ export const AgentTracePanel: React.FC<AgentTracePanelProps> = ({
           const isSkipped = step?.status === "skipped";
           const isFailed = step?.status === "failed";
 
-          let borderStyle = "border-slate-200/60 dark:border-white/5 bg-surface-100/40 text-slate-400 dark:text-slate-500";
+          let borderStyle = "border-border bg-surface-100/40 text-muted-foreground";
           let badge = null;
 
           if (isActive) {
             borderStyle = "border-indigo-500 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 shadow-sm animate-pulse";
             badge = <Loader2 className="w-3 h-3 animate-spin text-indigo-500" />;
           } else if (isCompleted) {
-            borderStyle = "border-emerald-500/30 bg-emerald-500/5 text-slate-900 dark:text-slate-200";
+            borderStyle = "border-emerald-500/30 bg-emerald-500/5 text-foreground";
             badge = <CheckCircle2 className="w-3 h-3 text-emerald-500" />;
           } else if (isSkipped) {
-            borderStyle = "border-slate-200/60 dark:border-white/5 bg-surface-100/30 text-slate-400";
-            badge = <SkipForward className="w-3 h-3 text-slate-400" />;
+            borderStyle = "border-border bg-surface-100/30 text-muted-foreground";
+            badge = <SkipForward className="w-3 h-3 text-muted-foreground" />;
           } else if (isFailed) {
             borderStyle = "border-rose-500/30 bg-rose-500/10 text-rose-500";
             badge = <AlertCircle className="w-3 h-3 text-rose-500" />;
@@ -106,7 +106,7 @@ export const AgentTracePanel: React.FC<AgentTracePanelProps> = ({
                 <h4 className="text-[11px] font-bold tracking-tight line-clamp-1">{node.label}</h4>
               </div>
 
-              <div className="mt-2 pt-1 border-t border-slate-200/40 dark:border-white/5 flex items-center justify-between text-[10px]">
+              <div className="mt-2 pt-1 border-t border-border flex items-center justify-between text-[10px]">
                 {step ? (
                   <>
                     <span className="capitalize opacity-80">{step.status}</span>

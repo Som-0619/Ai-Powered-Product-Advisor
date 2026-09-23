@@ -19,32 +19,32 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 dark:bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-surface-50 border border-slate-200/80 dark:border-white/10 rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl p-6 relative transition-colors duration-200">
+      <div className="bg-surface-50 border border-border rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl p-6 relative transition-colors duration-200">
         <button
           onClick={onClose}
           aria-label="Close modal"
-          className="absolute top-5 right-5 p-2 rounded-xl bg-surface-100 hover:bg-surface-200 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all"
+          className="absolute top-5 right-5 p-2 rounded-xl bg-surface-100 hover:bg-surface-200 text-muted-foreground hover:text-foreground dark:hover:text-white transition-all"
         >
           <X className="w-5 h-5" />
         </button>
 
-        <div className="flex items-center space-x-3 mb-5 border-b border-slate-200/80 dark:border-white/5 pb-4">
+        <div className="flex items-center space-x-3 mb-5 border-b border-border pb-4">
           <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
             <FileText className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">Traceable Evidence & Critic Audit</h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400">{item.product_name}</p>
+            <h3 className="text-base font-bold text-foreground tracking-tight">Traceable Evidence & Critic Audit</h3>
+            <p className="text-xs text-muted-foreground">{item.product_name}</p>
           </div>
         </div>
 
         {/* Verification Critic Audit Box */}
         {globalVerification && (
-          <div className="mb-6 p-4 rounded-xl bg-surface-100/70 border border-slate-200/80 dark:border-white/5">
+          <div className="mb-6 p-4 rounded-xl bg-surface-100/70 border border-border">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center space-x-2">
                 <ShieldCheck className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
-                <span className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+                <span className="text-xs font-bold text-foreground uppercase tracking-wider">
                   Critic Verification Findings
                 </span>
               </div>
@@ -62,8 +62,8 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
             {/* Coverage Meter */}
             <div className="mb-4">
               <div className="flex justify-between text-xs mb-1 font-semibold">
-                <span className="text-slate-600 dark:text-slate-400">Evidence Grounding Coverage</span>
-                <span className="text-slate-900 dark:text-white">
+                <span className="text-muted-foreground">Evidence Grounding Coverage</span>
+                <span className="text-foreground">
                   {Math.round(globalVerification.evidence_coverage_score * 100)}%
                 </span>
               </div>
@@ -82,15 +82,15 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
                   const isSuccess = f.status === "verified" || f.status === "passed";
                   const formattedCheck = f.check.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
                   return (
-                    <div key={i} className="flex items-start space-x-2 text-xs bg-surface-50 p-2.5 rounded-lg border border-slate-200/60 dark:border-white/5">
+                    <div key={i} className="flex items-start space-x-2 text-xs bg-surface-50 p-2.5 rounded-lg border border-border/70">
                       {isSuccess ? (
                         <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                       ) : (
                         <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
                       )}
                       <div>
-                        <span className="font-semibold text-slate-900 dark:text-white block">{formattedCheck}</span>
-                        <p className="text-slate-600 dark:text-slate-300 mt-0.5">{f.reasoning}</p>
+                        <span className="font-semibold text-foreground block">{formattedCheck}</span>
+                        <p className="text-muted-foreground mt-0.5">{f.reasoning}</p>
                       </div>
                     </div>
                   );
@@ -102,7 +102,7 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
 
         {/* Mapped Claims & Citations */}
         <div className="space-y-3">
-          <div className="flex items-center space-x-2 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+          <div className="flex items-center space-x-2 text-xs font-bold text-muted-foreground uppercase tracking-wider">
             <Scale className="w-4 h-4 text-emerald-500" />
             <span>Mapped Technical Claims</span>
           </div>
@@ -111,7 +111,7 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
             item.evidence.map((ev, idx) => (
               <div
                 key={idx}
-                className="bg-surface-100/50 p-4 rounded-xl border border-slate-200/80 dark:border-white/5 space-y-2"
+                className="bg-surface-100/50 p-4 rounded-xl border border-border space-y-2"
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex items-center space-x-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
@@ -125,20 +125,20 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
                   )}
                 </div>
 
-                <p className="text-xs text-slate-900 dark:text-white font-medium">{ev.claim}</p>
+                <p className="text-xs text-foreground font-medium">{ev.claim}</p>
 
                 {ev.evidence_text && (
-                  <div className="bg-surface-50 p-2.5 rounded-lg border border-slate-200/60 dark:border-white/5">
-                    <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-semibold block mb-0.5">
+                  <div className="bg-surface-50 p-2.5 rounded-lg border border-border/70">
+                    <span className="text-[10px] text-muted-foreground uppercase font-semibold block mb-0.5">
                       Grounded Citation
                     </span>
-                    <p className="text-xs text-slate-700 dark:text-slate-300 italic">"{ev.evidence_text}"</p>
+                    <p className="text-xs text-foreground italic">"{ev.evidence_text}"</p>
                   </div>
                 )}
               </div>
             ))
           ) : (
-            <p className="text-xs text-slate-500 italic">No specific claims mapped for this product.</p>
+            <p className="text-xs text-muted-foreground italic">No specific claims mapped for this product.</p>
           )}
         </div>
       </div>
