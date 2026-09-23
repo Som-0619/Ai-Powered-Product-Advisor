@@ -209,7 +209,24 @@ class WorkflowOrchestrator:
         # gave an explicit budget, widen the candidate pool so the later hard
         # budget filter has real affordable options to keep instead of finding
         # nothing and reporting "no results" too eagerly.
-        retrieval_limit = 20 if analysis.budget_max is not None else 8
+        retrieval_limit = 50 if analysis.budget_max is not None else 8
+
+        # When a budget is stated together with a clear category (phone/headphone/
+        # laptop/IoT), search by the plain canonical category name instead of the
+        # shopper's own phrasing. Phrasing-sensitive text relevance (especially for
+        # Hinglish like "mujhe phone dikhao") can rank budget-friendly models below
+        # flagship ones or miss them outright; searching the category name directly
+        # reliably pulls in every member of that category so the budget filter below
+        # can decide, rather than semantic relevance deciding first.
+        if analysis.budget_max is not None:
+            if is_audio_query:
+                search_query = "Audio Headphones Earbuds"
+            elif is_phone_query:
+                search_query = "Smartphones"
+            elif is_laptop_query:
+                search_query = "Laptops"
+            elif is_comp_query:
+                search_query = "Electronic Components Modules Sensors IoT"
 
         try:
             if is_comp_query:
