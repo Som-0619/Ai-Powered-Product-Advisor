@@ -9,7 +9,7 @@ export const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className="border-b border-border bg-card/80 backdrop-blur-md sticky top-0 z-50 transition-colors duration-200">
+    <header className="border-b border-border/60 bg-card/70 backdrop-blur-md sticky top-0 z-50 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand identity */}
         <Link href="/" className="group flex items-center space-x-3 cursor-pointer">

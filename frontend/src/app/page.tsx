@@ -95,11 +95,12 @@ export default function LandingPage() {
 
   return (
     <div className="w-full">
-      {/* Ambient background */}
+      {/* Ambient background -- kept well clear of the header so its opaque
+          bar never clips the blur into a visible hard edge/seam */}
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-[32rem] w-[60rem] rounded-full bg-pa-blue/10 blur-[120px]" />
-        <div className="absolute top-1/3 -left-40 h-96 w-96 rounded-full bg-pa-violet/10 blur-[100px]" />
-        <div className="absolute bottom-0 -right-40 h-96 w-96 rounded-full bg-pa-mint/10 blur-[100px]" />
+        <div className="absolute top-24 left-1/2 -translate-x-1/2 h-[32rem] w-[60rem] rounded-full bg-pa-blue/8 blur-[140px]" />
+        <div className="absolute top-1/3 -left-40 h-96 w-96 rounded-full bg-pa-violet/8 blur-[120px]" />
+        <div className="absolute bottom-0 -right-40 h-96 w-96 rounded-full bg-pa-mint/8 blur-[120px]" />
         <div className="absolute inset-x-0 top-0 h-[36rem] bg-grid-fade" />
       </div>
 
