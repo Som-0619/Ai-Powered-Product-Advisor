@@ -14,7 +14,6 @@ import {
   Workflow,
   Languages,
   Quote,
-  Image as ImageIcon,
   Star,
   Check,
 } from "lucide-react";
@@ -225,8 +224,12 @@ export default function LandingPage() {
 
         <div className="rounded-2xl border border-border bg-card shadow-md overflow-hidden">
           <div className="p-5 sm:p-6 grid grid-cols-1 md:grid-cols-[auto_1fr] gap-5">
-            <div className="w-full md:w-40 h-40 rounded-xl bg-surface-100 border border-border flex items-center justify-center shrink-0 mx-auto md:mx-0">
-              <ImageIcon className="w-8 h-8 text-muted-foreground/50" />
+            <div className="w-full md:w-40 h-40 rounded-xl bg-surface-100 border border-border overflow-hidden shrink-0 mx-auto md:mx-0">
+              <img
+                src="https://m.media-amazon.com/images/I/81x+1vl1kCL._SX679_.jpg"
+                alt="Gaming laptop example"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="space-y-3">
               <div className="flex items-center justify-between flex-wrap gap-2">
