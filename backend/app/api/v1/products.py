@@ -10,6 +10,7 @@ from app.services.factory import get_db_service
 from app.services.catalog_service import CatalogService
 from app.services.product_image_service import ProductImageService
 from app.services.catalog_fallback import get_fallback_product, get_product_images
+from app.services.web_product_cache import get_web_product
 from app.services.retailer_offers import (
     get_canonical_product_offers,
     get_canonical_comparison,
@@ -98,8 +99,8 @@ async def get_product(id: str):
     except Exception:
         pass
 
-    # Fallback to in-memory catalog
-    fallback = get_fallback_product(id)
+    # Fallback to in-memory catalog, then to a live web-retrieval result
+    fallback = get_fallback_product(id) or get_web_product(id)
     if fallback:
         offers = get_canonical_product_offers(fallback["id"])
         if not offers:
@@ -188,13 +189,18 @@ async def get_product_images_endpoint(id: str):
     except Exception:
         pass
 
-    # 2. Fallback in-memory images
+    # 2. Fallback in-memory images, then a live web-retrieval result
     images = get_product_images(id)
     if not images:
         fallback = get_fallback_product(id)
-        if not fallback:
-            raise HTTPException(status_code=404, detail=f"Product with id '{id}' not found")
-        images = get_product_images(fallback["id"])
+        if fallback:
+            images = get_product_images(fallback["id"])
+        else:
+            web_product = get_web_product(id)
+            if web_product:
+                images = web_product.get("images", [])
+            else:
+                raise HTTPException(status_code=404, detail=f"Product with id '{id}' not found")
 
     # Strict identity check: all returned images must reference this product_id
     verified_images = []
@@ -245,7 +251,7 @@ async def _get_canonical_product(product_id: str):
                 }
     except Exception:
         pass
-    return get_fallback_product(product_id)
+    return get_fallback_product(product_id) or get_web_product(product_id)
 
 
 @router.get("/{id}/offers")
@@ -347,9 +353,10 @@ async def get_product_reviews(id: str):
     except Exception:
         pass
 
-    # Fallback to in-memory product reviews if DB is unavailable or has no reviews
+    # Fallback to in-memory product reviews, then a live web-retrieval result,
+    # if DB is unavailable or has no reviews
     if not reviews_list:
-        fallback = get_fallback_product(id)
+        fallback = get_fallback_product(id) or get_web_product(id)
         if fallback:
             for idx, r in enumerate(fallback.get("reviews", [])):
                 rev = dict(r)
@@ -359,7 +366,7 @@ async def get_product_reviews(id: str):
                 reviews_list.append(rev)
 
     if not reviews_list:
-        fallback = get_fallback_product(id)
+        fallback = get_fallback_product(id) or get_web_product(id)
         if not fallback:
             raise HTTPException(status_code=404, detail=f"Product with id '{id}' not found")
 

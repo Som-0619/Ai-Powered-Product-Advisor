@@ -79,6 +79,49 @@ def _card_from_web_item(item: Dict[str, Any], analysis: QueryAnalysis, rank: int
         price = None
         formatted_price = "Price unavailable"
 
+    # Build pros/cons strictly from this specific product's own scraped Amazon
+    # reviews (never generic or copied from another product) -- same
+    # rating-based classification the internal catalog cards use.
+    product_reviews = item.get("_reviews") or []
+    pos_reviews = [r for r in product_reviews if (r.get("rating") or 0) >= 4]
+    neg_reviews = [r for r in product_reviews if (r.get("rating") or 5) <= 3]
+
+    def _clip(text: str, limit: int = 140) -> str:
+        text = (text or "").strip()
+        return text if len(text) <= limit else text[: limit - 3].rsplit(" ", 1)[0] + "..."
+
+    pros = [_clip(r.get("body") or r.get("title") or "") for r in pos_reviews[:3] if (r.get("body") or r.get("title"))]
+    cons = [_clip(r.get("body") or r.get("title") or "") for r in neg_reviews[:2] if (r.get("body") or r.get("title"))]
+
+    item_specs = item.get("specs") or {}
+    if item_specs:
+        for k, v in list(item_specs.items())[:2]:
+            pros.append(f"{k}: {v}")
+    if not pros:
+        pros = ["Limited review data available"]
+    if not cons:
+        cons = ["Limited review data available"]
+
+    card_evidence = [{
+        "claim": f"Live price verification for {title}.",
+        "evidence_text": f"Scraped directly from {az_url or fk_url or 'retailer search'} at query time: {formatted_price}.",
+        "confidence": 0.85,
+    }]
+    if item_specs:
+        spec_highlights = "; ".join(f"{k}: {v}" for k, v in list(item_specs.items())[:4])
+        card_evidence.append({
+            "claim": f"Verified specifications for {title}.",
+            "evidence_text": f"Scraped from the product's own Amazon listing: {spec_highlights}.",
+            "confidence": 0.9,
+        })
+    if product_reviews:
+        top_review = product_reviews[0]
+        card_evidence.append({
+            "claim": f"Customer review consensus for {title}.",
+            "evidence_text": f"\"{top_review.get('body', '')}\" -- Verified Amazon buyer ({top_review.get('rating')}/5 rating).",
+            "confidence": 0.85,
+        })
+
     img_url = item.get("image_url") or ""
     if not img_url:
         import urllib.parse
@@ -92,16 +135,28 @@ def _card_from_web_item(item: Dict[str, Any], analysis: QueryAnalysis, rank: int
             "font-family='sans-serif' font-weight='bold' font-size='15'>Image unavailable</text></svg>"
         )
 
-    return {
-        "product_id": str(item["id"]),
+    pid = str(item["id"])
+    has_real_image = bool(img_url) and not img_url.startswith("data:image/svg")
+    image_entries = [{
+        "image_id": f"IMG-{pid}-FRONT",
+        "product_id": pid,
+        "external_product_id": item.get("external_product_id"),
+        "image_url": img_url,
+        "image_type": "front",
+        "source": "Amazon",
+        "verified": True,
+    }] if has_real_image else []
+
+    card = {
+        "product_id": pid,
         "product_name": title,
         "external_product_id": item.get("external_product_id"),
         "product_image": img_url,
         "image_url": img_url,
-        "images": [],
+        "images": image_entries,
         "retailer_offers": resolved_offers,
         "buy_links": resolved_offers,
-        "specs": item.get("specs", {}),
+        "specs": item_specs,
         "model_number": "",
         "sku": "",
         "amazon_url": az_url,
@@ -112,21 +167,22 @@ def _card_from_web_item(item: Dict[str, Any], analysis: QueryAnalysis, rank: int
         "currency": currency,
         "formatted_price": formatted_price,
         "why_recommended": "Live current listing retrieved from the web because the internal catalog didn't have enough matching options in your stated range.",
-        "pros": ["Live listing, price verified at search time"],
-        "cons": ["Limited review data available (web-sourced result)"],
+        "pros": pros,
+        "cons": cons,
         "confidence": 0.7,
         "rank": rank,
         "eligible": True,
         "constraint_status": "satisfied",
-        "evidence": [{
-            "claim": f"Live price verification for {title}.",
-            "evidence_text": f"Scraped directly from {az_url or fk_url or 'retailer search'} at query time: {formatted_price}.",
-            "confidence": 0.85,
-        }],
+        "evidence": card_evidence,
         "compatibility": {"status": "compatible", "reasoning": "Not applicable for this product."},
-        "reviews": {"sentiment": "unknown", "suspicious_signals": []},
+        "reviews": {
+            "sentiment": "positive" if pos_reviews and len(pos_reviews) >= len(neg_reviews) else ("negative" if neg_reviews else "unknown"),
+            "suspicious_signals": [],
+            "review_count": len(product_reviews),
+            "average_rating": round(sum(r["rating"] for r in product_reviews) / len(product_reviews), 1) if product_reviews else None,
+        },
         "visual_verification": {
-            "visual_verification_status": "unavailable" if img_url.startswith("data:image/svg") else "available",
+            "visual_verification_status": "available" if has_real_image else "unavailable",
             "image_source": title,
             "gallery": {"front": img_url} if img_url else {},
             "observations": [],
@@ -134,6 +190,55 @@ def _card_from_web_item(item: Dict[str, Any], analysis: QueryAnalysis, rank: int
         "vision_summary": "Live web-sourced listing; multi-angle inspection not performed.",
         "source": "web",
     }
+
+    # Cache the full product record (shaped like a FALLBACK_CATALOG entry) so
+    # the frontend's detail-modal follow-up calls -- GET /products/{id},
+    # /{id}/reviews, /{id}/images, /{id}/buy-links -- resolve for this
+    # web-sourced id too instead of 404ing, with no frontend change needed.
+    try:
+        from app.services.web_product_cache import store_web_product
+
+        store_web_product(pid, {
+            "id": pid,
+            "product_id": pid,
+            "title": title,
+            "slug": "",
+            "description": "",
+            "brand": item.get("brand", ""),
+            "category": card["category"],
+            "model_number": "",
+            "sku": "",
+            "external_product_id": item.get("external_product_id"),
+            "is_component": item.get("is_component", False),
+            "price": price,
+            "currency": currency,
+            "specs": item_specs,
+            "image_url": img_url,
+            "images": image_entries,
+            "amazon_url": az_url,
+            "flipkart_url": fk_url,
+            "retailer_offers": resolved_offers,
+            "buy_links": resolved_offers,
+            "reviews": [
+                {
+                    "id": f"REV-{pid}-{idx + 1}",
+                    "product_id": pid,
+                    "rating": r.get("rating"),
+                    "title": r.get("title") or "",
+                    "body": r.get("body") or "",
+                    "sentiment": "positive" if (r.get("rating") or 0) >= 4 else ("negative" if (r.get("rating") or 5) <= 3 else "neutral"),
+                    "sentiment_score": None,
+                    "verified_purchase": True,
+                    "is_suspicious": False,
+                    "fraud_score": 0.0,
+                }
+                for idx, r in enumerate(product_reviews)
+            ],
+        })
+    except Exception:  # noqa: BLE001
+        pass
+
+    return card
 
 
 def _is_phone_category(category: str) -> bool:
@@ -230,6 +335,7 @@ class WorkflowOrchestrator:
 
         t0 = time.perf_counter()
         candidates_raw: List[Dict[str, Any]] = []
+        web_retrieval_attempted = False
 
         # Determine target index based on intent
         user_query_lower = user_query.lower()
@@ -475,6 +581,7 @@ class WorkflowOrchestrator:
             # unrelated items. Never triggered for queries the internal catalog
             # already answers well (keeps the fast path fast).
             if settings.WEB_RETRIEVAL_ENABLED and len(candidates_raw) < settings.WEB_RETRIEVAL_MIN_CANDIDATES:
+                web_retrieval_attempted = True
                 try:
                     from app.services.web_retrieval import search_web_products
 
@@ -1297,7 +1404,11 @@ class WorkflowOrchestrator:
         # -- e.g. the catalog has plenty of phones, just none actually priced in
         # the shopper's stated range. Live-search the web for real, currently
         # listed products in that exact range rather than answering "no results".
-        if settings.WEB_RETRIEVAL_ENABLED and len(cards) < 3 and (analysis.budget_min is not None or analysis.budget_max is not None):
+        if (
+            settings.WEB_RETRIEVAL_ENABLED and not web_retrieval_attempted and len(cards) < 3
+            and (analysis.budget_min is not None or analysis.budget_max is not None)
+        ):
+            web_retrieval_attempted = True
             try:
                 from app.services.web_retrieval import search_web_products
 

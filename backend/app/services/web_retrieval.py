@@ -56,6 +56,99 @@ def _parse_price(text: Optional[str]) -> Optional[float]:
         return None
 
 
+_SKIP_REVIEW_LINES = {"helpful", "report", "comment", "see more"}
+
+
+def _parse_review_block(text: str) -> Optional[Dict[str, Any]]:
+    """Parse one Amazon review block's plain text into {title, body, rating}.
+    Amazon's review DOM nests title/body oddly across a11y spans, so this
+    parses the block's rendered line order instead of relying on specific
+    data-hook selectors for each field. Returns None if no rating or body
+    text could be confidently found -- never fabricates a review."""
+    lines = [l.strip() for l in text.split("\n") if l.strip()]
+    rating: Optional[float] = None
+    title: Optional[str] = None
+    body_lines: List[str] = []
+    collecting_body = False
+
+    for i, line in enumerate(lines):
+        star_match = re.match(r"^(\d(?:\.\d)?)\s+out of 5 stars", line, re.IGNORECASE)
+        if star_match and rating is None:
+            rating = float(star_match.group(1))
+            if i + 1 < len(lines) and not lines[i + 1].lower().startswith("reviewed in"):
+                title = lines[i + 1]
+            continue
+        low = line.lower()
+        if low.startswith("reviewed in"):
+            collecting_body = True
+            continue
+        if low in ("verified purchase",):
+            continue
+        if low in _SKIP_REVIEW_LINES:
+            break
+        if collecting_body:
+            body_lines.append(line)
+
+    body = " ".join(body_lines).strip()
+    if rating is None or not body:
+        return None
+    return {"title": title or "", "body": body, "rating": rating}
+
+
+def _extract_specs_and_reviews(page, product_url: str) -> tuple:
+    """Visit a product's own page and extract real spec rows (from Amazon's
+    product-overview table, falling back to the top feature bullet) and up to
+    3 real customer reviews. Returns ({}, []) on any failure -- callers keep
+    working with just the search-result fields rather than fabricating
+    specs/reviews."""
+    specs: Dict[str, str] = {}
+    reviews: List[Dict[str, Any]] = []
+    try:
+        page.goto(product_url, wait_until="domcontentloaded", timeout=12000)
+        page.wait_for_timeout(800)
+
+        rows = page.locator("#productOverview_feature_div table tr")
+        row_count = min(rows.count(), 8)
+        for i in range(row_count):
+            try:
+                cells = rows.nth(i).locator("td, th")
+                if cells.count() >= 2:
+                    key = cells.nth(0).inner_text(timeout=1000).strip()
+                    val = cells.nth(1).inner_text(timeout=1000).strip()
+                    if key and val:
+                        specs[key] = val
+            except Exception:  # noqa: BLE001
+                continue
+
+        if not specs:
+            bullets = page.locator("#feature-bullets li span.a-list-item")
+            b_count = min(bullets.count(), 3)
+            for i in range(b_count):
+                try:
+                    text = bullets.nth(i).inner_text(timeout=1000).strip()
+                    if text:
+                        specs[f"Highlight {i + 1}"] = text
+                except Exception:  # noqa: BLE001
+                    continue
+
+        review_blocks = page.locator('[data-hook="review"]')
+        rb_count = min(review_blocks.count(), 5)
+        for i in range(rb_count):
+            if len(reviews) >= 3:
+                break
+            try:
+                block_text = review_blocks.nth(i).inner_text(timeout=1500)
+                parsed = _parse_review_block(block_text)
+                if parsed:
+                    reviews.append(parsed)
+            except Exception:  # noqa: BLE001
+                continue
+    except Exception:  # noqa: BLE001
+        pass
+
+    return specs, reviews
+
+
 async def search_web_products(
     category_query: str,
     brand: Optional[str] = None,
@@ -123,6 +216,9 @@ def _search_amazon_sync(
             page = context.new_page()
             page.goto(search_url, wait_until="domcontentloaded", timeout=15000)
             page.wait_for_timeout(1200)
+            # Separate tab for per-product spec/review visits so navigating
+            # there never disturbs the search-results page mid-loop.
+            detail_page = context.new_page()
 
             cards = page.locator('div[data-component-type="s-search-result"]')
             count = min(cards.count(), limit * 3)  # over-fetch, filter down below
@@ -161,6 +257,14 @@ def _search_amazon_sync(
                     img_el = card.locator("img.s-image").first
                     image_url = img_el.get_attribute("src", timeout=1500) if img_el.count() else None
 
+                    # Visit this product's own page for its real specs and
+                    # reviews -- capped so total latency stays bounded even
+                    # when several candidates pass the budget filter.
+                    specs: Dict[str, str] = {}
+                    product_reviews: List[Dict[str, Any]] = []
+                    if len(results) < 4:
+                        specs, product_reviews = _extract_specs_and_reviews(detail_page, product_url)
+
                     pid = str(uuid.uuid5(uuid.NAMESPACE_URL, product_url))
                     results.append({
                         "id": pid,
@@ -174,8 +278,8 @@ def _search_amazon_sync(
                         "external_product_id": asin,
                         "image_url": image_url,
                         "source": "web",
-                        "specs": {},
-                        "_reviews": [],
+                        "specs": specs,
+                        "_reviews": product_reviews,
                         "retailer_offers": [{
                             "product_id": pid,
                             "retailer": "Amazon",

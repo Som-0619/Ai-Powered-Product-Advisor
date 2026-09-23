@@ -96,7 +96,7 @@ class Settings(BaseSettings):
     BROWSERBASE_API_KEY: str = ""
     WEB_RETRIEVAL_ENABLED: bool = True
     WEB_RETRIEVAL_MIN_CANDIDATES: int = 8
-    WEB_RETRIEVAL_TIMEOUT_SECONDS: float = 45.0
+    WEB_RETRIEVAL_TIMEOUT_SECONDS: float = 90.0
 
     # Search & Retrieval Configuration
     KEYWORD_WEIGHT: float = 0.5
