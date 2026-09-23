@@ -6,9 +6,7 @@ import {
   AlertTriangle,
   FileText,
   ShieldCheck,
-  Eye,
   MessageSquare,
-  Sparkles,
   ExternalLink,
   Cpu,
   Layers,
@@ -27,7 +25,6 @@ interface RecommendationCardProps {
   onOpenEvidence: (item: RecommendationItem) => void;
   onOpenReviews: (item: RecommendationItem) => void;
   onOpenCompatibility: (item: RecommendationItem) => void;
-  onOpenVision: (item: RecommendationItem) => void;
 }
 
 export const RecommendationCard: React.FC<RecommendationCardProps> = ({
@@ -36,7 +33,6 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
   onOpenEvidence,
   onOpenReviews,
   onOpenCompatibility,
-  onOpenVision,
 }) => {
   const confidencePct = item.confidence > 0
     ? Math.min(100, Math.max(1, Math.round(item.confidence * 100)))
@@ -190,17 +186,6 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
           </div>
         )}
 
-        {/* Key Highlights / Match Rationale */}
-        <div className="bg-surface-100/50 border border-slate-200/60 dark:border-white/5 rounded-xl p-3 mb-3.5">
-          <div className="flex items-center space-x-1.5 text-blue-600 dark:text-blue-400 text-xs font-semibold mb-1">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Key Highlights</span>
-          </div>
-          <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-2">
-            {item.why_recommended}
-          </p>
-        </div>
-
         {/* Pros & Cons */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
           {/* Pros */}
@@ -270,17 +255,6 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
               >
                 <ShieldCheck className="w-3.5 h-3.5 text-purple-500" />
                 <span>Compatibility</span>
-              </button>
-            )}
-
-            {/* Vision Button */}
-            {item.visual_verification && (
-              <button
-                onClick={() => onOpenVision(item)}
-                className="px-2.5 py-1.5 rounded-lg bg-surface-100 hover:bg-surface-200 border border-slate-200/80 dark:border-white/5 text-xs text-slate-700 dark:text-slate-200 font-medium flex items-center space-x-1 transition-all"
-              >
-                <Eye className="w-3.5 h-3.5 text-rose-500" />
-                <span>Vision</span>
               </button>
             )}
           </div>

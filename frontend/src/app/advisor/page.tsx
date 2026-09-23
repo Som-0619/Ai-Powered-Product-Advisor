@@ -18,7 +18,6 @@ import { ProductDetailsModal } from "../../components/ProductDetailsModal";
 import { EvidencePanel } from "../../components/EvidencePanel";
 import { ReviewsPanel } from "../../components/ReviewsPanel";
 import { CompatibilityPanel } from "../../components/CompatibilityPanel";
-import { VisualVerificationPanel } from "../../components/VisualVerificationPanel";
 import { ChatInterface } from "../../components/ChatInterface";
 import {
   streamRecommendation,
@@ -42,7 +41,6 @@ function AdvisorScreen() {
   const [selectedEvidenceItem, setSelectedEvidenceItem] = useState<RecommendationItem | null>(null);
   const [selectedReviewsItem, setSelectedReviewsItem] = useState<RecommendationItem | null>(null);
   const [selectedCompatibilityItem, setSelectedCompatibilityItem] = useState<RecommendationItem | null>(null);
-  const [selectedVisionItem, setSelectedVisionItem] = useState<RecommendationItem | null>(null);
 
   const sortedRecommendations = React.useMemo(() => {
     if (!recommendationResult?.recommendations) return [];
@@ -117,7 +115,6 @@ function AdvisorScreen() {
             onOpenEvidence={(item) => setSelectedEvidenceItem(item)}
             onOpenReviews={(item) => setSelectedReviewsItem(item)}
             onOpenCompatibility={(item) => setSelectedCompatibilityItem(item)}
-            onOpenVision={(item) => setSelectedVisionItem(item)}
           />
         </div>
       ) : (
@@ -302,7 +299,6 @@ function AdvisorScreen() {
                     onOpenEvidence={(it) => setSelectedEvidenceItem(it)}
                     onOpenReviews={(it) => setSelectedReviewsItem(it)}
                     onOpenCompatibility={(it) => setSelectedCompatibilityItem(it)}
-                    onOpenVision={(it) => setSelectedVisionItem(it)}
                   />
                 ))}
               </div>
@@ -331,11 +327,6 @@ function AdvisorScreen() {
       <CompatibilityPanel
         item={selectedCompatibilityItem}
         onClose={() => setSelectedCompatibilityItem(null)}
-      />
-
-      <VisualVerificationPanel
-        item={selectedVisionItem}
-        onClose={() => setSelectedVisionItem(null)}
       />
     </div>
   );

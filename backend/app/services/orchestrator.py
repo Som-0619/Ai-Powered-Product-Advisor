@@ -181,7 +181,11 @@ class WorkflowOrchestrator:
                 comp_res = await self.search.hybrid_search("components", user_query, limit=8)
                 for hit in comp_res.hits:
                     src = dict(hit.source)
-                    src["id"] = hit.id
+                    # The components index keys documents by the component row's own id,
+                    # not the product id — resolve to product_id so this candidate dedupes
+                    # correctly against the same product returned from the products index,
+                    # and so downstream Postgres hydration (price/retailer offers) matches.
+                    src["id"] = src.get("product_id") or hit.id
                     src["is_component"] = True
                     src["retrieval_score"] = hit.score
                     candidates_raw.append(src)

@@ -41,7 +41,6 @@ interface ChatInterfaceProps {
   onOpenEvidence: (item: RecommendationItem) => void;
   onOpenReviews: (item: RecommendationItem) => void;
   onOpenCompatibility: (item: RecommendationItem) => void;
-  onOpenVision: (item: RecommendationItem) => void;
   onUpdateGlobalTrace?: (trace: TraceStep[]) => void;
 }
 
@@ -50,7 +49,6 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
   onOpenEvidence,
   onOpenReviews,
   onOpenCompatibility,
-  onOpenVision,
   onUpdateGlobalTrace,
 }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -249,7 +247,6 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                         onOpenEvidence={onOpenEvidence}
                         onOpenReviews={onOpenReviews}
                         onOpenCompatibility={onOpenCompatibility}
-                        onOpenVision={onOpenVision}
                       />
                     ))}
                   </div>

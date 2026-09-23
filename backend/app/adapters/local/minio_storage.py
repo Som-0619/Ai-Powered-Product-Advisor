@@ -23,6 +23,7 @@ class MinioStorageService(StorageService):
     def __init__(self):
         self._client: Optional[Minio] = None
         self._bucket: str = settings.STORAGE_BUCKET
+        self._existing_keys: Optional[set] = None
 
     def _get_clean_endpoint(self) -> str:
         """Strip http:// or https:// scheme for the MinIO client SDK."""
@@ -44,17 +45,45 @@ class MinioStorageService(StorageService):
             )
             loop = asyncio.get_running_loop()
             await loop.run_in_executor(None, self._ensure_bucket)
+            try:
+                keys = await self.list_objects(prefix="products/", recursive=True)
+                self._existing_keys = set(keys)
+            except Exception as exc:
+                logger.warning(f"Could not pre-cache MinIO product keys: {exc}")
+                self._existing_keys = None
             logger.info(
                 "Connected to local MinIO storage",
-                extra={"endpoint": endpoint, "bucket": self._bucket},
+                extra={"endpoint": endpoint, "bucket": self._bucket, "cached_keys": len(self._existing_keys or set())},
             )
 
     def _ensure_bucket(self) -> None:
-        """Synchronously check and create bucket if not already present."""
+        """Synchronously check and create bucket if not already present, ensuring public read policy."""
         if self._client:
             if not self._client.bucket_exists(self._bucket):
                 self._client.make_bucket(self._bucket)
                 logger.info(f"Created MinIO bucket: {self._bucket}")
+            import json
+            try:
+                policy = {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {"AWS": ["*"]},
+                            "Action": ["s3:GetBucketLocation", "s3:ListBucket"],
+                            "Resource": [f"arn:aws:s3:::{self._bucket}"],
+                        },
+                        {
+                            "Effect": "Allow",
+                            "Principal": {"AWS": ["*"]},
+                            "Action": ["s3:GetObject"],
+                            "Resource": [f"arn:aws:s3:::{self._bucket}/*"],
+                        },
+                    ],
+                }
+                self._client.set_bucket_policy(self._bucket, json.dumps(policy))
+            except Exception as exc:
+                logger.warning(f"Could not set MinIO public read policy: {exc}")
 
     async def health_check(self) -> Dict[str, Any]:
         """Perform a live health probe verifying bucket availability and latency."""
@@ -118,6 +147,8 @@ class MinioStorageService(StorageService):
             )
 
         await loop.run_in_executor(None, _upload)
+        if self._existing_keys is not None:
+            self._existing_keys.add(clean_name)
         return clean_name
 
     async def get_object(self, object_name: str) -> Optional[bytes]:
@@ -160,43 +191,42 @@ class MinioStorageService(StorageService):
                     return True
                 raise
 
-        return await loop.run_in_executor(None, _delete)
+        res = await loop.run_in_executor(None, _delete)
+        if res and self._existing_keys is not None:
+            self._existing_keys.discard(clean_name)
+        return res
 
     async def exists(self, object_name: str) -> bool:
-        """Check if an object exists in MinIO via stat metadata."""
+        """Check if an object exists in MinIO via cached set or stat metadata."""
+        if not object_name or not isinstance(object_name, str):
+            return False
+        clean_name = object_name.lstrip("/")
+        if self._existing_keys is not None:
+            return clean_name in self._existing_keys
+
         if not self._client:
             await self.connect()
 
-        clean_name = object_name.lstrip("/")
         loop = asyncio.get_running_loop()
 
         def _stat() -> bool:
             try:
                 self._client.stat_object(self._bucket, clean_name)
                 return True
-            except S3Error as exc:
-                if exc.code in ("NoSuchKey", "NoSuchBucket"):
-                    return False
-                raise
+            except Exception:
+                return False
 
         return await loop.run_in_executor(None, _stat)
 
     async def get_url(self, object_name: str, expires_seconds: int = 3600) -> str:
-        """Generate a presigned GET URL for downloading/viewing an object."""
-        if not self._client:
-            await self.connect()
-
+        """Generate a valid public or presigned GET URL for viewing an object in browser."""
         clean_name = object_name.lstrip("/")
-        loop = asyncio.get_running_loop()
-
-        def _presign() -> str:
-            return self._client.presigned_get_object(
-                self._bucket,
-                clean_name,
-                expires=timedelta(seconds=expires_seconds),
-            )
-
-        return await loop.run_in_executor(None, _presign)
+        endpoint = settings.STORAGE_ENDPOINT
+        if "minio:9000" in endpoint:
+            endpoint = endpoint.replace("minio:9000", "localhost:9000")
+        if not endpoint.startswith("http://") and not endpoint.startswith("https://"):
+            endpoint = f"http://{endpoint}"
+        return f"{endpoint.rstrip('/')}/{self._bucket}/{clean_name}"
 
 
 # Backwards compatibility and canonical aliases
