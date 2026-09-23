@@ -6,6 +6,11 @@ Product Advisor is an AI shopping assistant. You describe what you want ("gaming
 
 ---
 
+## Architecture 
+
+<img width="746" height="954" alt="Untitled Diagram drawio" src="https://github.com/user-attachments/assets/6441709b-50ca-49da-b11e-ca69ceb3d13a" />
+
+
 ## What it does
 
 - **Understands natural language and Hinglish** — budgets, brands, specific models, and use cases, without needing a rigid search form.
