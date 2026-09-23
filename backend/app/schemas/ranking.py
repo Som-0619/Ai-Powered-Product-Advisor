@@ -17,6 +17,7 @@ class HardConstraint(BaseModel):
 class RankingConstraints(BaseModel):
     category: Optional[str] = None
     budget_max: Optional[float] = Field(default=None, ge=0)
+    budget_min: Optional[float] = Field(default=None, ge=0)
     hard_constraints: List[HardConstraint] = Field(default_factory=list)
 
 

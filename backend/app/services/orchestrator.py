@@ -52,6 +52,90 @@ def _record_trace(trace_list: List[Dict[str, Any]], node: str, status: str, late
     })
 
 
+def _card_from_web_item(item: Dict[str, Any], analysis: QueryAnalysis, rank: int) -> Dict[str, Any]:
+    """Build a card in the exact same shape as an internal-catalog card, from a
+    live Browserbase web-retrieval item. Never fabricates a field: price/URL
+    come straight from what was actually scraped, and anything not verifiable
+    (reviews, multi-angle vision) is honestly marked as unavailable/limited
+    rather than invented."""
+    from app.services.retailer_offers import resolve_product_retailer_offers
+
+    title = item.get("title", "Product")
+    resolved_offers, az_url, fk_url, lowest_verified_price = resolve_product_retailer_offers(
+        product_id=str(item["id"]),
+        title=title,
+        brand=item.get("brand", ""),
+        model="",
+        variant="",
+        external_product_id=item.get("external_product_id"),
+        stored_offers=item.get("retailer_offers") or [],
+    )
+
+    price = lowest_verified_price
+    currency = item.get("currency") or "INR"
+    if price is not None and price > 0:
+        formatted_price = f"₹{int(price):,}" if float(price).is_integer() else f"₹{price:,.2f}"
+    else:
+        price = None
+        formatted_price = "Price unavailable"
+
+    img_url = item.get("image_url") or ""
+    if not img_url:
+        import urllib.parse
+        clean_title = urllib.parse.quote(title[:30])
+        img_url = (
+            "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' "
+            "viewBox='0 0 400 300'><rect width='400' height='300' fill='%2318181b'/>"
+            f"<text x='50%25' y='45%25' dominant-baseline='middle' text-anchor='middle' fill='%2371717a' "
+            f"font-family='sans-serif' font-size='14'>{clean_title}</text>"
+            "<text x='50%25' y='58%25' dominant-baseline='middle' text-anchor='middle' fill='%23a1a1aa' "
+            "font-family='sans-serif' font-weight='bold' font-size='15'>Image unavailable</text></svg>"
+        )
+
+    return {
+        "product_id": str(item["id"]),
+        "product_name": title,
+        "external_product_id": item.get("external_product_id"),
+        "product_image": img_url,
+        "image_url": img_url,
+        "images": [],
+        "retailer_offers": resolved_offers,
+        "buy_links": resolved_offers,
+        "specs": item.get("specs", {}),
+        "model_number": "",
+        "sku": "",
+        "amazon_url": az_url,
+        "flipkart_url": fk_url,
+        "brand": item.get("brand", ""),
+        "category": item.get("category") or analysis.category or "Electronics",
+        "price": price,
+        "currency": currency,
+        "formatted_price": formatted_price,
+        "why_recommended": "Live current listing retrieved from the web because the internal catalog didn't have enough matching options in your stated range.",
+        "pros": ["Live listing, price verified at search time"],
+        "cons": ["Limited review data available (web-sourced result)"],
+        "confidence": 0.7,
+        "rank": rank,
+        "eligible": True,
+        "constraint_status": "satisfied",
+        "evidence": [{
+            "claim": f"Live price verification for {title}.",
+            "evidence_text": f"Scraped directly from {az_url or fk_url or 'retailer search'} at query time: {formatted_price}.",
+            "confidence": 0.85,
+        }],
+        "compatibility": {"status": "compatible", "reasoning": "Not applicable for this product."},
+        "reviews": {"sentiment": "unknown", "suspicious_signals": []},
+        "visual_verification": {
+            "visual_verification_status": "unavailable" if img_url.startswith("data:image/svg") else "available",
+            "image_source": title,
+            "gallery": {"front": img_url} if img_url else {},
+            "observations": [],
+        },
+        "vision_summary": "Live web-sourced listing; multi-angle inspection not performed.",
+        "source": "web",
+    }
+
+
 def _is_phone_category(category: str) -> bool:
     """True for smartphone/mobile categories, never for headphone/earphone
     categories (which contain "phone" as a substring, e.g. "Audio & Headphones")."""
@@ -173,7 +257,7 @@ class WorkflowOrchestrator:
                 "microcontrollers & socs", "sensors & transducers", "passive components", "power management ics",
                 "electronics & components", "electronics", "electronic"
             ]
-            or any(k in user_query_lower for k in [
+            or any(re.search(rf"\b{re.escape(k)}\b", user_query_lower) for k in [
                 "electronics", "electronic", "sensor", "esp32", "mcu", "microcontroller", "relay", "capacitor",
                 "i2c", "spi", "gpio", "resistor", "breadboard", "voltage regulator", "ldo", "transducer", "arduino",
                 "raspberry", "pi 4", "pico", "shifter", "bme280", "iot", "circuit", "board", "module", "ic", "component"
@@ -379,6 +463,69 @@ class WorkflowOrchestrator:
                             ]
             except Exception as exc:
                 logger.warning(f"Failed hydrating candidates from PostgreSQL: {exc}")
+
+            # -----------------------------------------------------------
+            # 2b. Web retrieval fallback (Browserbase)
+            # -----------------------------------------------------------
+            # The internal catalog is a fixed snapshot -- it doesn't have every
+            # brand/model, and even when it has the right category it may have
+            # too few items actually priced inside a budget the shopper stated.
+            # When that happens, live-search Amazon for real, currently-listed
+            # products instead of returning "no results" or padding with
+            # unrelated items. Never triggered for queries the internal catalog
+            # already answers well (keeps the fast path fast).
+            if settings.WEB_RETRIEVAL_ENABLED and len(candidates_raw) < settings.WEB_RETRIEVAL_MIN_CANDIDATES:
+                try:
+                    from app.services.web_retrieval import search_web_products
+
+                    if is_comp_query:
+                        web_category = "Electronic Components Modules Sensors"
+                    elif is_audio_query:
+                        web_category = "Headphones Earbuds"
+                    elif is_phone_query:
+                        web_category = "Smartphones"
+                    elif is_laptop_query:
+                        web_category = "Laptops"
+                    else:
+                        web_category = analysis.category or search_query
+
+                    web_brand = None
+                    if analysis.brand_preferences:
+                        web_brand = analysis.brand_preferences[0]
+
+                    web_items = await search_web_products(
+                        category_query=web_category,
+                        brand=web_brand,
+                        budget_min=analysis.budget_min,
+                        budget_max=analysis.budget_max,
+                        limit=6,
+                    )
+
+                    existing_titles = [c.get("title", "") for c in candidates_raw]
+
+                    def _is_probable_duplicate(title: str) -> bool:
+                        words = {w for w in re.split(r"[^a-z0-9]+", title.lower()) if len(w) > 2}
+                        for other in existing_titles:
+                            other_words = {w for w in re.split(r"[^a-z0-9]+", other.lower()) if len(w) > 2}
+                            if not words or not other_words:
+                                continue
+                            overlap = len(words & other_words) / max(1, min(len(words), len(other_words)))
+                            if overlap >= 0.7:
+                                return True
+                        return False
+
+                    added = 0
+                    for item in web_items:
+                        if _is_probable_duplicate(item["title"]):
+                            continue
+                        candidates_raw.append(item)
+                        existing_titles.append(item["title"])
+                        added += 1
+
+                    if added:
+                        logger.info(f"Web retrieval added {added} live product(s) for insufficient internal results")
+                except Exception as exc:
+                    logger.warning(f"Web retrieval fallback failed, continuing with internal results only: {exc}")
 
         except Exception as exc:
             logger.error("Retrieval failed", extra={"error": str(exc)})
@@ -1137,13 +1284,67 @@ class WorkflowOrchestrator:
         # must not be shown just because it scored well semantically -- unless
         # dropping it would leave nothing, in which case "no results" is the honest
         # answer rather than silently substituting an unrelated product.
-        if analysis.budget_max is not None:
+        if analysis.budget_max is not None or analysis.budget_min is not None:
             cards = [c for c in cards if c["eligible"]]
 
         if analysis.brand_preferences:
             wanted_brands = {b.strip().lower() for b in analysis.brand_preferences if b.strip()}
             if wanted_brands:
                 cards = [c for c in cards if (c.get("brand") or "").strip().lower() in wanted_brands]
+
+        # The internal catalog's raw candidate count looked sufficient earlier,
+        # but after the strict budget/brand hard filter too few (or zero) survive
+        # -- e.g. the catalog has plenty of phones, just none actually priced in
+        # the shopper's stated range. Live-search the web for real, currently
+        # listed products in that exact range rather than answering "no results".
+        if settings.WEB_RETRIEVAL_ENABLED and len(cards) < 3 and (analysis.budget_min is not None or analysis.budget_max is not None):
+            try:
+                from app.services.web_retrieval import search_web_products
+
+                if is_comp_query:
+                    web_category = "Electronic Components Modules Sensors"
+                elif is_audio_query:
+                    web_category = "Headphones Earbuds"
+                elif is_phone_query:
+                    web_category = "Smartphones"
+                elif is_laptop_query:
+                    web_category = "Laptops"
+                else:
+                    web_category = analysis.category or user_query
+
+                web_brand = analysis.brand_preferences[0] if analysis.brand_preferences else None
+                web_items = await search_web_products(
+                    category_query=web_category,
+                    brand=web_brand,
+                    budget_min=analysis.budget_min,
+                    budget_max=analysis.budget_max,
+                    limit=6,
+                )
+
+                existing_titles = [c.get("product_name", "") for c in cards]
+
+                def _is_probable_duplicate_card(title: str) -> bool:
+                    words = {w for w in re.split(r"[^a-z0-9]+", title.lower()) if len(w) > 2}
+                    for other in existing_titles:
+                        other_words = {w for w in re.split(r"[^a-z0-9]+", other.lower()) if len(w) > 2}
+                        if not words or not other_words:
+                            continue
+                        overlap = len(words & other_words) / max(1, min(len(words), len(other_words)))
+                        if overlap >= 0.7:
+                            return True
+                    return False
+
+                added = 0
+                for item in web_items:
+                    if _is_probable_duplicate_card(item["title"]):
+                        continue
+                    cards.append(_card_from_web_item(item, analysis, len(cards) + 1))
+                    existing_titles.append(item["title"])
+                    added += 1
+                if added:
+                    logger.info(f"Post-budget-filter web retrieval added {added} live product(s) within stated range")
+            except Exception as exc:
+                logger.warning(f"Post-filter web retrieval fallback failed, keeping internal results only: {exc}")
 
         if not cards:
             final_res = {

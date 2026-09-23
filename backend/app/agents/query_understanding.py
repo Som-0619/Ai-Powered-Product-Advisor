@@ -68,6 +68,83 @@ class QueryUnderstandingAgent:
             return "hinglish"
         return "en"
 
+    _MONEY_UNIT_RE = r"(?:k|lakhs?|lacs?|crores?|cr|thousand|hazar|hazaar)"
+    _NOT_MONEY_LOOKAHEAD = r"(?!\s*(?:gb|tb|mb|mhz|ghz|hz|w|watt|mp|inch|in\b|\"|nits|kg|mah|cm|mm|core|cores))"
+
+    @staticmethod
+    def _parse_money_token(text: str) -> Optional[float]:
+        m = re.match(
+            rf"[₹]?\s*(\d+(?:\.\d+)?)\s*({QueryUnderstandingAgent._MONEY_UNIT_RE})?",
+            text.strip(), re.IGNORECASE,
+        )
+        if not m:
+            return None
+        val = float(m.group(1))
+        mult = {
+            "lakh": 100000, "lakhs": 100000, "lac": 100000, "lacs": 100000,
+            "crore": 10000000, "crores": 10000000, "cr": 10000000,
+            "thousand": 1000, "hazar": 1000, "hazaar": 1000, "k": 1000,
+        }.get((m.group(2) or "").lower())
+        if mult:
+            val *= mult
+        return val
+
+    def _extract_heuristic_budget_range(self, raw_query: str) -> Optional[tuple]:
+        """Detect an explicit two-sided budget range: "between 20000 and 30000",
+        "phones between 20k and 30k", Hinglish "20 se 30 hazar ke beech". Returns
+        (budget_min, budget_max) or None if no confident two-sided range is present.
+        Guarded against matching unrelated number pairs (e.g. "16GB and 512GB SSD")
+        via a unit-word negative lookahead on each captured number.
+        """
+        num = rf"[₹]?\s*\d+(?:\.\d+)?\s*{self._MONEY_UNIT_RE}?{self._NOT_MONEY_LOOKAHEAD}"
+
+        # "between <num> and/to <num>"
+        m = re.search(rf"between\s+({num})\s*(?:and|to|-)\s*({num})", raw_query, re.IGNORECASE)
+        if not m:
+            # Hinglish: "<num> se <num> (hazar) ke beech/bich"
+            m = re.search(rf"({num})\s+se\s+({num})\s*(?:ke\s+)?(?:beech|bich)\b", raw_query, re.IGNORECASE)
+        if not m:
+            return None
+
+        lo_text, hi_text = m.group(1), m.group(2)
+        lo = self._parse_money_token(lo_text)
+        hi = self._parse_money_token(hi_text)
+        if lo is None or hi is None:
+            return None
+
+        # Hinglish/English elision: "20 se 30 hazar" or "20 to 30k" means the
+        # unit (hazar/k/lakh) applies to BOTH sides even though only written
+        # once, on the second number. If one side has no unit and its raw
+        # value is small enough to plausibly be missing one (<500, matching
+        # the same heuristic used elsewhere in this file), apply the other
+        # side's multiplier to it.
+        lo_has_unit = bool(re.search(self._MONEY_UNIT_RE, lo_text, re.IGNORECASE))
+        hi_has_unit = bool(re.search(self._MONEY_UNIT_RE, hi_text, re.IGNORECASE))
+        if hi_has_unit and not lo_has_unit and lo < 500:
+            hi_mult_match = re.search(self._MONEY_UNIT_RE, hi_text, re.IGNORECASE)
+            if hi_mult_match:
+                mult = {
+                    "lakh": 100000, "lakhs": 100000, "lac": 100000, "lacs": 100000,
+                    "crore": 10000000, "crores": 10000000, "cr": 10000000,
+                    "thousand": 1000, "hazar": 1000, "hazaar": 1000, "k": 1000,
+                }.get(hi_mult_match.group(0).lower())
+                if mult:
+                    lo *= mult
+        elif lo_has_unit and not hi_has_unit and hi < 500:
+            lo_mult_match = re.search(self._MONEY_UNIT_RE, lo_text, re.IGNORECASE)
+            if lo_mult_match:
+                mult = {
+                    "lakh": 100000, "lakhs": 100000, "lac": 100000, "lacs": 100000,
+                    "crore": 10000000, "crores": 10000000, "cr": 10000000,
+                    "thousand": 1000, "hazar": 1000, "hazaar": 1000, "k": 1000,
+                }.get(lo_mult_match.group(0).lower())
+                if mult:
+                    hi *= mult
+
+        if lo > hi:
+            lo, hi = hi, lo
+        return (lo, hi)
+
     def _extract_heuristic_budget(self, text: str) -> Optional[float]:
         """Heuristic backup for budget extraction from Indian and international notation, including word numbers."""
         text_clean = text.strip()
@@ -282,7 +359,7 @@ class QueryUnderstandingAgent:
         elif any(k in q_lower for k in ["relay", "relay module"]):
             category = "Relay Module"
             subcategory = "Relay Module"
-        elif any(k in q_lower for k in ["esp32", "arduino", "raspberry", "microcontroller", "mcu", "transducer", "circuit", "breadboard", "electronics", "electronic", "component", "components", "ic", "module"]):
+        elif any(re.search(rf"\b{re.escape(k)}\b", q_lower) for k in ["esp32", "arduino", "raspberry", "microcontroller", "mcu", "transducer", "circuit", "breadboard", "electronics", "electronic", "component", "components", "ic", "module"]):
             category = "Electronics"
             if "microcontroller" in q_lower or "esp32" in q_lower or "mcu" in q_lower:
                 subcategory = "Microcontroller"
@@ -309,8 +386,16 @@ class QueryUnderstandingAgent:
         if not category and not brand_preferences and not is_follow_up and intent_type not in ("UNKNOWN", "GENERAL_CATALOG_QUERY", "VISION"):
             return None
 
-        # Extract budget
-        budget_max = self._extract_heuristic_budget(raw_query)
+        # Extract budget -- check for an explicit two-sided range ("between X and
+        # Y") before falling back to the single-sided "under X" extractor, so
+        # "phones between 20000 and 30000" sets both budget_min and budget_max
+        # instead of only picking up the first number as budget_max.
+        budget_min: Optional[float] = None
+        budget_range = self._extract_heuristic_budget_range(raw_query)
+        if budget_range:
+            budget_min, budget_max = budget_range
+        else:
+            budget_max = self._extract_heuristic_budget(raw_query)
         currency = "INR" if self._contains_currency_hint(raw_query) else ("USD" if any(w in q_lower for w in ["dollar", "usd", "$"]) else None)
         if budget_max and not currency:
             # This catalog/marketplace is INR-only (Amazon.in / Flipkart); a bare
@@ -319,6 +404,8 @@ class QueryUnderstandingAgent:
 
         # Hard constraints
         hard_constraints: List[str] = []
+        if budget_min:
+            hard_constraints.append(f"budget_min: {budget_min}")
         if budget_max:
             hard_constraints.append(f"budget_max: {budget_max}")
         for voltage in re.findall(r"\b\d+(?:\.\d+)?\s*[vV]\b", raw_query):
@@ -345,6 +432,7 @@ class QueryUnderstandingAgent:
         return QueryAnalysis(
             category=category,
             subcategory=subcategory,
+            budget_min=budget_min,
             budget_max=budget_max,
             currency=currency,
             hard_constraints=hard_constraints,

@@ -45,6 +45,9 @@ class DeterministicRankingEngine:
         if constraints.budget_max is not None and (candidate.price is None or candidate.price > constraints.budget_max):
             price = "unknown" if candidate.price is None else f"{candidate.price:g}"
             reasons.append(f"Budget constraint violated: price {price} exceeds or lacks the maximum {constraints.budget_max:g}.")
+        if constraints.budget_min is not None and (candidate.price is None or candidate.price < constraints.budget_min):
+            price = "unknown" if candidate.price is None else f"{candidate.price:g}"
+            reasons.append(f"Budget constraint violated: price {price} is below the minimum {constraints.budget_min:g}.")
         if constraints.category:
             c_cat = " ".join((candidate.category or "").lower().replace("-", " ").replace("&", " ").split())
             req_cat = " ".join(constraints.category.lower().replace("-", " ").replace("&", " ").split())

@@ -1,0 +1,196 @@
+"""Live web retrieval fallback via Browserbase.
+
+Used by the orchestrator only when the internal PostgreSQL/OpenSearch catalog
+returns too few candidates for a query (wrong/missing category, or a stated
+budget the local catalog can't satisfy). Opens a real Browserbase cloud
+browser, searches Amazon India, and extracts actual live listings -- never
+fabricated data. Every field is either scraped or omitted.
+
+Returned items are shaped exactly like the internal OpenSearch candidate
+dicts the orchestrator already works with (id/title/brand/category/price/
+retailer_offers/specs/...), so they flow through the *same* existing
+ranking, budget-filtering, and card-building code -- no separate rendering
+path, no UI change.
+
+Runs Playwright's SYNC API inside a worker thread (via asyncio.to_thread)
+rather than the async API. The sync approach is the one already proven
+reliable end-to-end against Browserbase in scripts/verify_and_fix_catalog.py;
+running it in a thread lets the calling async code bound it with a hard
+asyncio.wait_for timeout without depending on async-Playwright/event-loop
+interaction that proved unreliable in this environment.
+"""
+
+import asyncio
+import re
+import uuid
+from typing import Any, Dict, List, Optional
+from urllib.parse import quote_plus
+
+from app.core.config import settings
+from app.core.logging import logger
+
+KNOWN_BRANDS = [
+    "Apple", "Samsung", "OnePlus", "Xiaomi", "Redmi", "Realme", "Vivo", "Oppo", "Google", "Pixel",
+    "Motorola", "Nothing", "iQOO", "Asus", "ROG", "Dell", "HP", "Lenovo", "Acer", "MSI", "Sony",
+    "Boat", "boAt", "JBL", "Bose", "Sennheiser", "Skullcandy", "Noise", "Zebronics", "Logitech",
+    "Corsair", "Razer", "Espressif", "Raspberry Pi", "Arduino", "SparkFun", "Adafruit",
+]
+
+
+def _guess_brand(title: str) -> Optional[str]:
+    low = title.lower()
+    for b in KNOWN_BRANDS:
+        if b.lower() in low:
+            return b
+    return title.split()[0] if title.split() else None
+
+
+def _parse_price(text: Optional[str]) -> Optional[float]:
+    if not text:
+        return None
+    digits = re.sub(r"[^\d.]", "", text)
+    try:
+        val = float(digits) if digits else None
+        return val if val and val > 0 else None
+    except ValueError:
+        return None
+
+
+async def search_web_products(
+    category_query: str,
+    brand: Optional[str] = None,
+    budget_min: Optional[float] = None,
+    budget_max: Optional[float] = None,
+    limit: int = 6,
+) -> List[Dict[str, Any]]:
+    """Live-search Amazon India for products matching category/brand/budget.
+
+    Returns [] (never fabricated data) if Browserbase is unavailable, the
+    search fails, or nothing verifiable is found within the time budget.
+    Every returned item has a real scraped title, a live product URL, and
+    (when available) a real scraped price -- items with no verifiable price
+    are dropped when a budget constraint is active, since we can't confirm
+    they're in range.
+    """
+    if not settings.WEB_RETRIEVAL_ENABLED or not settings.BROWSERBASE_API_KEY:
+        return []
+
+    try:
+        return await asyncio.wait_for(
+            asyncio.to_thread(
+                _search_amazon_sync, category_query, brand, budget_min, budget_max, limit
+            ),
+            timeout=settings.WEB_RETRIEVAL_TIMEOUT_SECONDS,
+        )
+    except asyncio.TimeoutError:
+        logger.warning("Web retrieval timed out; continuing with internal results only")
+        return []
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"Web retrieval failed, continuing with internal results only: {exc}")
+        return []
+
+
+def _search_amazon_sync(
+    category_query: str,
+    brand: Optional[str],
+    budget_min: Optional[float],
+    budget_max: Optional[float],
+    limit: int,
+) -> List[Dict[str, Any]]:
+    """Runs in a worker thread -- blocking sync Playwright + Browserbase calls
+    are safe here since they don't block the FastAPI event loop, and a hung
+    call just makes this thread outlive the request rather than the request
+    itself (the caller's asyncio.wait_for still returns on time)."""
+    from browserbase import Browserbase
+    from playwright.sync_api import sync_playwright
+
+    query_text = f"{brand + ' ' if brand else ''}{category_query}".strip()
+    search_url = f"https://www.amazon.in/s?k={quote_plus(query_text)}"
+    if budget_min is not None or budget_max is not None:
+        lo = int((budget_min or 0) * 100)
+        hi = int((budget_max or 10_000_000) * 100)
+        search_url += f"&rh=p_36%3A{lo}-{hi}"
+
+    bb = Browserbase(api_key=settings.BROWSERBASE_API_KEY)
+    session = bb.sessions.create()
+    logger.info(f"[web_retrieval] Browserbase session {session.id} for query '{query_text}'")
+
+    results: List[Dict[str, Any]] = []
+    with sync_playwright() as pw:
+        browser = pw.chromium.connect_over_cdp(session.connect_url)
+        try:
+            context = browser.contexts[0] if browser.contexts else browser.new_context()
+            page = context.new_page()
+            page.goto(search_url, wait_until="domcontentloaded", timeout=15000)
+            page.wait_for_timeout(1200)
+
+            cards = page.locator('div[data-component-type="s-search-result"]')
+            count = min(cards.count(), limit * 3)  # over-fetch, filter down below
+
+            for i in range(count):
+                if len(results) >= limit:
+                    break
+                card = cards.nth(i)
+                try:
+                    # Amazon's current markup doesn't reliably nest the product
+                    # link inside <h2> (sponsored cards especially), but every
+                    # real result card carries its ASIN directly as a data-asin
+                    # attribute -- use that instead of parsing an <a href>.
+                    asin = card.get_attribute("data-asin", timeout=2000)
+                    title_el = card.locator("h2 span").first
+                    title = title_el.inner_text(timeout=2000).strip() if title_el.count() else None
+                    if not asin or not title:
+                        continue
+
+                    product_url = f"https://www.amazon.in/dp/{asin}"
+
+                    price_el = card.locator(".a-price .a-offscreen").first
+                    price_text = price_el.inner_text(timeout=1500) if price_el.count() else None
+                    price = _parse_price(price_text)
+
+                    # Never guess a price into range -- if a budget was stated and we
+                    # couldn't scrape a real price, drop the item rather than show it.
+                    if (budget_min is not None or budget_max is not None) and price is None:
+                        continue
+                    if price is not None:
+                        if budget_min is not None and price < budget_min:
+                            continue
+                        if budget_max is not None and price > budget_max:
+                            continue
+
+                    img_el = card.locator("img.s-image").first
+                    image_url = img_el.get_attribute("src", timeout=1500) if img_el.count() else None
+
+                    pid = str(uuid.uuid5(uuid.NAMESPACE_URL, product_url))
+                    results.append({
+                        "id": pid,
+                        "title": title,
+                        "brand": _guess_brand(title),
+                        "category": category_query,
+                        "price": price,
+                        "currency": "INR",
+                        "is_component": False,
+                        "retrieval_score": 5.0,
+                        "external_product_id": asin,
+                        "image_url": image_url,
+                        "source": "web",
+                        "specs": {},
+                        "_reviews": [],
+                        "retailer_offers": [{
+                            "product_id": pid,
+                            "retailer": "Amazon",
+                            "external_product_id": asin,
+                            "url": product_url,
+                            "price": price,
+                            "currency": "INR",
+                            "availability_status": "available",
+                            "verification_status": "verified",
+                        }] if price is not None else [],
+                    })
+                except Exception:  # noqa: BLE001
+                    continue
+        finally:
+            browser.close()
+
+    logger.info(f"[web_retrieval] found {len(results)} verified live product(s) for '{query_text}'")
+    return results

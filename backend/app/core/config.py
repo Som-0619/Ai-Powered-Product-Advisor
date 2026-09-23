@@ -92,6 +92,12 @@ class Settings(BaseSettings):
     LLM_TIMEOUT_SECONDS: float = 60.0
     LLM_MAX_RETRIES: int = 3
 
+    # Browserbase (live web retrieval fallback when internal catalog is insufficient)
+    BROWSERBASE_API_KEY: str = ""
+    WEB_RETRIEVAL_ENABLED: bool = True
+    WEB_RETRIEVAL_MIN_CANDIDATES: int = 8
+    WEB_RETRIEVAL_TIMEOUT_SECONDS: float = 45.0
+
     # Search & Retrieval Configuration
     KEYWORD_WEIGHT: float = 0.5
     VECTOR_WEIGHT: float = 0.5
