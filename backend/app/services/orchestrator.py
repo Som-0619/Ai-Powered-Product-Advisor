@@ -813,14 +813,43 @@ class WorkflowOrchestrator:
             positive_reviews = [r for r in prod_reviews if (r.get("rating") or 0) >= 4 or r.get("sentiment") == "positive"]
             negative_reviews = [r for r in prod_reviews if (r.get("rating") or 5) <= 3 or r.get("sentiment") in ("negative", "neutral")]
 
+            # Titles are frequently boilerplate across many products (e.g. "Verified
+            # Editorial Review", "Verified Purchase"), while the review body is the
+            # actual product-specific observation. Prefer the body whenever it says
+            # more than the title; only fall back to the title if there's no body.
+            _GENERIC_TITLE_RE = re.compile(
+                r"^(verified (editorial review|purchase|audio quality|reviews?)|great value|good product)\b", re.IGNORECASE
+            )
+
             def _review_line(r: Dict[str, Any]) -> str:
-                text = (r.get("title") or r.get("body") or "").strip()
+                title = (r.get("title") or "").strip()
+                body = (r.get("body") or "").strip()
                 # Generated reviews append "— Reviewer Name"; keep only the review content.
-                text = text.split(" — ")[0].strip()
+                body = body.split(" — ")[0].strip()
+                if body and (not title or len(body) > len(title) or _GENERIC_TITLE_RE.match(title)):
+                    text = body
+                else:
+                    text = title or body
+                # Keep each bullet concise.
+                if len(text) > 140:
+                    text = text[:137].rsplit(" ", 1)[0] + "..."
                 return text
 
-            pros = [_review_line(r) for r in positive_reviews[:3] if _review_line(r)]
-            cons = [_review_line(r) for r in negative_reviews[:2] if _review_line(r)]
+            def _unique_lines(reviews: List[Dict[str, Any]], limit: int) -> List[str]:
+                seen: set = set()
+                out: List[str] = []
+                for r in reviews:
+                    line = _review_line(r)
+                    key = line.lower()
+                    if line and key not in seen:
+                        seen.add(key)
+                        out.append(line)
+                    if len(out) >= limit:
+                        break
+                return out
+
+            pros = _unique_lines(positive_reviews, 3)
+            cons = _unique_lines(negative_reviews, 2)
 
             if cand.get("specs"):
                 for k, v in list(cand["specs"].items())[:2]:
@@ -831,7 +860,10 @@ class WorkflowOrchestrator:
             if not pros:
                 pros = ["Limited review data available"]
             if not cons:
-                cons = ["Limited review data available"] if not prod_reviews else ["Subject to retailer stock availability"]
+                # No negative/neutral review exists for this product specifically --
+                # that's genuinely limited review coverage for a caveat, not a real
+                # per-product downside, so say so rather than repeating a filler line.
+                cons = ["Limited review data available"]
             if res.constraint_status == "violated":
                 cons.extend(res.ranking_reasons)
 
