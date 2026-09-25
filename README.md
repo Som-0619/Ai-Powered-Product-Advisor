@@ -1,8 +1,14 @@
-# Product Advisor
+# Verdict
 
 **Ask for a product in plain English or Hinglish. Get real, verified recommendations with live buy links — not guesses.**
 
-Product Advisor is an AI shopping assistant. You describe what you want ("gaming laptop under 80k", "mujhe 20 se 30 hazar ke beech phone chahiye", "iPhone 15 Pro"), and it searches its own product catalog first, and if that isn't enough, it goes out and searches Amazon **live** for real, currently-listed products — with real prices, real reviews, and real buy links. It never makes up a price or a product.
+Verdict is an AI shopping assistant. You describe what you want ("gaming laptop under 80k", "mujhe 20 se 30 hazar ke beech phone chahiye", "iPhone 15 Pro"), and it searches its own product catalog first, and if that isn't enough, it goes out and searches Amazon **live** for real, currently-listed products — with real prices, real reviews, and real buy links. It never makes up a price or a product.
+
+---
+
+## Architecture
+
+<img width="746" height="954" alt="Verdict architecture diagram" src="https://github.com/user-attachments/assets/6441709b-50ca-49da-b11e-ca69ceb3d13a" />
 
 ---
 
@@ -18,6 +24,7 @@ Product Advisor is an AI shopping assistant. You describe what you want ("gaming
 - **Falls back to a live web search** (Amazon, via [Browserbase](https://www.browserbase.com/)) only when the catalog doesn't have enough good matches — so most searches stay fast, and rare/unusual ones still work.
 - **Never invents data.** Every price, spec, and review shown is scraped from a real product page at search time. If something can't be verified, it's honestly marked "unknown" instead of guessed.
 - **Stays scoped to what you asked for.** Search "Samsung phone" and you get Samsung phones. Search "iPhone 15 Pro" and you get that model — not every other iPhone in the catalog.
+- **Buy links go where they say.** Every live product link is matched against the exact model/chip/capacity it claims to be (not just a shared brand or spec), so you don't land on an unrelated product.
 - **Shows its work.** Every recommendation comes with evidence (why it was picked), pros/cons from real reviews, and direct buy links to Amazon/Flipkart.
 - **Two ways to search**: a structured search page, or a conversational chat interface — both go through the same underlying pipeline.
 
