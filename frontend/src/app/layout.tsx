@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "../components/Header";
 import { ThemeProvider } from "../components/ThemeProvider";
 
-const bricolage = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-heading" });
-const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-body" });
+// One clean, professional, highly-legible typeface for both headings and
+// body copy -- weight is what differentiates them, not a different family.
+// JetBrains Mono stays for technical/numeric bits (prices, SKUs).
+const inter = Inter({ subsets: ["latin"], variable: "--font-heading" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
-  title: "Product Advisor | Multimodal Product Intelligence",
+  title: "Verdict | Multimodal Product Intelligence",
   description:
     "AI-powered multimodal product recommendation and intelligence platform for consumer electronics and electronic components.",
 };
@@ -45,7 +47,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${bricolage.variable} ${dmSans.variable} ${jetbrainsMono.variable} min-h-screen bg-background text-foreground flex flex-col font-sans antialiased`}
+        className={`${inter.variable} ${jetbrainsMono.variable} min-h-screen bg-background text-foreground flex flex-col font-sans antialiased`}
       >
         <ThemeProvider>
           <Header />
@@ -53,7 +55,7 @@ export default function RootLayout({
             {children}
           </main>
           <footer className="border-t border-slate-200/80 dark:border-white/5 py-6 text-center text-xs text-slate-500 dark:text-slate-400">
-            Product Advisor • Multimodal Product Intelligence & Comparison
+            Verdict • Multimodal Product Intelligence & Comparison
           </footer>
         </ThemeProvider>
       </body>

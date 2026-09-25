@@ -25,7 +25,7 @@ export const ReviewsPanel: React.FC<ReviewsPanelProps> = ({ item, onClose }) => 
         </button>
 
         <div className="flex items-center space-x-3 mb-5 border-b border-border pb-4">
-          <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+          <div className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
             <MessageSquare className="w-5 h-5" />
           </div>
           <div>
@@ -44,7 +44,7 @@ export const ReviewsPanel: React.FC<ReviewsPanelProps> = ({ item, onClose }) => 
           </div>
           <div className="bg-surface-100 p-3 rounded-xl border border-border">
             <span className="text-[11px] text-muted-foreground block uppercase font-semibold">Fraud Risk</span>
-            <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
+            <span className="text-sm font-bold text-foreground">
               {reviews?.suspicious_signals?.length ? "Signals Flagged" : "Low Risk (Clean)"}
             </span>
           </div>

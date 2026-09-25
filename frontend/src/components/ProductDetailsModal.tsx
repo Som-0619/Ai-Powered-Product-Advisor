@@ -188,7 +188,7 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ item, 
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-1.5 mb-1">
               {item.brand && (
-                <span className="text-[11px] font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
+                <span className="text-[11px] font-semibold text-accent uppercase tracking-wider">
                   {item.brand}
                 </span>
               )}
@@ -196,7 +196,7 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ item, 
                 {item.category || "Electronics"}
               </span>
               {item.rank && (
-                <span className="text-[11px] px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-bold border border-indigo-500/20">
+                <span className="text-[11px] px-2 py-0.5 rounded-full bg-accent/10 text-accent font-bold border border-accent/20">
                   Rank #{item.rank}
                 </span>
               )}
@@ -216,7 +216,7 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ item, 
             onClick={() => setActiveTab("compare")}
             className={`flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center space-x-1.5 ${
               activeTab === "compare"
-                ? "bg-surface-50 text-indigo-600 dark:text-indigo-400 shadow-sm border border-border"
+                ? "bg-surface-50 text-accent shadow-sm border border-border"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
@@ -227,7 +227,7 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ item, 
             onClick={() => setActiveTab("specs")}
             className={`flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center space-x-1.5 ${
               activeTab === "specs"
-                ? "bg-surface-50 text-indigo-600 dark:text-indigo-400 shadow-sm border border-border"
+                ? "bg-surface-50 text-accent shadow-sm border border-border"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
@@ -238,7 +238,7 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ item, 
             onClick={() => setActiveTab("evidence")}
             className={`flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center space-x-1.5 ${
               activeTab === "evidence"
-                ? "bg-surface-50 text-indigo-600 dark:text-indigo-400 shadow-sm border border-border"
+                ? "bg-surface-50 text-accent shadow-sm border border-border"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
@@ -251,7 +251,7 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ item, 
         {activeTab === "compare" && (
           <div className="space-y-6 animate-in fade-in duration-150">
             {/* Best Deal Banner */}
-            <div className="p-3.5 rounded-xl bg-gradient-to-r from-emerald-500/10 via-indigo-500/10 to-indigo-500/10 border border-emerald-500/20 flex items-center justify-between flex-wrap gap-2">
+            <div className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-between flex-wrap gap-2">
               <div className="flex items-center space-x-2">
                 <Sparkles className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
                 <span className="text-xs font-bold text-foreground">
@@ -320,7 +320,7 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ item, 
                     )}
                   </div>
                   <div className="mt-2 flex items-center space-x-1.5 text-xs text-muted-foreground">
-                    <Clock className="w-3.5 h-3.5 text-indigo-500 shrink-0" />
+                    <Clock className="w-3.5 h-3.5 text-accent shrink-0" />
                     <span>{comparison.deals.amazon.deliveryBadge} • {comparison.deals.amazon.deliveryTime}</span>
                   </div>
                 </div>
@@ -341,7 +341,7 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ item, 
                     href={comparison.deals.amazon.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-xs flex items-center justify-center space-x-2 transition-all shadow-md shadow-amber-500/20 active:scale-[0.98]"
+                    className="w-full py-2.5 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-xs flex items-center justify-center space-x-2 transition-colors active:scale-[0.98]"
                   >
                     <span>Buy on Amazon</span>
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -420,7 +420,7 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ item, 
                     href={comparison.deals.flipkart.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs flex items-center justify-center space-x-2 transition-all shadow-md shadow-blue-500/20 active:scale-[0.98]"
+                    className="w-full py-2.5 px-4 rounded-xl bg-[#2874f0] hover:bg-[#1a5cc8] text-white font-semibold text-xs flex items-center justify-center space-x-2 transition-colors active:scale-[0.98]"
                   >
                     <span>Buy on Flipkart</span>
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -483,7 +483,7 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ item, 
           <div className="space-y-6 animate-in fade-in duration-150">
             {loading ? (
               <div className="flex items-center justify-center py-12 text-muted-foreground space-x-2">
-                <Loader2 className="w-5 h-5 animate-spin text-indigo-500" />
+                <Loader2 className="w-5 h-5 animate-spin text-accent" />
                 <span className="text-sm">Fetching detailed specifications...</span>
               </div>
             ) : (
@@ -504,7 +504,7 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ item, 
                 {details?.component_profile && (
                   <div>
                     <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 flex items-center space-x-1.5">
-                      <Cpu className="w-3.5 h-3.5 text-indigo-500" />
+                      <Cpu className="w-3.5 h-3.5 text-accent" />
                       <span>Component Specifications</span>
                     </h4>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -554,7 +554,7 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ item, 
                 {details?.specifications && Object.keys(details.specifications).length > 0 && (
                   <div>
                     <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 flex items-center space-x-1.5">
-                      <Layers className="w-3.5 h-3.5 text-indigo-500" />
+                      <Layers className="w-3.5 h-3.5 text-accent" />
                       <span>Technical Attributes</span>
                     </h4>
                     <div className="bg-surface-100/60 rounded-xl border border-border overflow-hidden">

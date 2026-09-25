@@ -27,33 +27,25 @@ const config: Config = {
           200: "var(--surface-200)",
           300: "var(--surface-300)",
         },
-        brand: {
-          500: "#3b82f6",
-          600: "#2563eb",
-          700: "#1d4ed8",
-        },
         accent: {
           DEFAULT: "var(--accent)",
           foreground: "var(--accent-foreground)",
-          emerald: "#10b981",
-          amber: "#f59e0b",
-          rose: "#f43f5e",
-          violet: "#8b5cf6",
+          secondary: "var(--accent-secondary)",
         },
-        /* Purposeful accent palette -- assign by meaning, not decoration.
-           blue = primary actions/search, violet = AI/intelligence,
-           mint = success/availability, coral = warnings/caveats,
-           yellow = highlights/deals. */
+        /* No color anywhere -- every "pa-*" token (kept only so existing
+           usages across components don't need touching one by one) resolves
+           to the same black/white accent as everything else: pure black text
+           on light, pure white on dark, never a hue. */
         pa: {
-          blue: "#4F7CFF",
-          violet: "#8B5CF6",
-          coral: "#FF6B6B",
-          mint: "#35C99A",
-          yellow: "#F4C95D",
+          blue: "var(--accent)",
+          violet: "var(--accent)",
+          coral: "var(--accent)",
+          mint: "var(--accent)",
+          yellow: "var(--accent)",
         },
       },
       fontFamily: {
-        sans: ["var(--font-body)", "sans-serif"],
+        sans: ["var(--font-heading)", "sans-serif"],
         heading: ["var(--font-heading)", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"],
       },

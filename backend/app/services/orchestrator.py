@@ -78,6 +78,101 @@ def _salvage_query_analysis(qu_agent: "QueryUnderstandingAgent", user_query: str
     return QueryAnalysis(category=None, budget_min=budget_min, budget_max=budget_max, ambiguity=False)
 
 
+_CAPACITY_TOKEN_RE = re.compile(r"^\d+(gb|tb|mb|kb|w|v|a|mah|mm|hz|khz|mhz|ghz)$")
+_GENERIC_TECH_TERMS = {
+    "5g", "4g", "3g", "2g", "wifi", "bluetooth", "rgb", "hd", "fhd", "uhd",
+    "oled", "amoled", "lcd", "ips", "usb", "nfc", "gps",
+}
+_CHIP_CODE_RE = re.compile(r"^([a-z]{1,4}\d{1,4}|\d{1,4}[a-z]{1,4})$")
+
+
+def _title_tokens(title: str) -> set:
+    """Whole-word vocabulary of a title (hyphens collapsed within a token,
+    e.g. "HC-SR04" -> "hcsr04"), used for exact token-membership checks --
+    never a substring/blob search, which would let a short code like "m3"
+    false-positive-match inside an unrelated word like "M365" (a bundled
+    Microsoft 365 mention, not the M3 chip)."""
+    raw = re.findall(r"[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*", title)
+    return {t.lower().replace("-", "") for t in raw}
+
+
+def _extract_identity_tokens(title: str) -> List[str]:
+    """Model/part-number-like tokens from a product title ("SPS30", "HC-SR04",
+    "BME680", "ESP32-WROOM-32D", "M3", "A35") -- letter+digit runs (hyphens
+    kept internal), plus short chip/model codes like "M3"/"A35" that a plain
+    length>=4 rule would otherwise miss. These are the strongest signal that
+    two titles refer to the SAME product rather than merely the same
+    category or product line -- e.g. distinguishing "MacBook Air M3" from
+    "MacBook Air M5" needs the short "m3"/"m5" tokens specifically, since
+    "MacBook"+"Air" alone match many different real Apple laptops. Generic
+    connectivity/display terms ("5G", "HD", "WiFi") are excluded since
+    they're shared by nearly every modern product and aren't identifying."""
+    tokens = []
+    for norm in _title_tokens(title):
+        if norm in _GENERIC_TECH_TERMS or not re.search(r"\d", norm):
+            continue
+        if len(norm) >= 4:
+            tokens.append(norm)
+        elif len(norm) >= 2 and _CHIP_CODE_RE.match(norm):
+            tokens.append(norm)
+    return tokens
+
+
+def _resolved_item_matches(original_title: str, candidate_title: str, brand: str = "") -> bool:
+    """Guards a live Amazon search result against being a plausible-looking
+    but wrong product -- e.g. searching "Sensirion SPS30 Particulate Matter
+    Sensor" can return a *different* brand's particulate sensor as the top
+    hit, or "MacBook Air M3" can return a real Apple "MacBook Air M5" (same
+    brand, same product line, wrong chip generation).
+
+    A genuine model/part/chip token ("hcsr04", "sps30", "m3") is the primary
+    signal and, once one exists in the original title, is REQUIRED to match
+    -- there is no fallback to brand-only once we have something this
+    specific to check, because brand alone can't distinguish different
+    models of the same product line from the same maker. Only when the
+    title has no such token at all does matching fall back to brand
+    presence, then to the title's first significant word.
+
+    Capacity/spec-magnitude tokens ("512gb", "16gb") never count as
+    identity on their own -- that RAM/storage combo is shared across many
+    different products, brands, and even chip generations. All comparisons
+    use exact whole-word token membership, never substring containment.
+
+    Rejects an accessory/case listing outright when the original product
+    isn't itself an accessory -- a case's title often says "Compatible for
+    MacBook Air 13 inch", which contains the real laptop's size tokens and
+    would otherwise pass while pointing at a ₹300 sleeve instead of the
+    ₹80,000 laptop."""
+    accessory_words = {"case", "cover", "sleeve", "skin", "screen protector", "protector",
+                        "charger cable", "strap", "pouch", "stand", "holder", "tempered glass"}
+    candidate_lower = candidate_title.lower()
+    is_accessory_candidate = any(w in candidate_lower for w in accessory_words)
+    original_lower = original_title.lower()
+    original_is_accessory = any(w in original_lower for w in accessory_words)
+    if is_accessory_candidate and not original_is_accessory:
+        return False
+    candidate_tokens = _title_tokens(candidate_title)
+    id_tokens = _extract_identity_tokens(original_title)
+    strong = [t for t in id_tokens if not _CAPACITY_TOKEN_RE.match(t)]
+    if strong:
+        # Exact whole-word match, not substring -- a short code like "m3"
+        # must not accidentally match inside an unrelated longer token.
+        return any(tok in candidate_tokens for tok in strong)
+    if brand and brand.strip():
+        # Brand names are long/distinctive enough (and sometimes multi-word,
+        # e.g. "Raspberry Pi") that substring containment on the full
+        # candidate text is safe here, unlike short chip-code tokens above.
+        candidate_norm = re.sub(r"[^a-z0-9]", "", candidate_title.lower())
+        brand_norm = re.sub(r"[^a-z0-9]", "", brand.strip().lower())
+        return bool(brand_norm and brand_norm in candidate_norm)
+    if id_tokens:
+        return False
+    words = [w for w in re.split(r"[^A-Za-z0-9]+", original_title) if len(w) > 2]
+    if not words:
+        return False
+    return words[0].lower() in candidate_title.lower()
+
+
 def _card_from_web_item(item: Dict[str, Any], analysis: QueryAnalysis, rank: int) -> Dict[str, Any]:
     """Build a card in the exact same shape as an internal-catalog card, from a
     live Browserbase web-retrieval item. Never fabricates a field: price/URL
@@ -1585,6 +1680,111 @@ class WorkflowOrchestrator:
 
         for idx, c in enumerate(cards):
             c["rank"] = idx + 1
+
+        # A large share of the internal catalog was never seeded with a real
+        # Amazon ASIN or a real product photo -- those cards fall back to a
+        # generic Amazon *search* link (not a dead link, but not the actual
+        # product page either) and a placeholder "Image unavailable" graphic.
+        # Resolve both via a quick live lookup per affected card (bonus:
+        # often picks up real specs too), bounded to the first several so a
+        # long results list never spins up dozens of Browserbase sessions.
+        def _needs_enrichment(c: dict) -> bool:
+            has_fallback_link = bool(c.get("amazon_url")) and "/s?k=" in c["amazon_url"]
+            img = c.get("image_url") or ""
+            has_placeholder_image = (not img) or img.startswith("data:image/svg+xml")
+            return has_fallback_link or has_placeholder_image
+
+        # Capped at 5, matching Browserbase's own burst limit (5 new sessions
+        # per rolling 60s) exactly -- a higher cap here (previously 8) packed
+        # more session-creation calls into the stagger window than the limit
+        # allows, tripping cascading 429-retry storms that pushed total time
+        # past the frontend's 180s idle timeout and surfaced as a false
+        # "Search Error" even though the backend was still working correctly.
+        fallback_cards = [c for c in cards if _needs_enrichment(c)][:5]
+        if fallback_cards and settings.WEB_RETRIEVAL_ENABLED and settings.BROWSERBASE_API_KEY:
+            from app.services.web_retrieval import resolve_live_amazon_link
+
+            # Browserbase plans cap MAX CONCURRENT sessions (observed: 3 on
+            # this account), not just a burst rate -- staggering start times
+            # alone doesn't respect this, since each lookup can stay open for
+            # 15-90s, so later-starting lookups can still overlap with
+            # earlier ones still running and get rejected with "exceeded your
+            # max concurrent sessions limit". A semaphore bounds how many
+            # lookups are actually IN FLIGHT at once, which is what the limit
+            # is really about; capped one below the observed limit (2) to
+            # leave headroom for the pre-ranking hook's own session.
+            concurrency_gate = asyncio.Semaphore(2)
+
+            async def _enrich_with_live_link(card: dict) -> None:
+                async with concurrency_gate:
+                    try:
+                        item = await resolve_live_amazon_link(card.get("product_name", ""), card.get("brand"))
+                    except Exception:  # noqa: BLE001
+                        item = None
+                    if not item or not item.get("external_product_id"):
+                        return
+                    if not _resolved_item_matches(card.get("product_name", ""), item.get("title", ""), card.get("brand", "")):
+                        # Amazon's search returned a plausible-but-different product
+                        # (same category, wrong item) -- never point a "Buy on
+                        # Amazon" link at the wrong product. Leave the honest
+                        # search-fallback link in place instead.
+                        logger.info(
+                            f"[enrich] discarding mismatched live result for "
+                            f"'{card.get('product_name', '')[:50]}' -> '{item.get('title', '')[:50]}'"
+                        )
+                        return
+                    real_url = f"https://www.amazon.in/dp/{item['external_product_id']}"
+                    card["amazon_url"] = real_url
+                    card["external_product_id"] = item["external_product_id"]
+                    live_image = item.get("image_url")
+                    current_image = card.get("image_url") or ""
+                    if live_image and (not current_image or current_image.startswith("data:image/svg+xml")):
+                        card["image_url"] = live_image
+                        card["product_image"] = live_image
+                        card["images"] = [{
+                            "image_id": f"IMG-{card.get('product_id')}-FRONT",
+                            "product_id": card.get("product_id"),
+                            "external_product_id": item["external_product_id"],
+                            "image_url": live_image,
+                            "image_type": "front",
+                            "source": "Amazon",
+                            "verified": True,
+                        }]
+                    if item.get("price"):
+                        price_val = item["price"]
+                        card["price"] = price_val
+                        card["formatted_price"] = (
+                            f"₹{int(price_val):,}" if float(price_val).is_integer() else f"₹{price_val:,.2f}"
+                        )
+                    if item.get("specs") and not card.get("specs"):
+                        card["specs"] = item["specs"]
+                    for off in card.get("retailer_offers", []) or []:
+                        if str(off.get("retailer", "")).lower() == "amazon":
+                            off["url"] = real_url
+                            off["is_search_fallback"] = False
+                            off["verification_status"] = "verified"
+                            off["availability_status"] = "available"
+                            if item.get("price"):
+                                off["price"] = item["price"]
+
+            enrich_task = asyncio.ensure_future(
+                asyncio.gather(
+                    *[_enrich_with_live_link(c) for c in fallback_cards],
+                    return_exceptions=True,
+                )
+            )
+            while True:
+                try:
+                    await asyncio.wait_for(asyncio.shield(enrich_task), timeout=15)
+                    break
+                except asyncio.TimeoutError:
+                    yield {
+                        "type": "step",
+                        "step": "Generating recommendation",
+                        "status": "in_progress",
+                        "message": "Resolving direct product links...",
+                        "request_id": req_id,
+                    }
 
         total_latency = (time.perf_counter() - overall_start) * 1000
 

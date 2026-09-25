@@ -4,60 +4,64 @@
 
 @layer base {
   :root {
-    /* Warm engineering-notebook paper, not cool app-gray */
-    --background: #faf7ef;
-    --foreground: #1c1912;
-    --card: #fffdf8;
-    --card-foreground: #1c1912;
-    --border: #e6ddc9;
-    --muted: #f3ecda;
-    --muted-foreground: #6b6250;
-    --accent: #6366f1;
+    /* Pure grayscale -- no purple/indigo or any other hue anywhere. All text
+       is true black on light, true white on dark; the "accent" is black
+       itself (a black button/border), not a color. */
+    --background: #fafafa;
+    --foreground: #000000;
+    --card: #ffffff;
+    --card-foreground: #000000;
+    --border: #e0e0e0;
+    --muted: #f0f0f0;
+    --muted-foreground: #4b4b4b;
+    --accent: #000000;
     --accent-foreground: #ffffff;
-    --accent-secondary: #ec4899;
-    --grid-line: rgba(92, 74, 40, 0.08);
-    --grid-line-strong: rgba(92, 74, 40, 0.14);
+    --accent-secondary: #3d3d3d;
+    --grid-line: rgba(0, 0, 0, 0.05);
+    --grid-line-strong: rgba(0, 0, 0, 0.09);
 
     /* Semantic surface mappings for existing component tokens */
-    --bg: #faf7ef;
-    --surface-50: #fffdf8;
-    --surface-100: #f6f0e2;
-    --surface-200: #efe6d0;
-    --surface-300: #e6ddc9;
-    --text-primary: #1c1912;
-    --text-secondary: #56503f;
-    --text-muted: #6b6250;
-    --border-subtle: rgba(92, 74, 40, 0.1);
-    --glass-bg: rgba(255, 253, 248, 0.92);
-    --glass-border: rgba(92, 74, 40, 0.1);
+    --bg: #fafafa;
+    --surface-50: #ffffff;
+    --surface-100: #f0f0f0;
+    --surface-200: #e5e5e5;
+    --surface-300: #d4d4d4;
+    --text-primary: #000000;
+    --text-secondary: #262626;
+    --text-muted: #4b4b4b;
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --glass-bg: rgba(255, 255, 255, 0.92);
+    --glass-border: rgba(0, 0, 0, 0.08);
   }
 
   .dark {
-    --background: #17150f;
-    --foreground: #f7f3e8;
-    --card: #201d15;
-    --card-foreground: #f7f3e8;
-    --border: rgba(247, 243, 232, 0.1);
-    --muted: #26221a;
-    --muted-foreground: #b5ac96;
-    --accent: #818cf8;
-    --accent-foreground: #ffffff;
-    --accent-secondary: #f472b6;
-    --grid-line: rgba(247, 243, 232, 0.05);
-    --grid-line-strong: rgba(247, 243, 232, 0.08);
+    /* Same pure grayscale, inverted -- true white text on true black-ish
+       surfaces, no hue. */
+    --background: #0f0f0f;
+    --foreground: #ffffff;
+    --card: #171717;
+    --card-foreground: #ffffff;
+    --border: rgba(255, 255, 255, 0.1);
+    --muted: #1c1c1c;
+    --muted-foreground: #b3b3b3;
+    --accent: #ffffff;
+    --accent-foreground: #0f0f0f;
+    --accent-secondary: #cccccc;
+    --grid-line: rgba(255, 255, 255, 0.05);
+    --grid-line-strong: rgba(255, 255, 255, 0.09);
 
     /* Semantic surface mappings for existing component tokens */
-    --bg: #17150f;
-    --surface-50: #201d15;
-    --surface-100: #26221a;
-    --surface-200: #2e291f;
-    --surface-300: #383225;
-    --text-primary: #f7f3e8;
-    --text-secondary: #cec5ac;
-    --text-muted: #b5ac96;
-    --border-subtle: rgba(247, 243, 232, 0.08);
-    --glass-bg: rgba(32, 29, 21, 0.88);
-    --glass-border: rgba(247, 243, 232, 0.08);
+    --bg: #0f0f0f;
+    --surface-50: #171717;
+    --surface-100: #1c1c1c;
+    --surface-200: #242424;
+    --surface-300: #2e2e2e;
+    --text-primary: #ffffff;
+    --text-secondary: #d9d9d9;
+    --text-muted: #b3b3b3;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --glass-bg: rgba(23, 23, 23, 0.9);
+    --glass-border: rgba(255, 255, 255, 0.08);
   }
 
   body {
@@ -65,8 +69,8 @@
     color: var(--foreground);
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     transition: background-color 0.2s ease, color 0.2s ease;
-    /* Subtle engineering-notebook grid, fixed to the viewport so it doesn't
-       scroll/tile awkwardly, with a faint dot at every intersection. */
+    /* Faint neutral grid, fixed to the viewport -- subtle texture, not
+       decoration. */
     background-image:
       radial-gradient(var(--grid-line-strong) 1px, transparent 1px),
       linear-gradient(var(--grid-line) 1px, transparent 1px),
@@ -77,7 +81,8 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading), sans-serif;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
+    font-weight: 600;
   }
 }
 
@@ -96,7 +101,7 @@
 }
 
 .glass-card:hover {
-  border-color: rgba(99, 102, 241, 0.35);
+  border-color: var(--accent-secondary);
 }
 
 /* Minimalist subtle scrollbar */
@@ -121,7 +126,7 @@
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -130,7 +135,7 @@
 }
 
 .animate-fade-up {
-  animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes spin-slow {
@@ -147,16 +152,16 @@
 @keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(8px) scale(0.99);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
 .animate-rise-in {
-  animation: rise-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: rise-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* Faint dot-grid backdrop -- cheap CSS background, no images/canvas */
@@ -173,8 +178,12 @@
 }
 
 .focus-glow:focus-within {
-  border-color: rgba(79, 124, 255, 0.55);
-  box-shadow: 0 0 0 4px rgba(79, 124, 255, 0.14), 0 4px 24px -8px rgba(79, 124, 255, 0.25);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.08), 0 4px 20px -8px rgba(0, 0, 0, 0.14);
+}
+
+.dark .focus-glow:focus-within {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1), 0 4px 20px -8px rgba(255, 255, 255, 0.16);
 }
 
 /* Skeleton loading shimmer */
@@ -224,23 +233,21 @@
   animation-delay: 0.3s;
 }
 
-/* Playful tactile card hover -- a slight lift and a hint of tilt, like
-   picking a card up off the page, not a generic dashboard hover state. */
+/* Understated card hover -- a small lift and a slightly stronger border/
+   shadow, the way a serious dashboard signals "interactive" without any
+   playful motion. */
 .tilt-card {
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .tilt-card:hover {
-  transform: translateY(-4px) rotate(-0.35deg);
-  box-shadow: 0 16px 32px -16px rgba(28, 25, 18, 0.18);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -16px rgba(26, 29, 36, 0.16);
+  border-color: var(--accent-secondary);
 }
 
 .dark .tilt-card:hover {
-  box-shadow: 0 16px 32px -16px rgba(0, 0, 0, 0.5);
-}
-
-.tilt-card:nth-child(even):hover {
-  transform: translateY(-4px) rotate(0.35deg);
+  box-shadow: 0 12px 24px -16px rgba(0, 0, 0, 0.5);
 }
 
 /* Monospace treatment for technical/numeric metadata (prices, SKUs, ranks,
@@ -250,29 +257,47 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Slow ambient drift for the hero's small floating technical doodles. */
-@keyframes float-slow {
-  0%, 100% {
-    transform: translateY(0) rotate(var(--float-rot, 0deg));
-  }
-  50% {
-    transform: translateY(-10px) rotate(var(--float-rot, 0deg));
-  }
-}
-
-.animate-float-slow {
-  animation: float-slow 6s ease-in-out infinite;
-}
-
-/* Search box: colored border + soft glow on focus, purposeful blue accent. */
+/* Search box: single-accent border + soft glow on focus. */
 .search-glow {
-  transition: border-color 0.25s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.25s ease, transform 0.15s ease;
 }
 
 .search-glow:focus-within {
-  border-color: #4f7cff;
-  box-shadow: 0 0 0 5px rgba(79, 124, 255, 0.14), 0 12px 32px -12px rgba(79, 124, 255, 0.3);
-  transform: translateY(-1px);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.08), 0 8px 24px -12px rgba(0, 0, 0, 0.16);
+}
+
+.dark .search-glow:focus-within {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1), 0 8px 24px -12px rgba(255, 255, 255, 0.18);
+}
+
+/* Soft breathing glow behind the final CTA button -- draws the eye without
+   being a solid boxed panel. Pauses under reduced-motion (global rule at
+   the bottom of this file already zeroes animation-duration). */
+@keyframes cta-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.18);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+}
+
+.dark .cta-pulse {
+  animation-name: cta-pulse-dark;
+}
+
+@keyframes cta-pulse-dark {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.18);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+}
+
+.cta-pulse {
+  animation: cta-pulse 2.2s ease-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

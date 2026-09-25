@@ -29,7 +29,7 @@ export const CompatibilityPanel: React.FC<CompatibilityPanelProps> = ({ item, on
         </button>
 
         <div className="flex items-center space-x-3 mb-5 border-b border-border pb-4">
-          <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400">
+          <div className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
             <ShieldCheck className="w-5 h-5" />
           </div>
           <div>
@@ -44,7 +44,7 @@ export const CompatibilityPanel: React.FC<CompatibilityPanelProps> = ({ item, on
             isCompatible
               ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-300"
               : isPossibly
-              ? "bg-indigo-500/10 border-indigo-500/20 text-indigo-700 dark:text-indigo-300"
+              ? "bg-amber-500/10 border-amber-500/20 text-amber-700 dark:text-amber-300"
               : isIncompatible
               ? "bg-rose-500/10 border-rose-500/20 text-rose-700 dark:text-rose-300"
               : "bg-surface-200 border-border text-foreground"
@@ -54,7 +54,7 @@ export const CompatibilityPanel: React.FC<CompatibilityPanelProps> = ({ item, on
             {isCompatible ? (
               <CheckCircle2 className="w-6 h-6 text-emerald-500 shrink-0" />
             ) : isPossibly ? (
-              <AlertTriangle className="w-6 h-6 text-indigo-500 shrink-0" />
+              <AlertTriangle className="w-6 h-6 text-amber-500 shrink-0" />
             ) : isIncompatible ? (
               <AlertCircle className="w-6 h-6 text-rose-500 shrink-0" />
             ) : (

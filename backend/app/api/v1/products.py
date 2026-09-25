@@ -14,10 +14,13 @@ from app.services.web_product_cache import get_web_product
 from app.services.retailer_offers import (
     get_canonical_product_offers,
     get_canonical_comparison,
+    _fallback_matches_product,
 )
+from app.services.product_catalog_service import ProductCatalogService
 from app.models.catalog import Product, Specification
 from app.models.reviews import Review
 from app.models.media import Document
+from app.core.logging import logger
 
 router = APIRouter(prefix="/products", tags=["products"])
 
@@ -354,9 +357,31 @@ async def get_product_reviews(id: str):
         pass
 
     # Fallback to in-memory product reviews, then a live web-retrieval result,
-    # if DB is unavailable or has no reviews
+    # if DB is unavailable or has no reviews. get_fallback_product() looks up
+    # a SEPARATE, independently-authored static dataset by id -- its ids can
+    # collide with the real catalog's ids for a completely different product
+    # (observed: id "...0004" is the real ASUS Vivobook in Postgres/OpenSearch
+    # but a hardcoded Apple MacBook Air entry in the fallback dataset). Cross-
+    # check the fallback's title against the real product's title before
+    # trusting its reviews, or a wrong product's reviews get shown as this
+    # product's "verified customer reviews".
     if not reviews_list:
         fallback = get_fallback_product(id) or get_web_product(id)
+        if fallback and fallback.get("title"):
+            try:
+                real_title = None
+                product_uuid_for_check = uuid.UUID(id)
+                real_product = await ProductCatalogService().get_product(product_uuid_for_check)
+                if real_product:
+                    real_title = real_product.title
+                if real_title and not _fallback_matches_product(real_title, fallback.get("title")):
+                    logger.warning(
+                        f"[get_product_reviews] discarding mismatched fallback for {id}: "
+                        f"real title '{real_title[:50]}' vs fallback '{fallback.get('title', '')[:50]}'"
+                    )
+                    fallback = None
+            except Exception:  # noqa: BLE001
+                pass
         if fallback:
             for idx, r in enumerate(fallback.get("reviews", [])):
                 rev = dict(r)

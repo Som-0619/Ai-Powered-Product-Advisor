@@ -50,7 +50,7 @@ export const AgentTracePanel: React.FC<AgentTracePanelProps> = ({
     <div className="bg-surface-50 border border-border rounded-2xl p-5 shadow-sm transition-colors duration-200">
       <div className="flex items-center justify-between border-b border-border pb-4 mb-4">
         <div className="flex items-center space-x-2.5">
-          <div className="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+          <div className="w-8 h-8 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
             <Brain className="w-4 h-4" />
           </div>
           <div>
@@ -61,7 +61,7 @@ export const AgentTracePanel: React.FC<AgentTracePanelProps> = ({
 
         {totalLatencyMs !== undefined && (
           <div className="flex items-center space-x-1.5 px-3 py-1 rounded-full bg-surface-100 border border-border text-xs text-muted-foreground">
-            <Clock className="w-3.5 h-3.5 text-indigo-500" />
+            <Clock className="w-3.5 h-3.5 text-accent" />
             <span>Total: {totalLatencyMs.toFixed(0)} ms</span>
           </div>
         )}
@@ -80,8 +80,8 @@ export const AgentTracePanel: React.FC<AgentTracePanelProps> = ({
           let badge = null;
 
           if (isActive) {
-            borderStyle = "border-indigo-500 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 shadow-sm animate-pulse";
-            badge = <Loader2 className="w-3 h-3 animate-spin text-indigo-500" />;
+            borderStyle = "border-accent bg-accent/10 text-accent shadow-sm animate-pulse";
+            badge = <Loader2 className="w-3 h-3 animate-spin text-accent" />;
           } else if (isCompleted) {
             borderStyle = "border-emerald-500/30 bg-emerald-500/5 text-foreground";
             badge = <CheckCircle2 className="w-3 h-3 text-emerald-500" />;

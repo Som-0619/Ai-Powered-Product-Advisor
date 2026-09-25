@@ -83,7 +83,16 @@ function AdvisorScreen() {
   // Auto-run the real search when arriving from the home hero's search box
   // (?q=...) -- reuses the exact same handleSearch/streamRecommendation path
   // as a manual search, never a fake/demo result.
+  //
+  // Guarded with a ref (not just the empty dep array) because Next.js dev
+  // mode runs with React Strict Mode, which deliberately double-invokes
+  // effects on mount -- without this guard, that fired the search twice,
+  // opening two concurrent Browserbase sessions for the same query and
+  // roughly doubling the wait before results appeared.
+  const didAutoSearch = React.useRef(false);
   useEffect(() => {
+    if (didAutoSearch.current) return;
+    didAutoSearch.current = true;
     const initialQuery = searchParams.get("q");
     if (initialQuery && initialQuery.trim()) {
       setQuery(initialQuery);

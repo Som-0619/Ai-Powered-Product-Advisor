@@ -32,6 +32,77 @@ from pydantic import BaseModel, Field
 
 from app.services.catalog_fallback import FALLBACK_CATALOG, get_fallback_product
 
+_CAPACITY_TOKEN_RE = re.compile(r"^\d+(gb|tb|mb|kb|w|v|a|mah|mm|hz|khz|mhz|ghz)$")
+_GENERIC_TECH_TERMS = {
+    "5g", "4g", "3g", "2g", "wifi", "bluetooth", "rgb", "hd", "fhd", "uhd",
+    "oled", "amoled", "lcd", "ips", "usb", "nfc", "gps",
+}
+_CHIP_CODE_RE = re.compile(r"^([a-z]{1,4}\d{1,4}|\d{1,4}[a-z]{1,4})$")
+
+
+def _title_tokens(title: str) -> set:
+    """Whole-word vocabulary of a title (hyphens collapsed within a token),
+    used for exact token-membership checks -- never substring/blob search,
+    which would let a short code like "m3" false-positive-match inside an
+    unrelated word like "M365" (bundled Microsoft 365, not the M3 chip)."""
+    raw = re.findall(r"[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*", title)
+    return {t.lower().replace("-", "") for t in raw}
+
+
+def _identity_tokens(t: str) -> List[str]:
+    """See orchestrator.py's _extract_identity_tokens -- kept in sync here to
+    avoid a cross-module import; includes short chip/model codes ("m3",
+    "a35") alongside longer model/part numbers, excluding generic
+    connectivity/display terms that are shared by nearly every product."""
+    tokens = []
+    for norm in _title_tokens(t):
+        if norm in _GENERIC_TECH_TERMS or not re.search(r"\d", norm):
+            continue
+        if len(norm) >= 4:
+            tokens.append(norm)
+        elif len(norm) >= 2 and _CHIP_CODE_RE.match(norm):
+            tokens.append(norm)
+    return tokens
+
+
+def _fallback_matches_product(title: str, fallback_title: Optional[str], brand: str = "") -> bool:
+    """Guards get_fallback_product() lookups against an ID collision between
+    the static fallback catalog and the real OpenSearch-ingested catalog --
+    both assign IDs independently (e.g. "c1000000-...-0004") and can land on
+    the SAME id for two completely different products. Without this check, a
+    product with no stored retailer offer could silently inherit another
+    product's buy links, price, and reviews. Requires the fallback entry's
+    title to share a model/part/chip token with the real title, or (when
+    neither has one) its first significant word.
+
+    A genuine model/part/chip token is the primary signal and, once one
+    exists in the title, is REQUIRED to match -- no falling back to brand-
+    only once we have something this specific to check, since brand alone
+    can't distinguish different models/generations from the same maker.
+    Spec numbers alone ("16gb", "512gb") never count as identity."""
+    if not fallback_title:
+        return False
+    norm_fallback = re.sub(r"[^a-z0-9]", "", fallback_title.lower())
+    accessory_words = {"case", "cover", "sleeve", "skin", "screen protector", "protector",
+                        "charger cable", "strap", "pouch", "stand", "holder", "tempered glass"}
+    if any(w in fallback_title.lower() for w in accessory_words) and not any(w in title.lower() for w in accessory_words):
+        return False
+
+    fallback_tokens = _title_tokens(fallback_title)
+    id_tokens = _identity_tokens(title)
+    strong = [t for t in id_tokens if not _CAPACITY_TOKEN_RE.match(t)]
+    if strong:
+        return any(tok in fallback_tokens for tok in strong)
+    if brand and brand.strip():
+        brand_norm = re.sub(r"[^a-z0-9]", "", brand.strip().lower())
+        return bool(brand_norm and brand_norm in norm_fallback)
+    if id_tokens:
+        return False
+    words = [w for w in re.split(r"[^A-Za-z0-9]+", title) if len(w) > 2]
+    if not words:
+        return False
+    return words[0].lower() in fallback_title.lower()
+
 
 VALID_AVAILABILITY_STATUSES = {"available", "unavailable", "unknown"}
 VALID_VERIFICATION_STATUSES = {"verified", "broken", "unverified"}
@@ -591,6 +662,8 @@ def resolve_product_retailer_offers(
     else:
         # Check if fallback or catalog default has verified Amazon link
         fallback_prod = get_fallback_product(product_id)
+        if fallback_prod and not _fallback_matches_product(title, fallback_prod.get("title"), brand):
+            fallback_prod = None
         if fallback_prod and fallback_prod.get("amazon_url"):
             raw_u = fallback_prod["amazon_url"]
             is_valid, reason, ext_id = verify_retailer_url("Amazon", raw_u, str(product_id), az_ext_id)
@@ -638,6 +711,8 @@ def resolve_product_retailer_offers(
             fk_verif = raw_verif if raw_verif in VALID_VERIFICATION_STATUSES else "unverified"
     else:
         fallback_prod = get_fallback_product(product_id)
+        if fallback_prod and not _fallback_matches_product(title, fallback_prod.get("title"), brand):
+            fallback_prod = None
         if fallback_prod and fallback_prod.get("flipkart_url"):
             raw_u = fallback_prod["flipkart_url"]
             is_valid, reason, ext_id = verify_retailer_url("Flipkart", raw_u, str(product_id), fk_ext_id)

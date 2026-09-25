@@ -194,6 +194,48 @@ async def search_web_products(
         return []
 
 
+async def resolve_live_amazon_link(title: str, brand: Optional[str] = None) -> Optional[Dict[str, Any]]:
+    """Single-item live Amazon lookup for a catalog product that has no stored
+    ASIN (mostly electronic components) -- used to replace a generic search
+    link with a real direct product page. Reuses the same search+scrape path
+    as search_web_products with limit=1, so it also picks up real specs.
+    Returns None (never fabricates) if nothing verifiable is found in time.
+
+    Most of the wall time here is Browserbase session startup + navigation,
+    not per-item scraping -- a single-item lookup isn't meaningfully faster
+    than a multi-item one (~75-90s observed), so this uses the same overall
+    budget as search_web_products rather than a short, tighter timeout that
+    would cut off genuinely-succeeding lookups before they finish."""
+    if not settings.WEB_RETRIEVAL_ENABLED or not settings.BROWSERBASE_API_KEY:
+        return None
+    # A catalog title's parenthetical variant details ("(8GB / 128GB / Awesome
+    # Navy)") make the search query overly specific -- Amazon frequently has
+    # no exact listing for that precise config/color and returns an unrelated
+    # top result instead. Strip to the brand+model portion, which is enough
+    # identity for the guard in the caller to still verify the match.
+    search_title = re.split(r"\s*\(", title, maxsplit=1)[0].strip() or title
+    for attempt in range(2):
+        try:
+            items = await asyncio.wait_for(
+                asyncio.to_thread(_search_amazon_sync, search_title, brand, None, None, 1),
+                timeout=settings.WEB_RETRIEVAL_TIMEOUT_SECONDS,
+            )
+            break
+        except Exception as exc:  # noqa: BLE001
+            # Browserbase enforces a burst limit on session creation (5/min);
+            # under concurrent load from multiple cards enriching at once, one
+            # can lose that race even after staggering. Retry once rather than
+            # silently leaving a resolvable link as a search fallback.
+            is_rate_limit = "429" in str(exc) or "RateLimitError" in type(exc).__name__
+            if is_rate_limit and attempt == 0:
+                logger.warning(f"[resolve_live_amazon_link] rate-limited for '{title[:60]}', retrying once in 15s")
+                await asyncio.sleep(15)
+                continue
+            logger.warning(f"[resolve_live_amazon_link] failed for '{title[:60]}': {exc!r}")
+            return None
+    return items[0] if items else None
+
+
 def _search_amazon_sync(
     category_query: str,
     brand: Optional[str],
@@ -208,7 +250,13 @@ def _search_amazon_sync(
     from browserbase import Browserbase
     from playwright.sync_api import sync_playwright
 
-    query_text = f"{brand + ' ' if brand else ''}{category_query}".strip()
+    # Don't duplicate the brand name into the query when the title/category
+    # text already starts with it (common when this is called with a full
+    # catalog product title) -- "Samsung Samsung Galaxy A35..." confuses
+    # Amazon's search into returning a poor top match far more often than
+    # the clean, single-brand query does.
+    brand_already_present = bool(brand) and category_query.strip().lower().startswith(brand.strip().lower())
+    query_text = f"{(brand + ' ') if (brand and not brand_already_present) else ''}{category_query}".strip()
     search_url = f"https://www.amazon.in/s?k={quote_plus(query_text)}"
     if budget_min is not None or budget_max is not None:
         lo = int((budget_min or 0) * 100)
@@ -227,9 +275,6 @@ def _search_amazon_sync(
             page = context.new_page()
             page.goto(search_url, wait_until="domcontentloaded", timeout=15000)
             page.wait_for_timeout(1200)
-            # Separate tab for per-product spec/review visits so navigating
-            # there never disturbs the search-results page mid-loop.
-            detail_page = context.new_page()
 
             cards = page.locator('div[data-component-type="s-search-result"]')
             count = min(cards.count(), limit * 3)  # over-fetch, filter down below
@@ -244,8 +289,27 @@ def _search_amazon_sync(
                     # real result card carries its ASIN directly as a data-asin
                     # attribute -- use that instead of parsing an <a href>.
                     asin = card.get_attribute("data-asin", timeout=2000)
-                    title_el = card.locator("h2 span").first
-                    title = title_el.inner_text(timeout=2000).strip() if title_el.count() else None
+                    # Each card actually has TWO <h2> elements: a small
+                    # "a-size-mini" one holding just the brand name link
+                    # ("Samsung", "Lava"...), and the real product title in an
+                    # "a-size-medium" one elsewhere in the card. `h2 span`
+                    # .first was grabbing the brand-only h2, silently mis-
+                    # labeling every scraped product with a one-word title --
+                    # the root cause of "wrong product" complaints, since a
+                    # card that says just "Samsung" can't be told apart from
+                    # any other Samsung listing downstream. Target the real
+                    # title h2 specifically, with graceful fallbacks.
+                    title_el = card.locator("h2.a-size-medium span").first
+                    if not title_el.count():
+                        title_el = card.locator("h2[aria-label] span").first
+                    if not title_el.count():
+                        # Last resort: the product image's alt text is also a
+                        # real, full title, never the brand-only stub.
+                        img_alt_el = card.locator("img.s-image").first
+                        title = img_alt_el.get_attribute("alt", timeout=1500) if img_alt_el.count() else None
+                        title = title.strip() if title else None
+                    else:
+                        title = title_el.inner_text(timeout=2000).strip()
                     if not asin or not title:
                         continue
 
@@ -268,13 +332,15 @@ def _search_amazon_sync(
                     img_el = card.locator("img.s-image").first
                     image_url = img_el.get_attribute("src", timeout=1500) if img_el.count() else None
 
-                    # Visit this product's own page for its real specs and
-                    # reviews -- every returned result gets this (not just the
-                    # first few), so specs aren't missing for "later" products
-                    # in the list. Per-visit timeouts below are kept tight so
-                    # this stays within the overall search timeout even for
-                    # the full result set.
-                    specs, product_reviews = _extract_specs_and_reviews(detail_page, product_url)
+                    # Skip the per-product detail-page visit (specs/reviews
+                    # scrape) -- it was the dominant cost of a live search
+                    # (~10-15s per product, sequential), turning a 6-product
+                    # search into 90-150s. Search-result-page data (title,
+                    # price, image) is enough to show a real, verified,
+                    # correctly-linked product fast; specs/reviews for
+                    # web-sourced items are honestly left empty rather than
+                    # fabricated, same as any other field we don't have.
+                    specs, product_reviews = {}, []
 
                     pid = str(uuid.uuid5(uuid.NAMESPACE_URL, product_url))
                     guessed_brand = _guess_brand(title)
